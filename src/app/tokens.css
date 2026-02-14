@@ -1,0 +1,30 @@
+/* ============================================
+   Design Tokens
+   ============================================ */
+
+:root {
+  /* === Color Tokens - Light Mode === */
+  --background-color: oklch(98% 0.006 240);
+  --text-primary-color: oklch(23% 0.05 240);
+  --text-accent-color: oklch(0.18 0.06 255);
+  
+  /* === Typography Tokens === */
+  /* Text Primary - Main prominent text */
+  --text-primary-size: 24px;
+  --text-primary-line-height: 36px;
+  --text-primary-weight: 450;
+}
+
+/* === Theme: Dark Mode === */
+[data-theme='dark'] {
+  --background-color: oklch(0.165 0.007 264.0);
+  --text-primary-color: oklch(95% 0.008 264);
+}
+
+/* === Responsive Typography === */
+@media screen and (max-width: 428px) {
+  :root {
+    --text-primary-size: 20px;
+    --text-primary-line-height: 28px;
+  }
+}

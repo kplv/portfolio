@@ -1,0 +1,14 @@
+.text {
+  font-family: 'ABC Walter Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: var(--text-primary-size);
+  font-weight: var(--text-primary-weight);
+  line-height: var(--text-primary-line-height);
+  margin-bottom: 120px;
+  color: var(--text-primary-color);
+}
+
+@media screen and (max-width: 428px) {
+  .text {
+    margin-bottom: 32px;
+  }
+}
