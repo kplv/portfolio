@@ -3,14 +3,6 @@
 @import './tokens.css';
 
 @font-face {
-  font-family: 'ABC Favorit';
-  src: url('/fonts/ABCFavoritVariable-Trial.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: 'ABC Walter Neue';
   src: url('/fonts/ABCWalterNeueVariable-Trial.woff2') format('woff2');
   font-weight: 100 900;
@@ -27,7 +19,7 @@ body {
 body {
   color: var(--text-primary-color);
   background: var(--background-color);
-  font-family: 'ABC Favorit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: var(--font-favorit), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background 0.3s ease, color 0.3s ease;
