@@ -22,7 +22,7 @@
   display: flex;
   min-height: 100vh;
   width: 100%;
-  max-width: 960px;
+  max-width: 860px;
   flex-direction: column;
   align-items: center; /* Center content horizontally */
   justify-content: flex-start;
@@ -30,7 +30,6 @@
   padding: 24px 64px;
   padding-top: 64px;
   margin: 0 auto; /* Center main horizontally inside the page container */
-  
 }
 
 .intro {

@@ -1,0 +1,91 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.backLink {
+  font-size: var(--text-secondary-size);
+  color: var(--text-secondary-color);
+  text-decoration: none;
+  margin-bottom: 40px;
+  transition: color 0.2s ease;
+}
+
+.backLink:hover {
+  color: var(--text-primary-color);
+}
+
+.project {
+  width: 100%;
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 400;
+  color: var(--text-primary-color);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.imageContainer {
+  width: 100%;
+  margin-bottom: 40px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1.5px solid var(--slate-200);
+  border-radius: 16px;
+}
+
+.description {
+  max-width: 800px;
+}
+
+.text {
+  font-size: var(--text-primary-size);
+  line-height: 1.7;
+  color: var(--text-primary-color);
+  margin: 0;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 428px) {
+  .content {
+    padding: 24px 16px;
+  }
+
+  .backLink {
+    margin-bottom: 24px;
+  }
+
+  .header {
+    margin-bottom: 24px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .imageContainer {
+    margin-bottom: 24px;
+  }
+}
+
+/* Dark mode */
+[data-theme='dark'] .image {
+  border-color: var(--slate-800);
+}

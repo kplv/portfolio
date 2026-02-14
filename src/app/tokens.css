@@ -16,10 +16,16 @@
   --text-primary-weight: 400;
 
   /* Text Secondary - Secondary text */
-  --text-secondary-color: var(--slate-300);
+  --text-secondary-color: var(--slate-400);
   --text-secondary-size: 16px;
   --text-secondary-line-height: 24px;
   --text-secondary-weight: 400;
+
+  /* Headers */
+  --header-secondary-color: var(--slate-1200);
+  --header-secondary-size: 28px;
+  --header-secondary-line-height: 36px;
+  --header-secondary-weight: 400;
 }
 
 /* === Theme: Dark Mode === */
@@ -27,6 +33,7 @@
   --background-color: var(--slate-1200);
   --text-primary-color: var(--slate-100);
   --text-secondary-color: var(--slate-600);
+  --header-secondary-color: var(--slate-100);
 }
 
 /* === Responsive Typography === */
@@ -36,5 +43,7 @@
     --text-primary-line-height: 26px;
     --text-secondary-size: 15px;
     --text-secondary-line-height: 22px;
+    --header-secondary-size: 24px;
+    --header-secondary-line-height: 30px;
   }
 }

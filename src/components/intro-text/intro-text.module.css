@@ -4,6 +4,7 @@
   align-items: flex-start;
   text-align: left;
   gap: 8px;
+  align-self: flex-start;
 }
 
 .text {
