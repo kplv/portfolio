@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import type { Project } from '@/data/projects';
 import styles from './project-card.module.css';
 
@@ -13,30 +13,30 @@ export interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const imageVariants = {
     hidden: {
+      transform: 'translateY(12px) scale(0.95)',
       opacity: 0,
-      y: 32,
     },
     visible: {
+      transform: 'translateY(0) scale(1)',
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.45,
-        type: 'spring',
-        stiffness: 100,
+        duration: 0.15,
+        ease: [0.23, 1, 0.32, 1] as [number, number, number, number], // ease-out-quint
       },
     },
   };
 
   return (
     <motion.div
-      whileHover={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       whileTap={{
-        scale: 0.98,
-        transition: { duration: 0.2, type: 'spring' },
+        scale: 0.97,
+        transition: { duration: 0.1, ease: [0.23, 1, 0.32, 1] as [number, number, number, number] },
       }}
       className={styles.wrapper}
     >
@@ -55,7 +55,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <motion.div
               variants={imageVariants}
               animate={isHovered ? 'visible' : 'hidden'}
-              initial="hidden"
+              initial={shouldReduceMotion ? false : 'hidden'}
               className={styles.imageWrapper}
             >
               <Image

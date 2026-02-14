@@ -17,6 +17,7 @@
 .wrapper {
   margin-bottom: 24px;
   padding-bottom: 32px;
+  will-change: transform;
 }
 
 .link {
@@ -67,6 +68,7 @@
   flex-shrink: 0;
   width: 364px;
   height: 228px;
+  will-change: transform;
 }
 
 .image {
