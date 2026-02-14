@@ -5,11 +5,16 @@ export interface IntroTextProps {
 }
 
 export function IntroText({
-  text = "Product designer and engineer based in Berlin. Currently at Ostrom."
+  text = "Product Designer and Engineer based in Berlin. Currently at Ostrom."
 }: IntroTextProps) {
   return (
-    <h1 className={styles.text}>
-      {text}
-    </h1>
+    <div className={styles.container}>
+      <p className={styles.label}>
+        Denis Kopylov
+      </p>
+      <h1 className={styles.text}>
+        {text}
+      </h1>
+    </div>
   );
 }

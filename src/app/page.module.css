@@ -110,6 +110,12 @@ a.secondary {
   }
 }
 
+@media screen and (max-width: 428px) {
+  .content {
+    padding: 20px 16px;
+  }
+}
+
 @media (max-width: 600px) {
   .main {
     padding: 48px 24px;

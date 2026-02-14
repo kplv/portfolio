@@ -1,10 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 8px;
+}
+
 .text {
-  font-family: 'ABC Walter Neue', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: var(--text-primary-size);
   font-weight: var(--text-primary-weight);
   line-height: var(--text-primary-line-height);
   margin-bottom: 120px;
   color: var(--text-primary-color);
+}
+
+.label {
+  font-size: var(--text-primary-size);
+  font-weight: var(--text-primary-weight);
+  line-height: var(--text-primary-line-height);
+  color: var(--text-secondary-color);
 }
 
 @media screen and (max-width: 428px) {

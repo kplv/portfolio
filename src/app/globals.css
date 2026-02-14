@@ -1,9 +1,18 @@
-/* Import design tokens */
+/* Import color palette and design tokens */
+@import './palette.css';
 @import './tokens.css';
 
 @font-face {
   font-family: 'ABC Favorit';
   src: url('/fonts/ABCFavoritVariable-Trial.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Walter Neue';
+  src: url('/fonts/ABCWalterNeueVariable-Trial.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
