@@ -49,7 +49,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <div className={styles.body}>
             <div className={styles.description}>
               <h2 className={styles.projectHeader}>{project.name}</h2>
-              <p className={styles.text}>{project.description}</p>
+              <p className={styles.projectDescription}>{project.description}</p>
             </div>
 
             <motion.div

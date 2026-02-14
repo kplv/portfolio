@@ -12,7 +12,7 @@
   /* Text Primary - Main prominent text */
   --text-primary-color: var(--slate-1200);
   --text-primary-size: 20px;
-  --text-primary-line-height: 28px;
+  --text-primary-line-height: 30px;
   --text-primary-weight: 400;
 
   /* Text Secondary - Secondary text */
@@ -23,9 +23,9 @@
 
   /* Headers */
   --header-secondary-color: var(--slate-1200);
-  --header-secondary-size: 28px;
-  --header-secondary-line-height: 36px;
-  --header-secondary-weight: 400;
+  --header-secondary-size: 24px;
+  --header-secondary-line-height: 32px;
+  --header-secondary-weight: 450;
 }
 
 /* === Theme: Dark Mode === */
@@ -43,7 +43,7 @@
     --text-primary-line-height: 26px;
     --text-secondary-size: 15px;
     --text-secondary-line-height: 22px;
-    --header-secondary-size: 24px;
-    --header-secondary-line-height: 30px;
+    --header-secondary-size: 20px;
+    --header-secondary-line-height: 28px;
   }
 }

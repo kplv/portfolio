@@ -9,6 +9,7 @@ export interface ProjectListProps {
 export function ProjectList({ projects }: ProjectListProps) {
   return (
     <div className={styles.container}>
+
       {projects.map((project) => (
         <ProjectCard key={project.id} project={project} />
       ))}

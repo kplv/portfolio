@@ -115,9 +115,9 @@ a.secondary {
   }
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
+@media (max-width: 900px) {
+  .content {
+    padding: 36px 24px;
   }
 
   .intro {
