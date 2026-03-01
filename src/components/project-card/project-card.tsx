@@ -12,7 +12,8 @@ export interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
+  // to do: change to false after card's ready
+  const [isHovered, setIsHovered] = useState(true);
   const shouldReduceMotion = useReducedMotion();
 
   const imageVariants = {
@@ -32,8 +33,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <motion.div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      // onMouseEnter={() => setIsHovered(true)}
+      // onMouseLeave={() => setIsHovered(false)}
       whileTap={{
         scale: 0.97,
         transition: { duration: 0.1, ease: [0.23, 1, 0.32, 1] as [number, number, number, number] },

@@ -66,9 +66,15 @@
 
 .imageWrapper {
   flex-shrink: 0;
-  width: 364px;
-  height: 228px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
   will-change: transform;
+  background-color: hsla(162, 76%, 48%, 0.08);
+  border-radius: 24px;
+  border: 1.5px solid;
+  border-color: hsla(228, 89%, 19%, 0.02);
+  overflow: hidden;
 }
 
 .image {

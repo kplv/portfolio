@@ -1,0 +1,55 @@
+.button {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px;
+  border-radius: 100px;
+  border: 1.5px solid hsla(228, 95%, 34%, 0.08);
+  background-color: hsla(228, 95%, 34%, 1);
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+  transition: filter 150ms ease;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    filter: brightness(1.2);
+  }
+}
+
+.button:active {
+  filter: brightness(1.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}
+
+.iconWrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: inherit;
+}
+
+.button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+  border-radius: 100px;
+}
