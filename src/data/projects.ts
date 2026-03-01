@@ -10,10 +10,10 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: '1',
-    slug: 'sample-project-one',
-    name: 'Sample Project One',
-    description: 'A beautiful application showcasing modern design principles and user experience best practices.',
-    image: '/images/projects/sample-project-one/thumbnail.svg',
+    slug: 'ostrom',
+    name: 'Ostrom',
+    description: 'Prototypes and 1 → N features for user friendly electricity.',
+    image: '/images/projects/ostrom/thumbnail.png',
   },
   {
     id: '2',
