@@ -47,11 +47,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
 
           <div className={styles.body}>
-            <div className={styles.description}>
-              <h2 className={styles.projectHeader}>{project.name}</h2>
-              <p className={styles.projectDescription}>{project.description}</p>
-            </div>
-
             <motion.div
               variants={imageVariants}
               animate={isHovered ? 'visible' : 'hidden'}
@@ -68,6 +63,15 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 className={styles.image}
               />
             </motion.div>
+
+            <p className={styles.projectTitle}>
+              <span className={styles.projectName}>{project.name}</span>
+              {'. '}
+              <span className={styles.projectDescription}>{project.description}</span>
+            </p>
+
+
+
           </div>
         </div>
       </Link>

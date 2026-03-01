@@ -1,0 +1,15 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-self: flex-start;
+  gap: 24px;
+  padding-bottom: 64px;
+}
+
+@media screen and (max-width: 428px) {
+  .list {
+    gap: 24px;
+  }
+}

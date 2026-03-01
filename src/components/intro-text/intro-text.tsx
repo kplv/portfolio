@@ -15,9 +15,9 @@ export function IntroText({
       <h1 className={styles.text}>
         I'm a product designer by day and an engineer by night. I bring ideas to life in code, sweat over details, and strive for a joyful user experience. I'm also a proficient mentor and a design leader. Now leading design at Ostrom.
       </h1>
-      <h1 className={styles.text}>
+      {/* <h1 className={styles.text}>
         Outside work I dance contemporary, brew ungodly amounts of V60, and survive Berlin's winter.
-      </h1>
+      </h1> */}
     </div>
   );
 }

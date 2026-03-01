@@ -1,17 +1,16 @@
-.projectHeader {
-  font-size: var(--header-secondary-size);
-  font-weight: var(--header-secondary-weight);
-  line-height: var(--header-secondary-line-height);
+.projectTitle {
+  font-size: 36px;
+  line-height: 50px;
+}
+
+.projectName {
+  font-weight: 450;
   color: var(--header-secondary-color);
-  padding-bottom: 12px;
 }
 
 .projectDescription {
-  font-size: var(--text-primary-size);
-  font-weight: var(--text-primary-weight);
-  line-height: var(--text-primary-line-height);
-  color: var(--text-secondary-color);
-  padding-bottom: 12px;
+  font-weight: 350;
+  color: hsla(228, 95%, 34%, 0.7);
 }
 
 .wrapper {
@@ -47,6 +46,7 @@
 
 .body {
   display: flex;
+  flex-direction: column;
   gap: 20px;
   justify-content: space-between;
   align-items: flex-start;
@@ -103,6 +103,10 @@
   .description {
     max-width: 100%;
     order: 2;
+  }
+
+  .projectTitle {
+    font-size: 28px;
   }
 
   .text {
