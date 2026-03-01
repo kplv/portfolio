@@ -10,6 +10,8 @@
   color: var(--text-link-color);
   text-decoration: none;
   cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /* Expanded hit area for better accessibility */

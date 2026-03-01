@@ -17,7 +17,7 @@ export default function Home() {
         <SocialLink href="" text="LinkedIn" />
         <SocialLink href="" text="E-Mail" />
       </SocialLinkList>
-      <Button label="Now leading design at Ostrom" ghost icon={<ReloadIcon size={28} />} />
+      <Button label="Shuffle" ghost icon={<ReloadIcon size={28} />} />
       <Button label="" ghost icon={<InfoIcon size={28} />} />
       <Button label="" icon={<InfoIcon size={28} />} />
       <ProjectList projects={projects} />
