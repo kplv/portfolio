@@ -18,9 +18,7 @@ export default function Home() {
         <SocialLink href="https://www.are.na/your-username" text="Are.na" />
         <SocialLink href="" text="E-Mail" />
       </SocialLinkList>
-      <Button label="Shuffle" ghost icon={<ReloadIcon size={28} />} />
-      <Button label="" ghost icon={<InfoIcon size={28} />} />
-      <Button label="" icon={<InfoIcon size={28} />} />
+
       <ProjectList projects={projects} />
     </main>
   );

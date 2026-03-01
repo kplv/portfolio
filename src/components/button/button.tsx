@@ -12,18 +12,22 @@ export interface ButtonProps {
   label?: string;
   icon?: React.ReactNode;
   ghost?: boolean;
+  onClick?: (e: React.MouseEvent) => void;
+  className?: string;
+  hitSlop?: 'default' | 'info';
 }
 
-export function Button({ label, icon, ghost }: ButtonProps) {
+export function Button({ label, icon, ghost, onClick, className, hitSlop = 'default' }: ButtonProps) {
   const shouldReduceMotion = useReducedMotion();
   const iconOnly = icon && !label;
 
   return (
     <motion.button
       type="button"
-      className={[styles.button, ghost && styles.ghost, iconOnly && styles.iconOnly]
+      className={[styles.button, ghost && styles.ghost, iconOnly && styles.iconOnly, hitSlop === 'info' && styles.hitSlopInfo, className]
         .filter(Boolean)
         .join(' ')}
+      onClick={onClick}
       whileTap={
         shouldReduceMotion
           ? undefined

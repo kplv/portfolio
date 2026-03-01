@@ -1,13 +1,17 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import ScrambleText from 'scramble-text';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import type { Project } from '@/data/projects';
+import { Button } from '@/components/button';
+import { InfoIcon } from '@/components/icons/info-icon';
 import styles from './project-card.module.css';
 
 export interface ProjectCardProps {
   project: Project;
+  onInfoClick?: (project: Project) => void;
 }
 
 const tapTransition = {
@@ -25,6 +29,10 @@ const fadeTransition = {
   ease: [0.23, 1, 0.32, 1] as [number, number, number, number],
 };
 
+const SCRAMBLE_EMOJIS = ['⚡', '🔌', '🔋', '🌞', '💡', '🌱', '☀️', '🏠'];
+const SCRAMBLE_CHARS = [...'!@#$%^&*()_+-=[]{}|;:,.<>?/~`░▒▓█▀▄■□▪▫●○◆◇◈◊※†‡', ...SCRAMBLE_EMOJIS];
+const SCRAMBLE_MINIMALISTC = ['░', '▒', '▓', '█'];
+
 function useCanHover() {
   const [canHover, setCanHover] = useState(false);
   useEffect(() => {
@@ -37,11 +45,14 @@ function useCanHover() {
   return canHover;
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPressed, setIsPressed] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const canHover = useCanHover();
+  const descriptionRef = useRef<HTMLSpanElement>(null);
+  const scrambleRef = useRef<{ stop: () => void; start: () => void } | null>(null);
+  const isInitialMount = useRef(true);
 
   const images = project.images ?? [project.image];
   const descriptions = project.descriptions ?? [project.description];
@@ -75,6 +86,37 @@ export function ProjectCard({ project }: ProjectCardProps) {
     },
   };
 
+  useEffect(() => {
+    // #region agent log
+    fetch('http://127.0.0.1:7244/ingest/39460fec-bee2-4a84-86f6-dc7b2c907bdf', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'efb6c6' }, body: JSON.stringify({ sessionId: 'efb6c6', location: 'project-card.tsx:useEffect', message: 'effect ran', data: { currentDescription, descriptionsLen: descriptions.length, shouldReduceMotion, isInitialMount: isInitialMount.current, hasRef: !!descriptionRef.current }, hypothesisId: 'H3', timestamp: Date.now() }) }).catch(() => { });
+    // #endregion
+    if (descriptions.length <= 1 || shouldReduceMotion || !descriptionRef.current) return;
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    scrambleRef.current?.stop();
+    // #region agent log
+    fetch('http://127.0.0.1:7244/ingest/39460fec-bee2-4a84-86f6-dc7b2c907bdf', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'efb6c6' }, body: JSON.stringify({ sessionId: 'efb6c6', location: 'project-card.tsx:create ScrambleText', message: 'creating ScrambleText', data: { currentDescription, innerHTML: descriptionRef.current?.innerHTML?.slice(0, 50) }, hypothesisId: 'H1', timestamp: Date.now() }) }).catch(() => { });
+    // #endregion
+    scrambleRef.current = new ScrambleText(descriptionRef.current, {
+      timeOffset: 16,
+      chars: SCRAMBLE_MINIMALISTC,
+      callback: () => {
+        // #region agent log
+        fetch('http://127.0.0.1:7244/ingest/39460fec-bee2-4a84-86f6-dc7b2c907bdf', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'efb6c6' }, body: JSON.stringify({ sessionId: 'efb6c6', location: 'project-card.tsx:scramble callback', message: 'scramble COMPLETE', data: { currentDescription }, hypothesisId: 'H4', runId: 'post-fix', timestamp: Date.now() }) }).catch(() => { });
+        // #endregion
+      },
+    });
+    scrambleRef.current.start();
+    return () => {
+      // #region agent log
+      fetch('http://127.0.0.1:7244/ingest/39460fec-bee2-4a84-86f6-dc7b2c907bdf', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'efb6c6' }, body: JSON.stringify({ sessionId: 'efb6c6', location: 'project-card.tsx:cleanup', message: 'effect cleanup stop()', hypothesisId: 'H3', timestamp: Date.now() }) }).catch(() => { });
+      // #endregion
+      scrambleRef.current?.stop();
+    };
+  }, [currentDescription, descriptions.length, shouldReduceMotion]);
+
   return (
     <motion.div
       layout={!shouldReduceMotion}
@@ -88,7 +130,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
         className={styles.card}
         role={images.length > 1 ? 'button' : undefined}
         tabIndex={images.length > 1 ? 0 : undefined}
-        onClick={images.length > 1 ? cycleToNext : undefined}
+        onClick={
+          images.length > 1
+            ? (e) => {
+              if ((e.target as HTMLElement).closest('button')) return;
+              cycleToNext();
+            }
+            : undefined
+        }
         onKeyDown={
           images.length > 1
             ? (e) => {
@@ -143,18 +192,29 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 </motion.div>
               </AnimatePresence>
             </motion.div>
+            <Button
+              label=""
+              ghost
+              icon={<InfoIcon size={28} />}
+              className={styles.infoButton}
+              hitSlop="info"
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                onInfoClick?.(project);
+              }}
+            />
           </motion.div>
 
           <p className={styles.projectTitle}>
             <span className={styles.projectName}>{project.name}</span>
             {'. '}
-            <motion.span
-              layout={!shouldReduceMotion}
-              transition={layoutTransition}
+            <span
+              ref={descriptionRef}
               className={styles.projectDescription}
             >
               {currentDescription}
-            </motion.span>
+            </span>
           </p>
 
 

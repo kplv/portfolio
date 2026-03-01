@@ -96,6 +96,13 @@
   will-change: transform;
 }
 
+.infoButton {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  z-index: 2;
+}
+
 .imageFrame {
   position: absolute;
   width: 90%;

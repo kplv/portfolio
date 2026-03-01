@@ -31,6 +31,10 @@
   inset: -12px;
 }
 
+.hitSlopInfo::before {
+  inset: -16px -16px -36px -36px; /* top right bottom left */
+}
+
 @media (hover: hover) and (pointer: fine) {
   .button:hover {
     filter: brightness(1.2);
