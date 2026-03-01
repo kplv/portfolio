@@ -5,6 +5,7 @@ import { SocialLink } from '@/components/social-link/social-link';
 import { SocialLinkList } from '@/components/social-link-list/social-link-list';
 import { Button } from '@/components/button';
 import { ReloadIcon } from '@/components/icons/reload-icon';
+import { InfoIcon } from '@/components/icons/info-icon';
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -16,7 +17,9 @@ export default function Home() {
         <SocialLink href="" text="LinkedIn" />
         <SocialLink href="" text="E-Mail" />
       </SocialLinkList>
-      <Button label="Shuffle" icon={<ReloadIcon size={28} />} />
+      <Button label="Shuffle" ghost icon={<ReloadIcon size={28} />} />
+      <Button label="" ghost icon={<InfoIcon size={28} />} />
+      <Button label="" icon={<InfoIcon size={28} />} />
       <ProjectList projects={projects} />
     </main>
   );

@@ -13,7 +13,7 @@
   font-weight: 500;
   line-height: normal;
   cursor: pointer;
-  transition: filter 150ms ease;
+  transition: filter 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .button::before {
@@ -38,6 +38,10 @@
   }
 }
 
+.label {
+  margin: 0;
+}
+
 .iconWrapper {
   flex-shrink: 0;
   display: flex;
@@ -48,8 +52,39 @@
   color: inherit;
 }
 
+/* Icon-only: center icon, square pill */
+.iconOnly {
+  justify-content: center;
+  padding: 10px;
+}
+
 .button:focus-visible {
-  outline: 2px solid white;
+  outline: 2px solid hsla(228, 95%, 34%, 1);
   outline-offset: 4px;
   border-radius: 100px;
+}
+
+/* Ghost variant: blur backdrop */
+.ghost {
+  background-color: hsla(0, 0%, 100%, 0.08);
+  color: hsla(228, 95%, 34%, 1);
+  border-color: transparent;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ghost:hover {
+    filter: brightness(0.95);
+  }
+}
+
+.ghost:active {
+  filter: brightness(0.9);
+}
+
+[data-theme='dark'] .ghost {
+  background-color: hsla(0, 0%, 0%, 0.4);
+  color: var(--text-primary-color);
+  border-color: transparent;
 }

@@ -9,17 +9,21 @@ import {
 import styles from './button.module.css';
 
 export interface ButtonProps {
-  label: string;
+  label?: string;
   icon?: React.ReactNode;
+  ghost?: boolean;
 }
 
-export function Button({ label, icon }: ButtonProps) {
+export function Button({ label, icon, ghost }: ButtonProps) {
   const shouldReduceMotion = useReducedMotion();
+  const iconOnly = icon && !label;
 
   return (
     <motion.button
       type="button"
-      className={styles.button}
+      className={[styles.button, ghost && styles.ghost, iconOnly && styles.iconOnly]
+        .filter(Boolean)
+        .join(' ')}
       whileTap={
         shouldReduceMotion
           ? undefined
@@ -32,8 +36,8 @@ export function Button({ label, icon }: ButtonProps) {
             }
       }
     >
-      {icon && <span className={styles.iconWrapper}>{icon}</span>}
-      <span>{label}</span>
+      {icon && <div className={styles.iconWrapper}>{icon}</div>}
+      {label && <p className={styles.label}>{label}</p>}
     </motion.button>
   );
 }
