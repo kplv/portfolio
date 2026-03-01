@@ -4,6 +4,10 @@ export interface Project {
   name: string;
   description: string;
   image: string;
+  /** When provided, cycles through these instead of single image. Must match descriptions length. */
+  images?: string[];
+  /** When provided, morphs to match current image index. Must match images length. */
+  descriptions?: string[];
   // tags?: string[]; // Future: add tags when ready
 }
 
@@ -13,7 +17,17 @@ export const projects: Project[] = [
     slug: 'ostrom',
     name: 'Ostrom',
     description: 'Prototypes and 1 → N features for user friendly electricity.',
-    image: '/images/projects/ostrom/thumbnail.png',
+    image: '/images/projects/ostrom/ostrom-1.png',
+    images: [
+      '/images/projects/ostrom/ostrom-1.png',
+      '/images/projects/ostrom/ostrom-2.png',
+      '/images/projects/ostrom/ostrom-3.png',
+    ],
+    descriptions: [
+      'Prototypes and 1 → N features for user friendly electricity',
+      'Solar system efficiency overview',
+      'Charging stats for electric vehicles',
+    ],
   },
   {
     id: '2',
