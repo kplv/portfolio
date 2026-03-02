@@ -1,0 +1,70 @@
+.link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-block: 4px;
+  font-size: var(--text-secondary-size);
+  font-weight: var(--text-secondary-weight);
+  line-height: var(--text-secondary-line-height);
+  color: var(--text-link-color);
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Expanded hit area for better accessibility */
+.link::before {
+  content: '';
+  position: absolute;
+  inset: -16px;
+ 
+}
+
+/* Animated underline */
+.underline {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--text-link-underline-color);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+
+  .underline {
+    transition: none;
+  }
+}
+
+/* Focus state for keyboard navigation */
+.link:focus {
+  outline: 2px solid var(--text-secondary-color);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.link:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--text-secondary-color);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Icon styles */
+.icon {
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}

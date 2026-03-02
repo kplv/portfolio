@@ -13,7 +13,7 @@
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-geist-sans);
+  font-family: var(--font-favorit);
   background-color: var(--background);
 }
 
@@ -22,7 +22,7 @@
   display: flex;
   min-height: 100vh;
   width: 100%;
-  max-width: 960px;
+  max-width: 860px;
   flex-direction: column;
   align-items: center; /* Center content horizontally */
   justify-content: flex-start;
@@ -30,7 +30,6 @@
   padding: 24px 64px;
   padding-top: 64px;
   margin: 0 auto; /* Center main horizontally inside the page container */
-  
 }
 
 .intro {
@@ -116,9 +115,9 @@ a.secondary {
   }
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
+@media (max-width: 900px) {
+  .content {
+    padding: 36px 24px;
   }
 
   .intro {
