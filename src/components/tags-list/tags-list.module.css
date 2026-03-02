@@ -1,0 +1,16 @@
+.wrapper {
+  position: relative;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.tagsList {
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--text-secondary-color);
+  text-align: inherit;
+}

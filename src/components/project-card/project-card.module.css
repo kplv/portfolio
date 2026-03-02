@@ -1,7 +1,7 @@
 .projectTitle {
   font-size: 36px;
   line-height: 50px;
-  min-height: 100px; /* 2 lines to prevent layout jump when description changes */
+  
 }
 
 .projectName {
@@ -40,7 +40,7 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+
   margin-bottom: 16px;
 }
 
@@ -60,9 +60,16 @@
   align-items: flex-start;
 }
 
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
 .description {
   flex: 1;
-  max-width: 61%;
 }
 
 .text {
@@ -85,7 +92,7 @@
   border: 1.5px solid;
   border-color: color-mix(in srgb, var(--slate-100) 5%, transparent);
   overflow: hidden;
-} 
+}
 
 .imageInner {
   position: absolute;
@@ -96,11 +103,19 @@
   will-change: transform;
 }
 
-.infoButton {
+.bottomControls {
   position: absolute;
   bottom: 16px;
   right: 16px;
   z-index: 2;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.infoButton {
+  flex-shrink: 0;
 }
 
 .imageFrame {
@@ -146,12 +161,11 @@
 
   .description {
     max-width: 100%;
-    order: 2;
+    min-height: 96px;
   }
 
   .projectTitle {
     font-size: 28px;
-    min-height: 80px; /* 2 lines at smaller font */
   }
 
   .text {
@@ -164,10 +178,7 @@
     max-height: 60vh;
     aspect-ratio: 9 / 16;
     padding: 24px 24px 0px 24px;
-    order: 1;
   }
-
-
 }
 
 /* Dark mode border */

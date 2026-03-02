@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
-import ScrambleText from 'scramble-text';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import type { Project } from '@/data/projects';
-import { Button } from '@/components/button';
-import { InfoIcon } from '@/components/icons/info-icon';
+// import { Button } from '@/components/button';
+import { TagsList } from '@/components/tags-list';
+// import { InfoIcon } from '@/components/icons/info-icon';
 import styles from './project-card.module.css';
 
 export interface ProjectCardProps {
@@ -29,10 +29,6 @@ const fadeTransition = {
   ease: [0.23, 1, 0.32, 1] as [number, number, number, number],
 };
 
-const SCRAMBLE_EMOJIS = ['⚡', '🔌', '🔋', '🌞', '💡', '🌱', '☀️', '🏠'];
-const SCRAMBLE_CHARS = [...'!@#$%^&*()_+-=[]{}|;:,.<>?/~`░▒▓█▀▄■□▪▫●○◆◇◈◊※†‡', ...SCRAMBLE_EMOJIS];
-const SCRAMBLE_MINIMALISTC = ['░', '▒', '▓', '█'];
-
 function useCanHover() {
   const [canHover, setCanHover] = useState(false);
   useEffect(() => {
@@ -50,14 +46,15 @@ export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
   const [isPressed, setIsPressed] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const canHover = useCanHover();
-  const descriptionRef = useRef<HTMLSpanElement>(null);
-  const scrambleRef = useRef<{ stop: () => void; start: () => void } | null>(null);
-  const isInitialMount = useRef(true);
 
   const images = project.images ?? [project.image];
-  const descriptions = project.descriptions ?? [project.description];
+  const tagGroups = project.tags;
+  const currentTagGroup = tagGroups?.[currentIndex] ?? tagGroups?.[0];
+  const tagsForList = currentTagGroup ?? [];
+  const hasTags = tagGroups && tagGroups.length > 0 && tagsForList.length > 0;
+  const tagsDisplayText = hasTags ? tagsForList.join(' · ') : undefined;
   const currentImage = images[currentIndex];
-  const currentDescription = descriptions[currentIndex] ?? descriptions[0];
+  const imageAlt = hasTags ? tagsForList.join(' · ') : project.description;
 
   const cycleToNext = useCallback(() => {
     if (images.length <= 1) return;
@@ -81,45 +78,14 @@ export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
 
   const layoutTransition = {
     layout: {
-      duration: 0.1,
+      duration: 1.5,
       ease: [0.86, 0, 0.07, 1] as [number, number, number, number], // ease-in-out-quint (moving/morphing on screen)
     },
   };
 
-  useEffect(() => {
-    // #region agent log
-    fetch('http://127.0.0.1:7244/ingest/39460fec-bee2-4a84-86f6-dc7b2c907bdf', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'efb6c6' }, body: JSON.stringify({ sessionId: 'efb6c6', location: 'project-card.tsx:useEffect', message: 'effect ran', data: { currentDescription, descriptionsLen: descriptions.length, shouldReduceMotion, isInitialMount: isInitialMount.current, hasRef: !!descriptionRef.current }, hypothesisId: 'H3', timestamp: Date.now() }) }).catch(() => { });
-    // #endregion
-    if (descriptions.length <= 1 || shouldReduceMotion || !descriptionRef.current) return;
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
-    scrambleRef.current?.stop();
-    // #region agent log
-    fetch('http://127.0.0.1:7244/ingest/39460fec-bee2-4a84-86f6-dc7b2c907bdf', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'efb6c6' }, body: JSON.stringify({ sessionId: 'efb6c6', location: 'project-card.tsx:create ScrambleText', message: 'creating ScrambleText', data: { currentDescription, innerHTML: descriptionRef.current?.innerHTML?.slice(0, 50) }, hypothesisId: 'H1', timestamp: Date.now() }) }).catch(() => { });
-    // #endregion
-    scrambleRef.current = new ScrambleText(descriptionRef.current, {
-      timeOffset: 16,
-      chars: SCRAMBLE_MINIMALISTC,
-      callback: () => {
-        // #region agent log
-        fetch('http://127.0.0.1:7244/ingest/39460fec-bee2-4a84-86f6-dc7b2c907bdf', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'efb6c6' }, body: JSON.stringify({ sessionId: 'efb6c6', location: 'project-card.tsx:scramble callback', message: 'scramble COMPLETE', data: { currentDescription }, hypothesisId: 'H4', runId: 'post-fix', timestamp: Date.now() }) }).catch(() => { });
-        // #endregion
-      },
-    });
-    scrambleRef.current.start();
-    return () => {
-      // #region agent log
-      fetch('http://127.0.0.1:7244/ingest/39460fec-bee2-4a84-86f6-dc7b2c907bdf', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'efb6c6' }, body: JSON.stringify({ sessionId: 'efb6c6', location: 'project-card.tsx:cleanup', message: 'effect cleanup stop()', hypothesisId: 'H3', timestamp: Date.now() }) }).catch(() => { });
-      // #endregion
-      scrambleRef.current?.stop();
-    };
-  }, [currentDescription, descriptions.length, shouldReduceMotion]);
-
   return (
     <motion.div
-      layout={!shouldReduceMotion}
+      layout={!shouldReduceMotion ? 'position' : false}
       transition={layoutTransition}
       onTapStart={() => !shouldReduceMotion && setIsPressed(true)}
       onTap={() => setIsPressed(false)}
@@ -162,7 +128,7 @@ export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
               className={styles.imageInner}
               animate={
                 isPressed && !shouldReduceMotion
-                  ? { scale: 1.1, transition: tapTransition }
+                  ? { scale: 1.18, transition: tapTransition }
                   : { scale: 1.2, transition: hoverTransition }
               }
               whileHover={
@@ -171,7 +137,7 @@ export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
                   : undefined
               }
             >
-              <AnimatePresence mode="sync" initial={false}>
+              <AnimatePresence mode="popLayout" initial={false}>
                 <motion.div
                   key={currentImage}
                   className={styles.imageFrame}
@@ -182,7 +148,7 @@ export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
                 >
                   <Image
                     src={currentImage}
-                    alt={`${project.name} - ${currentDescription}`}
+                    alt={`${project.name} - ${imageAlt}`}
                     fill
                     sizes="(max-width: 428px) 100vw, 364px"
                     quality={90}
@@ -192,30 +158,28 @@ export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
                 </motion.div>
               </AnimatePresence>
             </motion.div>
-            <Button
-              label=""
-              ghost
-              icon={<InfoIcon size={28} />}
-              className={styles.infoButton}
-              hitSlop="info"
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                onInfoClick?.(project);
-              }}
-            />
           </motion.div>
 
-          <p className={styles.projectTitle}>
-            <span className={styles.projectName}>{project.name}</span>
-            {'. '}
-            <span
-              ref={descriptionRef}
-              className={styles.projectDescription}
+          <div className={styles.textBlock}>
+            {hasTags && (
+              <TagsList
+                tags={tagsForList}
+                displayText={tagsDisplayText}
+                allDisplayTexts={tagGroups?.map((tg) => tg?.join(' · ') ?? '')}
+              />
+            )}
+            <motion.p
+              layout={!shouldReduceMotion ? 'position' : false}
+              transition={layoutTransition}
+              className={styles.projectTitle}
             >
-              {currentDescription}
-            </span>
-          </p>
+              <span className={styles.projectName}>{project.name}</span>
+              {'. '}
+              <span className={styles.projectDescription}>
+                {project.description}
+              </span>
+            </motion.p>
+          </div>
 
 
 

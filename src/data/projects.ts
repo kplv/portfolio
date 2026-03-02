@@ -4,11 +4,10 @@ export interface Project {
   name: string;
   description: string;
   image: string;
-  /** When provided, cycles through these instead of single image. Must match descriptions length. */
+  /** When provided, cycles through these instead of single image. Must match tags length. */
   images?: string[];
-  /** When provided, morphs to match current image index. Must match images length. */
-  descriptions?: string[];
-  // tags?: string[]; // Future: add tags when ready
+  /** Each group displays as {tag1, tag2}. One group per image when cycling. */
+  tags?: string[][];
 }
 
 export const projects: Project[] = [
@@ -22,25 +21,29 @@ export const projects: Project[] = [
       '/images/projects/ostrom/ostrom-1.png',
       '/images/projects/ostrom/ostrom-2.png',
       '/images/projects/ostrom/ostrom-3.png',
+      '/images/projects/ostrom/ostrom-4.png',
     ],
-    descriptions: [
-      'Prototypes and 1 → N features for user friendly electricity',
-      'Solar system efficiency overview',
-      'Charging stats for electric vehicles',
+    tags: [
+      ['Energy Flow'],
+      ['Solar Statistics'],
+      ['Charging Overivew '],
+      ['Daily Charging Sessions'],
     ],
   },
   {
     id: '2',
     slug: 'sample-project-two',
     name: 'Sample Project Two',
-    description: 'An innovative solution that combines cutting-edge technology with intuitive user interfaces.',
+    description:
+      'An innovative solution that combines cutting-edge technology with intuitive user interfaces.',
     image: '/images/projects/sample-project-two/thumbnail.svg',
   },
   {
     id: '3',
     slug: 'sample-project-three',
     name: 'Sample Project Three',
-    description: 'A comprehensive platform designed to streamline workflows and enhance productivity.',
+    description:
+      'A comprehensive platform designed to streamline workflows and enhance productivity.',
     image: '/images/projects/sample-project-three/thumbnail.svg',
   },
 ];
