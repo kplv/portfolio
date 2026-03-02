@@ -10,23 +10,44 @@
 
   /* === Typography Tokens === */
   /* Text Primary - Main prominent text */
-  --text-primary-color: var(--slate-1200);
+  --text-primary-color: var(--slate-1100);
   --text-primary-size: 20px;
-  --text-primary-line-height: 28px;
+  --text-primary-line-height: 30px;
   --text-primary-weight: 400;
 
   /* Text Secondary - Secondary text */
-  --text-secondary-color: var(--slate-300);
+  --text-secondary-color: var(--slate-400);
   --text-secondary-size: 16px;
   --text-secondary-line-height: 24px;
-  --text-secondary-weight: 400;
+  --text-secondary-weight: 450;
+
+  /* Text Link - Interactive link text */
+  --text-link-color: var(--mint-400);
+  --text-link-underline-color: color-mix(
+    in srgb,
+    var(--mint-400) 50%,
+    transparent
+  );
+
+  /* Headers */
+  --header-secondary-color: var(--slate-1100);
+  --header-secondary-size: 24px;
+  --header-secondary-line-height: 32px;
+  --header-secondary-weight: 450;
 }
 
 /* === Theme: Dark Mode === */
 [data-theme='dark'] {
-  --background-color: var(--slate-1200);
+  --background-color: var(--slate-1100);
   --text-primary-color: var(--slate-100);
   --text-secondary-color: var(--slate-600);
+  --text-link-color: var(--mint-400);
+  --text-link-underline-color: color-mix(
+    in srgb,
+    var(--mint-400) 50%,
+    transparent
+  );
+  --header-secondary-color: var(--slate-100);
 }
 
 /* === Responsive Typography === */
@@ -36,5 +57,7 @@
     --text-primary-line-height: 26px;
     --text-secondary-size: 15px;
     --text-secondary-line-height: 22px;
+    --header-secondary-size: 20px;
+    --header-secondary-line-height: 28px;
   }
 }
