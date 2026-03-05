@@ -10,7 +10,7 @@ export function IntroText({
   return (
     <div className={styles.container}>
       <p className={styles.label}>
-        Denis Kopylov · Berlin, Germany
+        Denis Kopylov
       </p>
       <h1 className={styles.text}>
         I'm a product designer by day and an engineer by night. I bring ideas to life in code, sweat over details, and strive for a joyful user experience. I'm also a proficient mentor and a design leader. Now leading design at Ostrom.

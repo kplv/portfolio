@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
-import { abcFavorit } from "./fonts";
+import { abcFavorit, gtSectra } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Denis Kopylov - Product Designer",
@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={abcFavorit.variable}>
+    <html lang="en" suppressHydrationWarning className={`${abcFavorit.variable} ${gtSectra.variable}`}>
       <body>
         <Providers>{children}</Providers>
       </body>

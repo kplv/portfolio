@@ -11,14 +11,14 @@
   /* === Typography Tokens === */
   /* Text Primary - Main prominent text */
   --text-primary-color: var(--slate-1100);
-  --text-primary-size: 20px;
-  --text-primary-line-height: 30px;
+  --text-primary-size: 24px;
+  --text-primary-line-height: 160%;
   --text-primary-weight: 400;
 
   /* Text Secondary - Secondary text */
   --text-secondary-color: var(--slate-400);
-  --text-secondary-size: 16px;
-  --text-secondary-line-height: 24px;
+  --text-secondary-size: 18px;
+  --text-secondary-line-height: 130%;
   --text-secondary-weight: 450;
 
   /* Text Link - Interactive link text */
@@ -34,6 +34,8 @@
   --header-secondary-size: 24px;
   --header-secondary-line-height: 32px;
   --header-secondary-weight: 450;
+
+  --selection-color: color-mix(in srgb, var(--mint-500) 50%, transparent);
 }
 
 /* === Theme: Dark Mode === */
@@ -48,15 +50,21 @@
     transparent
   );
   --header-secondary-color: var(--slate-100);
+
+  --selection-color: color-mix(in srgb, var(--mint-500) 50%, transparent);
+}
+
+::selection {
+  background-color: var(--selection-color);
 }
 
 /* === Responsive Typography === */
 @media screen and (max-width: 428px) {
   :root {
-    --text-primary-size: 18px;
-    --text-primary-line-height: 26px;
-    --text-secondary-size: 15px;
-    --text-secondary-line-height: 22px;
+    --text-primary-size: 20px;
+    --text-primary-line-height: 160%;
+    /* --text-secondary-size: 18px; */
+    --text-secondary-line-height: 130%;
     --header-secondary-size: 20px;
     --header-secondary-line-height: 28px;
   }
