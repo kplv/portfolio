@@ -1,5 +1,6 @@
 import { IntroText } from "@/components/intro-text";
-import { InfoTable } from "@/components/info-table";
+import { InfoTable } from "@/components/project/info-table";
+import { TeamList } from "@/components/project/team-list";
 import { ProjectList } from "@/components/project-list";
 import { projects } from "@/data/projects";
 import { SocialLink } from '@/components/social-link/social-link';
@@ -8,6 +9,8 @@ import { Button } from '@/components/button';
 import { ReloadIcon } from '@/components/icons/reload-icon';
 import { InfoIcon } from '@/components/icons/info-icon';
 import styles from "./page.module.css";
+
+const ostrom = projects[0];
 
 export default function Home() {
   return (
@@ -23,6 +26,9 @@ export default function Home() {
         contribution="Strategy & Processes, Product Design, Frontend"
         color="var(--mint-600)"
       />
+      {ostrom.team && ostrom.accentColor && (
+        <TeamList members={ostrom.team} color={ostrom.accentColor} />
+      )}
       <IntroText
         header="Denis Kopylov"
         text="I'm a product designer by day and an engineer by night. I bring ideas to life in code, sweat over details, and strive for a joyful user experience. I'm also a proficient mentor and a design leader. Now leading design at Ostrom."

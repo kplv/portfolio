@@ -1,3 +1,9 @@
+export interface TeamMember {
+  name: string;
+  avatar: string;
+  href: string;
+}
+
 export interface Project {
   id: string;
   slug: string;
@@ -8,6 +14,8 @@ export interface Project {
   images?: string[];
   /** Each group displays as {tag1, tag2}. One group per image when cycling. */
   tags?: string[][];
+  accentColor?: string;
+  team?: TeamMember[];
 }
 
 export const projects: Project[] = [
@@ -28,6 +36,12 @@ export const projects: Project[] = [
       ['Solar Statistics'],
       ['Charging Overivew '],
       ['Daily Charging Sessions'],
+    ],
+    accentColor: 'var(--mint-400)',
+    team: [
+      { name: 'Denis Kopylov', avatar: '/images/team/denis.jpg', href: '' },
+      { name: 'Team Member 2', avatar: 'https://i.pravatar.cc/80?img=32', href: '' },
+      { name: 'Team Member 3', avatar: 'https://i.pravatar.cc/80?img=47', href: '' },
     ],
   },
   {
