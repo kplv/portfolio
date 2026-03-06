@@ -9,4 +9,6 @@
   inset: 0;
   z-index: 10;
   pointer-events: none;
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
 }

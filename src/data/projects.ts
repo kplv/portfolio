@@ -61,7 +61,7 @@ export const projects: Project[] = [
       ['Charging Overivew '],
       ['Daily Charging Sessions'],
     ],
-    accentColor: 'var(--mint-400)',
+    accentColor: 'oklch(0.700 0.160 165)',
     role: 'Sr. Product Designer',
     year: '2025–26',
     contribution: 'Product Design, Frontend',
@@ -92,18 +92,54 @@ export const projects: Project[] = [
   },
   {
     id: '2',
-    slug: 'sample-project-two',
-    name: 'Sample Project Two',
-    description:
-      'An innovative solution that combines cutting-edge technology with intuitive user interfaces.',
-    image: '/images/projects/sample-project-two/thumbnail.svg',
+    slug: 'trade-republic',
+    name: 'Trade Republic',
+    description: "Worked on security and delight features for EU's largest broker.",
+    intro: 'European investing service used by 4M+ investors across 17 markets to trade stocks, ETFs, derivatives, and crypto. Worked on security and delight features.',
+    image: '/images/projects/trade/trade-1.png',
+    images: [
+      '/images/projects/trade/trade-1.png',
+    ],
+    accentColor: 'oklch(0.35 0.295 265)',
+    role: 'Product Designer II',
+    year: '2024–25',
+    contribution: 'Product Design',
+    team: [
+      { name: 'Denis Kopylov', avatar: '/images/team/denis.jpg', href: '' },
+      { name: 'Team Member 2', avatar: 'https://i.pravatar.cc/80?img=32', href: '' },
+      { name: 'Team Member 3', avatar: 'https://i.pravatar.cc/80?img=47', href: '' },
+      { name: 'Team Member 4', avatar: 'https://i.pravatar.cc/80?img=12', href: '' },
+    ],
+    sections: [
+      {
+        title: 'Features',
+        items: [
+          { label: 'Source of Income', media: { type: 'image', src: '/images/projects/trade/trade-1.png' } },
+        ],
+      },
+    ],
   },
   {
     id: '3',
-    slug: 'sample-project-three',
-    name: 'Sample Project Three',
-    description:
-      'A comprehensive platform designed to streamline workflows and enhance productivity.',
-    image: '/images/projects/sample-project-three/thumbnail.svg',
+    slug: 'playground',
+    name: 'Playground',
+    description: 'Experiments, prototypes, and personal projects.',
+    intro: 'Energy start-up from Berlin with expat friendly mobile application and the first virtual power plant in Germany. Series B with €30 millions market evaluation.',
+    image: '/images/projects/playground/playground-1.png',
+    images: [
+      '/images/projects/playground/playground-1.png',
+    ],
+    accentColor: 'oklch(0.62 0.22 35)',
+    role: 'Product Designer II',
+    year: '2024–25',
+    contribution: 'Product Design',
+    sections: [
+      {
+        title: 'Features',
+        items: [
+          { label: 'Statistics', media: { type: 'image', src: '/images/projects/playground/playground-1.png' } },
+        ],
+      },
+    ],
   },
 ];

@@ -41,7 +41,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
         className={styles.overlay}
         style={{ backgroundColor: openProject?.accentColor ?? 'var(--mint-400)' }}
         initial={{ opacity: 0 }}
-        animate={{ opacity: openProject ? 0.3 : 0 }}
+        animate={{ opacity: openProject ? 0.9 : 0 }}
         transition={{ duration: 0.5, ease: EASE_OUT_QUINT }}
       />
 

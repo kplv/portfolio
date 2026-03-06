@@ -119,6 +119,7 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
       onTap={() => setIsPressed(false)}
       onTapCancel={() => setIsPressed(false)}
       className={styles.wrapper}
+      style={project.accentColor ? ({ '--project-accent': project.accentColor } as React.CSSProperties) : undefined}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
     >

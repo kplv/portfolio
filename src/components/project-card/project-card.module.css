@@ -6,13 +6,13 @@
 
 .projectName {
   font-weight: 450;
-  color: var(--header-secondary-color);
+  color: var(--project-accent, var(--header-secondary-color));
 }
 
 .projectDescription {
   font-family: inherit;
   font-weight: 350;
-  color: hsla(228, 95%, 34%, 0.7);
+  color: color-mix(in srgb, var(--project-accent, hsla(228, 95%, 34%)) 70%, transparent);
 }
 
 .wrapper {
