@@ -3,49 +3,51 @@
   inset: 0;
   z-index: 20;
   will-change: transform;
-  border-radius: 20px 20px 0 0;
 }
 
-/* Close button — floats above the white panel */
+/* Close button — sticky inside panel, pins to top-right on scroll */
 .closeButtonWrapper {
-  position: absolute;
-  top: 8px;
-  right: 16px;
+  position: sticky;
+  top: 16px;
+  align-self: flex-end;
+  margin-top: 16px;
+  margin-right: 16px;
   z-index: 2;
+  flex-shrink: 0;
 }
 
 .closeButton {
-  color: white !important;
+  color: var(--sheet-accent) !important;
 }
 
-/* White scrollable panel — inset from sheet edges */
+/* White scrollable panel — inset from sheet edges, open at the bottom */
 .panel {
   position: absolute;
-  top: 64px;
+  top: 16px;
   left: 16px;
   right: 16px;
-  bottom: 46px;
+  bottom: 0;
   background-color: var(--background-color);
-  border-radius: 36px;
+  border-radius: 36px 36px 0 0;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Hide scrollbar universally */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Subtle accent-colored scrollbar */
 .panel::-webkit-scrollbar {
-  width: 6px;
-}
-.panel::-webkit-scrollbar-track {
-  background: transparent;
-}
-.panel::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--sheet-accent) 25%, transparent);
-  border-radius: 3px;
+  display: none;
 }
 
 .panelContent {
-  padding: 64px 56px 80px;
+  max-width: 860px;
+  width: 100%;
+  padding: 0 64px 80px;
   display: flex;
   flex-direction: column;
   gap: 100px;
@@ -56,7 +58,7 @@
 .entryBlock {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 24px;
   align-items: flex-start;
   width: 100%;
   max-width: 639px;
@@ -79,10 +81,10 @@
   line-height: 120%;
 }
 
-/* 2-column media grid */
+/* Single-column media grid — images always stack vertically */
 .mediaGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 8px;
   width: 100%;
 }
@@ -91,23 +93,22 @@
   min-width: 0;
 }
 
-/* Full-width item spans both columns */
 .mediaGridItemFull {
-  grid-column: 1 / -1;
+  grid-column: 1;
   min-width: 0;
 }
 
 @media screen and (max-width: 900px) {
   .panel {
-    top: 48px;
-    left: 8px;
-    right: 8px;
-    bottom: 16px;
-    border-radius: 28px;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    bottom: 0;
+    border-radius: 28px 28px 0 0;
   }
 
   .panelContent {
-    padding: 40px 32px 60px;
+    padding: 0 24px 60px;
     gap: 64px;
   }
 
@@ -122,28 +123,19 @@
 
 @media screen and (max-width: 428px) {
   .panel {
-    top: 40px;
-    left: 6px;
-    right: 6px;
-    bottom: 10px;
-    border-radius: 24px;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    bottom: 0;
+    border-radius: 24px 24px 0 0;
   }
 
   .panelContent {
-    padding: 24px 20px 48px;
+    padding: 0 16px 48px;
     gap: 48px;
   }
 
   .sectionTitle {
     font-size: 36px;
-  }
-
-  /* Stack to single column on mobile */
-  .mediaGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .mediaGridItemFull {
-    grid-column: 1;
   }
 }

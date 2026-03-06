@@ -11,8 +11,6 @@ import { EASE_OUT_QUINT } from '@/config/animations';
 import type { Project } from '@/data/projects';
 import styles from './home-client.module.css';
 
-// ease-in-out-quint — for elements already on screen moving/morphing
-const EASE_IN_OUT_QUINT = [0.86, 0, 0.07, 1] as [number, number, number, number];
 
 export interface HomeClientProps {
   projects: Project[];
@@ -38,20 +36,14 @@ export function HomeClient({ projects, className }: HomeClientProps) {
 
   return (
     <div className={styles.root}>
-      {/* Accent color backdrop — reveals the rounded corners of the receding main page */}
-      <AnimatePresence>
-        {openProject && (
-          <motion.div
-            key="backdrop"
-            className={styles.backdrop}
-            style={{ backgroundColor: openProject.accentColor ?? 'var(--mint-400)' }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: EASE_OUT_QUINT }}
-          />
-        )}
-      </AnimatePresence>
+      {/* Accent color overlay — always mounted, fades in/out based on open project */}
+      <motion.div
+        className={styles.overlay}
+        style={{ backgroundColor: openProject?.accentColor ?? 'var(--mint-400)' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: openProject ? 1 : 0 }}
+        transition={{ duration: 0.5, ease: EASE_OUT_QUINT }}
+      />
 
       {/* Main page — recedes back iOS-style when modal opens */}
       <motion.main
@@ -72,7 +64,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
                 opacity: openProject ? 0.85 : 1,
               }
         }
-        transition={{ duration: 0.4, ease: EASE_IN_OUT_QUINT }}
+        transition={{ duration: 0.3, ease: EASE_OUT_QUINT }}
       >
         <IntroText
           header="Denis Kopylov"
