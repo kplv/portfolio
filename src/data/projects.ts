@@ -4,11 +4,30 @@ export interface TeamMember {
   href: string;
 }
 
+export type MediaBlock =
+  | { type: 'image'; src: string; alt?: string }
+  | { type: 'video'; src: string; poster?: string; loop?: boolean };
+
+export interface SectionItem {
+  label?: string;
+  media: MediaBlock;
+  /** Spans full width of the 2-col grid */
+  fullWidth?: boolean;
+}
+
+export interface ProjectSection {
+  title: string;
+  items: SectionItem[];
+}
+
 export interface Project {
   id: string;
   slug: string;
   name: string;
+  /** Short tagline shown on the project card */
   description: string;
+  /** Longer intro text shown in the project modal header */
+  intro?: string;
   image: string;
   /** When provided, cycles through these instead of single image. Must match tags length. */
   images?: string[];
@@ -19,6 +38,7 @@ export interface Project {
   role?: string;
   year?: string;
   contribution?: string;
+  sections?: ProjectSection[];
 }
 
 export const projects: Project[] = [
@@ -27,6 +47,7 @@ export const projects: Project[] = [
     slug: 'ostrom',
     name: 'Ostrom',
     description: 'Prototypes and 1 → N features for user friendly electricity.',
+    intro: 'Energy start-up from Berlin with expat friendly mobile application and the first virtual power plant in Germany. Series B with € 30 millions market evaluation.',
     image: '/images/projects/ostrom/ostrom-1.png',
     images: [
       '/images/projects/ostrom/ostrom-1.png',
@@ -55,6 +76,17 @@ export const projects: Project[] = [
         name: 'Team Member 3',
         avatar: 'https://i.pravatar.cc/80?img=47',
         href: '',
+      },
+    ],
+    sections: [
+      {
+        title: 'Features',
+        items: [
+          { label: 'Live Energy Graph', media: { type: 'image', src: '/images/projects/ostrom/ostrom-1.png' } },
+          { label: 'Solar System Insights', media: { type: 'image', src: '/images/projects/ostrom/ostrom-2.png' } },
+          { label: 'Charging Statistics', media: { type: 'image', src: '/images/projects/ostrom/ostrom-3.png' }, fullWidth: true },
+          { label: 'Daily Charging Sessions', media: { type: 'image', src: '/images/projects/ostrom/ostrom-4.png' } },
+        ],
       },
     ],
   },

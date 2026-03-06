@@ -1,0 +1,149 @@
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  will-change: transform;
+  border-radius: 20px 20px 0 0;
+}
+
+/* Close button — floats above the white panel */
+.closeButtonWrapper {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  z-index: 2;
+}
+
+.closeButton {
+  color: white !important;
+}
+
+/* White scrollable panel — inset from sheet edges */
+.panel {
+  position: absolute;
+  top: 64px;
+  left: 16px;
+  right: 16px;
+  bottom: 46px;
+  background-color: var(--background-color);
+  border-radius: 36px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Subtle accent-colored scrollbar */
+.panel::-webkit-scrollbar {
+  width: 6px;
+}
+.panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+.panel::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--sheet-accent) 25%, transparent);
+  border-radius: 3px;
+}
+
+.panelContent {
+  padding: 64px 56px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  align-items: flex-start;
+}
+
+/* Entry block — constrained width on desktop like Figma */
+.entryBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 639px;
+}
+
+/* Section — title + media grid */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.sectionTitle {
+  font-family: var(--font-gt-sectra), serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 64px;
+  line-height: 120%;
+}
+
+/* 2-column media grid */
+.mediaGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
+.mediaGridItem {
+  min-width: 0;
+}
+
+/* Full-width item spans both columns */
+.mediaGridItemFull {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .panel {
+    top: 48px;
+    left: 8px;
+    right: 8px;
+    bottom: 16px;
+    border-radius: 28px;
+  }
+
+  .panelContent {
+    padding: 40px 32px 60px;
+    gap: 64px;
+  }
+
+  .entryBlock {
+    max-width: 100%;
+  }
+
+  .sectionTitle {
+    font-size: 48px;
+  }
+}
+
+@media screen and (max-width: 428px) {
+  .panel {
+    top: 40px;
+    left: 6px;
+    right: 6px;
+    bottom: 10px;
+    border-radius: 24px;
+  }
+
+  .panelContent {
+    padding: 24px 20px 48px;
+    gap: 48px;
+  }
+
+  .sectionTitle {
+    font-size: 36px;
+  }
+
+  /* Stack to single column on mobile */
+  .mediaGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .mediaGridItemFull {
+    grid-column: 1;
+  }
+}

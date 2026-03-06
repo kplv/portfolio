@@ -1,17 +1,30 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import type { Project } from '@/data/projects';
-// import { Button } from '@/components/button';
 import { TagsList } from '@/components/tags-list';
-// import { InfoIcon } from '@/components/icons/info-icon';
 import styles from './project-card.module.css';
 
 export interface ProjectCardProps {
   project: Project;
-  onInfoClick?: (project: Project) => void;
+  onProjectClick?: (project: Project) => void;
+}
+
+function prefetchProjectMedia(project: Project) {
+  project.sections?.forEach((section) =>
+    section.items.forEach((item) => {
+      if (item.media.type === 'image') {
+        const img = new window.Image();
+        img.src = item.media.src;
+      }
+      if (item.media.type === 'video' && item.media.poster) {
+        const img = new window.Image();
+        img.src = item.media.poster;
+      }
+    }),
+  );
 }
 
 const tapTransition = {
@@ -41,11 +54,12 @@ function useCanHover() {
   return canHover;
 }
 
-export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
+export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPressed, setIsPressed] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const canHover = useCanHover();
+  const prefetchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const images = project.images ?? [project.image];
   const tagGroups = project.tags;
@@ -60,6 +74,20 @@ export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
     if (images.length <= 1) return;
     setCurrentIndex((prev) => (prev + 1) % images.length);
   }, [images.length]);
+
+  const handlePointerEnter = useCallback(() => {
+    if (!canHover) return;
+    prefetchTimer.current = setTimeout(() => {
+      prefetchProjectMedia(project);
+    }, 100);
+  }, [canHover, project]);
+
+  const handlePointerLeave = useCallback(() => {
+    if (prefetchTimer.current) {
+      clearTimeout(prefetchTimer.current);
+      prefetchTimer.current = null;
+    }
+  }, []);
 
   const imageVariants = {
     hidden: {
@@ -91,29 +119,31 @@ export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
       onTap={() => setIsPressed(false)}
       onTapCancel={() => setIsPressed(false)}
       className={styles.wrapper}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
     >
       <div
         className={styles.card}
-        role={images.length > 1 ? 'button' : undefined}
-        tabIndex={images.length > 1 ? 0 : undefined}
-        onClick={
-          images.length > 1
-            ? (e) => {
-              if ((e.target as HTMLElement).closest('button')) return;
+        role="button"
+        tabIndex={0}
+        onClick={(e) => {
+          if ((e.target as HTMLElement).closest('button')) return;
+          if (onProjectClick) {
+            onProjectClick(project);
+          } else if (images.length > 1) {
+            cycleToNext();
+          }
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (onProjectClick) {
+              onProjectClick(project);
+            } else if (images.length > 1) {
               cycleToNext();
             }
-            : undefined
-        }
-        onKeyDown={
-          images.length > 1
-            ? (e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                cycleToNext();
-              }
-            }
-            : undefined
-        }
+          }
+        }}
       >
 
         <div className={styles.body}>

@@ -1,0 +1,12 @@
+.root {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Fixed backdrop — fades in with the project's accent color */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
