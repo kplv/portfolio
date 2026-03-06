@@ -3,8 +3,9 @@
   flex-direction: row;
   align-items: flex-start;
   align-self: flex-start;
-  
+
   padding: 8px 0px;
+  margin: 28px 0px;
 }
 
 .list > * + * {

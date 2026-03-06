@@ -16,6 +16,9 @@ export interface Project {
   tags?: string[][];
   accentColor?: string;
   team?: TeamMember[];
+  role?: string;
+  year?: string;
+  contribution?: string;
 }
 
 export const projects: Project[] = [
@@ -38,10 +41,21 @@ export const projects: Project[] = [
       ['Daily Charging Sessions'],
     ],
     accentColor: 'var(--mint-400)',
+    role: 'Sr. Product Designer',
+    year: '2025–26',
+    contribution: 'Product Design, Frontend',
     team: [
       { name: 'Denis Kopylov', avatar: '/images/team/denis.jpg', href: '' },
-      { name: 'Team Member 2', avatar: 'https://i.pravatar.cc/80?img=32', href: '' },
-      { name: 'Team Member 3', avatar: 'https://i.pravatar.cc/80?img=47', href: '' },
+      {
+        name: 'Team Member 2',
+        avatar: 'https://i.pravatar.cc/80?img=32',
+        href: '',
+      },
+      {
+        name: 'Team Member 3',
+        avatar: 'https://i.pravatar.cc/80?img=47',
+        href: '',
+      },
     ],
   },
   {

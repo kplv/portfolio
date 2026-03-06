@@ -20,12 +20,14 @@ export default function Home() {
         text="Energy start-up from Berlin with expat friendly mobile application and the first virtual power plant in Germany. Series B with € 30 millions market evaluation."
         color="var(--mint-500)"
       />
-      <InfoTable
-        role="Design Lead"
-        year="2025–26"
-        contribution="Strategy & Processes, Product Design, Frontend"
-        color="var(--mint-600)"
-      />
+      {ostrom.role && ostrom.year && ostrom.contribution && (
+        <InfoTable
+          role={ostrom.role}
+          year={ostrom.year}
+          contribution={ostrom.contribution}
+          color="var(--mint-600)"
+        />
+      )}
       {ostrom.team && ostrom.accentColor && (
         <TeamList members={ostrom.team} color={ostrom.accentColor} />
       )}
