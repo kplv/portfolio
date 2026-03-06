@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 96px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 0 0 auto;
+  
+}
+
+.header {
+  font-size: var(--text-secondary-size);
+  font-weight: 800;
+  font-variation-settings: 'slnt' -12;
+  line-height: var(--text-secondary-line-height);
+}
+
+.text {
+  font-size: var(--text-secondary-size);
+  font-weight: var(--text-secondary-weight);
+  line-height: var(--text-secondary-line-height);
+  color: var(--text-secondary-color);
+}

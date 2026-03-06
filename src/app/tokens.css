@@ -19,7 +19,7 @@
   --text-secondary-color: var(--slate-400);
   --text-secondary-size: 18px;
   --text-secondary-line-height: 130%;
-  --text-secondary-weight: 450;
+  --text-secondary-weight: 500;
 
   /* Text Link - Interactive link text */
   --text-link-color: var(--mint-400);

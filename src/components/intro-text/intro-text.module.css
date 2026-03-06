@@ -18,7 +18,7 @@
   text-wrap: balance;
 }
 
-.label {
+.header {
   font-family: var(--font-gt-sectra), serif;
   font-weight: 800;
   font-style: italic;
