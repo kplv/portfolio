@@ -34,11 +34,35 @@ export interface Project {
   /** Each group displays as {tag1, tag2}. One group per image when cycling. */
   tags?: string[][];
   accentColor?: string;
+  /** When provided, used for modal header and home overlay; accentColor used for other UI */
+  accentGradient?: string;
   team?: TeamMember[];
   role?: string;
   year?: string;
   contribution?: string;
   sections?: ProjectSection[];
+}
+
+/** First hex color from gradient, or undefined if not found */
+function firstColorFromGradient(gradient: string): string | undefined {
+  const match = gradient.match(/#[0-9a-fA-F]{6}/);
+  return match?.[0];
+}
+
+/** Resolved accent color: explicit accentColor, or first color from accentGradient, or fallback */
+export function getAccentColor(project: Project, fallback = 'var(--mint-400)'): string {
+  return (
+    project.accentColor ??
+    (project.accentGradient ? firstColorFromGradient(project.accentGradient) : undefined) ??
+    fallback
+  );
+}
+
+/** Gradient for headers: accentGradient when present, else fallback from accentColor */
+export function getHeaderGradient(project: Project): string {
+  if (project.accentGradient) return project.accentGradient;
+  const color = getAccentColor(project);
+  return `linear-gradient(90deg, ${color} 0%, ${color} 100%)`;
 }
 
 export const projects: Project[] = [
@@ -61,7 +85,7 @@ export const projects: Project[] = [
       ['Charging Overivew '],
       ['Daily Charging Sessions'],
     ],
-    accentColor: 'oklch(0.700 0.160 165)',
+    accentGradient: 'linear-gradient(in oklch 90deg, #007f7e 0.0%, #006660 100.0%)',
     role: 'Sr. Product Designer',
     year: '2025–26',
     contribution: 'Product Design, Frontend',
@@ -100,7 +124,7 @@ export const projects: Project[] = [
     images: [
       '/images/projects/trade/trade-1.png',
     ],
-    accentColor: 'oklch(0.35 0.295 265)',
+    accentGradient: 'linear-gradient(in oklch 90deg, #006d60 0.0%, #758529 100.0%)',
     role: 'Product Designer II',
     year: '2024–25',
     contribution: 'Product Design',
@@ -129,7 +153,7 @@ export const projects: Project[] = [
     images: [
       '/images/projects/playground/playground-1.png',
     ],
-    accentColor: 'oklch(0.62 0.22 35)',
+    accentGradient: 'linear-gradient(in oklch 90deg, #0062a9 0.0%, #ff7500 100.0%)',
     role: 'Product Designer II',
     year: '2024–25',
     contribution: 'Product Design',

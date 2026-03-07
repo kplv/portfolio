@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-import type { Project } from '@/data/projects';
+import { getAccentColor, type Project } from '@/data/projects';
 import { TagsList } from '@/components/tags-list';
 import styles from './project-card.module.css';
 
@@ -119,7 +119,7 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
       onTap={() => setIsPressed(false)}
       onTapCancel={() => setIsPressed(false)}
       className={styles.wrapper}
-      style={project.accentColor ? ({ '--project-accent': project.accentColor } as React.CSSProperties) : undefined}
+      style={(project.accentGradient || project.accentColor) ? ({ '--project-accent': getAccentColor(project) } as React.CSSProperties) : undefined}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
     >

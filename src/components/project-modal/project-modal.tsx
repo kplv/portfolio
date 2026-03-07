@@ -7,7 +7,7 @@ import { IntroText } from '@/components/intro-text';
 import { InfoTable } from '@/components/project/info-table';
 import { TeamList } from '@/components/project/team-list';
 import { ProjectMediaBlock } from '@/components/project/media-block';
-import type { Project } from '@/data/projects';
+import { getAccentColor, getHeaderGradient, type Project } from '@/data/projects';
 import styles from './project-modal.module.css';
 
 export interface ProjectModalProps {
@@ -17,7 +17,8 @@ export interface ProjectModalProps {
 
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
   const shouldReduceMotion = useReducedMotion();
-  const accentColor = project.accentColor ?? 'var(--mint-400)';
+  const accentColor = getAccentColor(project);
+  const headerGradient = getHeaderGradient(project);
 
   // Close on Escape key
   useEffect(() => {
@@ -61,7 +62,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             <IntroText
               header={project.name}
               text={project.intro ?? project.description}
-              color={accentColor}
+              gradient={headerGradient}
             />
             {project.role && project.year && project.contribution && (
               <InfoTable
@@ -81,7 +82,12 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             <div key={section.title} className={styles.section}>
               <h2
                 className={styles.sectionTitle}
-                style={{ color: accentColor }}
+                style={{
+                  backgroundImage: headerGradient,
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  color: 'transparent',
+                }}
               >
                 {section.title}
               </h2>
