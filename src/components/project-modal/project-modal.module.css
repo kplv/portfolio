@@ -97,15 +97,6 @@
   min-width: 0;
 }
 
-/* "Fancy Other Project?" — below the card, visible after scrolling */
-.fancyText {
-  color: color-mix(in oklch, var(--background-color) 70%, white);
-  text-align: center;
-  padding: 48px 24px 80px;
-  font-size: 20px;
-  line-height: 1.4;
-}
-
 @media screen and (max-width: 900px) {
   .card {
     border-radius: 28px;

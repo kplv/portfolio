@@ -91,7 +91,9 @@ export function HomeClient({ projects, className }: HomeClientProps) {
           <ProjectModal
             key={openProject.id}
             project={openProject}
+            projects={projects}
             onClose={() => setOpenProject(null)}
+            onNextProject={(p) => setOpenProject(p)}
           />
         )}
       </AnimatePresence>
