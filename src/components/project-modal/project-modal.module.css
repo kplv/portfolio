@@ -30,6 +30,11 @@
   align-items: center;
 }
 
+/* Dark mode — card uses 5% white for subtle contrast */
+[data-theme='dark'] .card {
+  background-color: color-mix(in srgb, white 5%, var(--background-color));
+}
+
 /* Sticky close button — floats at top-right as you scroll */
 .stickyClose {
   position: sticky;

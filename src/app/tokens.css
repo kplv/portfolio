@@ -43,10 +43,10 @@
   --background-color: var(--slate-1100);
   --text-primary-color: var(--slate-100);
   --text-secondary-color: var(--slate-600);
-  --text-link-color: var(--mint-400);
+  --text-link-color: var(--yellow-600);
   --text-link-underline-color: color-mix(
     in srgb,
-    var(--mint-400) 50%,
+    var(--yellow-500) 50%,
     transparent
   );
   --header-secondary-color: var(--slate-100);
@@ -63,7 +63,6 @@
   :root {
     --text-primary-size: 20px;
     --text-primary-line-height: 160%;
-    /* --text-secondary-size: 18px; */
     --text-secondary-line-height: 130%;
     --header-secondary-size: 20px;
     --header-secondary-line-height: 28px;

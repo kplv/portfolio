@@ -105,3 +105,11 @@
   color: currentColor;
   border-color: transparent;
 }
+
+[data-theme='dark'] .ghost:hover {
+  background-color: color-mix(in oklch, white 10%, transparent);
+}
+
+[data-theme='dark'] .ghost:active {
+  background-color: color-mix(in oklch, white 15%, transparent);
+}

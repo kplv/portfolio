@@ -1,3 +1,5 @@
+import { converter, formatCss } from 'culori';
+
 export interface TeamMember {
   name: string;
   avatar: string;
@@ -11,7 +13,7 @@ export type MediaBlock =
 export interface SectionItem {
   label?: string;
   media: MediaBlock;
-  /** Spans full width of the 2-col grid */
+  /** Spans full width in single-column layout (reserved for future 2-col grid) */
   fullWidth?: boolean;
 }
 
@@ -29,10 +31,9 @@ export interface Project {
   /** Longer intro text shown in the project modal header */
   intro?: string;
   image: string;
-  /** When provided, cycles through these instead of single image. Must match tags length. */
+  /** When provided, cycles through these instead of single image. */
   images?: string[];
-  /** Each group displays as {tag1, tag2}. One group per image when cycling. */
-  tags?: string[][];
+  /** Accent color in OKLCH; derived from last color of accentGradient when not set */
   accentColor?: string;
   /** When provided, used for modal header and home overlay; accentColor used for other UI */
   accentGradient?: string;
@@ -43,17 +44,28 @@ export interface Project {
   sections?: ProjectSection[];
 }
 
-/** First hex color from gradient, or undefined if not found */
-function firstColorFromGradient(gradient: string): string | undefined {
-  const match = gradient.match(/#[0-9a-fA-F]{6}/);
-  return match?.[0];
+const toOklch = converter('oklch');
+
+/** Last color from gradient (hex, rgb, or oklch), converted to OKLCH */
+function lastColorFromGradientInOklch(gradient: string): string | undefined {
+  const colorRegex = /#[0-9a-fA-F]{3,8}|rgb\s*\([^)]+\)|oklch\s*\([^)]+\)/g;
+  const matches = gradient.match(colorRegex);
+  if (!matches?.length) return undefined;
+  const last = matches[matches.length - 1];
+  const parsed = toOklch(last);
+  return parsed ? formatCss(parsed) : undefined;
 }
 
-/** Resolved accent color: explicit accentColor, or first color from accentGradient, or fallback */
-export function getAccentColor(project: Project, fallback = 'var(--mint-400)'): string {
+/** Resolved accent color in OKLCH: explicit accentColor, or last color from accentGradient, or fallback */
+export function getAccentColor(
+  project: Project,
+  fallback = 'var(--mint-400)',
+): string {
   return (
     project.accentColor ??
-    (project.accentGradient ? firstColorFromGradient(project.accentGradient) : undefined) ??
+    (project.accentGradient
+      ? lastColorFromGradientInOklch(project.accentGradient)
+      : undefined) ??
     fallback
   );
 }
@@ -70,8 +82,9 @@ export const projects: Project[] = [
     id: '1',
     slug: 'ostrom',
     name: 'Ostrom',
-    description: 'Prototypes and 1 → N features for user friendly electricity.',
-    intro: 'Energy start-up from Berlin with expat friendly mobile application and the first virtual power plant in Germany. Series B with € 30 millions market evaluation.',
+    description: 'Mobile app for managing your home energy and the first virtual power plant in Germany.',
+    intro:
+      'Energy start-up from Berlin with expat friendly mobile application and the first virtual power plant in Germany. Series B with € 30 millions market evaluation.',
     image: '/images/projects/ostrom/ostrom-1.png',
     images: [
       '/images/projects/ostrom/ostrom-1.png',
@@ -79,37 +92,46 @@ export const projects: Project[] = [
       '/images/projects/ostrom/ostrom-3.png',
       '/images/projects/ostrom/ostrom-4.png',
     ],
-    tags: [
-      ['Energy Flow'],
-      ['Solar Statistics'],
-      ['Charging Overivew '],
-      ['Daily Charging Sessions'],
-    ],
-    accentGradient: 'linear-gradient(in oklch 90deg, #007f7e 0.0%, #006660 100.0%)',
+    accentColor: 'oklch(70% 0.1 186)',
+    accentGradient:
+      'radial-gradient(farthest-corner circle at 50% 85% in oklch, oklch(95% 0.29 158) 0%, oklch(70% 0.1 186) 100%)',
     role: 'Sr. Product Designer',
     year: '2025–26',
     contribution: 'Product Design, Frontend',
-    team: [
-      { name: 'Denis Kopylov', avatar: '/images/team/denis.jpg', href: '' },
-      {
-        name: 'Team Member 2',
-        avatar: 'https://i.pravatar.cc/80?img=32',
-        href: '',
-      },
-      {
-        name: 'Team Member 3',
-        avatar: 'https://i.pravatar.cc/80?img=47',
-        href: '',
-      },
-    ],
+    team: [{ name: 'Denis Kopylov', avatar: '/images/team/denis.jpg', href: '' }],
     sections: [
       {
         title: 'Features',
         items: [
-          { label: 'Live Energy Graph', media: { type: 'image', src: '/images/projects/ostrom/ostrom-1.png' } },
-          { label: 'Solar System Insights', media: { type: 'image', src: '/images/projects/ostrom/ostrom-2.png' } },
-          { label: 'Charging Statistics', media: { type: 'image', src: '/images/projects/ostrom/ostrom-3.png' }, fullWidth: true },
-          { label: 'Daily Charging Sessions', media: { type: 'image', src: '/images/projects/ostrom/ostrom-4.png' } },
+          {
+            label: 'Live Energy Graph',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-1.png',
+            },
+          },
+          {
+            label: 'Solar System Insights',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-2.png',
+            },
+          },
+          {
+            label: 'Charging Statistics',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-3.png',
+            },
+            fullWidth: true,
+          },
+          {
+            label: 'Daily Charging Sessions',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-4.png',
+            },
+          },
         ],
       },
     ],
@@ -118,27 +140,27 @@ export const projects: Project[] = [
     id: '2',
     slug: 'trade-republic',
     name: 'Trade Republic',
-    description: "Worked on security and delight features for EU's largest broker.",
-    intro: 'European investing service used by 4M+ investors across 17 markets to trade stocks, ETFs, derivatives, and crypto. Worked on security and delight features.',
+    description:
+      "Worked on security and delight features for EU's largest broker.",
+    intro:
+      'European investing service used by 4M+ investors across 17 markets to trade stocks, ETFs, derivatives, and crypto. Worked on security and delight features.',
     image: '/images/projects/trade/trade-1.png',
-    images: [
-      '/images/projects/trade/trade-1.png',
-    ],
-    accentGradient: 'linear-gradient(in oklch 90deg, #006d60 0.0%, #758529 100.0%)',
+    images: ['/images/projects/trade/trade-1.png'],
+    accentColor: 'oklch(55% 0.05 237)',
+    accentGradient:
+      'linear-gradient(to bottom left in oklab, oklch(55% 0.05 237) 0%, oklch(17% 0.09 315) 100%)',
     role: 'Product Designer II',
     year: '2024–25',
     contribution: 'Product Design',
-    team: [
-      { name: 'Denis Kopylov', avatar: '/images/team/denis.jpg', href: '' },
-      { name: 'Team Member 2', avatar: 'https://i.pravatar.cc/80?img=32', href: '' },
-      { name: 'Team Member 3', avatar: 'https://i.pravatar.cc/80?img=47', href: '' },
-      { name: 'Team Member 4', avatar: 'https://i.pravatar.cc/80?img=12', href: '' },
-    ],
+    team: [{ name: 'Denis Kopylov', avatar: '/images/team/denis.jpg', href: '' }],
     sections: [
       {
         title: 'Features',
         items: [
-          { label: 'Source of Income', media: { type: 'image', src: '/images/projects/trade/trade-1.png' } },
+          {
+            label: 'Source of Income',
+            media: { type: 'image', src: '/images/projects/trade/trade-1.png' },
+          },
         ],
       },
     ],
@@ -148,12 +170,13 @@ export const projects: Project[] = [
     slug: 'playground',
     name: 'Playground',
     description: 'Experiments, prototypes, and personal projects.',
-    intro: 'Energy start-up from Berlin with expat friendly mobile application and the first virtual power plant in Germany. Series B with €30 millions market evaluation.',
+    intro:
+      'A collection of experiments, prototypes, and personal projects exploring design, interaction, and code.',
     image: '/images/projects/playground/playground-1.png',
-    images: [
-      '/images/projects/playground/playground-1.png',
-    ],
-    accentGradient: 'linear-gradient(in oklch 90deg, #0062a9 0.0%, #ff7500 100.0%)',
+    images: ['/images/projects/playground/playground-1.png'],
+    accentColor: '#0064b4',
+    accentGradient:
+      'linear-gradient(#0064b4 0%, #0060cf 10%, #004dff 26%, #003aff 46%, #0007ff 72%)',
     role: 'Product Designer II',
     year: '2024–25',
     contribution: 'Product Design',
@@ -161,7 +184,13 @@ export const projects: Project[] = [
       {
         title: 'Features',
         items: [
-          { label: 'Statistics', media: { type: 'image', src: '/images/projects/playground/playground-1.png' } },
+          {
+            label: 'Statistics',
+            media: {
+              type: 'image',
+              src: '/images/projects/playground/playground-1.png',
+            },
+          },
         ],
       },
     ],

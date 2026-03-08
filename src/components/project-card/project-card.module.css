@@ -1,7 +1,9 @@
 .projectTitle {
-  font-size: 36px;
-  line-height: 50px;
-  
+  font-size: var(--text-primary-size);
+  font-weight: var(--text-primary-weight);
+  line-height: var(--text-primary-line-height);
+  text-wrap: balance;
+  text-align: left;
 }
 
 .projectName {
@@ -12,7 +14,11 @@
 .projectDescription {
   font-family: inherit;
   font-weight: 350;
-  color: color-mix(in srgb, var(--project-accent, hsla(228, 95%, 34%)) 70%, transparent);
+  color: color-mix(
+    in srgb,
+    var(--project-accent, hsla(228, 95%, 34%)) 70%,
+    transparent
+  );
 }
 
 .wrapper {
@@ -86,7 +92,6 @@
   height: auto;
   aspect-ratio: 4 / 3;
   contain: layout;
-  /* background-color: hsla(162, 76%, 48%, 0.08); */
   background-color: color-mix(in srgb, var(--slate-100) 50%, transparent);
   border-radius: 24px;
   border: 1.5px solid;
@@ -101,21 +106,6 @@
   justify-content: center;
   align-items: center;
   will-change: transform;
-}
-
-.bottomControls {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  z-index: 2;
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  align-items: center;
-}
-
-.infoButton {
-  flex-shrink: 0;
 }
 
 .imageFrame {

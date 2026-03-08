@@ -4,7 +4,6 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { getAccentColor, type Project } from '@/data/projects';
-import { TagsList } from '@/components/tags-list';
 import styles from './project-card.module.css';
 
 export interface ProjectCardProps {
@@ -62,13 +61,7 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
   const prefetchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const images = project.images ?? [project.image];
-  const tagGroups = project.tags;
-  const currentTagGroup = tagGroups?.[currentIndex] ?? tagGroups?.[0];
-  const tagsForList = currentTagGroup ?? [];
-  const hasTags = tagGroups && tagGroups.length > 0 && tagsForList.length > 0;
-  const tagsDisplayText = hasTags ? tagsForList.join(' · ') : undefined;
   const currentImage = images[currentIndex];
-  const imageAlt = hasTags ? tagsForList.join(' · ') : project.description;
 
   const cycleToNext = useCallback(() => {
     if (images.length <= 1) return;
@@ -148,6 +141,19 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
       >
 
         <div className={styles.body}>
+          <div className={styles.textBlock}>
+            <motion.p
+              layout={!shouldReduceMotion ? 'position' : false}
+              transition={layoutTransition}
+              className={styles.projectTitle}
+            >
+              <span className={styles.projectName}>{project.name}</span>
+              {'. '}
+              <span className={styles.projectDescription}>
+                {project.description}
+              </span>
+            </motion.p>
+          </div>
           <motion.div
             variants={imageVariants}
             animate="visible"
@@ -163,7 +169,7 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
                   : { scale: 1.2, transition: hoverTransition }
               }
               whileHover={
-                canHover && !shouldReduceMotion && images.length > 1 && !isPressed
+                canHover && !shouldReduceMotion && !isPressed
                   ? { scale: 1.25, transition: hoverTransition }
                   : undefined
               }
@@ -179,7 +185,7 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
                 >
                   <Image
                     src={currentImage}
-                    alt={`${project.name} - ${imageAlt}`}
+                    alt={`${project.name} - ${project.description}`}
                     fill
                     sizes="(max-width: 428px) 100vw, 364px"
                     quality={90}
@@ -191,26 +197,7 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
             </motion.div>
           </motion.div>
 
-          <div className={styles.textBlock}>
-            {hasTags && (
-              <TagsList
-                tags={tagsForList}
-                displayText={tagsDisplayText}
-                allDisplayTexts={tagGroups?.map((tg) => tg?.join(' · ') ?? '')}
-              />
-            )}
-            <motion.p
-              layout={!shouldReduceMotion ? 'position' : false}
-              transition={layoutTransition}
-              className={styles.projectTitle}
-            >
-              <span className={styles.projectName}>{project.name}</span>
-              {'. '}
-              <span className={styles.projectDescription}>
-                {project.description}
-              </span>
-            </motion.p>
-          </div>
+
 
 
 

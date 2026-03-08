@@ -78,7 +78,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
           />
           <SocialLinkList>
             <SocialLink href="" text="LinkedIn" />
-            <SocialLink href="https://www.are.na/your-username" text="Are.na" />
+            <SocialLink href="https://www.are.na/denis-kopylov" text="Are.na" />
             <SocialLink href="" text="E-Mail" />
           </SocialLinkList>
           <ProjectList projects={projects} onProjectClick={setOpenProject} />

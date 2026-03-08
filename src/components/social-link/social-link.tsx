@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from 'motion/react';
 import { useState } from 'react';
-import { ExternalLinkIcon } from '@/components/icons/external-link-icon';
 import styles from './social-link.module.css';
 
 export interface SocialLinkProps {
@@ -47,7 +46,6 @@ export function SocialLink({ href, text }: SocialLinkProps) {
       }
     >
       {text}
-      {/* <ExternalLinkIcon className={styles.icon} size={20} /> */}
       <motion.span
         className={styles.underline}
         initial={{ scaleX: 0 }}
