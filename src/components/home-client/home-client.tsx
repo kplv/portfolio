@@ -11,6 +11,7 @@ import { EASE_OUT_QUINT, ENTRANCE_CONTAINER, BLUR_ITEM } from '@/config/animatio
 import { getAccentColor, type Project } from '@/data/projects';
 import styles from './home-client.module.css';
 
+const DEFAULT_TITLE = 'Denis Kopylov — Product Designer';
 
 export interface HomeClientProps {
   projects: Project[];
@@ -58,6 +59,12 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
   }, [projects]);
+
+  useEffect(() => {
+    document.title = openProject
+      ? `${openProject.name} — Denis Kopylov`
+      : DEFAULT_TITLE;
+  }, [openProject]);
 
   // Lock body scroll while modal is open
   useEffect(() => {
