@@ -1,0 +1,135 @@
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+}
+
+.page {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.page::-webkit-scrollbar {
+  display: none;
+}
+
+/* White content card — bounded on all sides, inset from sheet edges */
+.card {
+  background-color: white;
+  border-radius: 36px;
+  margin: 16px;
+  overflow: clip;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Dark mode — card uses 5% white for subtle contrast */
+[data-theme='dark'] .card {
+  background-color: color-mix(in srgb, white 5%, var(--background-color));
+}
+
+/* Sticky close button — floats at top-right as you scroll */
+.stickyClose {
+  position: sticky;
+  top: 16px;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 16px 0;
+  margin-bottom: -52px;
+  color: var(--sheet-accent);
+}
+
+.panelContent {
+  max-width: 860px;
+  width: 100%;
+  padding: 64px 64px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  align-items: flex-start;
+}
+
+/* Entry block — constrained width on desktop like Figma */
+.entryBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 639px;
+}
+
+/* Section — title + media grid */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.sectionTitle {
+  font-family: var(--font-gt-sectra), serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 64px;
+  line-height: 120%;
+}
+
+/* Single-column media grid — images always stack vertically */
+.mediaGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  width: 100%;
+}
+
+.mediaGridItem {
+  min-width: 0;
+}
+
+.mediaGridItemFull {
+  grid-column: 1;
+  min-width: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .card {
+    border-radius: 28px;
+  }
+
+  .panelContent {
+    padding: 64px 24px 60px;
+    gap: 64px;
+  }
+
+  .entryBlock {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 428px) {
+  .card {
+    border-radius: 24px;
+  }
+
+  .panelContent {
+    padding: 64px 16px 48px;
+    gap: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet {
+    will-change: auto;
+  }
+}

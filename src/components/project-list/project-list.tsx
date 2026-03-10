@@ -7,9 +7,10 @@ import styles from './project-list.module.css';
 
 export interface ProjectListProps {
   projects: Project[];
+  onProjectClick?: (project: Project) => void;
 }
 
-export function ProjectList({ projects }: ProjectListProps) {
+export function ProjectList({ projects, onProjectClick }: ProjectListProps) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
@@ -21,7 +22,11 @@ export function ProjectList({ projects }: ProjectListProps) {
       className={styles.container}
     >
       {projects.map((project) => (
-        <ProjectCard key={project.id} project={project} />
+        <ProjectCard
+          key={project.id}
+          project={project}
+          onProjectClick={onProjectClick}
+        />
       ))}
     </motion.div>
   );

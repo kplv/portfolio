@@ -6,12 +6,17 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 body {
   color: var(--text-primary-color);
   background: var(--background-color);
-  /* should we falter no? */
   font-family: var(--font-favorit), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

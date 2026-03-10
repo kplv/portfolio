@@ -78,27 +78,38 @@
   border-radius: 100px;
 }
 
-/* Ghost variant: blur backdrop */
+/* Ghost variant: inherits currentColor from parent, tinted background on hover/tap */
 .ghost {
-  background-color: hsla(0, 0%, 100%, 0.08);
-  color: hsla(228, 95%, 34%, 1);
+  background-color: transparent;
+  color: currentColor;
   border-color: transparent;
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
+  transition: background-color 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .ghost:hover {
-    filter: brightness(0.95);
+    filter: none;
+    background-color: color-mix(in oklch, currentColor 10%, transparent);
   }
 }
 
 .ghost:active {
-  filter: brightness(0.9);
+  filter: none;
+  background-color: color-mix(in oklch, currentColor 15%, transparent);
 }
 
 [data-theme='dark'] .ghost {
-  background-color: hsla(0, 0%, 0%, 0.4);
-  color: var(--text-primary-color);
+  background-color: transparent;
+  color: currentColor;
   border-color: transparent;
+}
+
+[data-theme='dark'] .ghost:hover {
+  background-color: color-mix(in oklch, white 10%, transparent);
+}
+
+[data-theme='dark'] .ghost:active {
+  background-color: color-mix(in oklch, white 15%, transparent);
 }
