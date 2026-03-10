@@ -196,7 +196,7 @@ export const projects: Project[] = [
     slug: 'playground',
     name: 'Other',
     description:
-      'Voice assistants, freight sustainability in the UK, and fun stuff I\'ve done over the years.',
+      'Voice assistants, freight sustainability in the UK, and fun stuff I\'ve done over the years',
     intro:
       'Projects of the past few years. Some were done inside product teams at major tech companies like Yandex. Some won awards such as Red Dot. Some are personal projects where I explored new approaches.',
     image: '/images/playground/play-0.png',
