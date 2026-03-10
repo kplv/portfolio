@@ -5,7 +5,7 @@ Accent Gradient: linear-gradient(to right top, oklch(0.55 0.05 237) 0%, oklch(0.
 
 Name: Trade Republic
 Description: Fraud prevention, delightful interactions, and employee tools for Europe’s largest savings platform
-Intro Text: As a product designer at Trade Republic (8M+ users), I built fraud prevention flows from 0 → 1, designed micro-interactions for core screens, and shipped an internal performance review tool.
+Intro Text: Built fraud prevention flows from 0 → 1 for Trade Republic's 8M+ users, designed micro-interactions for core screens, and shipped an internal performance review tool.
 
 Role: Product Designer II
 When: 2023–24

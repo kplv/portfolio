@@ -143,7 +143,7 @@ export const projects: Project[] = [
     description:
       'Fraud prevention, delightful interactions, and employee tools for Europe\'s largest savings platform',
     intro:
-      'Trade Republic is Europe\u2019s largest savings platform, with over 8\u00a0million users. I joined the design team as a product designer in 2023. My main contribution was developing financial crime solutions from scratch (0\u00a0\u2192\u00a01), which helped save customers hundreds of thousands of euros. I also launched a new internal performance review service that streamlined the process and helped retain top talent.',
+      'Built fraud prevention flows from 0\u00a0\u2192\u00a01 for Trade Republic\u2019s 8M+ users, designed micro-interactions for core screens, and shipped an internal performance review tool.',
     image: '/images/projects/trade/trade-0.png',
     images: [
       '/images/projects/trade/trade-0.png',
