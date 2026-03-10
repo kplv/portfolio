@@ -5,7 +5,7 @@ Accent Gradient: linear-gradient(to right top, oklch(0.55 0.05 237) 0%, oklch(0.
 
 Name: Trade Republic
 Description: Fraud prevention, delightful interactions, and employee tools for Europe’s largest savings platform
-Intro Text: Trade Republic is Europe's largest savings platform, with over 8 million users. I joined the design team as a product designer in 2023. My main contribution was developing financial crime solutions from scratch (0 → 1), which helped save customers hundreds of thousands of euros. I also launched a new internal performance review service that streamlined the process and helped retain top talent.
+Intro Text: As a product designer at Trade Republic (8M+ users), I built fraud prevention flows from 0 → 1, designed micro-interactions for core screens, and shipped an internal performance review tool.
 
 Role: Product Designer II
 When: 2023–24

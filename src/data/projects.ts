@@ -191,4 +191,92 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
+    id: '3',
+    slug: 'playground',
+    name: 'Other',
+    description:
+      'Voice assistants, freight sustainability in the UK, and fun stuff I\'ve done over the years.',
+    intro:
+      'Projects of the past few years. Some were done inside product teams at major tech companies like Yandex. Some won awards such as Red Dot. Some are personal projects where I explored new approaches.',
+    image: '/images/playground/play-0.png',
+    images: [
+      '/images/playground/play-0.png',
+      '/images/playground/play-1.png',
+      '/images/playground/play-2.png',
+      '/images/playground/play-3.png',
+      '/images/playground/play-7.png',
+    ],
+    accentColor: 'oklch(0.62 0.20 275)',
+    accentGradient:
+      'radial-gradient(circle at 50% 85% in oklch, oklch(0.65 0.17 235) 0%, oklch(0.55 0.27 310) 100%)',
+    role: 'Designer',
+    year: '2022 — Now',
+    contribution: 'Everything',
+    team: [],
+    sections: [
+      {
+        title: 'Code',
+        items: [
+          {
+            label:
+              'React Native Playground. I have an app where I prototype new components and just generally have fun. Some of it was later used in production for Ostrom.',
+            media: { type: 'video', src: '/images/playground/play-9.mp4', cover: true },
+          },
+        ],
+      },
+      {
+        title: 'Interactive Design',
+        items: [
+          {
+            label:
+              'Bownce. I was preparing the Red Dot case for this project, working on micro-interactions and screen transitions.',
+            media: { type: 'video', src: '/images/playground/play-10.mp4', cover: true },
+          },
+          {
+            label:
+              'Badoo. A new voice-first dating experience. My graduation project.',
+            media: { type: 'video', src: '/images/playground/play-6.mp4', cover: true },
+          },
+          {
+            label: 'Badoo. Spent a lot of time making the flow feel alive.',
+            media: { type: 'video', src: '/images/playground/play-5.mp4', cover: true },
+          },
+        ],
+      },
+      {
+        title: 'Font Design',
+        items: [
+          {
+            label:
+              'Tachkum Font. Final project of the type design workshop by Contrast Foundry in 2022.',
+            media: { type: 'image', src: '/images/playground/play-1.png', cover: true },
+          },
+          {
+            label: 'Tachkum Font. The name was inspired by an Abkhazian fairy tale.',
+            media: { type: 'image', src: '/images/playground/play-2.png', cover: true },
+          },
+        ],
+      },
+      {
+        title: 'Projects',
+        items: [
+          {
+            label:
+              'Arrival. I worked on new features for customer support and fleet management.',
+            media: { type: 'image', src: '/images/playground/play-3.png', cover: true },
+          },
+          {
+            label:
+              'SberDevices. I led a new stream for city exploration features, from voice to TV applications.',
+            media: { type: 'image', src: '/images/playground/play-7.png', cover: true },
+          },
+          {
+            label: 'SberDevices. Prototyping for TV was a fun experience.',
+            media: { type: 'video', src: '/images/playground/play-4.mp4', cover: true },
+          },
+        ],
+      },
+    ],
+  },
 ];
