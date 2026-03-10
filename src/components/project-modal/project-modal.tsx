@@ -8,17 +8,14 @@ import { InfoTable } from '@/components/project/info-table';
 import { TeamList } from '@/components/project/team-list';
 import { ProjectMediaBlock } from '@/components/project/media-block';
 import { getAccentColor, getHeaderGradient, type Project } from '@/data/projects';
-import { NextProjectLink } from '@/components/next-project-link';
 import styles from './project-modal.module.css';
 
 export interface ProjectModalProps {
   project: Project;
-  projects: Project[];
   onClose: () => void;
-  onNextProject: (project: Project) => void;
 }
 
-export function ProjectModal({ project, projects, onClose, onNextProject }: ProjectModalProps) {
+export function ProjectModal({ project, onClose }: ProjectModalProps) {
   const shouldReduceMotion = useReducedMotion();
   const accentColor = getAccentColor(project);
   const headerGradient = getHeaderGradient(project);
@@ -117,12 +114,6 @@ export function ProjectModal({ project, projects, onClose, onNextProject }: Proj
         </div>
       </div>
 
-      {/* Below the card — visible after scrolling through content */}
-      <NextProjectLink
-        currentProject={project}
-        projects={projects}
-        onSelectProject={onNextProject}
-      />
       </div>
     </motion.div>
   );

@@ -77,9 +77,9 @@ export function HomeClient({ projects, className }: HomeClientProps) {
             text="I'm a product designer by day and an engineer by night. I bring ideas to life in code, sweat over details, and strive for a joyful user experience. I'm also a proficient mentor and a design leader. Now leading design at Ostrom."
           />
           <SocialLinkList>
-            <SocialLink href="" text="LinkedIn" />
-            <SocialLink href="https://www.are.na/denis-kopylov" text="Are.na" />
-            <SocialLink href="" text="E-Mail" />
+            <SocialLink href="https://www.linkedin.com/in/deniskplv/" text="LinkedIn" />
+            <SocialLink href="https://www.are.na/denis-kopylov/channels" text="Are.na" />
+            <SocialLink href="/Denis Kopylov-CV.pdf" text="Resume" />
           </SocialLinkList>
           <ProjectList projects={projects} onProjectClick={setOpenProject} />
         </motion.main>
@@ -91,9 +91,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
           <ProjectModal
             key={openProject.id}
             project={openProject}
-            projects={projects}
             onClose={() => setOpenProject(null)}
-            onNextProject={(p) => setOpenProject(p)}
           />
         )}
       </AnimatePresence>

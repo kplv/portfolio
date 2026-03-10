@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 import { abcFavorit, gtSectra } from "./fonts";
+import { YandexMetrica } from "@/components/yandex-metrica/yandex-metrica";
 
 export const metadata: Metadata = {
   title: "Denis Kopylov - Product Designer",
@@ -16,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${abcFavorit.variable} ${gtSectra.variable}`}>
       <body>
+        <YandexMetrica />
         <Providers>{children}</Providers>
       </body>
     </html>

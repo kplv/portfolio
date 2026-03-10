@@ -108,37 +108,12 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
     <motion.div
       layout={!shouldReduceMotion ? 'position' : false}
       transition={layoutTransition}
-      onTapStart={() => !shouldReduceMotion && setIsPressed(true)}
-      onTap={() => setIsPressed(false)}
-      onTapCancel={() => setIsPressed(false)}
       className={styles.wrapper}
-      style={(project.accentGradient || project.accentColor) ? ({ '--project-accent': getAccentColor(project) } as React.CSSProperties) : undefined}
+      style={{ '--project-accent': getAccentColor(project) } as React.CSSProperties}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
     >
-      <div
-        className={styles.card}
-        role="button"
-        tabIndex={0}
-        onClick={(e) => {
-          if ((e.target as HTMLElement).closest('button')) return;
-          if (onProjectClick) {
-            onProjectClick(project);
-          } else if (images.length > 1) {
-            cycleToNext();
-          }
-        }}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            if (onProjectClick) {
-              onProjectClick(project);
-            } else if (images.length > 1) {
-              cycleToNext();
-            }
-          }
-        }}
-      >
+      <div className={styles.card}>
 
         <div className={styles.body}>
           <div className={styles.textBlock}>
@@ -147,8 +122,7 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
               transition={layoutTransition}
               className={styles.projectTitle}
             >
-              <span className={styles.projectName}>{project.name}</span>
-              {'. '}
+              <span className={styles.projectName}>{project.name}. </span>
               <span className={styles.projectDescription}>
                 {project.description}
               </span>
@@ -160,6 +134,29 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
             initial={shouldReduceMotion ? false : 'hidden'}
             transition={tapTransition}
             className={styles.imageWrapper}
+            role="button"
+            tabIndex={0}
+            onTapStart={() => !shouldReduceMotion && setIsPressed(true)}
+            onTap={() => setIsPressed(false)}
+            onTapCancel={() => setIsPressed(false)}
+            onClick={(e) => {
+              if ((e.target as HTMLElement).closest('button')) return;
+              if (onProjectClick) {
+                onProjectClick(project);
+              } else if (images.length > 1) {
+                cycleToNext();
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                if (onProjectClick) {
+                  onProjectClick(project);
+                } else if (images.length > 1) {
+                  cycleToNext();
+                }
+              }
+            }}
           >
             <motion.div
               className={styles.imageInner}
