@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useReducedMotion } from 'motion/react';
 import type { MediaBlock } from '@/data/projects';
@@ -38,7 +38,7 @@ function ProjectImage({ src, alt, cover }: { src: string; alt: string; cover?: b
   return (
     <>
       <span className={styles.skeleton} data-loaded={isLoaded} aria-hidden="true" />
-      <div className={cover ? styles.imageFrameCover : styles.imageFrame}>
+      <div className={cover ? styles.frameCover : styles.frame}>
         <Image
           src={src}
           alt={alt}
@@ -83,7 +83,7 @@ function ProjectVideo({
   }, [inView, loop, shouldReduceMotion]);
 
   return (
-    <div ref={containerRef} className={styles.videoWrapper}>
+    <div ref={containerRef} className={cover ? styles.frameCover : styles.frame}>
       <span className={styles.skeleton} data-loaded={isLoaded} aria-hidden="true" />
       <video
         ref={videoRef}

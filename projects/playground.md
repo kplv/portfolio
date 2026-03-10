@@ -5,7 +5,7 @@ Accent Gradient: radial-gradient(circle at 50% 85% in oklch, oklch(0.8 0.1 202) 
 
 Name: Ostrom
 Description: Mobile app for managing your home energy and the first virtual power plant in Germany.
-Intro Text: Berlin-based energy startup with an expat-friendly mobile app and Germany’s first virtual power plant. Raised € 20M in Series B funding.
+Intro Text: Berlin-based energy startup behind an expat-friendly mobile app and Germany’s first virtual power plant. Raised € 20M in Series B funding.
 
 Role: Sr. Product Designer
 When: 2025–26

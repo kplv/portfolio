@@ -33,11 +33,6 @@
   background-color: #fff;
 }
 
-.videoWrapper {
-  position: absolute;
-  inset: 0;
-}
-
 /* Skeleton — fades out when media loads */
 .skeleton {
   position: absolute;
@@ -53,8 +48,8 @@
   pointer-events: none;
 }
 
-/* Image frame — same "peek" offset as home page project card */
-.imageFrame {
+/* Media frame — "peek" offset (same as home page project card) */
+.frame {
   position: absolute;
   width: 90%;
   height: 100%;
@@ -65,8 +60,8 @@
   align-items: center;
 }
 
-/* Image frame — cover: fills entire container */
-.imageFrameCover {
+/* Media frame — cover: fills entire container */
+.frameCover {
   position: absolute;
   inset: 0;
 }
@@ -85,6 +80,10 @@
 .media[data-cover='true'] {
   object-fit: contain;
   object-position: center;
+}
+
+video.media[data-cover='true'] {
+  object-fit: cover;
 }
 
 .media[data-loaded='true'] {

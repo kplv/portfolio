@@ -82,9 +82,9 @@ export const projects: Project[] = [
     id: '1',
     slug: 'ostrom',
     name: 'Ostrom',
-    description: 'Mobile app for managing your home energy and the first virtual power plant in Germany.',
+    description: 'An expat-friendly energy app and Germany\'s first virtual power plant',
     intro:
-      'Berlin-based energy startup with an expat-friendly mobile app and Germany\'s first virtual power plant. Raised € 20M in Series B funding.',
+      'Berlin-based energy startup with an expat-friendly mobile app and Germany\u2019s first virtual power plant. Raised \u20ac\u00a020M in Series B funding.',
     image: '/images/projects/ostrom/ostrom-1.png',
     images: [
       '/images/projects/ostrom/ostrom-1.png',
@@ -103,21 +103,21 @@ export const projects: Project[] = [
         title: 'Features',
         items: [
           {
-            label: 'New Energy Graph',
+            label: 'New Energy Graph. Here\u2019s customers could check what\u2019s happening around their household in real-time.',
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-1.png',
             },
           },
           {
-            label: 'Solar System Insights',
+            label: 'Solar System Insights. One place to assess how self-sufficient customer setup is.',
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-2.png',
             },
           },
           {
-            label: 'Charging Statistics',
+            label: 'Charging Statistics. A holistics overview of spendings and savings when charging at home.',
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-3.png',
@@ -125,11 +125,11 @@ export const projects: Project[] = [
             fullWidth: true,
           },
           {
-            label: 'Almost all features were built in code first by me',
+            label: 'Almost all new features were built in code first by me. We had a proper hand-off with specifications and also code prototypes.',
             media: {
               type: 'video',
               src: '/images/projects/ostrom/ostrom-5.mp4',
-              cover: true,
+              cover: true
             },
           },
         ],
@@ -141,9 +141,9 @@ export const projects: Project[] = [
     slug: 'trade-republic',
     name: 'Trade Republic',
     description:
-      'Fraud prevention, delightful interactions, and employee tools for Europe\'s fastest-growing fintech',
+      'Fraud prevention, delightful interactions, and employee tools for Europe\'s largest savings platform',
     intro:
-      'Trade Republic is Europe\'s largest savings platform, boasting over 340 million users. I joined their design team as a product designer in 2023. My main contribution was developing financial crime solutions from scratch (0 → 1), which helped save our customers hundreds of thousands of euros. I also launched a new internal performance review service that streamlined the process and aided in retaining top talent.',
+      'Trade Republic is Europe\u2019s largest savings platform, with over 8\u00a0million users. I joined the design team as a product designer in 2023. My main contribution was developing financial crime solutions from scratch (0\u00a0\u2192\u00a01), which helped save customers hundreds of thousands of euros. I also launched a new internal performance review service that streamlined the process and helped retain top talent.',
     image: '/images/projects/trade/trade-0.png',
     images: [
       '/images/projects/trade/trade-0.png',
@@ -164,27 +164,27 @@ export const projects: Project[] = [
         title: 'Features',
         items: [
           {
-            label: 'New feature for source of income',
+            label: 'Source of Income. A new feature where we ask customers to declare their earnings.',
             media: { type: 'image', src: '/images/projects/trade/trade-1.png', cover: true },
           },
           {
-            label: 'I initiated a project for improving crucial flows with impeccably crafted micro-interactions',
+            label: 'Micro-interactions and Joy. I initiated a project to make the most-used flows more enjoyable, like the money transfer screen.',
             media: { type: 'video', src: '/images/projects/trade/trade-2.mp4', cover: true },
           },
           {
-            label: 'Gracefully handling different corner-cases',
+            label: 'We also thought about gracefully handling different corner-cases.',
             media: { type: 'video', src: '/images/projects/trade/trade-3.mp4', cover: true },
           },
           {
-            label: 'New feature for blocked account. Customer can still use the app, while we investigate the case',
+            label: 'Blocked Account. A new feature where the customer can still use the app while we investigate. Previously, we would block the entire app login.',
             media: { type: 'image', src: '/images/projects/trade/trade-4.png', cover: true },
           },
           {
-            label: 'New feature for keep customer\'s data relevant',
+            label: 'Recurrent Diligence. A new feature for keeping customer data up to date.',
             media: { type: 'image', src: '/images/projects/trade/trade-5.png', cover: true },
           },
           {
-            label: 'We also launched a new performance review app, and improved tools for aligning teams on company\'s strategy.',
+            label: 'New Performance Review App. I also contributed to internal tools, helping everyone stay aligned on the company\u2019s strategy.',
             media: { type: 'image', src: '/images/projects/trade/trade-6.png', cover: true },
           },
         ],

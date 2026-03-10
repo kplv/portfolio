@@ -117,7 +117,7 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
             <motion.div variants={BLUR_ITEM}>
               <IntroText
                 header="Denis Kopylov"
-                text="I'm a product designer by day and an engineer by night. I bring ideas to life in code, sweat over details, and strive for a joyful user experience. I'm also a proficient mentor and a design leader. Now leading design at Ostrom."
+                text="I'm a product designer by day and an engineer by night. I bring ideas to life in code, sweat over details, and chase joyful experiences. A mentor and design leader — now leading design at Ostrom."
               />
             </motion.div>
             <motion.div variants={BLUR_ITEM}>
