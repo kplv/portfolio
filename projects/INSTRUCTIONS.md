@@ -25,7 +25,7 @@ What: <contribution type, e.g. Product Design, Frontend>
 ### <Section Title>
 
 <label for first item>
-<absolute path to media file>
+<absolute path to media file> [cover]
 
 <label for second item>
 <absolute path to media file>
@@ -35,6 +35,7 @@ What: <contribution type, e.g. Product Design, Frontend>
 
 - Sections start with `### Title` and contain pairs of **label** + **media path**, separated by blank lines.
 - Media paths are absolute filesystem paths rooted at the repo (`/Users/.../public/images/...`).
+- A media path may end with `[cover]` to make the image/video fill its container (`object-fit: cover`). Without it, the default "peek" layout is used (`object-fit: contain`).
 - A file can have multiple `### Section` blocks.
 
 ---
@@ -61,6 +62,9 @@ What: <contribution type, e.g. Product Design, Frontend>
 Derive `media.type` from the file extension:
 - `.png`, `.jpg`, `.jpeg`, `.webp` → `{ type: 'image', src: '<web path>' }`
 - `.mp4`, `.webm` → `{ type: 'video', src: '<web path>' }`
+
+If the path ends with ` [cover]`, strip the suffix and set `cover: true` on the media object, e.g.:
+`/Users/.../trade-1.png [cover]` → `{ type: 'image', src: '/images/projects/trade/trade-1.png', cover: true }`
 
 Convert absolute filesystem paths to web-relative paths by stripping everything
 up to and including `/public`, e.g.:
@@ -92,6 +96,7 @@ These fields do **not** appear in `.md` files. Keep them in `projects.ts` direct
 5. Set `image` from the `Thumbnail` field (convert to web-relative path).
 6. Rebuild `sections` from the `### Section` blocks:
    - For each label + path pair, create a `SectionItem` with the correct `media.type`.
+   - When the path has a `[cover]` suffix, set `media.cover: true`.
    - Preserve any existing `fullWidth` flags from the current TS data.
 7. Update `images` to include all unique image sources (skip videos).
 8. Leave `team` and `id` unchanged.

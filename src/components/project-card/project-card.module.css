@@ -151,9 +151,7 @@
     min-height: 96px;
   }
 
-  .projectTitle {
-    font-size: 28px;
-  }
+  
 
   .text {
     font-size: var(--text-primary-size);

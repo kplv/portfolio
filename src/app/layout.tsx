@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${abcFavorit.variable} ${gtSectra.variable}`}>
       <body>
-        <YandexMetrica />
+        <Suspense fallback={null}>
+          <YandexMetrica />
+        </Suspense>
         <Providers>{children}</Providers>
       </body>
     </html>

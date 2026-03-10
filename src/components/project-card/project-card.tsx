@@ -82,21 +82,6 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
     }
   }, []);
 
-  const imageVariants = {
-    hidden: {
-      transform: 'translateY(12px) scale(0.95)',
-      opacity: 0,
-    },
-    visible: {
-      transform: 'translateY(0) scale(1)',
-      opacity: 1,
-      transition: {
-        duration: 0.15,
-        ease: [0.23, 1, 0.32, 1] as [number, number, number, number], // ease-out-quint
-      },
-    },
-  };
-
   const layoutTransition = {
     layout: {
       duration: 1.5,
@@ -129,10 +114,6 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
             </motion.p>
           </div>
           <motion.div
-            variants={imageVariants}
-            animate="visible"
-            initial={shouldReduceMotion ? false : 'hidden'}
-            transition={tapTransition}
             className={styles.imageWrapper}
             role="button"
             tabIndex={0}

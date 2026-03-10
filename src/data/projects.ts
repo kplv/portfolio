@@ -7,8 +7,8 @@ export interface TeamMember {
 }
 
 export type MediaBlock =
-  | { type: 'image'; src: string; alt?: string }
-  | { type: 'video'; src: string; poster?: string; loop?: boolean };
+  | { type: 'image'; src: string; alt?: string; cover?: boolean }
+  | { type: 'video'; src: string; poster?: string; loop?: boolean; cover?: boolean };
 
 export interface SectionItem {
   label?: string;
@@ -84,27 +84,26 @@ export const projects: Project[] = [
     name: 'Ostrom',
     description: 'Mobile app for managing your home energy and the first virtual power plant in Germany.',
     intro:
-      'Energy start-up from Berlin with expat friendly mobile application and the first virtual power plant in Germany. Series B with € 30 millions market evaluation.',
+      'Berlin-based energy startup with an expat-friendly mobile app and Germany\'s first virtual power plant. Raised € 20M in Series B funding.',
     image: '/images/projects/ostrom/ostrom-1.png',
     images: [
       '/images/projects/ostrom/ostrom-1.png',
       '/images/projects/ostrom/ostrom-2.png',
       '/images/projects/ostrom/ostrom-3.png',
-      '/images/projects/ostrom/ostrom-4.png',
     ],
     accentColor: 'oklch(70% 0.1 186)',
     accentGradient:
-      'radial-gradient(farthest-corner circle at 50% 85% in oklch, oklch(95% 0.29 158) 0%, oklch(70% 0.1 186) 100%)',
+      'radial-gradient(circle at 50% 85% in oklch, oklch(0.8 0.1 202) 0%, oklch(0.7 0.1 186) 100%)',
     role: 'Sr. Product Designer',
     year: '2025–26',
     contribution: 'Product Design, Frontend',
-    team: [{ name: 'Denis Kopylov', avatar: '/images/team/denis.jpg', href: '' }],
+    team: [],
     sections: [
       {
         title: 'Features',
         items: [
           {
-            label: 'Live Energy Graph',
+            label: 'New Energy Graph',
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-1.png',
@@ -126,10 +125,11 @@ export const projects: Project[] = [
             fullWidth: true,
           },
           {
-            label: 'Daily Charging Sessions',
+            label: 'Almost all features were built in code first by me',
             media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-4.png',
+              type: 'video',
+              src: '/images/projects/ostrom/ostrom-5.mp4',
+              cover: true,
             },
           },
         ],
@@ -141,55 +141,51 @@ export const projects: Project[] = [
     slug: 'trade-republic',
     name: 'Trade Republic',
     description:
-      "Worked on security and delight features for EU's largest broker.",
+      'Fraud prevention, delightful interactions, and employee tools for Europe\'s fastest-growing fintech',
     intro:
-      'European investing service used by 4M+ investors across 17 markets to trade stocks, ETFs, derivatives, and crypto. Worked on security and delight features.',
-    image: '/images/projects/trade/trade-1.png',
-    images: ['/images/projects/trade/trade-1.png'],
+      'Trade Republic is Europe\'s largest savings platform, boasting over 340 million users. I joined their design team as a product designer in 2023. My main contribution was developing financial crime solutions from scratch (0 → 1), which helped save our customers hundreds of thousands of euros. I also launched a new internal performance review service that streamlined the process and aided in retaining top talent.',
+    image: '/images/projects/trade/trade-0.png',
+    images: [
+      '/images/projects/trade/trade-0.png',
+      '/images/projects/trade/trade-1.png',
+      '/images/projects/trade/trade-4.png',
+      '/images/projects/trade/trade-5.png',
+      '/images/projects/trade/trade-6.png',
+    ],
     accentColor: 'oklch(55% 0.05 237)',
     accentGradient:
-      'linear-gradient(to bottom left in oklab, oklch(55% 0.05 237) 0%, oklch(17% 0.09 315) 100%)',
+      'linear-gradient(to right top, oklch(0.55 0.05 237) 0%, oklch(0.4 0.15 265) 100%)',
     role: 'Product Designer II',
-    year: '2024–25',
-    contribution: 'Product Design',
-    team: [{ name: 'Denis Kopylov', avatar: '/images/team/denis.jpg', href: '' }],
+    year: '2023–24',
+    contribution: 'Product & Interactive Design',
+    team: [],
     sections: [
       {
         title: 'Features',
         items: [
           {
-            label: 'Source of Income',
-            media: { type: 'image', src: '/images/projects/trade/trade-1.png' },
+            label: 'New feature for source of income',
+            media: { type: 'image', src: '/images/projects/trade/trade-1.png', cover: true },
           },
-        ],
-      },
-    ],
-  },
-  {
-    id: '3',
-    slug: 'playground',
-    name: 'Playground',
-    description: 'Experiments, prototypes, and personal projects.',
-    intro:
-      'A collection of experiments, prototypes, and personal projects exploring design, interaction, and code.',
-    image: '/images/projects/playground/playground-1.png',
-    images: ['/images/projects/playground/playground-1.png'],
-    accentColor: '#0064b4',
-    accentGradient:
-      'linear-gradient(#0064b4 0%, #0060cf 10%, #004dff 26%, #003aff 46%, #0007ff 72%)',
-    role: 'Product Designer II',
-    year: '2024–25',
-    contribution: 'Product Design',
-    sections: [
-      {
-        title: 'Features',
-        items: [
           {
-            label: 'Statistics',
-            media: {
-              type: 'image',
-              src: '/images/projects/playground/playground-1.png',
-            },
+            label: 'I initiated a project for improving crucial flows with impeccably crafted micro-interactions',
+            media: { type: 'video', src: '/images/projects/trade/trade-2.mp4', cover: true },
+          },
+          {
+            label: 'Gracefully handling different corner-cases',
+            media: { type: 'video', src: '/images/projects/trade/trade-3.mp4', cover: true },
+          },
+          {
+            label: 'New feature for blocked account. Customer can still use the app, while we investigate the case',
+            media: { type: 'image', src: '/images/projects/trade/trade-4.png', cover: true },
+          },
+          {
+            label: 'New feature for keep customer\'s data relevant',
+            media: { type: 'image', src: '/images/projects/trade/trade-5.png', cover: true },
+          },
+          {
+            label: 'We also launched a new performance review app, and improved tools for aligning teams on company\'s strategy.',
+            media: { type: 'image', src: '/images/projects/trade/trade-6.png', cover: true },
           },
         ],
       },

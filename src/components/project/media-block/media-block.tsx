@@ -32,13 +32,13 @@ function useInView(ref: React.RefObject<HTMLElement | null>) {
   return inView;
 }
 
-function ProjectImage({ src, alt }: { src: string; alt: string }) {
+function ProjectImage({ src, alt, cover }: { src: string; alt: string; cover?: boolean }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <>
       <span className={styles.skeleton} data-loaded={isLoaded} aria-hidden="true" />
-      <div className={styles.imageFrame}>
+      <div className={cover ? styles.imageFrameCover : styles.imageFrame}>
         <Image
           src={src}
           alt={alt}
@@ -48,6 +48,7 @@ function ProjectImage({ src, alt }: { src: string; alt: string }) {
           unoptimized
           className={styles.media}
           data-loaded={isLoaded}
+          data-cover={cover || undefined}
           onLoad={() => setIsLoaded(true)}
         />
       </div>
@@ -59,10 +60,12 @@ function ProjectVideo({
   src,
   poster,
   loop = true,
+  cover,
 }: {
   src: string;
   poster?: string;
   loop?: boolean;
+  cover?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -92,6 +95,7 @@ function ProjectVideo({
         loop={loop}
         className={styles.media}
         data-loaded={isLoaded}
+        data-cover={cover || undefined}
         onCanPlay={() => setIsLoaded(true)}
       />
     </div>
@@ -106,15 +110,14 @@ export function ProjectMediaBlock({ label, media, accentColor }: ProjectMediaBlo
     >
       {label && (
         <div className={styles.header}>
-          <span className={styles.bullet} aria-hidden="true" />
           <p className={styles.label}>{label}</p>
         </div>
       )}
-      <div className={styles.container}>
+      <div className={styles.container} data-cover={media.cover || undefined}>
         {media.type === 'image' ? (
-          <ProjectImage src={media.src} alt={media.alt ?? label ?? ''} />
+          <ProjectImage src={media.src} alt={media.alt ?? label ?? ''} cover={media.cover} />
         ) : (
-          <ProjectVideo src={media.src} poster={media.poster} loop={media.loop} />
+          <ProjectVideo src={media.src} poster={media.poster} loop={media.loop} cover={media.cover} />
         )}
       </div>
     </div>

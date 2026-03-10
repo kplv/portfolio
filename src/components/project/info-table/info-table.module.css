@@ -1,9 +1,22 @@
 .container {
   display: flex;
   flex-direction: row;
-  gap: 96px;
+  flex-wrap: wrap;
+  gap: 24px 56px;
   align-items: flex-start;
   width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    gap: 24px 56px;
+  }
+}
+
+@media screen and (max-width: 428px) {
+  .container {
+    gap: 24px 56px;
+  }
 }
 
 .item {
