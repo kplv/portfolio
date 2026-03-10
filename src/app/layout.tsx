@@ -6,7 +6,7 @@ import { abcFavorit, gtSectra } from "./fonts";
 import { YandexMetrica } from "@/components/yandex-metrica/yandex-metrica";
 
 export const metadata: Metadata = {
-  title: "Denis Kopylov - Product Designer",
+  title: "Denis Kopylov — Product Designer",
   description: "Senior product designer with over 8 years of experience",
 };
 
