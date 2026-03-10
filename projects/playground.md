@@ -4,7 +4,7 @@ Accent Color: oklch(0.62 0.20 275)
 Accent Gradient: radial-gradient(circle at 50% 85% in oklch, oklch(0.65 0.17 235) 0%, oklch(0.55 0.27 310) 100%)
 
 Name: Other
-Description: Voice assistants, freight sustainability in the UK, and fun stuff I've done over the years.
+Description: Voice assistants, freight sustainability in the UK, and fun stuff I've done over the years
 Intro Text: Projects of the past few years. Some were done inside product teams at major tech companies like Yandex. Some won awards such as Red Dot. Some are personal projects where I explored new approaches.
 
 Role: Designer
