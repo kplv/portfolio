@@ -24,12 +24,15 @@ export const SPRING_HOVER = { type: 'spring', duration: 0.3, bounce: 0.2 } as co
 /** Spring for press/tap — snappy, minimal bounce */
 export const SPRING_PRESS = { type: 'spring', duration: 0.2, bounce: 0.1 } as const;
 
+/** Spring for page entrance — subtle overshoot that settles quickly */
+export const SPRING_ENTRANCE = { type: 'spring', duration: 0.6, bounce: 0.15 } as const;
+
 /** Stagger container for page entrance — propagates to children via variants */
 export const ENTRANCE_CONTAINER = {
   show: { transition: { staggerChildren: 0.25 } },
 };
 
-/** Blur entrance item variant (matches kplv-3.0) */
+/** Blur entrance item variant — spring on y/scale, tween on opacity/filter */
 export const BLUR_ITEM = {
   hidden: { opacity: 0, scale: 0.98, y: 32, filter: 'blur(16px)' },
   show: {
@@ -37,6 +40,11 @@ export const BLUR_ITEM = {
     scale: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.25, ease: EASE_OUT_QUINT },
+    transition: {
+      y: SPRING_ENTRANCE,
+      scale: SPRING_ENTRANCE,
+      opacity: { duration: 0.35, ease: EASE_OUT_QUINT },
+      filter: { duration: 0.35, ease: EASE_OUT_QUINT },
+    },
   },
 };

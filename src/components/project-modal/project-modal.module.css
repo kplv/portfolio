@@ -115,10 +115,6 @@
   .entryBlock {
     max-width: 100%;
   }
-
-  .sectionTitle {
-    font-size: 48px;
-  }
 }
 
 @media screen and (max-width: 428px) {
@@ -129,10 +125,6 @@
   .panelContent {
     padding: 64px 16px 48px;
     gap: 48px;
-  }
-
-  .sectionTitle {
-    font-size: 36px;
   }
 }
 
