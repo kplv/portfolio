@@ -1,18 +1,24 @@
 .projectTitle {
-  font-size: 36px;
-  line-height: 50px;
-  
+  font-size: var(--text-primary-size);
+  font-weight: var(--text-primary-weight);
+  line-height: var(--text-primary-line-height);
+  text-wrap: balance;
+  text-align: center;
 }
 
 .projectName {
   font-weight: 450;
-  color: var(--header-secondary-color);
+  color: var(--project-accent, var(--header-secondary-color));
 }
 
 .projectDescription {
   font-family: inherit;
   font-weight: 350;
-  color: hsla(228, 95%, 34%, 0.7);
+  color: color-mix(
+    in srgb,
+    var(--project-accent, hsla(228, 95%, 34%)) 85%,
+    transparent
+  );
 }
 
 .wrapper {
@@ -31,10 +37,6 @@
 
 .card {
   cursor: default;
-}
-
-.card[role='button'] {
-  cursor: pointer;
 }
 
 .header {
@@ -57,7 +59,7 @@
   flex-direction: column;
   gap: 20px;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .textBlock {
@@ -86,12 +88,12 @@
   height: auto;
   aspect-ratio: 4 / 3;
   contain: layout;
-  /* background-color: hsla(162, 76%, 48%, 0.08); */
-  background-color: color-mix(in srgb, var(--slate-100) 50%, transparent);
+  background-color: color-mix(in srgb, var(--project-accent) 3%, transparent);
   border-radius: 24px;
-  border: 1.5px solid;
-  border-color: color-mix(in srgb, var(--slate-100) 5%, transparent);
+  border: 2x solid;
+  border-color: color-mix(in srgb, var(--project-accent) 2%, transparent);
   overflow: hidden;
+  cursor: pointer;
 }
 
 .imageInner {
@@ -101,21 +103,6 @@
   justify-content: center;
   align-items: center;
   will-change: transform;
-}
-
-.bottomControls {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  z-index: 2;
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  align-items: center;
-}
-
-.infoButton {
-  flex-shrink: 0;
 }
 
 .imageFrame {
@@ -164,9 +151,7 @@
     min-height: 96px;
   }
 
-  .projectTitle {
-    font-size: 28px;
-  }
+  
 
   .text {
     font-size: var(--text-primary-size);

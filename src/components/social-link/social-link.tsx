@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from 'motion/react';
 import { useState } from 'react';
-import { ExternalLinkIcon } from '@/components/icons/external-link-icon';
 import styles from './social-link.module.css';
 
 export interface SocialLinkProps {
@@ -12,14 +11,13 @@ export interface SocialLinkProps {
 
 export function SocialLink({ href, text }: SocialLinkProps) {
   const shouldReduceMotion = useReducedMotion();
-  const isExternal = href.startsWith('http') || href.startsWith('//');
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.a
       href={href}
-      target={isExternal ? '_blank' : undefined}
-      rel={isExternal ? 'noopener noreferrer' : undefined}
+      target="_blank"
+      rel="noopener noreferrer"
       className={styles.link}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
@@ -47,7 +45,6 @@ export function SocialLink({ href, text }: SocialLinkProps) {
       }
     >
       {text}
-      {/* <ExternalLinkIcon className={styles.icon} size={20} /> */}
       <motion.span
         className={styles.underline}
         initial={{ scaleX: 0 }}

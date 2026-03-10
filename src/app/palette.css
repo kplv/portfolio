@@ -32,4 +32,19 @@
   --mint-1000: oklch(0.275 0.090 165);
   --mint-1100: oklch(0.215 0.070 165);
   --mint-1200: oklch(0.175 0.055 165);
+
+  /* === Yellow Scale (50 = lightest, 1200 = darkest) === */
+  --yellow-50: oklch(0.991 0.01 91);
+  --yellow-100: oklch(0.985 0.021 91);
+  --yellow-200: oklch(0.972 0.049 91);
+  --yellow-300: oklch(0.96 0.074 91);
+  --yellow-400: oklch(0.943 0.098 91);
+  --yellow-500: oklch(0.92 0.122 91);
+  --yellow-600: oklch(0.886 0.147 91);
+  --yellow-700: oklch(0.835 0.176 91);
+  --yellow-800: oklch(0.725 0.187 91);
+  --yellow-900: oklch(0.667 0.177 91);
+  --yellow-1000: oklch(0.527 0.136 91);
+  --yellow-1100: oklch(0.385 0.088 91);
+  --yellow-1200: oklch(0.28 0.06 91);
 }

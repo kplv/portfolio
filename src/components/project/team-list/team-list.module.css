@@ -1,0 +1,21 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-self: flex-start;
+
+  padding: 8px 0px;
+  margin: 12px 0px;
+}
+
+.list > * + * {
+  margin-left: -10px;
+}
+
+.list > :first-child::before {
+  left: -16px;
+}
+
+.list > :last-child::before {
+  right: -16px;
+}

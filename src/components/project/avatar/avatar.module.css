@@ -1,0 +1,59 @@
+.avatar {
+  position: relative;
+  display: block;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--avatar-color) 8%, transparent);
+  flex-shrink: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Expanded hit area — vertical only */
+.avatar::before {
+  content: '';
+  position: absolute;
+  inset: -16px 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .avatar:hover {
+    z-index: 100;
+  }
+}
+
+.skeleton {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: color-mix(
+    in srgb,
+    var(--avatar-color) 10%,
+    var(--background-color)
+  );
+  transition: opacity 200ms ease;
+}
+
+.skeleton[data-loaded='true'] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.image {
+  object-fit: cover;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.image[data-loaded='true'] {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton,
+  .image {
+    transition: none;
+  }
+}

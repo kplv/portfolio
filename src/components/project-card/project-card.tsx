@@ -1,17 +1,29 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-import type { Project } from '@/data/projects';
-// import { Button } from '@/components/button';
-import { TagsList } from '@/components/tags-list';
-// import { InfoIcon } from '@/components/icons/info-icon';
+import { getAccentColor, type Project } from '@/data/projects';
 import styles from './project-card.module.css';
 
 export interface ProjectCardProps {
   project: Project;
-  onInfoClick?: (project: Project) => void;
+  onProjectClick?: (project: Project) => void;
+}
+
+function prefetchProjectMedia(project: Project) {
+  project.sections?.forEach((section) =>
+    section.items.forEach((item) => {
+      if (item.media.type === 'image') {
+        const img = new window.Image();
+        img.src = item.media.src;
+      }
+      if (item.media.type === 'video' && item.media.poster) {
+        const img = new window.Image();
+        img.src = item.media.poster;
+      }
+    }),
+  );
 }
 
 const tapTransition = {
@@ -41,40 +53,34 @@ function useCanHover() {
   return canHover;
 }
 
-export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
+export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPressed, setIsPressed] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const canHover = useCanHover();
+  const prefetchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const images = project.images ?? [project.image];
-  const tagGroups = project.tags;
-  const currentTagGroup = tagGroups?.[currentIndex] ?? tagGroups?.[0];
-  const tagsForList = currentTagGroup ?? [];
-  const hasTags = tagGroups && tagGroups.length > 0 && tagsForList.length > 0;
-  const tagsDisplayText = hasTags ? tagsForList.join(' · ') : undefined;
   const currentImage = images[currentIndex];
-  const imageAlt = hasTags ? tagsForList.join(' · ') : project.description;
 
   const cycleToNext = useCallback(() => {
     if (images.length <= 1) return;
     setCurrentIndex((prev) => (prev + 1) % images.length);
   }, [images.length]);
 
-  const imageVariants = {
-    hidden: {
-      transform: 'translateY(12px) scale(0.95)',
-      opacity: 0,
-    },
-    visible: {
-      transform: 'translateY(0) scale(1)',
-      opacity: 1,
-      transition: {
-        duration: 0.15,
-        ease: [0.23, 1, 0.32, 1] as [number, number, number, number], // ease-out-quint
-      },
-    },
-  };
+  const handlePointerEnter = useCallback(() => {
+    if (!canHover) return;
+    prefetchTimer.current = setTimeout(() => {
+      prefetchProjectMedia(project);
+    }, 100);
+  }, [canHover, project]);
+
+  const handlePointerLeave = useCallback(() => {
+    if (prefetchTimer.current) {
+      clearTimeout(prefetchTimer.current);
+      prefetchTimer.current = null;
+    }
+  }, []);
 
   const layoutTransition = {
     layout: {
@@ -87,42 +93,51 @@ export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
     <motion.div
       layout={!shouldReduceMotion ? 'position' : false}
       transition={layoutTransition}
-      onTapStart={() => !shouldReduceMotion && setIsPressed(true)}
-      onTap={() => setIsPressed(false)}
-      onTapCancel={() => setIsPressed(false)}
       className={styles.wrapper}
+      style={{ '--project-accent': getAccentColor(project) } as React.CSSProperties}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
     >
-      <div
-        className={styles.card}
-        role={images.length > 1 ? 'button' : undefined}
-        tabIndex={images.length > 1 ? 0 : undefined}
-        onClick={
-          images.length > 1
-            ? (e) => {
-              if ((e.target as HTMLElement).closest('button')) return;
-              cycleToNext();
-            }
-            : undefined
-        }
-        onKeyDown={
-          images.length > 1
-            ? (e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                cycleToNext();
-              }
-            }
-            : undefined
-        }
-      >
+      <div className={styles.card}>
 
         <div className={styles.body}>
+          <div className={styles.textBlock}>
+            <motion.p
+              layout={!shouldReduceMotion ? 'position' : false}
+              transition={layoutTransition}
+              className={styles.projectTitle}
+            >
+              <span className={styles.projectName}>{project.name}. </span>
+              <span className={styles.projectDescription}>
+                {project.description}
+              </span>
+            </motion.p>
+          </div>
           <motion.div
-            variants={imageVariants}
-            animate="visible"
-            initial={shouldReduceMotion ? false : 'hidden'}
-            transition={tapTransition}
             className={styles.imageWrapper}
+            role="button"
+            tabIndex={0}
+            onTapStart={() => !shouldReduceMotion && setIsPressed(true)}
+            onTap={() => setIsPressed(false)}
+            onTapCancel={() => setIsPressed(false)}
+            onClick={(e) => {
+              if ((e.target as HTMLElement).closest('button')) return;
+              if (onProjectClick) {
+                onProjectClick(project);
+              } else if (images.length > 1) {
+                cycleToNext();
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                if (onProjectClick) {
+                  onProjectClick(project);
+                } else if (images.length > 1) {
+                  cycleToNext();
+                }
+              }
+            }}
           >
             <motion.div
               className={styles.imageInner}
@@ -132,7 +147,7 @@ export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
                   : { scale: 1.2, transition: hoverTransition }
               }
               whileHover={
-                canHover && !shouldReduceMotion && images.length > 1 && !isPressed
+                canHover && !shouldReduceMotion && !isPressed
                   ? { scale: 1.25, transition: hoverTransition }
                   : undefined
               }
@@ -148,7 +163,7 @@ export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
                 >
                   <Image
                     src={currentImage}
-                    alt={`${project.name} - ${imageAlt}`}
+                    alt={`${project.name} - ${project.description}`}
                     fill
                     sizes="(max-width: 428px) 100vw, 364px"
                     quality={90}
@@ -160,26 +175,7 @@ export function ProjectCard({ project, onInfoClick }: ProjectCardProps) {
             </motion.div>
           </motion.div>
 
-          <div className={styles.textBlock}>
-            {hasTags && (
-              <TagsList
-                tags={tagsForList}
-                displayText={tagsDisplayText}
-                allDisplayTexts={tagGroups?.map((tg) => tg?.join(' · ') ?? '')}
-              />
-            )}
-            <motion.p
-              layout={!shouldReduceMotion ? 'position' : false}
-              transition={layoutTransition}
-              className={styles.projectTitle}
-            >
-              <span className={styles.projectName}>{project.name}</span>
-              {'. '}
-              <span className={styles.projectDescription}>
-                {project.description}
-              </span>
-            </motion.p>
-          </div>
+
 
 
 
