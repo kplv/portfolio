@@ -8,9 +8,9 @@
   user-select: none;
   padding: 10px 16px;
   border-radius: 100px;
-  border: 1.5px solid hsla(228, 95%, 34%, 0.08);
-  background-color: hsla(228, 95%, 34%, 1);
-  color: white;
+  border: 1.5px solid transparent;
+  background-color: transparent;
+  color: currentColor;
   font-family:
     var(--font-favorit),
     -apple-system,
@@ -19,10 +19,11 @@
     Roboto,
     sans-serif;
   font-size: 18px;
-
   line-height: var(--text-primary-line-height);
   cursor: pointer;
-  transition: filter 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: background-color 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .button::before {
@@ -32,17 +33,17 @@
 }
 
 .hitSlopInfo::before {
-  inset: -16px -16px -36px -36px; /* top right bottom left */
+  inset: -16px -16px -36px -36px;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .button:hover {
-    filter: brightness(1.2);
+    background-color: color-mix(in oklch, currentColor 10%, transparent);
   }
 }
 
 .button:active {
-  filter: brightness(1.25);
+  background-color: color-mix(in oklch, currentColor 15%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -57,6 +58,7 @@
 }
 
 .iconWrapper {
+  position: relative;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -66,50 +68,32 @@
   color: inherit;
 }
 
-/* Icon-only: center icon, square pill */
 .iconOnly {
   justify-content: center;
-  padding: 10px;
+  padding: 8px 12px;
 }
 
 .button:focus-visible {
-  outline: 2px solid hsla(228, 95%, 34%, 1);
+  outline: 2px solid currentColor;
   outline-offset: 4px;
   border-radius: 100px;
 }
 
-/* Ghost variant: inherits currentColor from parent, tinted background on hover/tap */
-.ghost {
-  background-color: transparent;
-  color: currentColor;
-  border-color: transparent;
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  transition: background-color 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+/* Theme switch variant: ghost button with accent border, adaptive icon */
+.themeSwitch {
+  color: var(--icon-ghost-color);
+  border-color: var(--border-ghost-color);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .ghost:hover {
-    filter: none;
-    background-color: color-mix(in oklch, currentColor 10%, transparent);
-  }
-}
-
-.ghost:active {
-  filter: none;
-  background-color: color-mix(in oklch, currentColor 15%, transparent);
-}
-
-[data-theme='dark'] .ghost {
-  background-color: transparent;
-  color: currentColor;
-  border-color: transparent;
-}
-
-[data-theme='dark'] .ghost:hover {
-  background-color: color-mix(in oklch, white 10%, transparent);
-}
-
-[data-theme='dark'] .ghost:active {
-  background-color: color-mix(in oklch, white 15%, transparent);
+/* Theme icon: mask-image approach for dynamic currentColor fill */
+.themeIcon {
+  position: absolute;
+  inset: 0;
+  background-color: currentColor;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }

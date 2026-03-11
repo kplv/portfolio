@@ -25,7 +25,7 @@
   font-style: italic;
   font-size: 64px;
   line-height: 120%;
-  color: var(--text-primary-color);
+  color: var(--text-display-color);
 }
 
 @media screen and (max-width: 428px) {

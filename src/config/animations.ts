@@ -24,6 +24,9 @@ export const SPRING_HOVER = { type: 'spring', duration: 0.3, bounce: 0.2 } as co
 /** Spring for press/tap — snappy, minimal bounce */
 export const SPRING_PRESS = { type: 'spring', duration: 0.2, bounce: 0.1 } as const;
 
+/** Spring for icon swap (theme toggle) — light, fast, minimal overshoot */
+export const SPRING_ICON_SWAP = { type: 'spring', duration: 0.35, bounce: 0.1 } as const;
+
 /** Spring for page entrance — subtle overshoot that settles quickly */
 export const SPRING_ENTRANCE = { type: 'spring', duration: 0.6, bounce: 0.15 } as const;
 
