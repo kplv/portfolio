@@ -6,7 +6,7 @@
   /* === Color Tokens - Light Mode === */
   --background-color: var(--slate-50);
 
-  --text-accent-color: var(--slate-1200);
+  --text-accent-color: var(--teal-1200);
 
   /* === Typography Tokens === */
   /* Text Primary - Main prominent text */
@@ -22,10 +22,10 @@
   --text-secondary-weight: 500;
 
   /* Text Link - Interactive link text */
-  --text-link-color: var(--mint-400);
+  --text-link-color: var(--teal-900);
   --text-link-underline-color: color-mix(
     in srgb,
-    var(--mint-400) 50%,
+    var(--teal-900) 50%,
     transparent
   );
 
@@ -35,21 +35,32 @@
   --header-secondary-line-height: 32px;
   --header-secondary-weight: 450;
 
+  /* Display heading (e.g. "Denis Kopylov") */
+  --text-display-color: var(--text-accent-color);
+
+  /* Ghost button (theme toggle) */
+  --icon-ghost-color: var(--text-accent-color);
+  --border-ghost-color: transparent;
+
   --selection-color: color-mix(in srgb, var(--mint-500) 50%, transparent);
 }
 
 /* === Theme: Dark Mode === */
 [data-theme='dark'] {
   --background-color: var(--slate-1100);
-  --text-primary-color: var(--slate-100);
+  --text-accent-color: var(--teal-600);
+  --text-primary-color: rgba(255, 255, 255, 0.8);
   --text-secondary-color: var(--slate-600);
-  --text-link-color: var(--yellow-600);
+  --text-link-color: var(--teal-700);
   --text-link-underline-color: color-mix(
     in srgb,
-    var(--yellow-500) 50%,
+    var(--teal-700) 50%,
     transparent
   );
   --header-secondary-color: var(--slate-100);
+  --text-display-color: rgba(255, 255, 255, 0.8);
+  --icon-ghost-color: rgba(255, 255, 255, 0.8);
+  --border-ghost-color: transparent;
 
   --selection-color: color-mix(in srgb, var(--mint-500) 50%, transparent);
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import { Button } from '@/components/button';
 import { IntroText } from '@/components/intro-text';
 import { ProjectList } from '@/components/project-list';
 import { SocialLink } from '@/components/social-link/social-link';
@@ -117,10 +118,14 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
           transition={{ duration: 0.3, ease: EASE_OUT_QUINT }}
         >
           <motion.div
+            className={styles.entranceContainer}
             variants={ENTRANCE_CONTAINER}
             initial={shouldReduceMotion ? false : 'hidden'}
             animate="show"
           >
+            <motion.div className={styles.toolbar} variants={BLUR_ITEM}>
+              <Button themeSwitch />
+            </motion.div>
             <motion.div variants={BLUR_ITEM}>
               <IntroText
                 header="Denis Kopylov"
