@@ -105,8 +105,9 @@ export const projects: Project[] = [
           {
             label: 'New Energy Graph. Here\u2019s customers could check what\u2019s happening around their household in real-time.',
             media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-1.png',
+              type: 'video',
+              src: '/images/projects/ostrom/ostrom-6.mp4',
+              cover: true,
             },
           },
           {
