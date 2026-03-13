@@ -96,6 +96,15 @@
   cursor: pointer;
 }
 
+.imageWrapper:focus {
+  outline: none;
+}
+
+.imageWrapper:focus-visible {
+  outline: 2px solid var(--project-accent);
+  outline-offset: 4px;
+}
+
 .imageInner {
   position: absolute;
   inset: 0;

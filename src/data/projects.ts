@@ -8,7 +8,13 @@ export interface TeamMember {
 
 export type MediaBlock =
   | { type: 'image'; src: string; alt?: string; cover?: boolean }
-  | { type: 'video'; src: string; poster?: string; loop?: boolean; cover?: boolean };
+  | {
+      type: 'video';
+      src: string;
+      poster?: string;
+      loop?: boolean;
+      cover?: boolean;
+    };
 
 export interface SectionItem {
   label?: string;
@@ -82,7 +88,8 @@ export const projects: Project[] = [
     id: '1',
     slug: 'ostrom',
     name: 'Ostrom',
-    description: 'An expat-friendly energy app and Germany\'s first virtual power plant',
+    description:
+      "An expat-friendly energy app and Germany's first virtual power plant",
     intro:
       'Berlin-based energy startup with an expat-friendly mobile app and Germany\u2019s first virtual power plant. Raised \u20ac\u00a020M in Series B funding.',
     image: '/images/projects/ostrom/ostrom-1.png',
@@ -96,14 +103,15 @@ export const projects: Project[] = [
       'radial-gradient(circle at 50% 85% in oklch, oklch(0.8 0.1 202) 0%, oklch(0.7 0.1 186) 100%)',
     role: 'Sr. Product Designer',
     year: '2025–26',
-    contribution: 'Product Design, Frontend',
+    contribution: 'Design, Frontend, Strategy',
     team: [],
     sections: [
       {
         title: 'Features',
         items: [
           {
-            label: 'New Energy Graph. Here\u2019s customers could check what\u2019s happening around their household in real-time.',
+            label:
+              'New Energy Graph. Here\u2019s customers could check what\u2019s happening around their household in real-time.',
             media: {
               type: 'video',
               src: '/images/projects/ostrom/ostrom-6.mp4',
@@ -111,26 +119,31 @@ export const projects: Project[] = [
             },
           },
           {
-            label: 'Solar System Insights. One place to assess how self-sufficient customer setup is.',
+            label:
+              'Solar System Insights. One place to assess how self-sufficient customer setup is.',
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-2.png',
+              cover: true,
             },
           },
           {
-            label: 'Charging Statistics. A holistics overview of spendings and savings when charging at home.',
+            label:
+              'Charging Statistics. A holistics overview of spendings and savings when charging at home.',
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-3.png',
+              cover: true,
             },
             fullWidth: true,
           },
           {
-            label: 'Almost all new features were built in code first by me. We had a proper hand-off with specifications and also code prototypes.',
+            label:
+              'Almost all new features were built in code first by me. We had a proper hand-off with specifications and also code prototypes.',
             media: {
               type: 'video',
               src: '/images/projects/ostrom/ostrom-5.mp4',
-              cover: true
+              cover: true,
             },
           },
         ],
@@ -142,7 +155,7 @@ export const projects: Project[] = [
     slug: 'trade-republic',
     name: 'Trade Republic',
     description:
-      'Fraud prevention, delightful interactions, and employee tools for Europe\'s largest savings platform',
+      "Fraud prevention, delightful interactions, and employee tools for Europe's largest savings platform",
     intro:
       'Built fraud prevention flows from 0\u00a0\u2192\u00a01 for Trade Republic\u2019s 8M+ users, designed micro-interactions for core screens, and shipped an internal performance review tool.',
     image: '/images/projects/trade/trade-0.png',
@@ -165,28 +178,58 @@ export const projects: Project[] = [
         title: 'Features',
         items: [
           {
-            label: 'Source of Income. A new feature where we ask customers to declare their earnings.',
-            media: { type: 'image', src: '/images/projects/trade/trade-1.png', cover: true },
+            label:
+              'Source of Income. A new feature where we ask customers to declare their earnings.',
+            media: {
+              type: 'image',
+              src: '/images/projects/trade/trade-1.png',
+              cover: true,
+            },
           },
           {
-            label: 'Micro-interactions and Joy. I initiated a project to make the most-used flows more enjoyable, like the money transfer screen.',
-            media: { type: 'video', src: '/images/projects/trade/trade-2.mp4', cover: true },
+            label:
+              'Micro-interactions and Joy. I initiated a project to make the most-used flows more enjoyable, like the money transfer screen.',
+            media: {
+              type: 'video',
+              src: '/images/projects/trade/trade-2.mp4',
+              cover: true,
+            },
           },
           {
-            label: 'We also thought about gracefully handling different corner-cases.',
-            media: { type: 'video', src: '/images/projects/trade/trade-3.mp4', cover: true },
+            label:
+              'We also thought about gracefully handling different corner-cases.',
+            media: {
+              type: 'video',
+              src: '/images/projects/trade/trade-3.mp4',
+              cover: true,
+            },
           },
           {
-            label: 'Blocked Account. A new feature where the customer can still use the app while we investigate. Previously, we would block the entire app login.',
-            media: { type: 'image', src: '/images/projects/trade/trade-4.png', cover: true },
+            label:
+              'Blocked Account. A new feature where the customer can still use the app while we investigate. Previously, we would block the entire app login.',
+            media: {
+              type: 'image',
+              src: '/images/projects/trade/trade-4.png',
+              cover: true,
+            },
           },
           {
-            label: 'Recurrent Diligence. A new feature for keeping customer data up to date.',
-            media: { type: 'image', src: '/images/projects/trade/trade-5.png', cover: true },
+            label:
+              'Recurrent Diligence. A new feature for keeping customer data up to date.',
+            media: {
+              type: 'image',
+              src: '/images/projects/trade/trade-5.png',
+              cover: true,
+            },
           },
           {
-            label: 'New Performance Review App. I also contributed to internal tools, helping everyone stay aligned on the company\u2019s strategy.',
-            media: { type: 'image', src: '/images/projects/trade/trade-6.png', cover: true },
+            label:
+              'New Performance Review App. I also contributed to internal tools, helping everyone stay aligned on the company\u2019s strategy.',
+            media: {
+              type: 'image',
+              src: '/images/projects/trade/trade-6.png',
+              cover: true,
+            },
           },
         ],
       },
@@ -197,7 +240,7 @@ export const projects: Project[] = [
     slug: 'playground',
     name: 'Other',
     description:
-      'Voice assistants, freight sustainability in the UK, and fun stuff I\'ve done over the years',
+      "Voice assistants, freight sustainability in the UK, and fun stuff I've done over the years",
     intro:
       'Projects of the past few years. Some were done inside product teams at major tech companies like Yandex. Some won awards such as Red Dot. Some are personal projects where I explored new approaches.',
     image: '/images/playground/play-0.png',
@@ -222,7 +265,11 @@ export const projects: Project[] = [
           {
             label:
               'React Native Playground. I have an app where I prototype new components and just generally have fun. Some of it was later used in production for Ostrom.',
-            media: { type: 'video', src: '/images/playground/play-9.mp4', cover: true },
+            media: {
+              type: 'video',
+              src: '/images/playground/play-9.mp4',
+              cover: true,
+            },
           },
         ],
       },
@@ -232,16 +279,28 @@ export const projects: Project[] = [
           {
             label:
               'Bownce. I was preparing the Red Dot case for this project, working on micro-interactions and screen transitions.',
-            media: { type: 'video', src: '/images/playground/play-10.mp4', cover: true },
+            media: {
+              type: 'video',
+              src: '/images/playground/play-10.mp4',
+              cover: true,
+            },
           },
           {
             label:
               'Badoo. A new voice-first dating experience. My graduation project.',
-            media: { type: 'video', src: '/images/playground/play-6.mp4', cover: true },
+            media: {
+              type: 'video',
+              src: '/images/playground/play-6.mp4',
+              cover: true,
+            },
           },
           {
             label: 'Badoo. Spent a lot of time making the flow feel alive.',
-            media: { type: 'video', src: '/images/playground/play-5.mp4', cover: true },
+            media: {
+              type: 'video',
+              src: '/images/playground/play-5.mp4',
+              cover: true,
+            },
           },
         ],
       },
@@ -251,11 +310,20 @@ export const projects: Project[] = [
           {
             label:
               'Tachkum Font. Final project of the type design workshop by Contrast Foundry in 2022.',
-            media: { type: 'image', src: '/images/playground/play-1.png', cover: true },
+            media: {
+              type: 'image',
+              src: '/images/playground/play-1.png',
+              cover: true,
+            },
           },
           {
-            label: 'Tachkum Font. The name was inspired by an Abkhazian fairy tale.',
-            media: { type: 'image', src: '/images/playground/play-2.png', cover: true },
+            label:
+              'Tachkum Font. The name was inspired by an Abkhazian fairy tale.',
+            media: {
+              type: 'image',
+              src: '/images/playground/play-2.png',
+              cover: true,
+            },
           },
         ],
       },
@@ -265,16 +333,28 @@ export const projects: Project[] = [
           {
             label:
               'Arrival. I worked on new features for customer support and fleet management.',
-            media: { type: 'image', src: '/images/playground/play-3.png', cover: true },
+            media: {
+              type: 'image',
+              src: '/images/playground/play-3.png',
+              cover: true,
+            },
           },
           {
             label:
               'SberDevices. I led a new stream for city exploration features, from voice to TV applications.',
-            media: { type: 'image', src: '/images/playground/play-7.png', cover: true },
+            media: {
+              type: 'image',
+              src: '/images/playground/play-7.png',
+              cover: true,
+            },
           },
           {
             label: 'SberDevices. Prototyping for TV was a fun experience.',
-            media: { type: 'video', src: '/images/playground/play-4.mp4', cover: true },
+            media: {
+              type: 'video',
+              src: '/images/playground/play-4.mp4',
+              cover: true,
+            },
           },
         ],
       },
