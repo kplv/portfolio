@@ -15,7 +15,7 @@
 
 @media screen and (max-width: 428px) {
   .container {
-    gap: 24px 56px;
+    gap: 24px 24px;
   }
 }
 
@@ -24,7 +24,11 @@
   flex-direction: column;
   gap: 12px;
   flex: 0 0 auto;
-  
+}
+
+.item:last-child {
+  flex: 1 1 0;
+  min-width: 150px;
 }
 
 .header {

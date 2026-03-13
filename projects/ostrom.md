@@ -9,12 +9,12 @@ Intro Text: Berlin-based energy startup with an expat-friendly mobile app and Ge
 
 Role: Sr. Product Designer
 When: 2025–26
-What: Product Design, Frontend
+What: Design, Frontend, Strategy
 
 ### Features
 
 New Energy Graph. Here's customers could check what's happening around their household in real-time.
-/Users/deniskplv/dev/portfolio/public/images/projects/ostrom/ostrom-1.png
+/Users/deniskplv/dev/portfolio/public/images/projects/ostrom/ostrom-6.mp4 [cover]
 
 Solar System Insights. One place to assess how self-sufficient customer setup is.
 /Users/deniskplv/dev/portfolio/public/images/projects/ostrom/ostrom-2.png
