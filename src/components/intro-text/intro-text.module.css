@@ -22,6 +22,7 @@
 .header {
   font-family: var(--font-hagrid), serif;
   font-weight: 800;
+  width: stretch;
   font-style: italic;
   font-size: var(--text-display-size);
   line-height: 120%;

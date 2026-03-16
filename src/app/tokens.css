@@ -6,7 +6,7 @@
   /* === Color Tokens - Light Mode === */
   --background-color: var(--slate-50);
 
-  --text-accent-color: oklch(0.407 0.172 170.5);
+  --text-accent-color: var(--mint-500);
 
   /* === Typography Tokens === */
   /* Text Primary - Main prominent text */
@@ -54,7 +54,7 @@
 /* === Theme: Dark Mode === */
 [data-theme='dark'] {
   --background-color: var(--slate-1100);
-  --text-accent-color: var(--teal-600);
+  --text-accent-color: var(--mint-300);
   --text-primary-color: rgba(255, 255, 255, 0.8);
   --text-secondary-color: var(--slate-600);
   --text-link-color: oklch(0.817 0.131 166);
