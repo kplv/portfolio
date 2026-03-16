@@ -1,0 +1,15 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+[data-theme='dark'] .wrapper {
+  mix-blend-mode: color;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrapper {
+    display: none;
+  }
+}

@@ -23,7 +23,7 @@
   flex-direction: column;
   align-items: center; /* Center content horizontally */
   justify-content: flex-start;
-  background-color: var(--foreground);
+  background-color: color-mix(in oklch, var(--foreground) 85%, transparent);
   padding: 0 64px 24px;
   margin: 0 auto; /* Center main horizontally inside the page container */
 }

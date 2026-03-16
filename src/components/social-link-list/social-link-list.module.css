@@ -6,7 +6,7 @@
   align-self: flex-start;
   width: fit-content;
   gap: 24px;
-  padding-bottom: 64px;
+  padding-bottom: 96px;
 }
 
 @media screen and (max-width: 428px) {

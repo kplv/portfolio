@@ -8,6 +8,7 @@ import { ProjectList } from '@/components/project-list';
 import { SocialLink } from '@/components/social-link/social-link';
 import { SocialLinkList } from '@/components/social-link-list/social-link-list';
 import { ProjectModal } from '@/components/project-modal';
+import { UnicornBackground } from '@/components/unicorn-background';
 import { EASE_OUT_QUINT, ENTRANCE_CONTAINER, BLUR_ITEM } from '@/config/animations';
 import { getAccentColor, type Project } from '@/data/projects';
 import styles from './home-client.module.css';
@@ -81,6 +82,7 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
 
   return (
     <div className={styles.root}>
+
       <div className={styles.blurContext}>
         {/* Accent color overlay — always mounted, fades in/out based on open project */}
         <motion.div
@@ -143,8 +145,11 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
               <ProjectList projects={projects} onProjectClick={handleOpenProject} />
             </motion.div>
           </motion.div>
+
         </motion.main>
+
       </div>
+
 
       {/* Project modal — slides up from bottom */}
       <AnimatePresence initial={!initialProjectSlug}>
@@ -156,6 +161,7 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
           />
         )}
       </AnimatePresence>
+      {!shouldReduceMotion && <UnicornBackground paused={!!openProject} />}
     </div>
   );
 }

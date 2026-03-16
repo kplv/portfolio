@@ -14,11 +14,12 @@
 .projectDescription {
   font-family: inherit;
   font-weight: 350;
-  color: color-mix(
+  color: var(--project-accent, var(--header-secondary-color));
+  /* color: color-mix(
     in srgb,
     var(--project-accent, hsla(228, 95%, 34%)) 85%,
     transparent
-  );
+  ); */
 }
 
 .wrapper {
@@ -87,13 +88,14 @@
   width: 100%;
   height: auto;
   aspect-ratio: 4 / 3;
-  contain: layout;
   background-color: color-mix(in srgb, var(--project-accent) 3%, transparent);
   border-radius: 24px;
   border: 2x solid;
   border-color: color-mix(in srgb, var(--project-accent) 2%, transparent);
   overflow: hidden;
   cursor: pointer;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 .imageWrapper:focus {
