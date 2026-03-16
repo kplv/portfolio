@@ -1,7 +1,6 @@
 url: playground
 Thumbnail: /Users/deniskplv/dev/portfolio/public/images/playground/play-0.png
-Accent Color: oklch(0.62 0.20 275)
-Accent Gradient: radial-gradient(circle at 50% 85% in oklch, oklch(0.65 0.17 235) 0%, oklch(0.55 0.27 310) 100%)
+Accent Gradient: linear-gradient(179deg, oklch(0.34 0.22 271) 32.354%, oklch(0.63 0.21 287) 124.7%)
 
 Name: Other
 Description: Voice assistants, freight sustainability in the UK, and fun stuff I've done over the years

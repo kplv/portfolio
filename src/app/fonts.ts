@@ -6,8 +6,8 @@ export const abcFavorit = localFont({
   display: 'swap',
 })
 
-export const gtSectra = localFont({
-  src: '../../public/fonts/GT-Sectra-Display-Super-Italic-Trial.otf',
-  variable: '--font-gt-sectra',
+export const hagrid = localFont({
+  src: '../../public/fonts/Hagrid-Heavy-Italic.woff2',
+  variable: '--font-hagrid',
   display: 'swap',
 })

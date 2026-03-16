@@ -78,11 +78,12 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-gt-sectra), serif;
+  font-family: var(--font-hagrid), serif;
   font-weight: 800;
   font-style: italic;
-  font-size: 64px;
+  font-size: var(--text-display-size);
   line-height: 120%;
+  overflow-wrap: break-word;
 }
 
 /* Single-column media grid — images always stack vertically */

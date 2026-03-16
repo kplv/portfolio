@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
-import { abcFavorit, gtSectra } from "./fonts";
+import { abcFavorit, hagrid } from "./fonts";
 import { YandexMetrica } from "@/components/yandex-metrica/yandex-metrica";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${abcFavorit.variable} ${gtSectra.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${abcFavorit.variable} ${hagrid.variable}`}>
       <body>
         <Suspense fallback={null}>
           <YandexMetrica />

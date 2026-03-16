@@ -1,7 +1,6 @@
 url: Trade
 Thumbnail: /Users/deniskplv/dev/portfolio/public/images/projects/trade/trade-0.png
-Accent Color: oklch(55% 0.05 237)
-Accent Gradient: linear-gradient(to right top, oklch(0.55 0.05 237) 0%, oklch(0.4 0.15 265) 100%)
+Accent Gradient: linear-gradient(179deg, oklch(0.40 0.18 261) 32.354%, oklch(0.72 0.15 261) 124.7%)
 
 Name: Trade Republic
 Description: Fraud prevention, delightful interactions, and employee tools for Europe’s largest savings platform

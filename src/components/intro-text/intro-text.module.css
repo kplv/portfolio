@@ -20,12 +20,16 @@
 }
 
 .header {
-  font-family: var(--font-gt-sectra), serif;
+  font-family: var(--font-hagrid), serif;
   font-weight: 800;
   font-style: italic;
-  font-size: 64px;
+  font-size: var(--text-display-size);
   line-height: 120%;
-  color: var(--text-display-color);
+  background-image: var(--text-display-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  
 }
 
 @media screen and (max-width: 428px) {

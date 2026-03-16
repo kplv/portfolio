@@ -98,7 +98,6 @@ export const projects: Project[] = [
       '/images/projects/ostrom/ostrom-2.png',
       '/images/projects/ostrom/ostrom-3.png',
     ],
-    accentColor: 'oklch(70% 0.1 186)',
     accentGradient:
       'radial-gradient(circle at 50% 85% in oklch, oklch(0.8 0.1 202) 0%, oklch(0.7 0.1 186) 100%)',
     role: 'Sr. Product Designer',
@@ -166,9 +165,8 @@ export const projects: Project[] = [
       '/images/projects/trade/trade-5.png',
       '/images/projects/trade/trade-6.png',
     ],
-    accentColor: 'oklch(55% 0.05 237)',
     accentGradient:
-      'linear-gradient(to right top, oklch(0.55 0.05 237) 0%, oklch(0.4 0.15 265) 100%)',
+      'linear-gradient(179deg, oklch(0.40 0.18 261) 32.354%, oklch(0.72 0.15 261) 124.7%)',
     role: 'Product Designer II',
     year: '2023–24',
     contribution: 'Product & Interactive Design',
@@ -251,9 +249,8 @@ export const projects: Project[] = [
       '/images/playground/play-3.png',
       '/images/playground/play-7.png',
     ],
-    accentColor: 'oklch(0.62 0.20 275)',
     accentGradient:
-      'radial-gradient(circle at 50% 85% in oklch, oklch(0.65 0.17 235) 0%, oklch(0.55 0.27 310) 100%)',
+      'linear-gradient(179deg, oklch(0.34 0.22 271) 32.354%, oklch(0.63 0.21 287) 124.7%)',
     role: 'Designer',
     year: '2022 — Now',
     contribution: 'Everything',
