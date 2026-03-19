@@ -77,7 +77,7 @@ export function UnicornBackground({ paused = false }: UnicornBackgroundProps) {
       <motion.div
         className={styles.wrapper}
         initial={{ opacity: 0 }}
-        animate={{ opacity: loaded ? .4 : 0 }}
+        animate={{ opacity: loaded ? .3 : 0 }}
         transition={{ duration: 0.8, ease: EASE_OUT_QUINT }}
       >
         <div id={containerId} style={{ width: '100%', height: '100%' }} />

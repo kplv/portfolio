@@ -7,13 +7,13 @@
 }
 
 .projectName {
-  font-weight: 450;
+  font-weight: 700;
   color: var(--project-accent, var(--header-secondary-color));
 }
 
 .projectDescription {
   font-family: inherit;
-  font-weight: 350;
+  font-weight: 400;
   color: var(--project-accent, var(--header-secondary-color));
   /* color: color-mix(
     in srgb,

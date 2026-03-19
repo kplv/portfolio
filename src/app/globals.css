@@ -8,6 +8,7 @@ body {
   overflow-x: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  font-family: var(--font-favorit), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 }
 
 body::-webkit-scrollbar {
@@ -17,7 +18,6 @@ body::-webkit-scrollbar {
 body {
   color: var(--text-primary-color);
   background: var(--background-color);
-  font-family: var(--font-favorit), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background 0.3s ease, color 0.3s ease;

@@ -1,7 +1,18 @@
 import localFont from 'next/font/local'
 
 export const abcFavorit = localFont({
-  src: '../../public/fonts/ABCFavoritVariable-Trial.woff2',
+  src: [
+    {
+      path: '../../public/fonts/ABCFavorit-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/ABCFavorit-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
   variable: '--font-favorit',
   display: 'swap',
 })

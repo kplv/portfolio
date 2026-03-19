@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, type CSSProperties } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Button } from '@/components/button';
 import { IntroText } from '@/components/intro-text';
@@ -14,6 +14,12 @@ import { getAccentColor, type Project } from '@/data/projects';
 import styles from './home-client.module.css';
 
 const DEFAULT_TITLE = 'Denis Kopylov — Product Designer';
+
+function overlayStyleForProject(project: Project): CSSProperties {
+  return project.accentGradient
+    ? { backgroundImage: project.accentGradient }
+    : { backgroundColor: getAccentColor(project) };
+}
 
 export interface HomeClientProps {
   projects: Project[];
@@ -31,6 +37,16 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
   );
   const shouldReduceMotion = useReducedMotion();
   const didPushRef = useRef(false);
+  /** Last project overlay look — kept after close so fade-out doesn’t snap to mint */
+  const overlayAppearanceRef = useRef<CSSProperties | null>(null);
+
+  if (openProject) {
+    overlayAppearanceRef.current = overlayStyleForProject(openProject);
+  }
+
+  const overlayStyle: CSSProperties = openProject
+    ? overlayStyleForProject(openProject)
+    : overlayAppearanceRef.current ?? { backgroundColor: 'var(--mint-400)' };
 
   const handleOpenProject = useCallback(
     (project: Project) => {
@@ -87,11 +103,7 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
         {/* Accent color overlay — always mounted, fades in/out based on open project */}
         <motion.div
           className={styles.overlay}
-          style={
-            openProject?.accentGradient
-              ? { backgroundImage: openProject.accentGradient }
-              : { backgroundColor: openProject ? getAccentColor(openProject) : 'var(--mint-400)' }
-          }
+          style={overlayStyle}
           initial={{ opacity: 0 }}
           animate={{ opacity: openProject ? 0.7 : 0 }}
           transition={{ duration: 0.5, ease: EASE_OUT_QUINT }}
