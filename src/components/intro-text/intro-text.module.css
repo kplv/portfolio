@@ -16,7 +16,7 @@
   line-height: var(--text-primary-line-height);
   color: var(--text-primary-color);
   text-wrap: balance;
-  cursor: default;
+  
 }
 
 .header {
