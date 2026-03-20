@@ -20,6 +20,17 @@
   padding: 16px 0;
 }
 
+.entranceContainer {
+  width: 100%;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 16px 0;
+}
+
 /* Fixed overlay — always mounted, fades accent color in/out */
 .overlay {
   position: fixed;

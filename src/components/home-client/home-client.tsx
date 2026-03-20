@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback, type CSSProperties } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Button } from '@/components/button';
 import { IntroText } from '@/components/intro-text';
@@ -8,18 +8,11 @@ import { ProjectList } from '@/components/project-list';
 import { SocialLink } from '@/components/social-link/social-link';
 import { SocialLinkList } from '@/components/social-link-list/social-link-list';
 import { ProjectModal } from '@/components/project-modal';
-import { UnicornBackground } from '@/components/unicorn-background';
 import { EASE_OUT_QUINT, ENTRANCE_CONTAINER, BLUR_ITEM } from '@/config/animations';
 import { getAccentColor, type Project } from '@/data/projects';
 import styles from './home-client.module.css';
 
 const DEFAULT_TITLE = 'Denis Kopylov — Product Designer';
-
-function overlayStyleForProject(project: Project): CSSProperties {
-  return project.accentGradient
-    ? { backgroundImage: project.accentGradient }
-    : { backgroundColor: getAccentColor(project) };
-}
 
 export interface HomeClientProps {
   projects: Project[];
@@ -37,16 +30,6 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
   );
   const shouldReduceMotion = useReducedMotion();
   const didPushRef = useRef(false);
-  /** Last project overlay look — kept after close so fade-out doesn’t snap to mint */
-  const overlayAppearanceRef = useRef<CSSProperties | null>(null);
-
-  if (openProject) {
-    overlayAppearanceRef.current = overlayStyleForProject(openProject);
-  }
-
-  const overlayStyle: CSSProperties = openProject
-    ? overlayStyleForProject(openProject)
-    : overlayAppearanceRef.current ?? { backgroundColor: 'var(--mint-400)' };
 
   const handleOpenProject = useCallback(
     (project: Project) => {
@@ -98,12 +81,15 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
 
   return (
     <div className={styles.root}>
-
       <div className={styles.blurContext}>
         {/* Accent color overlay — always mounted, fades in/out based on open project */}
         <motion.div
           className={styles.overlay}
-          style={overlayStyle}
+          style={
+            openProject?.accentGradient
+              ? { backgroundImage: openProject.accentGradient }
+              : { backgroundColor: openProject ? getAccentColor(openProject) : 'var(--mint-400)' }
+          }
           initial={{ opacity: 0 }}
           animate={{ opacity: openProject ? 0.7 : 0 }}
           transition={{ duration: 0.5, ease: EASE_OUT_QUINT }}
@@ -143,7 +129,7 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
             <motion.div variants={BLUR_ITEM}>
               <IntroText
                 header="Denis Kopylov"
-                text="Product designer with a focus on turning ideas into reality through coding, a holistic approach, and an eye for interactive experiences. Currently at Ostrom."
+                text="I'm a product designer by day and an engineer by night. I bring ideas to life in code, sweat over details, and chase joyful experiences. A mentor and design leader — now leading design at Ostrom."
               />
             </motion.div>
             <motion.div variants={BLUR_ITEM}>
@@ -157,11 +143,8 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
               <ProjectList projects={projects} onProjectClick={handleOpenProject} />
             </motion.div>
           </motion.div>
-
         </motion.main>
-
       </div>
-
 
       {/* Project modal — slides up from bottom */}
       <AnimatePresence initial={!initialProjectSlug}>
@@ -173,7 +156,6 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
           />
         )}
       </AnimatePresence>
-      {!shouldReduceMotion && <UnicornBackground paused={!!openProject} />}
     </div>
   );
 }

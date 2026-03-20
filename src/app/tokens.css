@@ -6,11 +6,11 @@
   /* === Color Tokens - Light Mode === */
   --background-color: var(--slate-50);
 
-  --text-accent-color: var(--mint-500);
+  --text-accent-color: var(--teal-1200);
 
   /* === Typography Tokens === */
   /* Text Primary - Main prominent text */
-  --text-primary-color: oklch(0.290 0.056 168.1);
+  --text-primary-color: var(--slate-1100);
   --text-primary-size: 24px;
   --text-primary-line-height: 160%;
   --text-primary-weight: 400;
@@ -19,13 +19,13 @@
   --text-secondary-color: var(--slate-400);
   --text-secondary-size: 18px;
   --text-secondary-line-height: 130%;
-  --text-secondary-weight: 400;
+  --text-secondary-weight: 500;
 
   /* Text Link - Interactive link text */
-  --text-link-color: oklch(0.637 0.133 166);
+  --text-link-color: var(--teal-900);
   --text-link-underline-color: color-mix(
     in srgb,
-    oklch(0.637 0.133 166) 50%,
+    var(--teal-900) 50%,
     transparent
   );
 
@@ -33,16 +33,10 @@
   --header-secondary-color: var(--slate-1100);
   --header-secondary-size: 24px;
   --header-secondary-line-height: 32px;
-  --header-secondary-weight: 400;
+  --header-secondary-weight: 450;
 
   /* Display heading (e.g. "Denis Kopylov") */
-  --text-display-size: 64px;
   --text-display-color: var(--text-accent-color);
-  --text-display-gradient: linear-gradient(
-    179.13deg,
-    var(--green-grad-start) 49.818%,
-    var(--green-grad-end) 124.7%
-  );
 
   /* Ghost button (theme toggle) */
   --icon-ghost-color: var(--text-accent-color);
@@ -54,13 +48,13 @@
 /* === Theme: Dark Mode === */
 [data-theme='dark'] {
   --background-color: var(--slate-1100);
-  --text-accent-color: var(--mint-300);
+  --text-accent-color: var(--teal-600);
   --text-primary-color: rgba(255, 255, 255, 0.8);
   --text-secondary-color: var(--slate-600);
-  --text-link-color: oklch(0.817 0.131 166);
+  --text-link-color: var(--teal-700);
   --text-link-underline-color: color-mix(
     in srgb,
-    oklch(0.817 0.131 166) 50%,
+    var(--teal-700) 50%,
     transparent
   );
   --header-secondary-color: var(--slate-100);
@@ -83,6 +77,5 @@
     --text-secondary-line-height: 130%;
     --header-secondary-size: 20px;
     --header-secondary-line-height: 28px;
-    --text-display-size: 48px;
   }
 }
