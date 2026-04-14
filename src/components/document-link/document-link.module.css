@@ -1,0 +1,159 @@
+.root {
+  --document-link-accent: #6465e7;
+  position: relative;
+  display: inline-flex;
+  padding: 8px;
+  margin: -8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  color: inherit;
+  font-family: inherit;
+}
+
+@supports (color: oklch(from #6465e7 l c h)) {
+  .root {
+    --document-link-accent: oklch(from #6465e7 l c h);
+  }
+}
+
+.root:focus {
+  outline: none;
+}
+
+.root:focus-visible {
+  outline: 2px solid var(--document-link-accent);
+  outline-offset: 4px;
+  border-radius: 20px;
+}
+
+.float {
+  display: block;
+  animation: documentLinkFloat 6s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float {
+    animation: none;
+  }
+}
+
+@keyframes documentLinkFloat {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(3px, -2px);
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 120px;
+  height: 160px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background-color: oklch(1 0 0);
+  overflow: hidden;
+}
+
+.borderSvg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.borderPath {
+  stroke: color-mix(in oklch, var(--document-link-accent) 8%, transparent);
+}
+
+.body {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.topSlot {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-height: 68px;
+  width: 100%;
+}
+
+.linesColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.line {
+  height: 12px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  background-color: color-mix(
+    in oklch,
+    var(--document-link-accent) 28%,
+    oklch(0.94 0.02 280)
+  );
+  transition: background-color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .root:hover .line {
+    background-color: color-mix(
+      in oklch,
+      var(--document-link-accent) 72%,
+      oklch(0.94 0.02 280)
+    );
+  }
+}
+
+.root:focus-visible .line {
+  background-color: color-mix(
+    in oklch,
+    var(--document-link-accent) 72%,
+    oklch(0.94 0.02 280)
+  );
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-secondary-size);
+  font-weight: var(--text-primary-weight);
+  line-height: var(--text-primary-line-height);
+  color: var(--document-link-accent);
+}
+
+.sizeLine {
+  margin: 0;
+  font-size: var(--text-secondary-size);
+  font-weight: var(--text-primary-weight);
+  line-height: 1;
+  color: var(--document-link-accent);
+}

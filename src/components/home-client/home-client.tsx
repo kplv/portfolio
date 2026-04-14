@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback, type CSSProperties } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Button } from '@/components/button';
+import { DocumentLink } from '@/components/document-link';
 import { MaskedAvatar } from '@/components/masked-avatar';
 import { IntroText } from '@/components/intro-text';
 import { ProjectList } from '@/components/project-list';
@@ -142,6 +143,10 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
               <Button themeSwitch />
             </motion.div>
             <motion.div className={styles.maskedAvatarWrap} variants={BLUR_ITEM}>
+              <DocumentLink
+                src="/Denis Kopylov-CV.pdf"
+                downloadFileName="Denis Kopylov, Sr. Product Designer"
+              />
               <MaskedAvatar src="/images/denis-image.png" />
             </motion.div>
             <motion.div variants={BLUR_ITEM}>
