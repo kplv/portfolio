@@ -5,12 +5,29 @@
 :root {
   /* === Color Tokens - Light Mode === */
   --background-color: var(--slate-50);
+  --document-link-accent: oklch(from #6465e7 l c h);
+  --document-link-card-bg: oklch(1 0 0);
+  --document-link-border: color-mix(
+    in oklch,
+    oklch(from #6465e7 l c h) 8%,
+    transparent
+  );
+  --document-link-line: color-mix(
+    in oklch,
+    oklch(from #6465e7 l c h) 28%,
+    oklch(0.94 0.02 280)
+  );
+  --document-link-line-active: color-mix(
+    in oklch,
+    oklch(from #6465e7 l c h) 72%,
+    oklch(0.94 0.02 280)
+  );
 
   --text-accent-color: var(--mint-500);
 
   /* === Typography Tokens === */
   /* Text Primary - Main prominent text */
-  --text-primary-color: oklch(0.290 0.056 168.1);
+  --text-primary-color: oklch(0.29 0.056 168.1);
   --text-primary-size: 24px;
   --text-primary-line-height: 160%;
   --text-primary-weight: 400;
@@ -54,6 +71,15 @@
 /* === Theme: Dark Mode === */
 [data-theme='dark'] {
   --background-color: var(--slate-1100);
+  --document-link-accent: oklch(from #6465e7 l c h);
+  --document-link-card-bg: oklch(from #1b1f2c l c h);
+  --document-link-border: color-mix(in oklch, white 5%, transparent);
+  --document-link-line: color-mix(
+    in oklch,
+    var(--document-link-accent) 50%,
+    transparent
+  );
+  --document-link-line-active: var(--document-link-accent);
   --text-accent-color: var(--mint-300);
   --text-primary-color: rgba(255, 255, 255, 0.8);
   --text-secondary-color: var(--slate-600);

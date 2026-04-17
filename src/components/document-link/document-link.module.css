@@ -23,15 +23,9 @@
   outline: none;
 }
 
-.root:focus-visible {
-  outline: 2px solid var(--document-link-accent);
-  outline-offset: 4px;
-  border-radius: 20px;
-}
-
 .float {
   display: block;
-  animation: documentLinkFloat 6s ease-in-out infinite alternate;
+  animation: documentLinkFloat 3s ease-in-out infinite alternate;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -59,7 +53,7 @@
   height: 160px;
   flex-shrink: 0;
   border-radius: 16px;
-  background-color: oklch(1 0 0);
+  background-color: var(--document-link-card-bg);
   overflow: hidden;
 }
 
@@ -74,7 +68,7 @@
 }
 
 .borderPath {
-  stroke: color-mix(in oklch, var(--document-link-accent) 8%, transparent);
+  stroke: var(--document-link-border);
 }
 
 .body {
@@ -108,30 +102,18 @@
   height: 12px;
   border-radius: 4px;
   flex-shrink: 0;
-  background-color: color-mix(
-    in oklch,
-    var(--document-link-accent) 28%,
-    oklch(0.94 0.02 280)
-  );
+  background-color: var(--document-link-line);
   transition: background-color 150ms ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .root:hover .line {
-    background-color: color-mix(
-      in oklch,
-      var(--document-link-accent) 72%,
-      oklch(0.94 0.02 280)
-    );
+    background-color: var(--document-link-line-active);
   }
 }
 
 .root:focus-visible .line {
-  background-color: color-mix(
-    in oklch,
-    var(--document-link-accent) 72%,
-    oklch(0.94 0.02 280)
-  );
+  background-color: var(--document-link-line-active);
 }
 
 .textBlock {
