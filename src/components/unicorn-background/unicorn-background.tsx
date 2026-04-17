@@ -22,9 +22,13 @@ function useShouldRender(): boolean {
 
 interface UnicornBackgroundProps {
   paused?: boolean;
+  isVisible?: boolean;
 }
 
-export function UnicornBackground({ paused = false }: UnicornBackgroundProps) {
+export function UnicornBackground({
+  paused = false,
+  isVisible = true,
+}: UnicornBackgroundProps) {
   const shouldRender = useShouldRender();
   const [loaded, setLoaded] = useState(false);
   const sceneRef = useRef<UnicornScene | null>(null);
@@ -58,6 +62,13 @@ export function UnicornBackground({ paused = false }: UnicornBackgroundProps) {
   }, [containerId]);
 
   useEffect(() => {
+    if (!shouldRender) return;
+    if (window.UnicornStudio) {
+      initScene();
+    }
+  }, [shouldRender, initScene]);
+
+  useEffect(() => {
     return () => {
       sceneRef.current?.destroy();
     };
@@ -77,8 +88,8 @@ export function UnicornBackground({ paused = false }: UnicornBackgroundProps) {
       <motion.div
         className={styles.wrapper}
         initial={{ opacity: 0 }}
-        animate={{ opacity: loaded ? .2 : 0 }}
-        transition={{ duration: 0.8, ease: EASE_OUT_QUINT }}
+        animate={{ opacity: loaded ? (isVisible ? 0.4 : 0) : 0 }}
+        transition={{ duration: 0.2, ease: EASE_OUT_QUINT }}
       >
         <div id={containerId} style={{ width: '100%', height: '100%' }} />
       </motion.div>
