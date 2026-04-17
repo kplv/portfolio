@@ -30,6 +30,14 @@ export const SPRING_ICON_SWAP = { type: 'spring', duration: 0.35, bounce: 0.1 } 
 /** Spring for page entrance — subtle overshoot that settles quickly */
 export const SPRING_ENTRANCE = { type: 'spring', duration: 0.6, bounce: 0.15 } as const;
 
+/** Snappy spring for `/` ↔ `/about` route transition (opacity + scale) — matches document card feel */
+export const SPRING_ROUTE_CONTENT = {
+  type: 'spring' as const,
+  stiffness: 420,
+  damping: 15,
+  mass: 0.55,
+};
+
 /** Stagger container for page entrance — propagates to children via variants */
 export const ENTRANCE_CONTAINER = {
   show: { transition: { staggerChildren: 0.25 } },

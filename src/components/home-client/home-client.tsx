@@ -121,8 +121,7 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
             <motion.div className={styles.cardsHorizontallViewWrap} variants={BLUR_ITEM}>
               <CardsHorizontallView
                 avatarSrc="/images/denis-image.png"
-                documentSrc="/Denis Kopylov-CV.pdf"
-                downloadFileName="Denis Kopylov, Sr. Product Designer"
+                documentNavigateTo="/about"
               />
             </motion.div>
             <motion.div variants={BLUR_ITEM}>
@@ -135,7 +134,7 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
               <SocialLinkList>
                 <SocialLink href="https://www.linkedin.com/in/deniskplv/" text="LinkedIn" />
                 <SocialLink href="https://www.are.na/denis-kopylov/channels" text="Are.na" />
-                <SocialLink href="/Denis Kopylov-CV.pdf" text="Resume" />
+                <SocialLink href="/about" text="About" />
               </SocialLinkList>
             </motion.div>
             <motion.div variants={BLUR_ITEM}>

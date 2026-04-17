@@ -13,19 +13,26 @@ const SNAPPY_SPRING = {
   mass: 0.55,
 };
 
-export interface CardsHorizontallViewProps {
+type CardsHorizontallViewPdfProps = {
   avatarSrc: string;
+  className?: string;
   documentSrc: string;
   downloadFileName: string;
-  className?: string;
-}
+};
 
-export function CardsHorizontallView({
-  avatarSrc,
-  documentSrc,
-  downloadFileName,
-  className,
-}: CardsHorizontallViewProps) {
+type CardsHorizontallViewNavigateProps = {
+  avatarSrc: string;
+  className?: string;
+  /** Document tile navigates in-app (e.g. `/about`) instead of downloading the PDF */
+  documentNavigateTo: string;
+};
+
+export type CardsHorizontallViewProps =
+  | CardsHorizontallViewPdfProps
+  | CardsHorizontallViewNavigateProps;
+
+export function CardsHorizontallView(props: CardsHorizontallViewProps) {
+  const { avatarSrc, className } = props;
   const shouldReduceMotion = useReducedMotion();
   const [isDocumentHovered, setIsDocumentHovered] = useState(false);
   const [isDocumentFocusVisible, setIsDocumentFocusVisible] = useState(false);
@@ -71,10 +78,18 @@ export function CardsHorizontallView({
             setIsDocumentFocusVisible(false);
           }}
         >
-          <DocumentLink
-            src={documentSrc}
-            downloadFileName={downloadFileName}
-          />
+          {'documentNavigateTo' in props ? (
+            <DocumentLink
+              mode="navigate"
+              href={props.documentNavigateTo}
+              label="About"
+            />
+          ) : (
+            <DocumentLink
+              src={props.documentSrc}
+              downloadFileName={props.downloadFileName}
+            />
+          )}
         </motion.div>
       </div>
     </div>

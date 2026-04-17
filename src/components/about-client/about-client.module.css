@@ -1,0 +1,127 @@
+.root {
+  position: relative;
+  min-height: 100vh;
+}
+
+.blurContext {
+  isolation: isolate;
+  position: relative;
+  z-index: 1;
+}
+
+.entranceContainer {
+  width: 100%;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 16px 0;
+}
+
+.goBack {
+  position: relative;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px;
+  margin-left: -16px;
+  border-radius: 100px;
+  border: 1.5px solid transparent;
+  background-color: transparent;
+  color: var(--text-primary-color);
+  font-family: inherit;
+  font-size: 18px;
+  line-height: var(--text-primary-line-height);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: background-color 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.goBack::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+}
+
+.goBack:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 100px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .goBack:hover {
+    background-color: color-mix(in oklch, currentColor 10%, transparent);
+  }
+}
+
+.goBack:active {
+  background-color: color-mix(in oklch, currentColor 15%, transparent);
+}
+
+.goBackIcon {
+  position: relative;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  background-color: currentColor;
+  -webkit-mask-image: url('/go-back-arrow.svg');
+  mask-image: url('/go-back-arrow.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.goBackLabel {
+  position: relative;
+}
+
+.cardsWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 44px;
+  width: 100%;
+  max-width: 617px;
+  margin: 0 auto;
+  padding: 0 0 32px;
+  box-sizing: border-box;
+}
+
+.paragraph {
+  margin: 0;
+  font-size: var(--text-primary-size);
+  font-weight: var(--text-primary-weight);
+  line-height: var(--text-primary-line-height);
+  color: var(--text-primary-color);
+  text-wrap: balance;
+}
+
+.accent {
+  color: var(--text-accent-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .goBack {
+    transition: none;
+  }
+}

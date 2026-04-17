@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
 import {
   EASE_OUT_QUINT,
@@ -26,20 +27,122 @@ function formatMb(bytes: number, locale: string): string {
   return `${n} MB`;
 }
 
-export interface DocumentLinkProps {
+type DownloadDocumentLinkProps = {
+  mode?: 'download';
   src: string;
   downloadFileName: string;
   label?: string;
   className?: string;
+};
+
+type NavigateDocumentLinkProps = {
+  mode: 'navigate';
+  href: string;
+  label: string;
+  className?: string;
+};
+
+export type DocumentLinkProps = DownloadDocumentLinkProps | NavigateDocumentLinkProps;
+
+function DocumentCardBody({
+  label,
+  sizeLine,
+}: {
+  label: string;
+  sizeLine?: string;
+}) {
+  return (
+    <span className={styles.float}>
+      <span className={styles.card}>
+        <svg
+          className={styles.borderSvg}
+          viewBox={BORDER_VIEWBOX}
+          aria-hidden
+        >
+          <rect
+            className={styles.borderPath}
+            x={1}
+            y={1}
+            width={118}
+            height={158}
+            rx={16}
+            ry={16}
+            fill="none"
+            strokeWidth={2}
+            vectorEffect="nonScalingStroke"
+          />
+        </svg>
+        <div className={styles.body}>
+          <div className={styles.topSlot}>
+            <div className={styles.linesColumn}>
+              <div
+                className={styles.line}
+                style={{ width: 76 }}
+                aria-hidden
+              />
+              <div
+                className={styles.line}
+                style={{ width: 40 }}
+                aria-hidden
+              />
+              <div
+                className={styles.line}
+                style={{ width: 60 }}
+                aria-hidden
+              />
+            </div>
+          </div>
+          <div className={styles.textBlock}>
+            <p className={styles.title}>{label}</p>
+            {sizeLine !== undefined ? (
+              <p className={styles.sizeLine}>{sizeLine}</p>
+            ) : null}
+          </div>
+        </div>
+      </span>
+    </span>
+  );
 }
 
-export function DocumentLink({
-  src,
-  downloadFileName,
-  label = 'Resume',
-  className,
-}: DocumentLinkProps) {
+export function DocumentLink(props: DocumentLinkProps) {
   const shouldReduceMotion = useReducedMotion();
+
+  if (props.mode === 'navigate') {
+    const { href, label, className } = props;
+    return (
+      <Link
+        href={href}
+        className={[styles.root, className].filter(Boolean).join(' ')}
+        aria-label={label}
+        scroll
+      >
+        <motion.span
+          className={styles.motionTap}
+          whileTap={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  scale: PRESS_SCALE,
+                  transition: {
+                    duration: PRESS_DURATION,
+                    ease: EASE_OUT_QUINT,
+                  },
+                }
+          }
+        >
+          <DocumentCardBody label={label} />
+        </motion.span>
+      </Link>
+    );
+  }
+
+  const {
+    src,
+    downloadFileName,
+    label = 'Resume',
+    className,
+  } = props;
+
   const [sizeBytes, setSizeBytes] = useState<number | null>(null);
 
   const href = encodeURI(src);
@@ -107,53 +210,7 @@ export function DocumentLink({
             }
       }
     >
-      <span className={styles.float}>
-        <span className={styles.card}>
-          <svg
-            className={styles.borderSvg}
-            viewBox={BORDER_VIEWBOX}
-            aria-hidden
-          >
-            <rect
-              className={styles.borderPath}
-              x={1}
-              y={1}
-              width={118}
-              height={158}
-              rx={16}
-              ry={16}
-              fill="none"
-              strokeWidth={2}
-              vectorEffect="nonScalingStroke"
-            />
-          </svg>
-          <div className={styles.body}>
-            <div className={styles.topSlot}>
-              <div className={styles.linesColumn}>
-                <div
-                  className={styles.line}
-                  style={{ width: 76 }}
-                  aria-hidden
-                />
-                <div
-                  className={styles.line}
-                  style={{ width: 40 }}
-                  aria-hidden
-                />
-                <div
-                  className={styles.line}
-                  style={{ width: 60 }}
-                  aria-hidden
-                />
-              </div>
-            </div>
-            <div className={styles.textBlock}>
-              <p className={styles.title}>{label}</p>
-              <p className={styles.sizeLine}>{sizeLine}</p>
-            </div>
-          </div>
-        </span>
-      </span>
+      <DocumentCardBody label={label} sizeLine={sizeLine} />
     </motion.a>
   );
 }

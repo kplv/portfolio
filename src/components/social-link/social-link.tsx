@@ -9,15 +9,21 @@ export interface SocialLinkProps {
   text: string;
 }
 
+function isExternalHref(href: string): boolean {
+  return /^https?:\/\//i.test(href);
+}
+
 export function SocialLink({ href, text }: SocialLinkProps) {
   const shouldReduceMotion = useReducedMotion();
   const [isHovered, setIsHovered] = useState(false);
+  const external = isExternalHref(href);
 
   return (
     <motion.a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(external
+        ? { target: '_blank' as const, rel: 'noopener noreferrer' }
+        : {})}
       className={styles.link}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
