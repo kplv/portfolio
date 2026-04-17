@@ -4,8 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/button';
-import { DocumentLink } from '@/components/document-link';
-import { MaskedAvatar } from '@/components/masked-avatar';
+import { CardsHorizontallView } from '@/components/cards-horizontall-view';
 import { IntroText } from '@/components/intro-text';
 import { ProjectList } from '@/components/project-list';
 import { SocialLink } from '@/components/social-link/social-link';
@@ -119,12 +118,12 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
             <motion.div className={styles.toolbar} variants={BLUR_ITEM}>
               <Button themeSwitch />
             </motion.div>
-            <motion.div className={styles.maskedAvatarWrap} variants={BLUR_ITEM}>
-              <DocumentLink
-                src="/Denis Kopylov-CV.pdf"
+            <motion.div className={styles.cardsHorizontallViewWrap} variants={BLUR_ITEM}>
+              <CardsHorizontallView
+                avatarSrc="/images/denis-image.png"
+                documentSrc="/Denis Kopylov-CV.pdf"
                 downloadFileName="Denis Kopylov, Sr. Product Designer"
               />
-              <MaskedAvatar src="/images/denis-image.png" />
             </motion.div>
             <motion.div variants={BLUR_ITEM}>
               <IntroText

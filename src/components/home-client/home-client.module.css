@@ -20,12 +20,10 @@
   padding: 16px 0;
 }
 
-.maskedAvatarWrap {
+.cardsHorizontallViewWrap {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+  align-items: stretch;
   justify-content: flex-start;
   width: 100%;
-  padding-bottom: 24px;
 }
