@@ -19,11 +19,3 @@
   width: 100%;
   padding: 16px 0;
 }
-
-.cardsHorizontallViewWrap {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  width: 100%;
-}

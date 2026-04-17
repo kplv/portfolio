@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useLayoutEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/button';
-import { CardsHorizontallView } from '@/components/cards-horizontall-view';
 import { IntroText } from '@/components/intro-text';
 import { ProjectList } from '@/components/project-list';
 import { SocialLink } from '@/components/social-link/social-link';
@@ -17,6 +17,38 @@ import styles from './home-client.module.css';
 
 const DEFAULT_TITLE = 'Denis Kopylov — Product Designer';
 
+/**
+ * Survives React Strict Mode remounts (unlike sessionStorage consumed in effects).
+ * Set right before router.push from `/`; cleared after choreographed reveal or on close.
+ */
+let pendingModalChoreographySlug: string | null = null;
+
+function resolveProject(
+  projects: Project[],
+  slug: string | undefined,
+): Project | null {
+  if (slug == null) return null;
+  return projects.find((p) => p.slug === slug) ?? null;
+}
+
+function getInitialPresentedProject(
+  projects: Project[],
+  initialProjectSlug: string | undefined,
+): Project | null {
+  const resolved = resolveProject(projects, initialProjectSlug);
+  if (!resolved) return null;
+  if (typeof window === 'undefined') return resolved;
+  if (
+    window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
+  ) {
+    return resolved;
+  }
+  if (pendingModalChoreographySlug === resolved.slug) {
+    return null;
+  }
+  return resolved;
+}
+
 export interface HomeClientProps {
   projects: Project[];
   /** Page-level layout class from page.module.css applied to the main element */
@@ -26,55 +58,74 @@ export interface HomeClientProps {
 }
 
 export function HomeClient({ projects, className, initialProjectSlug }: HomeClientProps) {
-  const [openProject, setOpenProject] = useState<Project | null>(() =>
-    initialProjectSlug
-      ? projects.find((p) => p.slug === initialProjectSlug) ?? null
-      : null,
+  const [presentedProject, setPresentedProject] = useState<Project | null>(() =>
+    getInitialPresentedProject(projects, initialProjectSlug),
   );
+
+  const skipModalPresenceEnterRef = useRef<boolean | null>(null);
+  if (skipModalPresenceEnterRef.current === null) {
+    if (!initialProjectSlug) {
+      skipModalPresenceEnterRef.current = true;
+    } else if (typeof window === 'undefined') {
+      skipModalPresenceEnterRef.current = true;
+    } else if (
+      pendingModalChoreographySlug === initialProjectSlug &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      skipModalPresenceEnterRef.current = false;
+    } else {
+      skipModalPresenceEnterRef.current = true;
+    }
+  }
+
+  const router = useRouter();
   const shouldReduceMotion = useReducedMotion();
   const { resolvedTheme } = useTheme();
-  const didPushRef = useRef(false);
   const isLightTheme = resolvedTheme === 'light';
 
-  const handleOpenProject = useCallback(
-    (project: Project) => {
-      setOpenProject(project);
-      window.history.pushState(null, '', `/${project.slug}`);
-      didPushRef.current = true;
-    },
-    [],
-  );
+  useLayoutEffect(() => {
+    if (!initialProjectSlug || typeof window === 'undefined') return;
+
+    if (shouldReduceMotion) {
+      pendingModalChoreographySlug = null;
+      return;
+    }
+
+    if (pendingModalChoreographySlug !== initialProjectSlug) {
+      return;
+    }
+
+    const p = resolveProject(projects, initialProjectSlug);
+    if (!p) return;
+
+    setPresentedProject(null);
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setPresentedProject(p);
+        pendingModalChoreographySlug = null;
+      });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [initialProjectSlug, projects, shouldReduceMotion]);
+
+  const handleOpenProject = useCallback((project: Project) => {
+    pendingModalChoreographySlug = project.slug;
+    router.push(`/${project.slug}`);
+  }, [router]);
 
   const handleCloseProject = useCallback(() => {
-    setOpenProject(null);
-    if (didPushRef.current) {
-      window.history.back();
-      didPushRef.current = false;
-    } else {
-      window.history.replaceState(null, '', '/');
-    }
-  }, []);
+    pendingModalChoreographySlug = null;
+    router.replace('/');
+  }, [router]);
 
   useEffect(() => {
-    const onPopState = () => {
-      const slug = window.location.pathname.slice(1);
-      const project = slug ? projects.find((p) => p.slug === slug) : null;
-      setOpenProject(project ?? null);
-      didPushRef.current = false;
-    };
-    window.addEventListener('popstate', onPopState);
-    return () => window.removeEventListener('popstate', onPopState);
-  }, [projects]);
-
-  useEffect(() => {
-    document.title = openProject
-      ? `${openProject.name} — Denis Kopylov`
+    document.title = presentedProject
+      ? `${presentedProject.name} — Denis Kopylov`
       : DEFAULT_TITLE;
-  }, [openProject]);
+  }, [presentedProject]);
 
-  // Lock body scroll while modal is open
   useEffect(() => {
-    if (openProject) {
+    if (presentedProject) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -82,7 +133,7 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
     return () => {
       document.body.style.overflow = '';
     };
-  }, [openProject]);
+  }, [presentedProject]);
 
   return (
     <div className={styles.root}>
@@ -93,19 +144,19 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
           style={
             {
               borderRadius: 16,
-              willChange: openProject ? 'auto' : 'transform',
-              pointerEvents: openProject ? 'none' : 'auto',
+              willChange: presentedProject ? 'auto' : 'transform',
+              pointerEvents: presentedProject ? 'none' : 'auto',
             } as React.CSSProperties
           }
           animate={
             shouldReduceMotion
-              ? { opacity: openProject ? 0.7 : 1, filter: 'blur(0px)' }
+              ? { opacity: presentedProject ? 0.7 : 1, filter: 'blur(0px)' }
               : {
-                scale: openProject ? 0.92 : 1,
-                y: openProject ? -16 : 0,
-                opacity: openProject ? 0.1 : 1,
-                filter: openProject ? 'blur(8px)' : 'blur(0px)',
-              }
+                  scale: presentedProject ? 0.92 : 1,
+                  y: presentedProject ? -16 : 0,
+                  opacity: presentedProject ? 0.1 : 1,
+                  filter: presentedProject ? 'blur(8px)' : 'blur(0px)',
+                }
           }
           transition={{ duration: 0.3, ease: EASE_OUT_QUINT }}
         >
@@ -117,12 +168,6 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
           >
             <motion.div className={styles.toolbar} variants={BLUR_ITEM}>
               <Button themeSwitch />
-            </motion.div>
-            <motion.div className={styles.cardsHorizontallViewWrap} variants={BLUR_ITEM}>
-              <CardsHorizontallView
-                avatarSrc="/images/denis-image.png"
-                documentNavigateTo="/about"
-              />
             </motion.div>
             <motion.div variants={BLUR_ITEM}>
               <IntroText
@@ -141,24 +186,21 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
               <ProjectList projects={projects} onProjectClick={handleOpenProject} />
             </motion.div>
           </motion.div>
-
         </motion.main>
-
       </div>
 
-
       {/* Project modal — slides up from bottom */}
-      <AnimatePresence initial={!initialProjectSlug}>
-        {openProject && (
+      <AnimatePresence initial={!skipModalPresenceEnterRef.current}>
+        {presentedProject && (
           <ProjectModal
-            key={openProject.id}
-            project={openProject}
+            key={presentedProject.id}
+            project={presentedProject}
             onClose={handleCloseProject}
           />
         )}
       </AnimatePresence>
       {!shouldReduceMotion && (
-        <UnicornBackground paused={!!openProject} isVisible={isLightTheme} />
+        <UnicornBackground paused={!!presentedProject} isVisible={isLightTheme} />
       )}
     </div>
   );
