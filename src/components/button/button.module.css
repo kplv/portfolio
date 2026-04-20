@@ -75,7 +75,7 @@
 
 /* Theme switch variant: ghost button with accent border, adaptive icon */
 .themeSwitch {
-  color: var(--icon-ghost-color);
+  color: var(--text-primary-color);
   border-color: var(--border-ghost-color);
 }
 

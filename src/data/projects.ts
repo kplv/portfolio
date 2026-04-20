@@ -34,14 +34,14 @@ export interface Project {
   name: string;
   /** Short tagline shown on the project card */
   description: string;
-  /** Longer intro text shown in the project modal header */
+  /** Longer intro text shown in the project detail header */
   intro?: string;
   image: string;
   /** When provided, cycles through these instead of single image. */
   images?: string[];
   /** Accent color in OKLCH; derived from last color of accentGradient when not set */
   accentColor?: string;
-  /** When provided, used for modal header and home overlay; accentColor used for other UI */
+  /** When provided, used for project detail header and home overlay; accentColor used for other UI */
   accentGradient?: string;
   team?: TeamMember[];
   role?: string;
@@ -81,6 +81,17 @@ export function getHeaderGradient(project: Project): string {
   if (project.accentGradient) return project.accentGradient;
   const color = getAccentColor(project);
   return `linear-gradient(90deg, ${color} 0%, ${color} 100%)`;
+}
+
+/** Resolves a project when pathname is `/${slug}` for a known project slug. */
+export function getProjectByPathname(
+  pathname: string,
+  projectList: readonly Project[],
+): Project | null {
+  if (pathname === '/' || pathname === '/about') return null;
+  const segment = pathname.slice(1).split('/')[0];
+  if (!segment) return null;
+  return projectList.find((p) => p.slug === segment) ?? null;
 }
 
 export const projects: Project[] = [
@@ -165,8 +176,9 @@ export const projects: Project[] = [
       '/images/projects/trade/trade-5.png',
       '/images/projects/trade/trade-6.png',
     ],
+    accentColor: '#153e9b',
     accentGradient:
-      'linear-gradient(179deg, oklch(0.40 0.18 261) 32.354%, oklch(0.72 0.15 261) 124.7%)',
+      'linear-gradient(179deg, oklch(0.28 0.17 262) 28%, oklch(0.36 0.18 264) 58%, #153e9b 100%)',
     role: 'Product Designer II',
     year: '2023–24',
     contribution: 'Product & Interactive Design',
