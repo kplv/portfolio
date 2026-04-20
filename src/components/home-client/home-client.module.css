@@ -10,90 +10,25 @@
   width: 100%;
 }
 
-.toolbar {
-  display: flex;
-  width: 100%;
-  padding: 16px 0;
+/* Reserve space for fixed NavigationHeader (toolbar height + padding) */
+.contentPadNav {
+  padding-top: 4.75rem;
 }
 
-.toolbarHome {
-  justify-content: flex-end;
-}
-
-.toolbarAbout {
-  justify-content: flex-start;
-}
-
-.goBack {
-  position: relative;
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 4px;
-  padding: 10px 16px;
-  margin-left: -16px;
-  border-radius: 100px;
-  border: 1.5px solid transparent;
-  appearance: none;
+.devNavCycle {
+  margin-top: 12px;
   font: inherit;
-  background-color: transparent;
-  color: var(--text-primary-color);
-  font-family: inherit;
-  font-size: 18px;
-  line-height: var(--text-primary-line-height);
-  font-weight: 700;
-  text-decoration: none;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px dashed color-mix(in oklch, currentColor 35%, transparent);
+  background: color-mix(in oklch, currentColor 6%, transparent);
+  color: var(--text-secondary-color, inherit);
   cursor: pointer;
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  transition: background-color 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  -webkit-tap-highlight-color: transparent;
+  align-self: flex-start;
 }
 
-.goBack::before {
-  content: '';
-  position: absolute;
-  inset: -12px;
-}
-
-.goBack:focus-visible {
+.devNavCycle:focus-visible {
   outline: 2px solid currentColor;
-  outline-offset: 4px;
-  border-radius: 100px;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .goBack:hover {
-    background-color: color-mix(in oklch, currentColor 10%, transparent);
-  }
-}
-
-.goBack:active {
-  background-color: color-mix(in oklch, currentColor 15%, transparent);
-}
-
-.goBackIcon {
-  position: relative;
-  flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  background-color: currentColor;
-  -webkit-mask-image: url('/go-back-arrow.svg');
-  mask-image: url('/go-back-arrow.svg');
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-}
-
-.goBackLabel {
-  position: relative;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .goBack {
-    transition: none;
-  }
+  outline-offset: 2px;
 }

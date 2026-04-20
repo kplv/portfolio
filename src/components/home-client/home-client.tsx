@@ -1,28 +1,25 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import { AnimatePresence, useReducedMotion } from 'motion/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { AboutSectionContent } from '@/components/about-client/about-client';
-import { Button } from '@/components/button';
 import { IntroText } from '@/components/intro-text';
+import {
+  NavigationHeader,
+  type NavigationHeaderState,
+} from '@/components/navigation-header';
 import { ProjectList } from '@/components/project-list';
 import { SocialLink } from '@/components/social-link/social-link';
 import { SocialLinkList } from '@/components/social-link-list/social-link-list';
 import { ProjectModal } from '@/components/project-modal';
 import { UnicornBackground } from '@/components/unicorn-background';
-import {
-  EASE_OUT_QUINT,
-  PRESS_DURATION,
-  PRESS_SCALE,
-} from '@/config/animations';
 import { type Project } from '@/data/projects';
 import styles from './home-client.module.css';
 
 const DEFAULT_TITLE = 'Denis Kopylov — Product Designer';
 const ABOUT_TITLE = 'About — Denis Kopylov';
-const TOOLBAR_REVEAL_SESSION_KEY = 'home-toolbar-reveal-shown';
 
 /**
  * Survives React Strict Mode remounts (unlike sessionStorage consumed in effects).
@@ -64,15 +61,22 @@ export interface HomeClientProps {
   initialProjectSlug?: string;
 }
 
+const IS_DEV = process.env.NODE_ENV !== 'production';
+
 export function HomeClient({ projects, className, initialProjectSlug }: HomeClientProps) {
   const pathname = usePathname();
   const isAbout = pathname === '/about';
+  const isHome = pathname === '/';
+  const showNavHeader = isHome || isAbout;
 
   const [presentedProject, setPresentedProject] = useState<Project | null>(() =>
     getInitialPresentedProject(projects, initialProjectSlug),
   );
 
-  const [toolbarRevealState, setToolbarRevealState] = useState<'idle' | 'showing'>('idle');
+  /** Dev-only: on `/`, cycle left Go Back on/off (theme toggle always stays on the right) */
+  const [devNavOverride, setDevNavOverride] =
+    useState<NavigationHeaderState>('theme');
+
   const skipModalPresenceEnter = useMemo(() => {
     if (!initialProjectSlug) {
       return true;
@@ -90,18 +94,6 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
   const shouldReduceMotion = useReducedMotion();
   const { resolvedTheme } = useTheme();
   const isLightTheme = resolvedTheme === 'light';
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || shouldReduceMotion) return;
-    if (window.sessionStorage.getItem(TOOLBAR_REVEAL_SESSION_KEY) === '1') return;
-
-    const frameId = requestAnimationFrame(() => {
-      window.sessionStorage.setItem(TOOLBAR_REVEAL_SESSION_KEY, '1');
-      setToolbarRevealState('showing');
-    });
-
-    return () => cancelAnimationFrame(frameId);
-  }, [shouldReduceMotion]);
 
   useEffect(() => {
     if (!initialProjectSlug || typeof window === 'undefined') return;
@@ -145,10 +137,6 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
     router.replace('/');
   }, [router]);
 
-  const handleNavigateHome = useCallback(() => {
-    router.push('/');
-  }, [router]);
-
   useEffect(() => {
     if (presentedProject) {
       document.title = `${presentedProject.name} — Denis Kopylov`;
@@ -170,73 +158,38 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
     };
   }, [presentedProject]);
 
-  const actionSwapTransition = shouldReduceMotion
-    ? { duration: 0 }
-    : { duration: 0.2, ease: EASE_OUT_QUINT as [number, number, number, number] };
+  const mainClassName = [
+    className,
+    showNavHeader ? styles.contentPadNav : null,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className={styles.root}>
-      <main className={className}>
-        <motion.div
-          key={toolbarRevealState}
-          className={`${styles.toolbar} ${isAbout ? styles.toolbarAbout : styles.toolbarHome}`}
-          initial={
-            toolbarRevealState === 'showing' && !shouldReduceMotion
-              ? { opacity: 0 }
-              : false
-          }
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2, ease: EASE_OUT_QUINT }}
-        >
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={isAbout ? 'about-toolbar' : 'home-toolbar'}
-              initial={
-                shouldReduceMotion
-                  ? false
-                  : { opacity: 0, scale: 0.92, filter: 'blur(8px)' }
-              }
-              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-              exit={
-                shouldReduceMotion
-                  ? undefined
-                  : { opacity: 0, scale: 0.92, filter: 'blur(8px)' }
-              }
-              transition={actionSwapTransition}
-            >
-              {isAbout ? (
-                <motion.button
-                  type="button"
-                  className={styles.goBack}
-                  onClick={handleNavigateHome}
-                  aria-label="Go back to home"
-                  whileTap={
-                    shouldReduceMotion
-                      ? undefined
-                      : {
-                        scale: PRESS_SCALE,
-                        transition: {
-                          duration: PRESS_DURATION,
-                          ease: EASE_OUT_QUINT,
-                        },
-                      }
-                  }
-                >
-                  <span className={styles.goBackIcon} aria-hidden />
-                  <span className={styles.goBackLabel}>Go Back</span>
-                </motion.button>
-              ) : (
-                <Button themeSwitch />
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </motion.div>
+      <NavigationHeader
+        devStateOverride={IS_DEV && isHome ? devNavOverride : undefined}
+      />
 
+      <main className={mainClassName}>
         <div className={styles.content}>
           {isAbout ? (
             <AboutSectionContent />
           ) : (
             <>
+              {IS_DEV && isHome && (
+                <button
+                  type="button"
+                  className={styles.devNavCycle}
+                  onClick={() =>
+                    setDevNavOverride((prev) =>
+                      prev === 'theme' ? 'back' : 'theme',
+                    )
+                  }
+                >
+                  {`[dev] Left back: ${devNavOverride === 'back' ? 'on' : 'off'} — click to toggle; theme stays on the right`}
+                </button>
+              )}
               <IntroText
                 header="Denis Kopylov"
                 text="Product designer with a focus on turning ideas into reality through coding, a holistic approach, and an eye for interactive experiences. Currently at Ostrom."
