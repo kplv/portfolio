@@ -109,12 +109,13 @@ export function DocumentLink(props: DocumentLinkProps) {
 
   if (props.mode === 'navigate') {
     const { href, label, className } = props;
+    const scroll = !href.includes('#');
     return (
       <Link
         href={href}
         className={[styles.root, className].filter(Boolean).join(' ')}
         aria-label={label}
-        scroll
+        scroll={scroll}
       >
         <motion.span
           className={styles.motionTap}

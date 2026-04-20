@@ -23,7 +23,7 @@ type CardsHorizontallViewPdfProps = {
 type CardsHorizontallViewNavigateProps = {
   avatarSrc: string;
   className?: string;
-  /** Document tile navigates in-app (e.g. `/about`) instead of downloading the PDF */
+  /** Document tile navigates in-app (e.g. `/#about`) instead of downloading the PDF */
   documentNavigateTo: string;
 };
 
