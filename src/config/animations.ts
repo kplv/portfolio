@@ -73,8 +73,8 @@ type AboutSectionOrder = {
   exitOrder: number;
 };
 
-/** Opacity-only variant for About cards/copy sections. */
-export const ABOUT_SECTION_FADE = {
+/** Opacity-only variant for route sections with ordered enter/exit. */
+export const ORDERED_ROUTE_SECTION_FADE = {
   hidden: { opacity: 0 },
   show: (order: AboutSectionOrder) => ({
     opacity: 1,
@@ -93,3 +93,9 @@ export const ABOUT_SECTION_FADE = {
     },
   }),
 };
+
+/** Opacity-only variant for About cards/copy sections. */
+export const ABOUT_SECTION_FADE = ORDERED_ROUTE_SECTION_FADE;
+
+/** Opacity-only variant for Home intro/social/projects sections. */
+export const HOME_SECTION_FADE = ORDERED_ROUTE_SECTION_FADE;

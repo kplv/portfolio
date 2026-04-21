@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { IntroText } from '@/components/intro-text';
 import { InfoTable } from '@/components/project/info-table';
 import { TeamList } from '@/components/project/team-list';
 import { ProjectMediaBlock } from '@/components/project/media-block';
+import { ORDERED_ROUTE_SECTION_FADE } from '@/config/animations';
 import { getAccentColor, getHeaderGradient, type Project } from '@/data/projects';
 import styles from './project-detail.module.css';
 
@@ -15,8 +17,11 @@ export interface ProjectDetailProps {
 }
 
 export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
+  const shouldReduceMotion = useReducedMotion();
   const accentColor = getAccentColor(project);
   const headerGradient = getHeaderGradient(project);
+  const sectionCount = project.sections?.length ?? 0;
+  const reducedState = { opacity: 1 };
 
   useEffect(() => {
     if (!onDismiss) return;
@@ -30,7 +35,14 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
   return (
     <article className={styles.root}>
       <div className={styles.panelContent}>
-        <div className={styles.entryBlock}>
+        <motion.div
+          className={styles.entryBlock}
+          variants={ORDERED_ROUTE_SECTION_FADE}
+          custom={{ enterOrder: 0, exitOrder: sectionCount }}
+          initial={shouldReduceMotion ? reducedState : 'hidden'}
+          animate={shouldReduceMotion ? reducedState : 'show'}
+          exit={shouldReduceMotion ? reducedState : 'exit'}
+        >
           <IntroText
             header={project.name}
             text={project.intro ?? project.description}
@@ -47,10 +59,18 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
           {project.team && (
             <TeamList members={project.team} color={accentColor} />
           )}
-        </div>
+        </motion.div>
 
-        {project.sections?.map((section) => (
-          <div key={section.title} className={styles.section}>
+        {project.sections?.map((section, i) => (
+          <motion.div
+            key={section.title}
+            className={styles.section}
+            variants={ORDERED_ROUTE_SECTION_FADE}
+            custom={{ enterOrder: i + 1, exitOrder: sectionCount - i - 1 }}
+            initial={shouldReduceMotion ? reducedState : 'hidden'}
+            animate={shouldReduceMotion ? reducedState : 'show'}
+            exit={shouldReduceMotion ? reducedState : 'exit'}
+          >
             <h2
               className={styles.sectionTitle}
               style={{
@@ -80,7 +100,7 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </article>

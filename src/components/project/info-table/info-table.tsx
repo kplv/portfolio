@@ -14,15 +14,15 @@ export function InfoTable({ role, year, contribution, color }: InfoTableProps) {
     <div className={styles.container}>
       <div className={styles.item}>
         <p className={styles.header} style={headerStyle}>Role</p>
-        <p className={styles.text} style={headerStyle}>{role}</p>
+        <p className={styles.text}>{role}</p>
       </div>
       <div className={styles.item}>
         <p className={styles.header} style={headerStyle}>When</p>
-        <p className={styles.text} style={headerStyle}>{year}</p>
+        <p className={styles.text}>{year}</p>
       </div>
       <div className={styles.item}>
         <p className={styles.header} style={headerStyle}>What</p>
-        <p className={styles.text} style={headerStyle}>{contribution}</p>
+        <p className={styles.text}>{contribution}</p>
       </div>
     </div>
   );

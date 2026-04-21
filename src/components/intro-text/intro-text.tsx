@@ -1,8 +1,9 @@
 'use client';
 
+import type { HTMLMotionProps } from 'motion/react';
 import styles from './intro-text.module.css';
 
-export interface IntroTextProps {
+export interface IntroTextProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
   header: string;
   text: string;
   /** Solid accent color for header when no gradient */
@@ -11,7 +12,14 @@ export interface IntroTextProps {
   gradient?: string;
 }
 
-export function IntroText({ header, text, color, gradient }: IntroTextProps) {
+export function IntroText({
+  header,
+  text,
+  color,
+  gradient,
+  className,
+  ...motionProps
+}: IntroTextProps) {
   const headerStyle: React.CSSProperties | undefined =
     gradient
       ? {
@@ -25,7 +33,10 @@ export function IntroText({ header, text, color, gradient }: IntroTextProps) {
         : undefined;
 
   return (
-    <div className={styles.container}>
+    <div
+      {...motionProps}
+      className={[styles.container, className].filter(Boolean).join(' ')}
+    >
       <h1 className={styles.header} {...(headerStyle && { style: headerStyle })}>
         {header}
       </h1>

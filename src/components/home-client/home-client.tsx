@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useCallback, useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { AboutSectionContent } from '@/components/about-client/about-client';
 import { IntroText } from '@/components/intro-text';
@@ -13,6 +13,7 @@ import { ProjectDetail } from '@/components/project-detail';
 import { ProjectList } from '@/components/project-list';
 import { SocialLink } from '@/components/social-link/social-link';
 import { SocialLinkList } from '@/components/social-link-list/social-link-list';
+import { HOME_SECTION_FADE } from '@/config/animations';
 import { getProjectByPathname, type Project } from '@/data/projects';
 import styles from './home-client.module.css';
 
@@ -30,8 +31,12 @@ const ABOUT_PRESENCE_BRIDGE = {
   show: { opacity: 1 },
   exit: { opacity: 1, transition: { when: 'afterChildren' as const } },
 };
+const MotionIntroText = motion(IntroText);
+const MotionSocialLinkList = motion(SocialLinkList);
+const MotionProjectList = motion(ProjectList);
 
 export function HomeClient({ projects, className }: HomeClientProps) {
+  const shouldReduceMotion = useReducedMotion();
   const pathname = usePathname();
   const isAbout = pathname === '/about';
   const isHome = pathname === '/';
@@ -75,6 +80,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
   const mainClassName = [className, showNavPadding ? styles.contentPadNav : null]
     .filter(Boolean)
     .join(' ');
+  const reducedState = { opacity: 1 };
 
   return (
     <div className={styles.root}>
@@ -123,16 +129,35 @@ export function HomeClient({ projects, className }: HomeClientProps) {
                     {`[dev] Left back: ${devNavOverride === 'back' ? 'on' : 'off'} — click to toggle; theme stays on the right`}
                   </button>
                 )}
-                <IntroText
+                <MotionIntroText
+                  variants={HOME_SECTION_FADE}
+                  custom={{ enterOrder: 0, exitOrder: 2 }}
+                  initial={shouldReduceMotion ? reducedState : 'hidden'}
+                  animate={shouldReduceMotion ? reducedState : 'show'}
+                  exit={shouldReduceMotion ? reducedState : 'exit'}
                   header="Denis Kopylov"
                   text="Product designer with a focus on turning ideas into reality through coding, a holistic approach, and an eye for interactive experiences. Currently at Ostrom."
                 />
-                <SocialLinkList>
+                <MotionSocialLinkList
+                  variants={HOME_SECTION_FADE}
+                  custom={{ enterOrder: 1, exitOrder: 1 }}
+                  initial={shouldReduceMotion ? reducedState : 'hidden'}
+                  animate={shouldReduceMotion ? reducedState : 'show'}
+                  exit={shouldReduceMotion ? reducedState : 'exit'}
+                >
                   <SocialLink href="https://www.linkedin.com/in/deniskplv/" text="LinkedIn" />
                   <SocialLink href="https://www.are.na/denis-kopylov/channels" text="Are.na" />
                   <SocialLink href="/about" text="About" />
-                </SocialLinkList>
-                <ProjectList projects={projects} onProjectClick={handleOpenProject} />
+                </MotionSocialLinkList>
+                <MotionProjectList
+                  variants={HOME_SECTION_FADE}
+                  custom={{ enterOrder: 2, exitOrder: 0 }}
+                  initial={shouldReduceMotion ? reducedState : 'hidden'}
+                  animate={shouldReduceMotion ? reducedState : 'show'}
+                  exit={shouldReduceMotion ? reducedState : 'exit'}
+                  projects={projects}
+                  onProjectClick={handleOpenProject}
+                />
               </motion.div>
             )}
           </AnimatePresence>
