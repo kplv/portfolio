@@ -1,7 +1,8 @@
 .root {
   position: relative;
+  z-index: 1;
   min-height: 100vh;
-  isolation: isolate;
+  /* No isolation: isolate — it can prevent backdrop-filter from sampling the fixed shader sibling */
 }
 
 .content {

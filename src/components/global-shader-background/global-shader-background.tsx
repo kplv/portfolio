@@ -3,11 +3,7 @@
 import { useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
-import {
-  UnicornBackground,
-  UNICORN_PROJECT_ID_DARK,
-  UNICORN_PROJECT_ID_LIGHT,
-} from '@/components/unicorn-background';
+import { UnicornBackground } from '@/components/unicorn-background';
 import { getProjectByPathname, projects } from '@/data/projects';
 
 export function GlobalShaderBackground() {
@@ -25,17 +21,13 @@ export function GlobalShaderBackground() {
   const showNavPadding = isHome || isAbout || isProject;
 
   const themeReady = resolvedTheme === 'light' || resolvedTheme === 'dark';
-  const projectId =
-    resolvedTheme === 'dark' ? UNICORN_PROJECT_ID_DARK : UNICORN_PROJECT_ID_LIGHT;
+  const isLightTheme = resolvedTheme === 'light';
 
   if (!showNavPadding) {
     return null;
   }
 
   return (
-    <UnicornBackground
-      projectId={projectId}
-      isVisible={themeReady}
-    />
+    <UnicornBackground isVisible={themeReady && isLightTheme} />
   );
 }
