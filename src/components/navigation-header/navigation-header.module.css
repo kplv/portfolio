@@ -107,6 +107,30 @@
   background-color: color-mix(in oklch, currentColor 15%, transparent);
 }
 
+[data-theme='dark'] .goBack {
+  background-color: color-mix(
+    in oklch,
+    var(--background-color) 1%,
+    transparent
+  );
+}
+
+[data-theme='dark'] .goBack:hover {
+  background-color: color-mix(
+    in oklch,
+    var(--background-color) 10%,
+    transparent
+  );
+}
+
+[data-theme='dark'] .goBack:active {
+  background-color: color-mix(
+    in oklch,
+    var(--background-color) 15%,
+    transparent
+  );
+}
+
 .goBackIcon {
   position: relative;
   flex-shrink: 0;
