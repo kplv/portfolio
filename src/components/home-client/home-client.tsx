@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useCallback, useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { AboutSectionContent } from '@/components/about-client/about-client';
 import { IntroText } from '@/components/intro-text';
@@ -25,6 +26,10 @@ export interface HomeClientProps {
 }
 
 const IS_DEV = process.env.NODE_ENV !== 'production';
+const ABOUT_PRESENCE_BRIDGE = {
+  show: { opacity: 1 },
+  exit: { opacity: 1, transition: { when: 'afterChildren' as const } },
+};
 
 export function HomeClient({ projects, className }: HomeClientProps) {
   const pathname = usePathname();
@@ -79,40 +84,58 @@ export function HomeClient({ projects, className }: HomeClientProps) {
 
       <main className={mainClassName}>
         <div className={styles.content}>
-          {isAbout ? (
-            <AboutSectionContent />
-          ) : projectFromRoute ? (
-            <ProjectDetail
-              project={projectFromRoute}
-              onDismiss={handleCloseProject}
-            />
-          ) : (
-            <>
-              {IS_DEV && isHome && (
-                <button
-                  type="button"
-                  className={styles.devNavCycle}
-                  onClick={() =>
-                    setDevNavOverride((prev) =>
-                      prev === 'theme' ? 'back' : 'theme',
-                    )
-                  }
-                >
-                  {`[dev] Left back: ${devNavOverride === 'back' ? 'on' : 'off'} — click to toggle; theme stays on the right`}
-                </button>
-              )}
-              <IntroText
-                header="Denis Kopylov"
-                text="Product designer with a focus on turning ideas into reality through coding, a holistic approach, and an eye for interactive experiences. Currently at Ostrom."
-              />
-              <SocialLinkList>
-                <SocialLink href="https://www.linkedin.com/in/deniskplv/" text="LinkedIn" />
-                <SocialLink href="https://www.are.na/denis-kopylov/channels" text="Are.na" />
-                <SocialLink href="/about" text="About" />
-              </SocialLinkList>
-              <ProjectList projects={projects} onProjectClick={handleOpenProject} />
-            </>
-          )}
+          <AnimatePresence
+            mode="wait"
+          >
+            {isAbout ? (
+              <motion.div
+                key="about"
+                style={{ display: 'contents' }}
+                variants={ABOUT_PRESENCE_BRIDGE}
+                initial="show"
+                animate="show"
+                exit="exit"
+              >
+                <AboutSectionContent />
+              </motion.div>
+            ) : projectFromRoute ? (
+              <motion.div
+                key={`project-${projectFromRoute.slug}`}
+                style={{ display: 'contents' }}
+              >
+                <ProjectDetail
+                  project={projectFromRoute}
+                  onDismiss={handleCloseProject}
+                />
+              </motion.div>
+            ) : (
+              <motion.div key="home" style={{ display: 'contents' }}>
+                {IS_DEV && isHome && (
+                  <button
+                    type="button"
+                    className={styles.devNavCycle}
+                    onClick={() =>
+                      setDevNavOverride((prev) =>
+                        prev === 'theme' ? 'back' : 'theme',
+                      )
+                    }
+                  >
+                    {`[dev] Left back: ${devNavOverride === 'back' ? 'on' : 'off'} — click to toggle; theme stays on the right`}
+                  </button>
+                )}
+                <IntroText
+                  header="Denis Kopylov"
+                  text="Product designer with a focus on turning ideas into reality through coding, a holistic approach, and an eye for interactive experiences. Currently at Ostrom."
+                />
+                <SocialLinkList>
+                  <SocialLink href="https://www.linkedin.com/in/deniskplv/" text="LinkedIn" />
+                  <SocialLink href="https://www.are.na/denis-kopylov/channels" text="Are.na" />
+                  <SocialLink href="/about" text="About" />
+                </SocialLinkList>
+                <ProjectList projects={projects} onProjectClick={handleOpenProject} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </main>
     </div>

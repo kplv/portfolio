@@ -61,3 +61,35 @@ export const BLUR_ITEM = {
     },
   },
 };
+
+/** Temporary About page fade duration for tuning. */
+export const ABOUT_FADE_DURATION = 0.7;
+
+/** Temporary About page stagger step for tuning. */
+export const ABOUT_STAGGER_STEP = 0.5;
+
+type AboutSectionOrder = {
+  enterOrder: number;
+  exitOrder: number;
+};
+
+/** Opacity-only variant for About cards/copy sections. */
+export const ABOUT_SECTION_FADE = {
+  hidden: { opacity: 0 },
+  show: (order: AboutSectionOrder) => ({
+    opacity: 1,
+    transition: {
+      duration: ABOUT_FADE_DURATION,
+      ease: EASE_OUT_QUINT,
+      delay: order.enterOrder * ABOUT_STAGGER_STEP,
+    },
+  }),
+  exit: (order: AboutSectionOrder) => ({
+    opacity: 0,
+    transition: {
+      duration: ABOUT_FADE_DURATION,
+      ease: EASE_OUT_QUINT,
+      delay: order.exitOrder * ABOUT_STAGGER_STEP,
+    },
+  }),
+};

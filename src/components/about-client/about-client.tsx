@@ -1,22 +1,41 @@
 'use client';
 
+import { motion, useReducedMotion } from 'motion/react';
 import { CardsHorizontallView } from '@/components/cards-horizontall-view';
+import { ABOUT_SECTION_FADE } from '@/config/animations';
 import styles from './about-client.module.css';
 
 /**
  * About column (cards + copy) for use inside the shared shell.
  */
 export function AboutSectionContent() {
+  const shouldReduceMotion = useReducedMotion();
+  const reducedState = { opacity: 1 };
+
   return (
     <>
-      <div className={styles.cardsWrap}>
+      <motion.div
+        className={styles.cardsWrap}
+        variants={ABOUT_SECTION_FADE}
+        custom={{ enterOrder: 0, exitOrder: 1 }}
+        initial={shouldReduceMotion ? reducedState : 'hidden'}
+        animate={shouldReduceMotion ? reducedState : 'show'}
+        exit={shouldReduceMotion ? reducedState : 'exit'}
+      >
         <CardsHorizontallView
           avatarSrc="/images/denis-image.png"
           documentSrc="/Denis Kopylov-CV.pdf"
           downloadFileName="Denis Kopylov, Sr. Product Designer"
         />
-      </div>
-      <div className={styles.copy}>
+      </motion.div>
+      <motion.div
+        className={styles.copy}
+        variants={ABOUT_SECTION_FADE}
+        custom={{ enterOrder: 1, exitOrder: 0 }}
+        initial={shouldReduceMotion ? reducedState : 'hidden'}
+        animate={shouldReduceMotion ? reducedState : 'show'}
+        exit={shouldReduceMotion ? reducedState : 'exit'}
+      >
         <p className={styles.paragraph}>
           <span>{`Hey, I’m `}</span>
           <span className={styles.accent}>Denis!</span>
@@ -32,7 +51,7 @@ export function AboutSectionContent() {
           Apart from looking at screen, I spend my time dancing contemporary or riding a Fuji
           Feather across Schöneberg, Berlin.{' '}
         </p>
-      </div>
+      </motion.div>
     </>
   );
 }
