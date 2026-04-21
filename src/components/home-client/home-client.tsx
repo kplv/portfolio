@@ -1,9 +1,7 @@
 'use client';
 
 import { useEffect, useCallback, useMemo, useState } from 'react';
-import { useReducedMotion } from 'motion/react';
 import { usePathname, useRouter } from 'next/navigation';
-import { useTheme } from 'next-themes';
 import { AboutSectionContent } from '@/components/about-client/about-client';
 import { IntroText } from '@/components/intro-text';
 import {
@@ -14,7 +12,6 @@ import { ProjectDetail } from '@/components/project-detail';
 import { ProjectList } from '@/components/project-list';
 import { SocialLink } from '@/components/social-link/social-link';
 import { SocialLinkList } from '@/components/social-link-list/social-link-list';
-import { UnicornBackground } from '@/components/unicorn-background';
 import { getProjectByPathname, type Project } from '@/data/projects';
 import styles from './home-client.module.css';
 
@@ -48,9 +45,6 @@ export function HomeClient({ projects, className }: HomeClientProps) {
   );
 
   const router = useRouter();
-  const shouldReduceMotion = useReducedMotion();
-  const { resolvedTheme } = useTheme();
-  const isLightTheme = resolvedTheme === 'light';
 
   const handleOpenProject = useCallback(
     (project: Project) => {
@@ -121,10 +115,6 @@ export function HomeClient({ projects, className }: HomeClientProps) {
           )}
         </div>
       </main>
-
-      {isHome && !shouldReduceMotion && (
-        <UnicornBackground isVisible={isHome && isLightTheme} />
-      )}
     </div>
   );
 }

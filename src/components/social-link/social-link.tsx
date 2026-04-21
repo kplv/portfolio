@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, useReducedMotion } from 'motion/react';
+import Link from 'next/link';
 import { useState } from 'react';
 import styles from './social-link.module.css';
 
@@ -13,13 +14,16 @@ function isExternalHref(href: string): boolean {
   return /^https?:\/\//i.test(href);
 }
 
+const MotionLink = motion.create(Link);
+
 export function SocialLink({ href, text }: SocialLinkProps) {
   const shouldReduceMotion = useReducedMotion();
   const [isHovered, setIsHovered] = useState(false);
   const external = isExternalHref(href);
+  const LinkComponent = external ? motion.a : MotionLink;
 
   return (
-    <motion.a
+    <LinkComponent
       href={href}
       {...(external
         ? { target: '_blank' as const, rel: 'noopener noreferrer' }
@@ -67,6 +71,6 @@ export function SocialLink({ href, text }: SocialLinkProps) {
               }
         }
       />
-    </motion.a>
+    </LinkComponent>
   );
 }

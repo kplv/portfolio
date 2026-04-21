@@ -4,7 +4,7 @@
 
 :root {
   /* === Color Tokens - Light Mode === */
-  --background-color: var(--slate-50);
+  --background-color: oklch(from #f0f0f4 l c h);
   --document-link-accent: oklch(from #6465e7 l c h);
   --document-link-card-bg: oklch(1 0 0);
   --document-link-border: color-mix(
