@@ -1,6 +1,6 @@
 'use client';
 
-import type { HTMLMotionProps } from 'motion/react';
+import { motion, type HTMLMotionProps } from 'motion/react';
 import { ProjectCard } from '@/components/project-card';
 import type { Project } from '@/data/projects';
 import styles from './project-list.module.css';
@@ -17,7 +17,7 @@ export function ProjectList({
   ...motionProps
 }: ProjectListProps) {
   return (
-    <div
+    <motion.div
       {...motionProps}
       className={[styles.container, className].filter(Boolean).join(' ')}
     >
@@ -28,6 +28,6 @@ export function ProjectList({
           onProjectClick={onProjectClick}
         />
       ))}
-    </div>
+    </motion.div>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import type { HTMLMotionProps } from 'motion/react';
+import { motion, type HTMLMotionProps } from 'motion/react';
 import styles from './intro-text.module.css';
 
 export interface IntroTextProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
@@ -33,7 +33,7 @@ export function IntroText({
         : undefined;
 
   return (
-    <div
+    <motion.div
       {...motionProps}
       className={[styles.container, className].filter(Boolean).join(' ')}
     >
@@ -41,6 +41,6 @@ export function IntroText({
         {header}
       </h1>
       <p className={styles.text}>{text}</p>
-    </div>
+    </motion.div>
   );
 }

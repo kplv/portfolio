@@ -75,12 +75,12 @@ export function NavigationHeader() {
                   shouldReduceMotion
                     ? undefined
                     : {
-                        scale: PRESS_SCALE,
-                        transition: {
-                          duration: PRESS_DURATION,
-                          ease: EASE_OUT_QUINT,
-                        },
-                      }
+                      scale: PRESS_SCALE,
+                      transition: {
+                        duration: PRESS_DURATION,
+                        ease: EASE_OUT_QUINT,
+                      },
+                    }
                 }
               >
                 <span className={styles.goBackIcon} aria-hidden />

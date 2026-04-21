@@ -1,4 +1,4 @@
-import type { HTMLMotionProps } from 'motion/react';
+import { motion, type HTMLMotionProps } from 'motion/react';
 import styles from './social-link-list.module.css';
 
 export interface SocialLinkListProps extends Omit<HTMLMotionProps<'nav'>, 'children'> {
@@ -11,12 +11,12 @@ export function SocialLinkList({
   ...motionProps
 }: SocialLinkListProps) {
   return (
-    <nav
+    <motion.nav
       {...motionProps}
       className={[styles.list, className].filter(Boolean).join(' ')}
       aria-label="Social links"
     >
       {children}
-    </nav>
+    </motion.nav>
   );
 }
