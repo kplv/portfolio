@@ -1,14 +1,11 @@
 'use client';
 
-import { useEffect, useCallback, useMemo, useState } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { AboutSectionContent } from '@/components/about-client/about-client';
 import { IntroText } from '@/components/intro-text';
-import {
-  NavigationHeader,
-  type NavigationHeaderState,
-} from '@/components/navigation-header';
+import { NavigationHeader } from '@/components/navigation-header';
 import { ProjectDetail } from '@/components/project-detail';
 import { ProjectList } from '@/components/project-list';
 import { SocialLink } from '@/components/social-link/social-link';
@@ -31,7 +28,6 @@ export interface HomeClientProps {
   className?: string;
 }
 
-const IS_DEV = process.env.NODE_ENV !== 'production';
 const MotionIntroText = motion(IntroText);
 const MotionSocialLinkList = motion(SocialLinkList);
 const MotionProjectList = motion(ProjectList);
@@ -49,11 +45,6 @@ export function HomeClient({ projects, className }: HomeClientProps) {
   const isProject = projectFromRoute != null;
 
   const showNavPadding = isHome || isAbout || isProject;
-
-  /** Dev-only: on `/`, cycle left Go Back on/off (theme toggle stays on the right) */
-  const [devNavOverride, setDevNavOverride] = useState<NavigationHeaderState>(
-    'theme',
-  );
 
   const router = useRouter();
 
@@ -85,9 +76,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
 
   return (
     <div className={styles.root}>
-      <NavigationHeader
-        devStateOverride={IS_DEV && isHome ? devNavOverride : undefined}
-      />
+      <NavigationHeader />
 
       <main className={mainClassName}>
         <div className={styles.content}>
@@ -115,19 +104,6 @@ export function HomeClient({ projects, className }: HomeClientProps) {
               </motion.div>
             ) : (
               <motion.div key="home" style={{ display: 'contents' }}>
-                {IS_DEV && isHome && (
-                  <button
-                    type="button"
-                    className={styles.devNavCycle}
-                    onClick={() =>
-                      setDevNavOverride((prev) =>
-                        prev === 'theme' ? 'back' : 'theme',
-                      )
-                    }
-                  >
-                    {`[dev] Left back: ${devNavOverride === 'back' ? 'on' : 'off'} — click to toggle; theme stays on the right`}
-                  </button>
-                )}
                 <MotionIntroText
                   variants={HOME_SECTION_FADE}
                   custom={{ enterOrder: 0, exitOrder: 2 }}

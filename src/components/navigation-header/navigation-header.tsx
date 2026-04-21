@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/button';
@@ -15,20 +15,12 @@ import styles from './navigation-header.module.css';
 
 export type NavigationHeaderState = 'theme' | 'back';
 
-export interface NavigationHeaderProps {
-  /**
-   * When pathname is `/` and this is set (dev preview), toggles Go Back on `/` (left side).
-   * Theme toggle stays on the right; both can show when back is on.
-   */
-  devStateOverride?: NavigationHeaderState;
-}
-
 const actionSwapTransition = {
   duration: 0.2,
   ease: EASE_OUT_QUINT as [number, number, number, number],
 };
 
-export function NavigationHeader({ devStateOverride }: NavigationHeaderProps) {
+export function NavigationHeader() {
   const pathname = usePathname();
   const router = useRouter();
   const shouldReduceMotion = useReducedMotion();
@@ -42,14 +34,7 @@ export function NavigationHeader({ devStateOverride }: NavigationHeaderProps) {
   const routeState: NavigationHeaderState =
     pathname === '/about' || isProjectRoute ? 'back' : 'theme';
 
-  const effectiveState: NavigationHeaderState = useMemo(() => {
-    if (pathname === '/' && devStateOverride != null) {
-      return devStateOverride;
-    }
-    return routeState;
-  }, [pathname, routeState, devStateOverride]);
-
-  const showBack = effectiveState === 'back';
+  const showBack = routeState === 'back';
   const isAbout = pathname === '/about';
   const showThemeToggle = !isAbout && !isProjectRoute;
 

@@ -12,23 +12,5 @@
 
 /* Reserve space for fixed NavigationHeader (toolbar height + padding) */
 .contentPadNav {
-  padding-top: 4.75rem;
-}
-
-.devNavCycle {
-  margin-top: 12px;
-  font: inherit;
-  font-size: 13px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px dashed color-mix(in oklch, currentColor 35%, transparent);
-  background: color-mix(in oklch, currentColor 6%, transparent);
-  color: var(--text-secondary-color, inherit);
-  cursor: pointer;
-  align-self: flex-start;
-}
-
-.devNavCycle:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
+  padding-top: 56px;
 }
