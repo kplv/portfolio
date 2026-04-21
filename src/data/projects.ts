@@ -189,7 +189,7 @@ export const projects: Project[] = [
         items: [
           {
             label:
-              'Source of Income. A new feature where we ask customers to declare their earnings.',
+              'Source of Income. As a bank, we have to make sure we know where our customers’ money comes from. For customers, it might seem like a mundane task, so we tried to make it as seamless as possible. We came up with a “shopping basket” solution, where I can add multiple sources of income, each with its own flow.',
             media: {
               type: 'image',
               src: '/images/projects/trade/trade-1.png',
@@ -216,25 +216,17 @@ export const projects: Project[] = [
           },
           {
             label:
-              'Blocked Account. A new feature where the customer can still use the app while we investigate. Previously, we would block the entire app login.',
+              'Account protection. We developed few featutres to protect our customer from fraud. For example, new device login notifcation, where can could also block the entire app login and report the incident.',
             media: {
               type: 'image',
               src: '/images/projects/trade/trade-4.png',
               cover: true,
             },
           },
+
           {
             label:
-              'Recurrent Diligence. A new feature for keeping customer data up to date.',
-            media: {
-              type: 'image',
-              src: '/images/projects/trade/trade-5.png',
-              cover: true,
-            },
-          },
-          {
-            label:
-              'New Performance Review App. I also contributed to internal tools, helping everyone stay aligned on the company\u2019s strategy.',
+              'New Performance Review App. I also contributed to internal tools, helping everyone stay aligned on the company\u2019s strategy. This project was done from ground up in close collaboration with talent team. ',
             media: {
               type: 'image',
               src: '/images/projects/trade/trade-6.png',

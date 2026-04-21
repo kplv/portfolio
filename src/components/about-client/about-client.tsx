@@ -40,9 +40,7 @@ export function AboutSectionContent() {
         exit={shouldReduceMotion ? reducedState : 'exit'}
       >
         <p className={styles.paragraph}>
-          <span>{`Hey, I’m `}</span>
-          <span className={styles.accent}>Denis!</span>
-          <span>{` I’m a product designer with focus on interaction design.`}</span>
+          Hey! I’m Denis, a product designer with focus on interaction design.
         </p>
         <p className={styles.paragraph}>
           A fan of Bauhaus, and then of Ulm School of Design — I approach work holistically.
