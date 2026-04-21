@@ -2,7 +2,10 @@
 
 import { motion, useReducedMotion } from 'motion/react';
 import { CardsHorizontallView } from '@/components/cards-horizontall-view';
-import { ABOUT_SECTION_FADE } from '@/config/animations';
+import {
+  ABOUT_SECTION_FADE,
+  ROUTE_SECTION_REDUCED_MOTION_TARGET,
+} from '@/config/page-motion';
 import styles from './about-client.module.css';
 
 /**
@@ -10,7 +13,7 @@ import styles from './about-client.module.css';
  */
 export function AboutSectionContent() {
   const shouldReduceMotion = useReducedMotion();
-  const reducedState = { opacity: 1 };
+  const reducedState = ROUTE_SECTION_REDUCED_MOTION_TARGET;
 
   return (
     <>

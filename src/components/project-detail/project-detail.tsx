@@ -6,7 +6,10 @@ import { IntroText } from '@/components/intro-text';
 import { InfoTable } from '@/components/project/info-table';
 import { TeamList } from '@/components/project/team-list';
 import { ProjectMediaBlock } from '@/components/project/media-block';
-import { ORDERED_ROUTE_SECTION_FADE } from '@/config/animations';
+import {
+  ORDERED_ROUTE_SECTION_VARIANTS,
+  ROUTE_SECTION_REDUCED_MOTION_TARGET,
+} from '@/config/page-motion';
 import { getAccentColor, getHeaderGradient, type Project } from '@/data/projects';
 import styles from './project-detail.module.css';
 
@@ -21,7 +24,7 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
   const accentColor = getAccentColor(project);
   const headerGradient = getHeaderGradient(project);
   const sectionCount = project.sections?.length ?? 0;
-  const reducedState = { opacity: 1 };
+  const reducedState = ROUTE_SECTION_REDUCED_MOTION_TARGET;
 
   useEffect(() => {
     if (!onDismiss) return;
@@ -37,7 +40,7 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
       <div className={styles.panelContent}>
         <motion.div
           className={styles.entryBlock}
-          variants={ORDERED_ROUTE_SECTION_FADE}
+          variants={ORDERED_ROUTE_SECTION_VARIANTS}
           custom={{ enterOrder: 0, exitOrder: sectionCount }}
           initial={shouldReduceMotion ? reducedState : 'hidden'}
           animate={shouldReduceMotion ? reducedState : 'show'}
@@ -65,7 +68,7 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
           <motion.div
             key={section.title}
             className={styles.section}
-            variants={ORDERED_ROUTE_SECTION_FADE}
+            variants={ORDERED_ROUTE_SECTION_VARIANTS}
             custom={{ enterOrder: i + 1, exitOrder: sectionCount - i - 1 }}
             initial={shouldReduceMotion ? reducedState : 'hidden'}
             animate={shouldReduceMotion ? reducedState : 'show'}

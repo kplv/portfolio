@@ -13,7 +13,12 @@ import { ProjectDetail } from '@/components/project-detail';
 import { ProjectList } from '@/components/project-list';
 import { SocialLink } from '@/components/social-link/social-link';
 import { SocialLinkList } from '@/components/social-link-list/social-link-list';
-import { HOME_SECTION_FADE } from '@/config/animations';
+import {
+  ABOUT_PRESENCE_BRIDGE,
+  HOME_SECTION_FADE,
+  ROUTE_SECTION_REDUCED_MOTION_TARGET,
+  ROUTE_SHELL_ANIMATE_PRESENCE_PROPS,
+} from '@/config/page-motion';
 import { getProjectByPathname, type Project } from '@/data/projects';
 import styles from './home-client.module.css';
 
@@ -27,10 +32,6 @@ export interface HomeClientProps {
 }
 
 const IS_DEV = process.env.NODE_ENV !== 'production';
-const ABOUT_PRESENCE_BRIDGE = {
-  show: { opacity: 1 },
-  exit: { opacity: 1, transition: { when: 'afterChildren' as const } },
-};
 const MotionIntroText = motion(IntroText);
 const MotionSocialLinkList = motion(SocialLinkList);
 const MotionProjectList = motion(ProjectList);
@@ -80,7 +81,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
   const mainClassName = [className, showNavPadding ? styles.contentPadNav : null]
     .filter(Boolean)
     .join(' ');
-  const reducedState = { opacity: 1 };
+  const reducedState = ROUTE_SECTION_REDUCED_MOTION_TARGET;
 
   return (
     <div className={styles.root}>
@@ -90,9 +91,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
 
       <main className={mainClassName}>
         <div className={styles.content}>
-          <AnimatePresence
-            mode="wait"
-          >
+          <AnimatePresence {...ROUTE_SHELL_ANIMATE_PRESENCE_PROPS}>
             {isAbout ? (
               <motion.div
                 key="about"

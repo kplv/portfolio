@@ -4,14 +4,8 @@ import { useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { DocumentLink } from '@/components/document-link';
 import { MaskedAvatar } from '@/components/masked-avatar';
+import { SPRING_ROUTE_CONTENT } from '@/config/animations';
 import styles from './cards-horizontall-view.module.css';
-
-const SNAPPY_SPRING = {
-  type: 'spring' as const,
-  stiffness: 420,
-  damping: 15,
-  mass: 0.55,
-};
 
 type CardsHorizontallViewPdfProps = {
   avatarSrc: string;
@@ -51,7 +45,9 @@ export function CardsHorizontallView(props: CardsHorizontallViewProps) {
             scale: avatarScale,
             zIndex: isDocumentActive ? 1 : 2,
           }}
-          transition={shouldReduceMotion ? { duration: 0 } : SNAPPY_SPRING}
+          transition={
+            shouldReduceMotion ? { duration: 0 } : SPRING_ROUTE_CONTENT
+          }
           onHoverStart={() => setIsAvatarHovered(true)}
           onHoverEnd={() => setIsAvatarHovered(false)}
         >
@@ -65,7 +61,9 @@ export function CardsHorizontallView(props: CardsHorizontallViewProps) {
             rotate: isDocumentHovered ? -2 : -7,
             zIndex: isDocumentActive ? 3 : 1,
           }}
-          transition={shouldReduceMotion ? { duration: 0 } : SNAPPY_SPRING}
+          transition={
+            shouldReduceMotion ? { duration: 0 } : SPRING_ROUTE_CONTENT
+          }
           onHoverStart={() => setIsDocumentHovered(true)}
           onHoverEnd={() => setIsDocumentHovered(false)}
           onFocusCapture={(event) => {
