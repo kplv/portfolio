@@ -178,7 +178,7 @@ export const projects: Project[] = [
     ],
     accentColor: '#153e9b',
     accentGradient:
-      'linear-gradient(179deg, oklch(0.28 0.17 262) 28%, oklch(0.36 0.18 264) 58%, #153e9b 100%)',
+      'linear-gradient(180deg, oklch(0.5 0.22 266) 28%, oklch(0.36 0.18 264) 58%, #153e9b 100%)',
     role: 'Product Designer II',
     year: '2023–24',
     contribution: 'Product & Interactive Design',
@@ -190,6 +190,7 @@ export const projects: Project[] = [
           {
             label:
               'Source of Income. As a bank, we have to make sure we know where our customers’ money comes from. For customers, it might seem like a mundane task, so we tried to make it as seamless as possible. We came up with a “shopping basket” solution, where I can add multiple sources of income, each with its own flow.',
+
             media: {
               type: 'image',
               src: '/images/projects/trade/trade-1.png',
