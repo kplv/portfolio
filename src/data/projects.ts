@@ -14,6 +14,7 @@ export type MediaBlock =
       poster?: string;
       loop?: boolean;
       cover?: boolean;
+      scale?: number;
     };
 
 export interface SectionItem {
@@ -169,15 +170,54 @@ export const projects: Project[] = [
         items: [
           {
             label:
-              'I\u2019d been working with React for a couple of years, and with the advent of Claude, I was well positioned to move from Figma to prototyping experiences closer to what end users would see. Most of the redesigns were initially explored in code by me. The same was true for the design system work. I analysed our production code and its issues, developed an approach to tokens and styles, and only then moved them to Figma.',
+              'I’d been working with React for a couple of years now, and with the advent of Claude, I was well positioned to move from Figma into prototypes that looked and felt closer to what end users would see. I explored most of the redesigns in code first, and the same approach applied to design system work. I analysed our production code and its issues, developed an approach to tokens and styles, and only then moved them into Figma.',
             media: {
               type: 'video',
               src: '/images/projects/ostrom/ostrom-5.mp4',
+              cover: true,
+              scale: 1.13,
+            },
+          },
+          {
+            label:
+              ' I treated even the smaller components with care. For example, this timestamp component, which we improved by adding a better loading state with skeletons and by gracefully handling error states.',
+            media: {
+              type: 'video',
+              src: '/images/projects/ostrom/ostrom-9.mp4',
               cover: true,
             },
           },
         ],
       },
+      {
+        title: 'Status Quo vs. After',
+        items: [
+          {
+            label:
+              'In user testing and later in production data, we saw improvements in retention, discoverability, and overall user satisfaction with the redesigns. The new design was perceived as more modern and clean, while meeting user needs without adding too much clutter to the screen.',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-11.png',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-12.png',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-13.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+
       {
         title: 'Exploration & User Testing',
         items: [
@@ -187,6 +227,13 @@ export const projects: Project[] = [
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-7.png',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-14.png',
               cover: true,
             },
           },

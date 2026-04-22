@@ -96,6 +96,11 @@ video.media[data-cover='true'] {
   object-fit: cover;
 }
 
+video.media[data-scaled='true'] {
+  transform: scale(var(--video-scale));
+  transform-origin: center;
+}
+
 .media[data-loaded='true'] {
   opacity: 1;
 }

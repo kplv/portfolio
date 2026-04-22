@@ -74,7 +74,7 @@
 
 /* === Theme: Dark Mode === */
 [data-theme='dark'] {
-  --background-color: var(--slate-1100);
+  --background-color: var(--slate-1000);
   --document-link-accent: var(--text-accent-color);
   --document-link-card-bg: color-mix(
     in oklch,

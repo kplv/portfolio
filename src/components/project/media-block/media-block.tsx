@@ -61,11 +61,13 @@ function ProjectVideo({
   poster,
   loop = true,
   cover,
+  scale,
 }: {
   src: string;
   poster?: string;
   loop?: boolean;
   cover?: boolean;
+  scale?: number;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -96,6 +98,8 @@ function ProjectVideo({
         className={styles.media}
         data-loaded={isLoaded}
         data-cover={cover || undefined}
+        data-scaled={scale ? true : undefined}
+        style={scale ? ({ '--video-scale': scale } as React.CSSProperties) : undefined}
         onCanPlay={() => setIsLoaded(true)}
       />
     </div>
@@ -118,7 +122,13 @@ export function ProjectMediaBlock({ label, media, accentColor }: ProjectMediaBlo
           {media.type === 'image' ? (
             <ProjectImage src={media.src} alt={media.alt ?? label ?? ''} cover={media.cover} />
           ) : (
-            <ProjectVideo src={media.src} poster={media.poster} loop={media.loop} cover={media.cover} />
+            <ProjectVideo
+              src={media.src}
+              poster={media.poster}
+              loop={media.loop}
+              cover={media.cover}
+              scale={media.scale}
+            />
           )}
         </div>
       )}
