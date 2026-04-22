@@ -11,9 +11,9 @@
 }
 
 .label {
-  font-size: var(--text-primary-size);
-  font-weight: var(--text-primary-weight);
-  line-height: var(--text-primary-line-height);
+  font-size: var(--text-secondary-size);
+  font-weight: var(--text-secondary-weight);
+  line-height: var(--text-secondary-line-height);
   color: var(--text-primary-color);
   flex: 1;
   padding-bottom: 16px;

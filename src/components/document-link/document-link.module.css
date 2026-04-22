@@ -1,5 +1,4 @@
 .root {
-  --document-link-accent: #6465e7;
   position: relative;
   display: inline-flex;
   padding: 8px;
@@ -15,12 +14,6 @@
 
 .motionTap {
   display: inline-flex;
-}
-
-@supports (color: oklch(from #6465e7 l c h)) {
-  .root {
-    --document-link-accent: oklch(from #6465e7 l c h);
-  }
 }
 
 .root:focus {
@@ -133,7 +126,7 @@
   font-size: var(--text-secondary-size);
   font-weight: var(--text-primary-weight);
   line-height: var(--text-primary-line-height);
-  color: var(--document-link-accent);
+  color: var(--text-accent-color);
 }
 
 .sizeLine {
@@ -141,5 +134,5 @@
   font-size: var(--text-secondary-size);
   font-weight: var(--text-primary-weight);
   line-height: 1;
-  color: var(--document-link-accent);
+  color: var(--text-accent-color);
 }

@@ -37,9 +37,8 @@
 .sectionTitle {
   font-family: var(--font-hagrid), serif;
   font-weight: 800;
-  width: stretch;
   font-style: italic;
-  font-size: var(--text-display-size);
+  font-size: 40px;
   line-height: 120%;
   overflow-wrap: break-word;
 }
