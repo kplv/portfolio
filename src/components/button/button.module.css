@@ -1,5 +1,6 @@
 .button {
   position: relative;
+  font-family: inherit;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -11,6 +12,13 @@
   border: 1.5px solid transparent;
   background-color: transparent;
   color: currentColor;
+  font-family:
+    var(--font-favorit),
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   font-size: 18px;
   line-height: var(--text-primary-line-height);
   cursor: pointer;
@@ -47,7 +55,7 @@
 
 .label {
   margin: 0;
-  font-weight: 700;
+  font-weight: var(--text-primary-weight);
 }
 
 .iconWrapper {
@@ -74,7 +82,7 @@
 
 /* Theme switch variant: ghost button with accent border, adaptive icon */
 .themeSwitch {
-  color: var(--icon-ghost-color);
+  color: var(--text-primary-color);
   border-color: var(--border-ghost-color);
 }
 

@@ -34,11 +34,5 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  return (
-    <HomeClient
-      projects={projects}
-      className={styles.content}
-      initialProjectSlug={slug}
-    />
-  );
+  return <HomeClient projects={projects} className={styles.content} />;
 }

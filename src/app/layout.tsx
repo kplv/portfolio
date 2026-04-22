@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 import { abcFavorit, hagrid } from "./fonts";
+import { GlobalShaderBackground } from "@/components/global-shader-background";
 import { YandexMetrica } from "@/components/yandex-metrica/yandex-metrica";
 
 export const metadata: Metadata = {
@@ -21,7 +22,10 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <YandexMetrica />
         </Suspense>
-        <Providers>{children}</Providers>
+        <Providers>
+          <GlobalShaderBackground />
+          {children}
+        </Providers>
       </body>
     </html>
   );

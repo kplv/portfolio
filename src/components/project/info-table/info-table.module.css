@@ -38,8 +38,8 @@
 }
 
 .text {
+  color: var(--text-primary-color);
   font-size: var(--text-secondary-size);
-  font-weight: 700;
+  font-weight: var(--text-primary-weight);
   line-height: var(--text-secondary-line-height);
-  color: var(--text-secondary-color);
 }

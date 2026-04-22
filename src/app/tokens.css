@@ -4,13 +4,34 @@
 
 :root {
   /* === Color Tokens - Light Mode === */
-  --background-color: var(--slate-50);
+  --background-color: oklch(from #f0f0f4 l c h);
+  --document-link-accent: var(--text-accent-color);
+  --document-link-card-bg: color-mix(
+    in oklch,
+    var(--text-accent-color) 1%,
+    oklch(1 0 0)
+  );
+  --document-link-border: color-mix(
+    in oklch,
+    var(--text-accent-color) 8%,
+    transparent
+  );
+  --document-link-line: color-mix(
+    in oklch,
+    var(--text-accent-color) 34%,
+    oklch(0.94 0.01 165)
+  );
+  --document-link-line-active: color-mix(
+    in oklch,
+    var(--text-accent-color) 74%,
+    oklch(0.94 0.01 165)
+  );
 
   --text-accent-color: var(--mint-500);
 
   /* === Typography Tokens === */
   /* Text Primary - Main prominent text */
-  --text-primary-color: oklch(0.290 0.056 168.1);
+  --text-primary-color: oklch(0.29 0.056 168.1);
   --text-primary-size: 24px;
   --text-primary-line-height: 160%;
   --text-primary-weight: 400;
@@ -18,7 +39,7 @@
   /* Text Secondary - Secondary text */
   --text-secondary-color: var(--slate-400);
   --text-secondary-size: 18px;
-  --text-secondary-line-height: 130%;
+  --text-secondary-line-height: 26px;
   --text-secondary-weight: 400;
 
   /* Text Link - Interactive link text */
@@ -40,8 +61,8 @@
   --text-display-color: var(--text-accent-color);
   --text-display-gradient: linear-gradient(
     179.13deg,
-    var(--green-grad-start) 49.818%,
-    var(--green-grad-end) 124.7%
+    var(--mint-400) 49.818%,
+    var(--mint-500) 124.7%
   );
 
   /* Ghost button (theme toggle) */
@@ -53,7 +74,28 @@
 
 /* === Theme: Dark Mode === */
 [data-theme='dark'] {
-  --background-color: var(--slate-1100);
+  --background-color: var(--slate-1000);
+  --document-link-accent: var(--text-accent-color);
+  --document-link-card-bg: color-mix(
+    in oklch,
+    var(--text-accent-color) 16%,
+    var(--slate-1100)
+  );
+  --document-link-border: color-mix(
+    in oklch,
+    var(--text-accent-color) 8%,
+    transparent
+  );
+  --document-link-line: color-mix(
+    in oklch,
+    var(--text-accent-color) 44%,
+    transparent
+  );
+  --document-link-line-active: color-mix(
+    in oklch,
+    var(--text-accent-color) 78%,
+    transparent
+  );
   --text-accent-color: var(--mint-300);
   --text-primary-color: rgba(255, 255, 255, 0.8);
   --text-secondary-color: var(--slate-600);

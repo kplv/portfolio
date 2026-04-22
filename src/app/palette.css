@@ -47,10 +47,6 @@
   --teal-1100: oklch(0.461 0.146 180);
   --teal-1200: oklch(0.346 0.097 180);
 
-  /* === Green Gradient Stops === */
-  --green-grad-start: oklch(0.637 0.133 165.71);
-  --green-grad-end:   oklch(0.740 0.235 144.37);
-
   /* === Yellow Scale (50 = lightest, 1200 = darkest) === */
   --yellow-50: oklch(0.991 0.01 91);
   --yellow-100: oklch(0.985 0.021 91);

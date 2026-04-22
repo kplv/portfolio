@@ -14,11 +14,12 @@ export type MediaBlock =
       poster?: string;
       loop?: boolean;
       cover?: boolean;
+      scale?: number;
     };
 
 export interface SectionItem {
   label?: string;
-  media: MediaBlock;
+  media?: MediaBlock;
   /** Spans full width in single-column layout (reserved for future 2-col grid) */
   fullWidth?: boolean;
 }
@@ -34,14 +35,14 @@ export interface Project {
   name: string;
   /** Short tagline shown on the project card */
   description: string;
-  /** Longer intro text shown in the project modal header */
+  /** Longer intro text shown in the project detail header */
   intro?: string;
   image: string;
   /** When provided, cycles through these instead of single image. */
   images?: string[];
   /** Accent color in OKLCH; derived from last color of accentGradient when not set */
   accentColor?: string;
-  /** When provided, used for modal header and home overlay; accentColor used for other UI */
+  /** When provided, used for project detail header and home overlay; accentColor used for other UI */
   accentGradient?: string;
   team?: TeamMember[];
   role?: string;
@@ -83,13 +84,23 @@ export function getHeaderGradient(project: Project): string {
   return `linear-gradient(90deg, ${color} 0%, ${color} 100%)`;
 }
 
+/** Resolves a project when pathname is `/${slug}` for a known project slug. */
+export function getProjectByPathname(
+  pathname: string,
+  projectList: readonly Project[],
+): Project | null {
+  if (pathname === '/' || pathname === '/about') return null;
+  const segment = pathname.slice(1).split('/')[0];
+  if (!segment) return null;
+  return projectList.find((p) => p.slug === segment) ?? null;
+}
+
 export const projects: Project[] = [
   {
     id: '1',
     slug: 'ostrom',
     name: 'Ostrom',
-    description:
-      "An expat-friendly energy app and Germany's first virtual power plant",
+    description: 'An expat-friendly energy app and Germany\'s first virtual power plant',
     intro:
       'Berlin-based energy startup with an expat-friendly mobile app and Germany\u2019s first virtual power plant. Raised \u20ac\u00a020M in Series B funding.',
     image: '/images/projects/ostrom/ostrom-1.png',
@@ -97,29 +108,34 @@ export const projects: Project[] = [
       '/images/projects/ostrom/ostrom-1.png',
       '/images/projects/ostrom/ostrom-2.png',
       '/images/projects/ostrom/ostrom-3.png',
+      '/images/projects/ostrom/ostrom-4.png',
+      '/images/projects/ostrom/ostrom-7.png',
+      '/images/projects/ostrom/ostrom-8.png',
     ],
+    accentColor: 'oklch(70% 0.1 186)',
     accentGradient:
       'radial-gradient(circle at 50% 85% in oklch, oklch(0.8 0.1 202) 0%, oklch(0.7 0.1 186) 100%)',
     role: 'Sr. Product Designer',
     year: '2025–26',
-    contribution: 'Design, Frontend, Strategy',
+    contribution: 'Product Design, Frontend, Strategy',
     team: [],
     sections: [
       {
-        title: 'Features',
+        title: 'My Role',
         items: [
           {
             label:
-              'New Energy Graph. Here\u2019s customers could check what\u2019s happening around their household in real-time.',
-            media: {
-              type: 'video',
-              src: '/images/projects/ostrom/ostrom-6.mp4',
-              cover: true,
-            },
+              'I joined Ostrom first as a contractor, bringing product design expertise to build robust processes and improve product quality. I redesigned most critical flows, increased the design function\u2019s output and velocity, hired a designer, and supported marketing and growth initiatives. For most of my time there, I was the sole product designer. Later, the design team grew to two people.',
           },
+        ],
+      },
+      {
+        title: 'Crucial Flows Redesign',
+        items: [
           {
             label:
-              'Solar System Insights. One place to assess how self-sufficient customer setup is.',
+              'Ostrom launched in 2022, and most flows stayed the same.\n\nOver time, we gathered enough evidence that some features weren\u2019t delivering enough customer value, contributing to lower retention. The launch of new business streams (such as the virtual power plant) also exposed gaps: the existing approach no longer supported them or the company\u2019s future vision.\n\nSo we redesigned the most crucial flows, including vehicle and solar statistics, the live energy graph, and battery modes.',
+
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-2.png',
@@ -127,21 +143,111 @@ export const projects: Project[] = [
             },
           },
           {
-            label:
-              'Charging Statistics. A holistics overview of spendings and savings when charging at home.',
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-3.png',
               cover: true,
             },
-            fullWidth: true,
           },
           {
+            media: {
+              type: 'video',
+              src: '/images/projects/ostrom/ostrom-6.mp4',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-4.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'From Figma to React Native',
+        items: [
+          {
             label:
-              'Almost all new features were built in code first by me. We had a proper hand-off with specifications and also code prototypes.',
+              'I’d been working with React for a couple of years now, and with the advent of Claude, I was well positioned to move from Figma into prototypes that looked and felt closer to what end users would see. I explored most of the redesigns in code first, and the same approach applied to design system work. I analysed our production code and its issues, developed an approach to tokens and styles, and only then moved them into Figma.',
             media: {
               type: 'video',
               src: '/images/projects/ostrom/ostrom-5.mp4',
+              cover: true,
+              scale: 1.13,
+            },
+          },
+          {
+            label:
+              ' I treated even the smaller components with care. For example, this timestamp component, which we improved by adding a better loading state with skeletons and by gracefully handling error states.',
+            media: {
+              type: 'video',
+              src: '/images/projects/ostrom/ostrom-9.mp4',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'Status Quo vs. After',
+        items: [
+          {
+            label:
+              'In user testing and later in production data, we saw improvements in retention, discoverability, and overall user satisfaction with the redesigns. The new design was perceived as more modern and clean, while meeting user needs without adding too much clutter to the screen.',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-11.png',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-12.png',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-13.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+
+      {
+        title: 'Exploration & User Testing',
+        items: [
+          {
+            label:
+              'Because we didn\u2019t know what would work for each major redesign, I explored multiple directions. For every major launch, we tested with customers first. Before testing, we also conducted thorough research using customer insights and the quantitative data we had.',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-7.png',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-14.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'Design Leadership',
+        items: [
+          {
+            label:
+              'I\u2019d say I spent 80% of my time as a design engineer and individual contributor, and 20% on leadership activities such as quarterly planning, building the design function, hiring and developing team members, and improving overall design maturity. I took a systematic approach: I\u2019d assess the current state of the design function and identify the next improvements.',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-8.png',
               cover: true,
             },
           },
@@ -154,7 +260,7 @@ export const projects: Project[] = [
     slug: 'trade-republic',
     name: 'Trade Republic',
     description:
-      "Fraud prevention, delightful interactions, and employee tools for Europe's largest savings platform",
+      'Fraud prevention, delightful interactions, and employee tools for Europe\'s largest savings platform',
     intro:
       'Built fraud prevention flows from 0\u00a0\u2192\u00a01 for Trade Republic\u2019s 8M+ users, designed micro-interactions for core screens, and shipped an internal performance review tool.',
     image: '/images/projects/trade/trade-0.png',
@@ -165,8 +271,9 @@ export const projects: Project[] = [
       '/images/projects/trade/trade-5.png',
       '/images/projects/trade/trade-6.png',
     ],
+    accentColor: '#153e9b',
     accentGradient:
-      'linear-gradient(179deg, oklch(0.40 0.18 261) 32.354%, oklch(0.72 0.15 261) 124.7%)',
+      'linear-gradient(180deg, oklch(0.5 0.22 266) 28%, oklch(0.36 0.18 264) 58%, #153e9b 100%)',
     role: 'Product Designer II',
     year: '2023–24',
     contribution: 'Product & Interactive Design',
@@ -177,7 +284,8 @@ export const projects: Project[] = [
         items: [
           {
             label:
-              'Source of Income. A new feature where we ask customers to declare their earnings.',
+              'Source of Income. As a bank, we have to make sure we know where our customers’ money comes from. For customers, it might seem like a mundane task, so we tried to make it as seamless as possible. We came up with a “shopping basket” solution, where I can add multiple sources of income, each with its own flow.',
+
             media: {
               type: 'image',
               src: '/images/projects/trade/trade-1.png',
@@ -185,44 +293,26 @@ export const projects: Project[] = [
             },
           },
           {
-            label:
-              'Micro-interactions and Joy. I initiated a project to make the most-used flows more enjoyable, like the money transfer screen.',
-            media: {
-              type: 'video',
-              src: '/images/projects/trade/trade-2.mp4',
-              cover: true,
-            },
+            label: 'Micro-interactions and Joy. I initiated a project to make the most-used flows more enjoyable, like the money transfer screen.',
+            media: { type: 'video', src: '/images/projects/trade/trade-2.mp4', cover: true },
+          },
+          {
+            label: 'We also thought about gracefully handling different corner-cases.',
+            media: { type: 'video', src: '/images/projects/trade/trade-3.mp4', cover: true },
           },
           {
             label:
-              'We also thought about gracefully handling different corner-cases.',
-            media: {
-              type: 'video',
-              src: '/images/projects/trade/trade-3.mp4',
-              cover: true,
-            },
-          },
-          {
-            label:
-              'Blocked Account. A new feature where the customer can still use the app while we investigate. Previously, we would block the entire app login.',
+              'Account protection. We developed few featutres to protect our customer from fraud. For example, new device login notifcation, where can could also block the entire app login and report the incident.',
             media: {
               type: 'image',
               src: '/images/projects/trade/trade-4.png',
               cover: true,
             },
           },
+
           {
             label:
-              'Recurrent Diligence. A new feature for keeping customer data up to date.',
-            media: {
-              type: 'image',
-              src: '/images/projects/trade/trade-5.png',
-              cover: true,
-            },
-          },
-          {
-            label:
-              'New Performance Review App. I also contributed to internal tools, helping everyone stay aligned on the company\u2019s strategy.',
+              'New Performance Review App. I also contributed to internal tools, helping everyone stay aligned on the company\u2019s strategy. This project was done from ground up in close collaboration with talent team. ',
             media: {
               type: 'image',
               src: '/images/projects/trade/trade-6.png',
@@ -238,7 +328,7 @@ export const projects: Project[] = [
     slug: 'playground',
     name: 'Other',
     description:
-      "Voice assistants, freight sustainability in the UK, and fun stuff I've done over the years",
+      'Voice assistants, freight sustainability in the UK, and fun stuff I\'ve done over the years',
     intro:
       'Projects of the past few years. Some were done inside product teams at major tech companies like Yandex. Some won awards such as Red Dot. Some are personal projects where I explored new approaches.',
     image: '/images/playground/play-0.png',
@@ -249,8 +339,9 @@ export const projects: Project[] = [
       '/images/playground/play-3.png',
       '/images/playground/play-7.png',
     ],
+    accentColor: 'oklch(0.62 0.20 275)',
     accentGradient:
-      'linear-gradient(179deg, oklch(0.34 0.22 271) 32.354%, oklch(0.63 0.21 287) 124.7%)',
+      'radial-gradient(circle at 50% 85% in oklch, oklch(0.65 0.17 235) 0%, oklch(0.55 0.27 310) 100%)',
     role: 'Designer',
     year: '2022 — Now',
     contribution: 'Everything',
@@ -262,11 +353,7 @@ export const projects: Project[] = [
           {
             label:
               'React Native Playground. I have an app where I prototype new components and just generally have fun. Some of it was later used in production for Ostrom.',
-            media: {
-              type: 'video',
-              src: '/images/playground/play-9.mp4',
-              cover: true,
-            },
+            media: { type: 'video', src: '/images/playground/play-9.mp4', cover: true },
           },
         ],
       },
@@ -276,28 +363,16 @@ export const projects: Project[] = [
           {
             label:
               'Bownce. I was preparing the Red Dot case for this project, working on micro-interactions and screen transitions.',
-            media: {
-              type: 'video',
-              src: '/images/playground/play-10.mp4',
-              cover: true,
-            },
+            media: { type: 'video', src: '/images/playground/play-10.mp4', cover: true },
           },
           {
             label:
               'Badoo. A new voice-first dating experience. My graduation project.',
-            media: {
-              type: 'video',
-              src: '/images/playground/play-6.mp4',
-              cover: true,
-            },
+            media: { type: 'video', src: '/images/playground/play-6.mp4', cover: true },
           },
           {
             label: 'Badoo. Spent a lot of time making the flow feel alive.',
-            media: {
-              type: 'video',
-              src: '/images/playground/play-5.mp4',
-              cover: true,
-            },
+            media: { type: 'video', src: '/images/playground/play-5.mp4', cover: true },
           },
         ],
       },
@@ -307,20 +382,11 @@ export const projects: Project[] = [
           {
             label:
               'Tachkum Font. Final project of the type design workshop by Contrast Foundry in 2022.',
-            media: {
-              type: 'image',
-              src: '/images/playground/play-1.png',
-              cover: true,
-            },
+            media: { type: 'image', src: '/images/playground/play-1.png', cover: true },
           },
           {
-            label:
-              'Tachkum Font. The name was inspired by an Abkhazian fairy tale.',
-            media: {
-              type: 'image',
-              src: '/images/playground/play-2.png',
-              cover: true,
-            },
+            label: 'Tachkum Font. The name was inspired by an Abkhazian fairy tale.',
+            media: { type: 'image', src: '/images/playground/play-2.png', cover: true },
           },
         ],
       },
@@ -330,28 +396,16 @@ export const projects: Project[] = [
           {
             label:
               'Arrival. I worked on new features for customer support and fleet management.',
-            media: {
-              type: 'image',
-              src: '/images/playground/play-3.png',
-              cover: true,
-            },
+            media: { type: 'image', src: '/images/playground/play-3.png', cover: true },
           },
           {
             label:
               'SberDevices. I led a new stream for city exploration features, from voice to TV applications.',
-            media: {
-              type: 'image',
-              src: '/images/playground/play-7.png',
-              cover: true,
-            },
+            media: { type: 'image', src: '/images/playground/play-7.png', cover: true },
           },
           {
             label: 'SberDevices. Prototyping for TV was a fun experience.',
-            media: {
-              type: 'video',
-              src: '/images/playground/play-4.mp4',
-              cover: true,
-            },
+            media: { type: 'video', src: '/images/playground/play-4.mp4', cover: true },
           },
         ],
       },
