@@ -13,7 +13,7 @@
   );
   --document-link-border: color-mix(
     in oklch,
-    var(--text-accent-color) 18%,
+    var(--text-accent-color) 8%,
     transparent
   );
   --document-link-line: color-mix(
@@ -78,12 +78,12 @@
   --document-link-accent: var(--text-accent-color);
   --document-link-card-bg: color-mix(
     in oklch,
-    var(--text-accent-color) 2%,
+    var(--text-accent-color) 16%,
     var(--slate-1100)
   );
   --document-link-border: color-mix(
     in oklch,
-    var(--text-accent-color) 28%,
+    var(--text-accent-color) 8%,
     transparent
   );
   --document-link-line: color-mix(

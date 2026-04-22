@@ -1,7 +1,6 @@
 .block {
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
 .header {
@@ -13,7 +12,8 @@
 .label {
   font-size: var(--text-secondary-size);
   font-weight: var(--text-secondary-weight);
-  line-height: var(--text-secondary-line-height);
+  line-height: 160%;
+  text-wrap: balance;
   color: var(--text-primary-color);
   flex: 1;
   padding-bottom: 16px;

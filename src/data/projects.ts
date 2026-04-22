@@ -18,7 +18,7 @@ export type MediaBlock =
 
 export interface SectionItem {
   label?: string;
-  media: MediaBlock;
+  media?: MediaBlock;
   /** Spans full width in single-column layout (reserved for future 2-col grid) */
   fullWidth?: boolean;
 }
@@ -108,6 +108,9 @@ export const projects: Project[] = [
       '/images/projects/ostrom/ostrom-1.png',
       '/images/projects/ostrom/ostrom-2.png',
       '/images/projects/ostrom/ostrom-3.png',
+      '/images/projects/ostrom/ostrom-4.png',
+      '/images/projects/ostrom/ostrom-7.png',
+      '/images/projects/ostrom/ostrom-8.png',
     ],
     accentGradient:
       'radial-gradient(circle at 50% 85% in oklch, oklch(0.8 0.1 202) 0%, oklch(0.7 0.1 186) 100%)',
@@ -117,20 +120,21 @@ export const projects: Project[] = [
     team: [],
     sections: [
       {
-        title: 'Features',
+        title: 'My Role',
         items: [
           {
             label:
-              'New Energy Graph. Here\u2019s customers could check what\u2019s happening around their household in real-time.',
-            media: {
-              type: 'video',
-              src: '/images/projects/ostrom/ostrom-6.mp4',
-              cover: true,
-            },
+              'I joined Ostrom first as a contractor, bringing product design expertise to build robust processes and improve product quality. I redesigned most critical flows, increased the design function\u2019s output and velocity, hired a designer, and supported marketing and growth initiatives. For most of my time there, I was the sole product designer. Later, the design team grew to two people.',
           },
+        ],
+      },
+      {
+        title: 'Crucial Flows Redesign',
+        items: [
           {
             label:
-              'Solar System Insights. One place to assess how self-sufficient customer setup is.',
+              'Ostrom launched in 2022, and most flows stayed the same.\n\nOver time, we gathered enough evidence that some features weren\u2019t delivering enough customer value, contributing to lower retention. The launch of new business streams (such as the virtual power plant) also exposed gaps: the existing approach no longer supported them or the company\u2019s future vision.\n\nSo we redesigned the most crucial flows, including vehicle and solar statistics, the live energy graph, and battery modes.',
+
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-2.png',
@@ -138,21 +142,65 @@ export const projects: Project[] = [
             },
           },
           {
-            label:
-              'Charging Statistics. A holistics overview of spendings and savings when charging at home.',
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-3.png',
               cover: true,
             },
-            fullWidth: true,
           },
           {
+            media: {
+              type: 'video',
+              src: '/images/projects/ostrom/ostrom-6.mp4',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-4.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'From Figma to React Native',
+        items: [
+          {
             label:
-              'Almost all new features were built in code first by me. We had a proper hand-off with specifications and also code prototypes.',
+              'I\u2019d been working with React for a couple of years, and with the advent of Claude, I was well positioned to move from Figma to prototyping experiences closer to what end users would see. Most of the redesigns were initially explored in code by me. The same was true for the design system work. I analysed our production code and its issues, developed an approach to tokens and styles, and only then moved them to Figma.',
             media: {
               type: 'video',
               src: '/images/projects/ostrom/ostrom-5.mp4',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'Exploration & User Testing',
+        items: [
+          {
+            label:
+              'Because we didn\u2019t know what would work for each major redesign, I explored multiple directions. For every major launch, we tested with customers first. Before testing, we also conducted thorough research using customer insights and the quantitative data we had.',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-7.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'Design Leadership',
+        items: [
+          {
+            label:
+              'I\u2019d say I spent 80% of my time as a design engineer and individual contributor, and 20% on leadership activities such as quarterly planning, building the design function, hiring and developing team members, and improving overall design maturity. I took a systematic approach: I\u2019d assess the current state of the design function and identify the next improvements.',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-8.png',
               cover: true,
             },
           },

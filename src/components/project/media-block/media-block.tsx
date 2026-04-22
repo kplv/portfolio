@@ -8,7 +8,7 @@ import styles from './media-block.module.css';
 
 export interface ProjectMediaBlockProps {
   label?: string;
-  media: MediaBlock;
+  media?: MediaBlock;
   accentColor: string;
 }
 
@@ -113,13 +113,15 @@ export function ProjectMediaBlock({ label, media, accentColor }: ProjectMediaBlo
           <p className={styles.label}>{label}</p>
         </div>
       )}
-      <div className={styles.container} data-cover={media.cover || undefined}>
-        {media.type === 'image' ? (
-          <ProjectImage src={media.src} alt={media.alt ?? label ?? ''} cover={media.cover} />
-        ) : (
-          <ProjectVideo src={media.src} poster={media.poster} loop={media.loop} cover={media.cover} />
-        )}
-      </div>
+      {media && (
+        <div className={styles.container} data-cover={media.cover || undefined}>
+          {media.type === 'image' ? (
+            <ProjectImage src={media.src} alt={media.alt ?? label ?? ''} cover={media.cover} />
+          ) : (
+            <ProjectVideo src={media.src} poster={media.poster} loop={media.loop} cover={media.cover} />
+          )}
+        </div>
+      )}
     </div>
   );
 }
