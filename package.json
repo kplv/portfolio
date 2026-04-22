@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "analyze": "ANALYZE=true next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -17,10 +18,10 @@
     "next-themes": "^0.4.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "scramble-text": "^0.0.9",
-    "unicornstudio-react": "^2.1.1"
+    "scramble-text": "^0.0.9"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.2.4",
     "@types/culori": "^4.0.1",
     "@types/node": "^20",
     "@types/react": "^19",

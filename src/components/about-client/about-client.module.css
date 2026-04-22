@@ -1,0 +1,33 @@
+.cardsWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 44px;
+  width: 100%;
+  max-width: 617px;
+  margin: 0 auto;
+  padding: 0 0 32px;
+  box-sizing: border-box;
+}
+
+.paragraph {
+  margin: 0;
+  font-size: var(--text-primary-size);
+  font-weight: var(--text-primary-weight);
+  line-height: var(--text-primary-line-height);
+  color: var(--text-primary-color);
+  text-wrap: balance;
+}
+
+.accent {
+  color: var(--text-accent-color);
+}

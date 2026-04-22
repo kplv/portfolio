@@ -14,6 +14,7 @@ export interface ProjectCardProps {
 function prefetchProjectMedia(project: Project) {
   project.sections?.forEach((section) =>
     section.items.forEach((item) => {
+      if (!item.media) return;
       if (item.media.type === 'image') {
         const img = new window.Image();
         img.src = item.media.src;
@@ -82,17 +83,8 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
     }
   }, []);
 
-  const layoutTransition = {
-    layout: {
-      duration: 1.5,
-      ease: [0.86, 0, 0.07, 1] as [number, number, number, number], // ease-in-out-quint (moving/morphing on screen)
-    },
-  };
-
   return (
     <motion.div
-      layout={!shouldReduceMotion ? 'position' : false}
-      transition={layoutTransition}
       className={styles.wrapper}
       style={{ '--project-accent': getAccentColor(project) } as React.CSSProperties}
       onPointerEnter={handlePointerEnter}
@@ -101,18 +93,7 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
       <div className={styles.card}>
 
         <div className={styles.body}>
-          <div className={styles.textBlock}>
-            <motion.p
-              layout={!shouldReduceMotion ? 'position' : false}
-              transition={layoutTransition}
-              className={styles.projectTitle}
-            >
-              <span className={styles.projectName}>{project.name}. </span>
-              <span className={styles.projectDescription}>
-                {project.description}
-              </span>
-            </motion.p>
-          </div>
+
           <motion.div
             className={styles.imageWrapper}
             role="button"
@@ -174,7 +155,14 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
               </AnimatePresence>
             </motion.div>
           </motion.div>
-
+          <div className={styles.textBlock}>
+            <motion.p className={styles.projectTitle}>
+              <span className={styles.projectName}>{project.name}. </span>
+              <span className={styles.projectDescription}>
+                {project.description}
+              </span>
+            </motion.p>
+          </div>
 
 
 

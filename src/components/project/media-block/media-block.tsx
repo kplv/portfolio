@@ -8,7 +8,7 @@ import styles from './media-block.module.css';
 
 export interface ProjectMediaBlockProps {
   label?: string;
-  media: MediaBlock;
+  media?: MediaBlock;
   accentColor: string;
 }
 
@@ -61,11 +61,13 @@ function ProjectVideo({
   poster,
   loop = true,
   cover,
+  scale,
 }: {
   src: string;
   poster?: string;
   loop?: boolean;
   cover?: boolean;
+  scale?: number;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -96,6 +98,8 @@ function ProjectVideo({
         className={styles.media}
         data-loaded={isLoaded}
         data-cover={cover || undefined}
+        data-scaled={scale ? true : undefined}
+        style={scale ? ({ '--video-scale': scale } as React.CSSProperties) : undefined}
         onCanPlay={() => setIsLoaded(true)}
       />
     </div>
@@ -113,13 +117,21 @@ export function ProjectMediaBlock({ label, media, accentColor }: ProjectMediaBlo
           <p className={styles.label}>{label}</p>
         </div>
       )}
-      <div className={styles.container} data-cover={media.cover || undefined}>
-        {media.type === 'image' ? (
-          <ProjectImage src={media.src} alt={media.alt ?? label ?? ''} cover={media.cover} />
-        ) : (
-          <ProjectVideo src={media.src} poster={media.poster} loop={media.loop} cover={media.cover} />
-        )}
-      </div>
+      {media && (
+        <div className={styles.container} data-cover={media.cover || undefined}>
+          {media.type === 'image' ? (
+            <ProjectImage src={media.src} alt={media.alt ?? label ?? ''} cover={media.cover} />
+          ) : (
+            <ProjectVideo
+              src={media.src}
+              poster={media.poster}
+              loop={media.loop}
+              cover={media.cover}
+              scale={media.scale}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }

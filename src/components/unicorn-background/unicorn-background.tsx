@@ -9,6 +9,8 @@ import styles from './unicorn-background.module.css';
 const SDK_URL =
   'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.4/dist/unicornStudio.umd.js';
 
+const LEGACY_PROJECT_ID = 'ssf4XIrdYQTi8HGovdhZ';
+
 function useShouldRender(): boolean {
   const reducedMotion = useReducedMotion();
   const [capable, setCapable] = useState(false);
@@ -22,9 +24,13 @@ function useShouldRender(): boolean {
 
 interface UnicornBackgroundProps {
   paused?: boolean;
+  isVisible?: boolean;
 }
 
-export function UnicornBackground({ paused = false }: UnicornBackgroundProps) {
+export function UnicornBackground({
+  paused = false,
+  isVisible = true,
+}: UnicornBackgroundProps) {
   const shouldRender = useShouldRender();
   const [loaded, setLoaded] = useState(false);
   const sceneRef = useRef<UnicornScene | null>(null);
@@ -38,7 +44,7 @@ export function UnicornBackground({ paused = false }: UnicornBackgroundProps) {
 
     window.UnicornStudio.addScene({
       elementId: containerId,
-      projectId: 'ssf4XIrdYQTi8HGovdhZ',
+      projectId: LEGACY_PROJECT_ID,
       scale: 1,
       dpi: 1.5,
       fps: 60,
@@ -56,6 +62,13 @@ export function UnicornBackground({ paused = false }: UnicornBackgroundProps) {
         console.error('UnicornStudio scene failed to load:', err);
       });
   }, [containerId]);
+
+  useEffect(() => {
+    if (!shouldRender) return;
+    if (window.UnicornStudio) {
+      initScene();
+    }
+  }, [shouldRender, initScene]);
 
   useEffect(() => {
     return () => {
@@ -77,8 +90,8 @@ export function UnicornBackground({ paused = false }: UnicornBackgroundProps) {
       <motion.div
         className={styles.wrapper}
         initial={{ opacity: 0 }}
-        animate={{ opacity: loaded ? .2 : 0 }}
-        transition={{ duration: 0.8, ease: EASE_OUT_QUINT }}
+        animate={{ opacity: loaded ? (isVisible ? 0.2 : 0) : 0 }}
+        transition={{ duration: 0.5, ease: EASE_OUT_QUINT }}
       >
         <div id={containerId} style={{ width: '100%', height: '100%' }} />
       </motion.div>

@@ -1,11 +1,9 @@
 .wrapper {
   position: fixed;
   inset: 0;
+  /* Above root background so backdrop-filter on UI can sample this layer */
   z-index: 0;
-}
-
-[data-theme='dark'] .wrapper {
-  mix-blend-mode: color;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

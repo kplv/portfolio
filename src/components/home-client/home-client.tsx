@@ -1,86 +1,101 @@
 'use client';
 
+<<<<<<< HEAD
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Button } from '@/components/button';
+=======
+import { useEffect, useCallback, useMemo } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { usePathname, useRouter } from 'next/navigation';
+import { AboutSectionContent } from '@/components/about-client/about-client';
+>>>>>>> about-page
 import { IntroText } from '@/components/intro-text';
+import { NavigationHeader } from '@/components/navigation-header';
+import { ProjectDetail } from '@/components/project-detail';
 import { ProjectList } from '@/components/project-list';
 import { SocialLink } from '@/components/social-link/social-link';
 import { SocialLinkList } from '@/components/social-link-list/social-link-list';
+<<<<<<< HEAD
 import { ProjectModal } from '@/components/project-modal';
 import { EASE_OUT_QUINT, ENTRANCE_CONTAINER, BLUR_ITEM } from '@/config/animations';
 import { getAccentColor, type Project } from '@/data/projects';
 import styles from './home-client.module.css';
 
 const DEFAULT_TITLE = 'Denis Kopylov — Product Designer';
+=======
+import {
+  ABOUT_PRESENCE_BRIDGE,
+  HOME_SECTION_FADE,
+  ROUTE_SECTION_REDUCED_MOTION_TARGET,
+  ROUTE_SHELL_ANIMATE_PRESENCE_PROPS,
+} from '@/config/page-motion';
+import { getProjectByPathname, type Project } from '@/data/projects';
+import styles from './home-client.module.css';
+
+const DEFAULT_TITLE = 'Denis Kopylov — Product Designer';
+const ABOUT_TITLE = 'About — Denis Kopylov';
+>>>>>>> about-page
 
 export interface HomeClientProps {
   projects: Project[];
   /** Page-level layout class from page.module.css applied to the main element */
   className?: string;
-  /** When set, auto-open this project on mount (used by /[slug] route) */
-  initialProjectSlug?: string;
 }
 
-export function HomeClient({ projects, className, initialProjectSlug }: HomeClientProps) {
-  const [openProject, setOpenProject] = useState<Project | null>(() =>
-    initialProjectSlug
-      ? projects.find((p) => p.slug === initialProjectSlug) ?? null
-      : null,
-  );
+const MotionIntroText = motion(IntroText);
+const MotionSocialLinkList = motion(SocialLinkList);
+const MotionProjectList = motion(ProjectList);
+
+export function HomeClient({ projects, className }: HomeClientProps) {
   const shouldReduceMotion = useReducedMotion();
+<<<<<<< HEAD
   const didPushRef = useRef(false);
+=======
+  const pathname = usePathname();
+  const isAbout = pathname === '/about';
+  const isHome = pathname === '/';
+
+  const projectFromRoute = useMemo(
+    () => getProjectByPathname(pathname, projects),
+    [pathname, projects],
+  );
+  const isProject = projectFromRoute != null;
+
+  const showNavPadding = isHome || isAbout || isProject;
+
+  const router = useRouter();
+>>>>>>> about-page
 
   const handleOpenProject = useCallback(
     (project: Project) => {
-      setOpenProject(project);
-      window.history.pushState(null, '', `/${project.slug}`);
-      didPushRef.current = true;
+      router.push(`/${project.slug}`);
     },
-    [],
+    [router],
   );
 
   const handleCloseProject = useCallback(() => {
-    setOpenProject(null);
-    if (didPushRef.current) {
-      window.history.back();
-      didPushRef.current = false;
+    router.replace('/');
+  }, [router]);
+
+  useEffect(() => {
+    if (projectFromRoute) {
+      document.title = `${projectFromRoute.name} — Denis Kopylov`;
+    } else if (isAbout) {
+      document.title = ABOUT_TITLE;
     } else {
-      window.history.replaceState(null, '', '/');
+      document.title = DEFAULT_TITLE;
     }
-  }, []);
+  }, [projectFromRoute, isAbout]);
 
-  useEffect(() => {
-    const onPopState = () => {
-      const slug = window.location.pathname.slice(1);
-      const project = slug ? projects.find((p) => p.slug === slug) : null;
-      setOpenProject(project ?? null);
-      didPushRef.current = false;
-    };
-    window.addEventListener('popstate', onPopState);
-    return () => window.removeEventListener('popstate', onPopState);
-  }, [projects]);
-
-  useEffect(() => {
-    document.title = openProject
-      ? `${openProject.name} — Denis Kopylov`
-      : DEFAULT_TITLE;
-  }, [openProject]);
-
-  // Lock body scroll while modal is open
-  useEffect(() => {
-    if (openProject) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [openProject]);
+  const mainClassName = [className, showNavPadding ? styles.contentPadNav : null]
+    .filter(Boolean)
+    .join(' ');
+  const reducedState = ROUTE_SECTION_REDUCED_MOTION_TARGET;
 
   return (
     <div className={styles.root}>
+<<<<<<< HEAD
       <div className={styles.blurContext}>
         {/* Accent color overlay — always mounted, fades in/out based on open project */}
         <motion.div
@@ -156,6 +171,70 @@ export function HomeClient({ projects, className, initialProjectSlug }: HomeClie
           />
         )}
       </AnimatePresence>
+=======
+      <NavigationHeader />
+
+      <main className={mainClassName}>
+        <div className={styles.content}>
+          <AnimatePresence {...ROUTE_SHELL_ANIMATE_PRESENCE_PROPS}>
+            {isAbout ? (
+              <motion.div
+                key="about"
+                style={{ display: 'contents' }}
+                variants={ABOUT_PRESENCE_BRIDGE}
+                initial="show"
+                animate="show"
+                exit="exit"
+              >
+                <AboutSectionContent />
+              </motion.div>
+            ) : projectFromRoute ? (
+              <motion.div
+                key={`project-${projectFromRoute.slug}`}
+                style={{ display: 'contents' }}
+              >
+                <ProjectDetail
+                  project={projectFromRoute}
+                  onDismiss={handleCloseProject}
+                />
+              </motion.div>
+            ) : (
+              <motion.div key="home" style={{ display: 'contents' }}>
+                <MotionIntroText
+                  variants={HOME_SECTION_FADE}
+                  custom={{ enterOrder: 0, exitOrder: 2 }}
+                  initial={shouldReduceMotion ? reducedState : 'hidden'}
+                  animate={shouldReduceMotion ? reducedState : 'show'}
+                  exit={shouldReduceMotion ? reducedState : 'exit'}
+                  header="Denis Kopylov"
+                  text="Product designer with a focus on turning ideas into reality through coding, a holistic approach, and an eye for interactive experiences. Currently at Ostrom."
+                />
+                <MotionSocialLinkList
+                  variants={HOME_SECTION_FADE}
+                  custom={{ enterOrder: 1, exitOrder: 1 }}
+                  initial={shouldReduceMotion ? reducedState : 'hidden'}
+                  animate={shouldReduceMotion ? reducedState : 'show'}
+                  exit={shouldReduceMotion ? reducedState : 'exit'}
+                >
+                  <SocialLink href="https://www.linkedin.com/in/deniskplv/" text="LinkedIn" />
+                  <SocialLink href="https://www.are.na/denis-kopylov/channels" text="Are.na" />
+                  <SocialLink href="/about" text="About" />
+                </MotionSocialLinkList>
+                <MotionProjectList
+                  variants={HOME_SECTION_FADE}
+                  custom={{ enterOrder: 2, exitOrder: 0 }}
+                  initial={shouldReduceMotion ? reducedState : 'hidden'}
+                  animate={shouldReduceMotion ? reducedState : 'show'}
+                  exit={shouldReduceMotion ? reducedState : 'exit'}
+                  projects={projects}
+                  onProjectClick={handleOpenProject}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </main>
+>>>>>>> about-page
     </div>
   );
 }

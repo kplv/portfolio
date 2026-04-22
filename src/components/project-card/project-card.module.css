@@ -2,7 +2,6 @@
   font-size: var(--text-primary-size);
   font-weight: var(--text-primary-weight);
   line-height: var(--text-primary-line-height);
-  text-wrap: balance;
   text-align: center;
 }
 
@@ -14,7 +13,7 @@
 .projectDescription {
   font-family: inherit;
   font-weight: 400;
-  color: var(--project-accent, var(--header-secondary-color));
+  color: var(--text-primary-color);
   /* color: color-mix(
     in srgb,
     var(--project-accent, hsla(228, 95%, 34%)) 85%,
@@ -66,9 +65,9 @@
 .textBlock {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
-  text-align: center;
+  text-align: left;
 }
 
 .description {
@@ -161,8 +160,6 @@
     max-width: 100%;
     min-height: 96px;
   }
-
-  
 
   .text {
     font-size: var(--text-primary-size);

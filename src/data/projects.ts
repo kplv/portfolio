@@ -8,11 +8,18 @@ export interface TeamMember {
 
 export type MediaBlock =
   | { type: 'image'; src: string; alt?: string; cover?: boolean }
-  | { type: 'video'; src: string; poster?: string; loop?: boolean; cover?: boolean };
+  | {
+      type: 'video';
+      src: string;
+      poster?: string;
+      loop?: boolean;
+      cover?: boolean;
+      scale?: number;
+    };
 
 export interface SectionItem {
   label?: string;
-  media: MediaBlock;
+  media?: MediaBlock;
   /** Spans full width in single-column layout (reserved for future 2-col grid) */
   fullWidth?: boolean;
 }
@@ -28,14 +35,14 @@ export interface Project {
   name: string;
   /** Short tagline shown on the project card */
   description: string;
-  /** Longer intro text shown in the project modal header */
+  /** Longer intro text shown in the project detail header */
   intro?: string;
   image: string;
   /** When provided, cycles through these instead of single image. */
   images?: string[];
   /** Accent color in OKLCH; derived from last color of accentGradient when not set */
   accentColor?: string;
-  /** When provided, used for modal header and home overlay; accentColor used for other UI */
+  /** When provided, used for project detail header and home overlay; accentColor used for other UI */
   accentGradient?: string;
   team?: TeamMember[];
   role?: string;
@@ -77,6 +84,17 @@ export function getHeaderGradient(project: Project): string {
   return `linear-gradient(90deg, ${color} 0%, ${color} 100%)`;
 }
 
+/** Resolves a project when pathname is `/${slug}` for a known project slug. */
+export function getProjectByPathname(
+  pathname: string,
+  projectList: readonly Project[],
+): Project | null {
+  if (pathname === '/' || pathname === '/about') return null;
+  const segment = pathname.slice(1).split('/')[0];
+  if (!segment) return null;
+  return projectList.find((p) => p.slug === segment) ?? null;
+}
+
 export const projects: Project[] = [
   {
     id: '1',
@@ -90,6 +108,9 @@ export const projects: Project[] = [
       '/images/projects/ostrom/ostrom-1.png',
       '/images/projects/ostrom/ostrom-2.png',
       '/images/projects/ostrom/ostrom-3.png',
+      '/images/projects/ostrom/ostrom-4.png',
+      '/images/projects/ostrom/ostrom-7.png',
+      '/images/projects/ostrom/ostrom-8.png',
     ],
     accentColor: 'oklch(70% 0.1 186)',
     accentGradient:
@@ -100,36 +121,133 @@ export const projects: Project[] = [
     team: [],
     sections: [
       {
-        title: 'Features',
+        title: 'My Role',
         items: [
           {
-            label: 'New Energy Graph. Here\u2019s customers could check what\u2019s happening around their household in real-time.',
-            media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-1.png',
-            },
+            label:
+              'I joined Ostrom first as a contractor, bringing product design expertise to build robust processes and improve product quality. I redesigned most critical flows, increased the design function\u2019s output and velocity, hired a designer, and supported marketing and growth initiatives. For most of my time there, I was the sole product designer. Later, the design team grew to two people.',
           },
+        ],
+      },
+      {
+        title: 'Crucial Flows Redesign',
+        items: [
           {
-            label: 'Solar System Insights. One place to assess how self-sufficient customer setup is.',
+            label:
+              'Ostrom launched in 2022, and most flows stayed the same.\n\nOver time, we gathered enough evidence that some features weren\u2019t delivering enough customer value, contributing to lower retention. The launch of new business streams (such as the virtual power plant) also exposed gaps: the existing approach no longer supported them or the company\u2019s future vision.\n\nSo we redesigned the most crucial flows, including vehicle and solar statistics, the live energy graph, and battery modes.',
+
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-2.png',
             },
           },
           {
-            label: 'Charging Statistics. A holistics overview of spendings and savings when charging at home.',
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-3.png',
+              cover: true,
             },
-            fullWidth: true,
           },
           {
-            label: 'Almost all new features were built in code first by me. We had a proper hand-off with specifications and also code prototypes.',
+            media: {
+              type: 'video',
+              src: '/images/projects/ostrom/ostrom-6.mp4',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-4.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'From Figma to React Native',
+        items: [
+          {
+            label:
+              'I’d been working with React for a couple of years now, and with the advent of Claude, I was well positioned to move from Figma into prototypes that looked and felt closer to what end users would see. I explored most of the redesigns in code first, and the same approach applied to design system work. I analysed our production code and its issues, developed an approach to tokens and styles, and only then moved them into Figma.',
             media: {
               type: 'video',
               src: '/images/projects/ostrom/ostrom-5.mp4',
-              cover: true
+              cover: true,
+              scale: 1.13,
+            },
+          },
+          {
+            label:
+              ' I treated even the smaller components with care. For example, this timestamp component, which we improved by adding a better loading state with skeletons and by gracefully handling error states.',
+            media: {
+              type: 'video',
+              src: '/images/projects/ostrom/ostrom-9.mp4',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'Status Quo vs. After',
+        items: [
+          {
+            label:
+              'In user testing and later in production data, we saw improvements in retention, discoverability, and overall user satisfaction with the redesigns. The new design was perceived as more modern and clean, while meeting user needs without adding too much clutter to the screen.',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-11.png',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-12.png',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-13.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+
+      {
+        title: 'Exploration & User Testing',
+        items: [
+          {
+            label:
+              'Because we didn\u2019t know what would work for each major redesign, I explored multiple directions. For every major launch, we tested with customers first. Before testing, we also conducted thorough research using customer insights and the quantitative data we had.',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-7.png',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-14.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'Design Leadership',
+        items: [
+          {
+            label:
+              'I\u2019d say I spent 80% of my time as a design engineer and individual contributor, and 20% on leadership activities such as quarterly planning, building the design function, hiring and developing team members, and improving overall design maturity. I took a systematic approach: I\u2019d assess the current state of the design function and identify the next improvements.',
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-8.png',
+              cover: true,
             },
           },
         ],
@@ -152,9 +270,9 @@ export const projects: Project[] = [
       '/images/projects/trade/trade-5.png',
       '/images/projects/trade/trade-6.png',
     ],
-    accentColor: 'oklch(55% 0.05 237)',
+    accentColor: '#153e9b',
     accentGradient:
-      'linear-gradient(to right top, oklch(0.55 0.05 237) 0%, oklch(0.4 0.15 265) 100%)',
+      'linear-gradient(180deg, oklch(0.5 0.22 266) 28%, oklch(0.36 0.18 264) 58%, #153e9b 100%)',
     role: 'Product Designer II',
     year: '2023–24',
     contribution: 'Product & Interactive Design',
@@ -164,8 +282,14 @@ export const projects: Project[] = [
         title: 'Features',
         items: [
           {
-            label: 'Source of Income. A new feature where we ask customers to declare their earnings.',
-            media: { type: 'image', src: '/images/projects/trade/trade-1.png', cover: true },
+            label:
+              'Source of Income. As a bank, we have to make sure we know where our customers’ money comes from. For customers, it might seem like a mundane task, so we tried to make it as seamless as possible. We came up with a “shopping basket” solution, where I can add multiple sources of income, each with its own flow.',
+
+            media: {
+              type: 'image',
+              src: '/images/projects/trade/trade-1.png',
+              cover: true,
+            },
           },
           {
             label: 'Micro-interactions and Joy. I initiated a project to make the most-used flows more enjoyable, like the money transfer screen.',
@@ -176,16 +300,23 @@ export const projects: Project[] = [
             media: { type: 'video', src: '/images/projects/trade/trade-3.mp4', cover: true },
           },
           {
-            label: 'Blocked Account. A new feature where the customer can still use the app while we investigate. Previously, we would block the entire app login.',
-            media: { type: 'image', src: '/images/projects/trade/trade-4.png', cover: true },
+            label:
+              'Account protection. We developed few featutres to protect our customer from fraud. For example, new device login notifcation, where can could also block the entire app login and report the incident.',
+            media: {
+              type: 'image',
+              src: '/images/projects/trade/trade-4.png',
+              cover: true,
+            },
           },
+
           {
-            label: 'Recurrent Diligence. A new feature for keeping customer data up to date.',
-            media: { type: 'image', src: '/images/projects/trade/trade-5.png', cover: true },
-          },
-          {
-            label: 'New Performance Review App. I also contributed to internal tools, helping everyone stay aligned on the company\u2019s strategy.',
-            media: { type: 'image', src: '/images/projects/trade/trade-6.png', cover: true },
+            label:
+              'New Performance Review App. I also contributed to internal tools, helping everyone stay aligned on the company\u2019s strategy. This project was done from ground up in close collaboration with talent team. ',
+            media: {
+              type: 'image',
+              src: '/images/projects/trade/trade-6.png',
+              cover: true,
+            },
           },
         ],
       },

@@ -1,0 +1,31 @@
+.root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-block: 24px;
+}
+
+.cardsRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  /* Nudge left so the pair reads centered (document extends right; less overlap shifts right) */
+  transform: translateX(-16px);
+}
+
+.avatarItem {
+  position: relative;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.documentItem {
+  position: relative;
+  /* ~15% of 120px card width ≈ 18px horizontal overlap with avatar */
+  margin-left: -18px;
+  margin-top: 6px;
+  transform-origin: center center;
+  will-change: transform;
+}

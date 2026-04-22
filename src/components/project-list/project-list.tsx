@@ -1,25 +1,25 @@
 'use client';
 
-import { motion, useReducedMotion } from 'motion/react';
+import { motion, type HTMLMotionProps } from 'motion/react';
 import { ProjectCard } from '@/components/project-card';
 import type { Project } from '@/data/projects';
 import styles from './project-list.module.css';
 
-export interface ProjectListProps {
+export interface ProjectListProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
   projects: Project[];
   onProjectClick?: (project: Project) => void;
 }
 
-export function ProjectList({ projects, onProjectClick }: ProjectListProps) {
-  const shouldReduceMotion = useReducedMotion();
-
+export function ProjectList({
+  projects,
+  onProjectClick,
+  className,
+  ...motionProps
+}: ProjectListProps) {
   return (
     <motion.div
-      layout={!shouldReduceMotion}
-      transition={{
-        layout: { duration: 1.5, ease: [0.86, 0, 0.07, 1] }, // ease-in-out-quint (moving/morphing on screen)
-      }}
-      className={styles.container}
+      {...motionProps}
+      className={[styles.container, className].filter(Boolean).join(' ')}
     >
       {projects.map((project) => (
         <ProjectCard

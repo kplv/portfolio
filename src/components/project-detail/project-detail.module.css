@@ -1,0 +1,76 @@
+.root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.panelContent {
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 64px;
+  /* padding: 64px 64px 80px; */
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  align-items: flex-start;
+}
+
+.entryBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 639px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.sectionTitle {
+  font-family: var(--font-hagrid), serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 40px;
+  line-height: 120%;
+  overflow-wrap: break-word;
+}
+
+.mediaGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 64px;
+  width: 100%;
+}
+
+.mediaGridItem {
+  min-width: 0;
+}
+
+.mediaGridItemFull {
+  grid-column: 1;
+  min-width: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .panelContent {
+    gap: 64px;
+  }
+
+  .entryBlock {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 428px) {
+  .panelContent {
+    gap: 48px;
+  }
+}
