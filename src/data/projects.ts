@@ -117,7 +117,7 @@ export const projects: Project[] = [
       'radial-gradient(circle at 50% 85% in oklch, oklch(0.8 0.1 202) 0%, oklch(0.7 0.1 186) 100%)',
     role: 'Sr. Product Designer',
     year: '2025–26',
-    contribution: 'Product Design, Frontend',
+    contribution: 'Product Design, Frontend, Strategy',
     team: [],
     sections: [
       {

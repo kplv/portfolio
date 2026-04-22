@@ -61,8 +61,8 @@
   --text-display-color: var(--text-accent-color);
   --text-display-gradient: linear-gradient(
     179.13deg,
-    var(--green-grad-start) 49.818%,
-    var(--green-grad-end) 124.7%
+    var(--mint-400) 49.818%,
+    var(--mint-500) 124.7%
   );
 
   /* Ghost button (theme toggle) */
