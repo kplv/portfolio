@@ -139,6 +139,7 @@ export const projects: Project[] = [
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-2.png',
+              cover: true,
             },
           },
           {
