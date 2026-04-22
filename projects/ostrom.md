@@ -1,6 +1,5 @@
 url: Ostrom
 Thumbnail: /Users/deniskplv/dev/portfolio/public/images/projects/ostrom/ostrom-1.png
-Accent Color: oklch(70% 0.1 186)
 Accent Gradient: radial-gradient(circle at 50% 85% in oklch, oklch(0.8 0.1 202) 0%, oklch(0.7 0.1 186) 100%)
 
 Name: Ostrom
@@ -9,23 +8,10 @@ Intro Text: Berlin-based energy startup with an expat-friendly mobile app and Ge
 
 Role: Sr. Product Designer
 When: 2025–26
-What: Product Design, Frontend
+What: Design, Frontend, Strategy
 
 ## My Role
 
-<<<<<<< HEAD
-New Energy Graph. Here's customers could check what's happening around their household in real-time.
-/Users/deniskplv/dev/portfolio/public/images/projects/ostrom/ostrom-1.png
-
-Solar System Insights. One place to assess how self-sufficient customer setup is.
-/Users/deniskplv/dev/portfolio/public/images/projects/ostrom/ostrom-2.png
-
-Charging Statistics. A holistics overview of spendings and savings when charging at home.
-/Users/deniskplv/dev/portfolio/public/images/projects/ostrom/ostrom-3.png
-
-Almost all new features were built in code first by me. We had a proper hand-off with specifications and also code prototypes.
-/Users/deniskplv/dev/portfolio/public/images/projects/ostrom/ostrom-5.mp4 
-=======
 I joined Ostrom first as a contractor, bringing product design expertise to build robust processes and improve product quality. I redesigned most critical flows, increased the design function’s output and velocity, hired a designer, and supported marketing and growth initiatives. For most of my time there, I was the sole product designer. Later, the design team grew to two people.
 
 ## Crucial Flows Redesign
@@ -58,4 +44,3 @@ Because we didn’t know what would work for each major redesign, I explored mul
 I’d say I spent 80% of my time as a design engineer and individual contributor, and 20% on leadership activities such as quarterly planning, building the design function, hiring and developing team members, and improving overall design maturity. I took a systematic approach: I’d assess the current state of the design function and identify the next improvements.
 
 /Users/deniskplv/dev/portfolio/public/images/projects/ostrom/ostrom-8.png [cover]
->>>>>>> about-page

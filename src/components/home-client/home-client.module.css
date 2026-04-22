@@ -11,29 +11,7 @@
   width: 100%;
 }
 
-<<<<<<< HEAD
-.entranceContainer {
-  width: 100%;
-}
-
-.toolbar {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  padding: 16px 0;
-}
-
-/* Fixed overlay — always mounted, fades accent color in/out */
-.overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
-  pointer-events: none;
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-=======
 /* Reserve space for fixed NavigationHeader (toolbar height + padding) */
 .contentPadNav {
   padding-top: 56px;
->>>>>>> about-page
 }
