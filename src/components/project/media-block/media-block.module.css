@@ -114,7 +114,7 @@ video.media[data-scaled='true'] {
   }
 }
 
-@media screen and (max-width: 428px) {
+@media screen and (max-width: 900px) {
   .container {
     max-width: 100%;
   }
