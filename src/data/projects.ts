@@ -100,7 +100,8 @@ export const projects: Project[] = [
     id: '1',
     slug: 'ostrom',
     name: 'Ostrom',
-    description: 'An expat-friendly energy app and Germany\'s first virtual power plant',
+    description:
+      "An expat-friendly energy app and Germany's first virtual power plant",
     intro:
       'Berlin-based energy startup with an expat-friendly mobile app and Germany\u2019s first virtual power plant. Raised \u20ac\u00a020M in Series B funding.',
     image: '/images/projects/ostrom/ostrom-1.png',
@@ -134,7 +135,7 @@ export const projects: Project[] = [
         items: [
           {
             label:
-              'Ostrom launched in 2022, and most flows stayed the same.\n\nOver time, we gathered enough evidence that some features weren\u2019t delivering enough customer value, contributing to lower retention. The launch of new business streams (such as the virtual power plant) also exposed gaps: the existing approach no longer supported them or the company\u2019s future vision.\n\nSo we redesigned the most crucial flows, including vehicle and solar statistics, the live energy graph, and battery modes.',
+              'Ostrom launched in 2022, and most flows remained unchanged. Over time, we gathered evidence that some features were not delivering enough customer value, which contributed to lower retention. The launch of new business streams, such as the virtual power plant, also exposed gaps: the existing approach no longer supported these initiatives or the company’s future vision. So we redesigned the most critical flows, including vehicle and solar statistics, the live energy graph, and battery modes.',
 
             media: {
               type: 'image',
@@ -208,6 +209,7 @@ export const projects: Project[] = [
               cover: true,
             },
           },
+
           {
             media: {
               type: 'image',
@@ -227,6 +229,13 @@ export const projects: Project[] = [
             media: {
               type: 'image',
               src: '/images/projects/ostrom/ostrom-7.png',
+              cover: true,
+            },
+          },
+          {
+            media: {
+              type: 'image',
+              src: '/images/projects/ostrom/ostrom-testing.png',
               cover: true,
             },
           },
@@ -260,7 +269,7 @@ export const projects: Project[] = [
     slug: 'trade-republic',
     name: 'Trade Republic',
     description:
-      'Fraud prevention, delightful interactions, and employee tools for Europe\'s largest savings platform',
+      "Fraud prevention, delightful interactions, and employee tools for Europe's largest savings platform",
     intro:
       'Built fraud prevention flows from 0\u00a0\u2192\u00a01 for Trade Republic\u2019s 8M+ users, designed micro-interactions for core screens, and shipped an internal performance review tool.',
     image: '/images/projects/trade/trade-0.png',
@@ -280,42 +289,88 @@ export const projects: Project[] = [
     team: [],
     sections: [
       {
-        title: 'Features',
+        title: 'My Role',
         items: [
           {
             label:
-              'Source of Income. As a bank, we have to make sure we know where our customers’ money comes from. For customers, it might seem like a mundane task, so we tried to make it as seamless as possible. We came up with a “shopping basket” solution, where I can add multiple sources of income, each with its own flow.',
-
+              'I joined Trade Republic as a Product Designer II, bringing interactive, mobile, and 0 \u2192 1 design expertise. First, we launched the new performance review tool, taking it from the initial idea and cross-company alignment to a fully working product that is still used today. Later, I switched to the financial crime team, where I worked on launching new security features: account protection, new device notification, and source of income.',
+          },
+        ],
+      },
+      {
+        title: '0 \u2192 1 Performance Tool',
+        items: [
+          {
+            label:
+              'One of the first projects we launched was a new tool for performance reviews. We started with extensive alignment sessions with the People team and C-level leadership on the initial goals, then focused on making the experience as seamless and transparent for employees as possible.',
             media: {
               type: 'image',
-              src: '/images/projects/trade/trade-1.png',
+              src: '/images/projects/trade/trade-review-tool.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'Account Protection',
+        items: [
+          {
+            label:
+              'As the company grew, account takeovers became more frequent. Our team’s goal was to protect customers by letting them flag unfamiliar logins. When we detected an unfamiliar login, we sent the customer a notification and temporarily blocked the account if they did not recognise it. The flow was as simple as “Yes” / “No“, and we used customer responses to better educate our data models in the end.',
+            media: {
+              type: 'image',
+              src: '/images/projects/trade/trade-device-notification.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'Blocked Account',
+        items: [
+          {
+            label:
+              'Once a customer flagged an unfamiliar login, or our models detected suspicious behavior, we blocked all sensitive operations to protect the customer’s money. We explored different approaches, including blocking access entirely, but ultimately landed on a more elegant solution: customers could still log in, but sensitive actions required identification. This let us verify the account while preventing fraudsters from stealing from it again.',
+            media: {
+              type: 'image',
+              src: '/images/projects/trade/trade-blocked-acc.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'Source of Wealth',
+        items: [
+          {
+            label:
+              'As a bank, we have to make sure we know where our customers’ money comes from. For customers, it might seem like a mundane task, so we tried to make it as seamless as possible. We came up with a “shopping basket” solution, where I can add multiple sources of income, each with its own flow.',
+            media: {
+              type: 'image',
+              src: '/images/projects/trade/trade-source-of-wealth.png',
+              cover: true,
+            },
+          },
+        ],
+      },
+      {
+        title: 'Interactions In Crucial Flows',
+        items: [
+          {
+            label:
+              'Interactions and animation have a special place in my heart, so at some point I initiated a project to gradually improve the most-used flows across the app by making them more polished and enjoyable for customers. We started with the most-used screen, which we call the amount screen, by making number inputs and buttons react more smoothly to customer intent.',
+            media: {
+              type: 'video',
+              src: '/images/projects/trade/trade-2.mp4',
               cover: true,
             },
           },
           {
-            label: 'Micro-interactions and Joy. I initiated a project to make the most-used flows more enjoyable, like the money transfer screen.',
-            media: { type: 'video', src: '/images/projects/trade/trade-2.mp4', cover: true },
-          },
-          {
-            label: 'We also thought about gracefully handling different corner-cases.',
-            media: { type: 'video', src: '/images/projects/trade/trade-3.mp4', cover: true },
-          },
-          {
             label:
-              'Account protection. We developed few featutres to protect our customer from fraud. For example, new device login notifcation, where can could also block the entire app login and report the incident.',
+              'We also considered how to gracefully handle edge cases, for example, when a customer enters incorrect login details.',
             media: {
-              type: 'image',
-              src: '/images/projects/trade/trade-4.png',
-              cover: true,
-            },
-          },
-
-          {
-            label:
-              'New Performance Review App. I also contributed to internal tools, helping everyone stay aligned on the company\u2019s strategy. This project was done from ground up in close collaboration with talent team. ',
-            media: {
-              type: 'image',
-              src: '/images/projects/trade/trade-6.png',
+              type: 'video',
+              src: '/images/projects/trade/trade-3.mp4',
               cover: true,
             },
           },
@@ -328,7 +383,7 @@ export const projects: Project[] = [
     slug: 'playground',
     name: 'Other',
     description:
-      'Voice assistants, freight sustainability in the UK, and fun stuff I\'ve done over the years',
+      "Voice assistants, freight sustainability in the UK, and fun stuff I've done over the years",
     intro:
       'Projects of the past few years. Some were done inside product teams at major tech companies like Yandex. Some won awards such as Red Dot. Some are personal projects where I explored new approaches.',
     image: '/images/playground/play-0.png',
@@ -353,7 +408,11 @@ export const projects: Project[] = [
           {
             label:
               'React Native Playground. I have an app where I prototype new components and just generally have fun. Some of it was later used in production for Ostrom.',
-            media: { type: 'video', src: '/images/playground/play-9.mp4', cover: true },
+            media: {
+              type: 'video',
+              src: '/images/playground/play-9.mp4',
+              cover: true,
+            },
           },
         ],
       },
@@ -363,16 +422,28 @@ export const projects: Project[] = [
           {
             label:
               'Bownce. I was preparing the Red Dot case for this project, working on micro-interactions and screen transitions.',
-            media: { type: 'video', src: '/images/playground/play-10.mp4', cover: true },
+            media: {
+              type: 'video',
+              src: '/images/playground/play-10.mp4',
+              cover: true,
+            },
           },
           {
             label:
               'Badoo. A new voice-first dating experience. My graduation project.',
-            media: { type: 'video', src: '/images/playground/play-6.mp4', cover: true },
+            media: {
+              type: 'video',
+              src: '/images/playground/play-6.mp4',
+              cover: true,
+            },
           },
           {
             label: 'Badoo. Spent a lot of time making the flow feel alive.',
-            media: { type: 'video', src: '/images/playground/play-5.mp4', cover: true },
+            media: {
+              type: 'video',
+              src: '/images/playground/play-5.mp4',
+              cover: true,
+            },
           },
         ],
       },
@@ -382,11 +453,20 @@ export const projects: Project[] = [
           {
             label:
               'Tachkum Font. Final project of the type design workshop by Contrast Foundry in 2022.',
-            media: { type: 'image', src: '/images/playground/play-1.png', cover: true },
+            media: {
+              type: 'image',
+              src: '/images/playground/play-1.png',
+              cover: true,
+            },
           },
           {
-            label: 'Tachkum Font. The name was inspired by an Abkhazian fairy tale.',
-            media: { type: 'image', src: '/images/playground/play-2.png', cover: true },
+            label:
+              'Tachkum Font. The name was inspired by an Abkhazian fairy tale.',
+            media: {
+              type: 'image',
+              src: '/images/playground/play-2.png',
+              cover: true,
+            },
           },
         ],
       },
@@ -396,16 +476,28 @@ export const projects: Project[] = [
           {
             label:
               'Arrival. I worked on new features for customer support and fleet management.',
-            media: { type: 'image', src: '/images/playground/play-3.png', cover: true },
+            media: {
+              type: 'image',
+              src: '/images/playground/play-3.png',
+              cover: true,
+            },
           },
           {
             label:
               'SberDevices. I led a new stream for city exploration features, from voice to TV applications.',
-            media: { type: 'image', src: '/images/playground/play-7.png', cover: true },
+            media: {
+              type: 'image',
+              src: '/images/playground/play-7.png',
+              cover: true,
+            },
           },
           {
             label: 'SberDevices. Prototyping for TV was a fun experience.',
-            media: { type: 'video', src: '/images/playground/play-4.mp4', cover: true },
+            media: {
+              type: 'video',
+              src: '/images/playground/play-4.mp4',
+              cover: true,
+            },
           },
         ],
       },

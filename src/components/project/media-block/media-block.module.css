@@ -26,8 +26,8 @@
   max-width: 65vw;
   aspect-ratio: 4 / 3;
   border-radius: 36px;
-  border: 1.5px solid
-    color-mix(in srgb, var(--media-accent-color) 3%, transparent);
+  border: 1px solid
+    color-mix(in srgb, var(--media-accent-color) 2%, transparent);
   background-color: color-mix(
     in srgb,
     var(--media-accent-color) 3%,
