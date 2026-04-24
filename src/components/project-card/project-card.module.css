@@ -2,18 +2,18 @@
   font-size: var(--text-primary-size);
   font-weight: var(--text-primary-weight);
   line-height: var(--text-primary-line-height);
-  text-align: center;
+  text-align: left;
 }
 
 .projectName {
   font-weight: 700;
-  color: var(--project-accent, var(--header-secondary-color));
+  color: color-mix(in srgb, var(--text-primary-color) 90%, transparent);
 }
 
 .projectDescription {
   font-family: inherit;
   font-weight: 400;
-  color: var(--text-primary-color);
+  color: color-mix(in srgb, var(--text-primary-color) 70%, transparent);
   /* color: color-mix(
     in srgb,
     var(--project-accent, hsla(228, 95%, 34%)) 85%,
@@ -87,7 +87,7 @@
   width: 100%;
   height: auto;
   aspect-ratio: 4 / 3;
-  background-color: color-mix(in srgb, var(--project-accent) 4%, transparent);
+  background-color: color-mix(in srgb, var(--slate-1000) 2%, transparent);
   border-radius: 24px;
   border: 2x solid;
   border-color: color-mix(in srgb, var(--project-accent) 2%, transparent);
@@ -177,4 +177,8 @@
 /* Dark mode border */
 [data-theme='dark'] .image {
   border-color: var(--slate-800);
+}
+
+[data-theme='dark'] .imageWrapper {
+  background-color: color-mix(in srgb, white 4%, transparent);
 }

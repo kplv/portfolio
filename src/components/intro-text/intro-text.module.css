@@ -1,4 +1,5 @@
 @import '../../app/palette.css';
+@import '../../app/tokens.css';
 
 .container {
   display: flex;
@@ -8,6 +9,7 @@
   gap: 16px;
   align-self: flex-start;
   padding-bottom: 32px;
+  max-width: var(--content-max-width);
 }
 
 .text {

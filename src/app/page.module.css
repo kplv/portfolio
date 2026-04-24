@@ -19,17 +19,13 @@
   display: flex;
   min-height: 100vh;
   width: 100%;
-  max-width: 860px;
   flex-direction: column;
   align-items: center; /* Center content horizontally */
   justify-content: flex-start;
   /* Transparent so the global shader can sit behind content; frosted panels use their own backdrop */
   background-color: transparent;
   /* No padding-top here — HomeClient `.contentPadNav` sets it for the fixed header */
-  padding-left: 64px;
-  padding-right: 64px;
-  padding-bottom: 24px;
-  margin: 0 auto; /* Center main horizontally inside the page container */
+  padding: 32px;
 }
 
 .intro {

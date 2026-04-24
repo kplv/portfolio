@@ -7,6 +7,7 @@
   display: flex;
   gap: 8px;
   align-items: center;
+  max-width: var(--content-max-width);
 }
 
 .label {
@@ -22,8 +23,9 @@
 .container {
   position: relative;
   width: 100%;
+  max-width: 65vw;
   aspect-ratio: 4 / 3;
-  border-radius: 24px;
+  border-radius: 36px;
   border: 1.5px solid
     color-mix(in srgb, var(--media-accent-color) 3%, transparent);
   background-color: color-mix(
@@ -109,5 +111,11 @@ video.media[data-scaled='true'] {
   .skeleton,
   .media {
     transition: none;
+  }
+}
+
+@media screen and (max-width: 428px) {
+  .container {
+    max-width: 100%;
   }
 }
