@@ -282,7 +282,8 @@ export const projects: Project[] = [
     ],
     accentColor: '#153e9b',
     accentGradient:
-      'linear-gradient(180deg, oklch(0.5 0.22 266) 28%, oklch(0.36 0.18 264) 58%, #153e9b 100%)',
+      'linear-gradient(135deg, #5be7ff 0%, #7858ff 60%, #18345b 100%)',
+ 
     role: 'Product Designer II',
     year: '2023–24',
     contribution: 'Product & Interactive Design',
