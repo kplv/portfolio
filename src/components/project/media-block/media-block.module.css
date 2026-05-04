@@ -3,7 +3,11 @@
   flex-direction: column;
   gap: 24px;
   width: 100%;
-  max-width: 65vw;
+  max-width: 55vw;
+}
+
+.frameLeadIn {
+  padding-top: 44px;
 }
 
 .container {

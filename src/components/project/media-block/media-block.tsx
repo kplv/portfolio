@@ -116,7 +116,11 @@ function ProjectVideo({
   );
 }
 
-export function ProjectMediaBlock({ text, media, accentColor }: ProjectMediaBlockProps) {
+export function ProjectMediaBlock({
+  text,
+  media,
+  accentColor,
+}: ProjectMediaBlockProps) {
   const items = media ? (Array.isArray(media) ? media : [media]) : [];
   const isGallery = items.length > 1;
   const total = items.length;
@@ -140,62 +144,66 @@ export function ProjectMediaBlock({ text, media, accentColor }: ProjectMediaBloc
       }
     : {};
 
+  const mediaFrame = active ? (
+    <div
+      className={styles.container}
+      data-cover={active.cover || undefined}
+    >
+      {isGallery ? (
+        <AnimatePresence initial={false} mode="sync">
+          <motion.div
+            key={`gallery-${index}`}
+            className={styles.swapLayer}
+            initial={shouldReduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.15,
+              ease: 'linear',
+            }}
+          >
+            {active.type === 'image' ? (
+              <ProjectImage
+                src={active.src}
+                alt={active.alt ?? active.label ?? ''}
+                cover={active.cover}
+              />
+            ) : (
+              <ProjectVideo
+                src={active.src}
+                poster={active.poster}
+                loop={active.loop}
+                cover={active.cover}
+                scale={active.scale}
+              />
+            )}
+          </motion.div>
+        </AnimatePresence>
+      ) : active.type === 'image' ? (
+        <ProjectImage
+          src={active.src}
+          alt={active.alt ?? active.label ?? ''}
+          cover={active.cover}
+        />
+      ) : (
+        <ProjectVideo
+          src={active.src}
+          poster={active.poster}
+          loop={active.loop}
+          cover={active.cover}
+          scale={active.scale}
+        />
+      )}
+    </div>
+  ) : null;
+
   return (
     <div
       className={styles.block}
       style={{ '--media-accent-color': accentColor } as CSSProperties}
     >
-      {active && (
-        <div
-          className={styles.container}
-          data-cover={active.cover || undefined}
-        >
-          {isGallery ? (
-            <AnimatePresence initial={false} mode="sync">
-              <motion.div
-                key={`gallery-${index}`}
-                className={styles.swapLayer}
-                initial={shouldReduceMotion ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: shouldReduceMotion ? 0 : 0.15,
-                  ease: 'linear',
-                }}
-              >
-                {active.type === 'image' ? (
-                  <ProjectImage
-                    src={active.src}
-                    alt={active.alt ?? active.label ?? ''}
-                    cover={active.cover}
-                  />
-                ) : (
-                  <ProjectVideo
-                    src={active.src}
-                    poster={active.poster}
-                    loop={active.loop}
-                    cover={active.cover}
-                    scale={active.scale}
-                  />
-                )}
-              </motion.div>
-            </AnimatePresence>
-          ) : active.type === 'image' ? (
-            <ProjectImage
-              src={active.src}
-              alt={active.alt ?? active.label ?? ''}
-              cover={active.cover}
-            />
-          ) : (
-            <ProjectVideo
-              src={active.src}
-              poster={active.poster}
-              loop={active.loop}
-              cover={active.cover}
-              scale={active.scale}
-            />
-          )}
-        </div>
+      {mediaFrame && (
+        <div className={styles.frameLeadIn}>{mediaFrame}</div>
       )}
       {showMediaLabel && (
         <MediaLabel

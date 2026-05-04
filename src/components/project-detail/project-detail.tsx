@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from 'motion/react';
 import { IntroText } from '@/components/intro-text';
 import { InfoTable } from '@/components/project/info-table';
 import { TeamList } from '@/components/project/team-list';
-import { ProjectMediaBlock } from '@/components/project/media-block';
+import { SectionBlockView } from '@/components/project/section-block';
 import {
   ORDERED_ROUTE_SECTION_VARIANTS,
   ROUTE_SECTION_REDUCED_MOTION_TARGET,
@@ -66,7 +66,7 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
 
         {project.sections?.map((section, i) => (
           <motion.div
-            key={section.title}
+            key={`section-${i}`}
             className={styles.section}
             variants={ORDERED_ROUTE_SECTION_VARIANTS}
             custom={{ enterOrder: i + 1, exitOrder: sectionCount - i - 1 }}
@@ -74,35 +74,14 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
             animate={shouldReduceMotion ? reducedState : 'show'}
             exit={shouldReduceMotion ? reducedState : 'exit'}
           >
-            <h2
-              className={styles.sectionTitle}
-              style={{
-                backgroundImage: headerGradient,
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                color: 'transparent',
-              }}
-            >
-              {section.title}
-            </h2>
-            <div className={styles.mediaGrid}>
-              {section.items.map((item, i) => (
-                <div
-                  key={i}
-                  className={
-                    item.fullWidth
-                      ? styles.mediaGridItemFull
-                      : styles.mediaGridItem
-                  }
-                >
-                  <ProjectMediaBlock
-                    text={item.text}
-                    media={item.media}
-                    accentColor={accentColor}
-                  />
-                </div>
-              ))}
-            </div>
+            {section.blocks.map((block, j) => (
+              <SectionBlockView
+                key={`${j}-${block.type}`}
+                block={block}
+                headerGradient={headerGradient}
+                accentColor={accentColor}
+              />
+            ))}
           </motion.div>
         ))}
       </div>

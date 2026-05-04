@@ -28,35 +28,9 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
   align-items: flex-start;
   width: 100%;
-  
-}
-
-.sectionTitle {
-  font-family: var(--font-hagrid), serif;
-  font-weight: 800;
-  font-style: italic;
-  font-size: 40px;
-  line-height: 120%;
-  overflow-wrap: break-word;
-}
-
-.mediaGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 36px;
-  width: 100%;
-}
-
-.mediaGridItem {
-  min-width: 0;
-}
-
-.mediaGridItemFull {
-  grid-column: 1;
-  min-width: 0;
 }
 
 @media screen and (max-width: 900px) {

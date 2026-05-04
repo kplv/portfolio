@@ -12,10 +12,12 @@ export interface ProjectCardProps {
 }
 
 function prefetchProjectMedia(project: Project) {
-  project.sections?.forEach((section) =>
-    section.items.forEach((item) => {
-      if (!item.media) return;
-      const medias = Array.isArray(item.media) ? item.media : [item.media];
+  project.sections?.forEach((section) => {
+    section.blocks.forEach((block) => {
+      if (block.type !== 'media') return;
+      const medias = Array.isArray(block.media)
+        ? block.media
+        : [block.media];
       for (const m of medias) {
         if (m.type === 'image') {
           const img = new window.Image();
@@ -26,8 +28,8 @@ function prefetchProjectMedia(project: Project) {
           img.src = m.poster;
         }
       }
-    }),
-  );
+    });
+  });
 }
 
 const tapTransition = {

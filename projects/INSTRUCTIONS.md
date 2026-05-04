@@ -54,8 +54,8 @@ What: <contribution type, e.g. Product Design, Frontend>
 | `Role` | `role` | Job title |
 | `When` | `year` | Year range string |
 | `What` | `contribution` | Contribution type |
-| `### Title` | `sections[].title` | Section heading |
-| label + path pairs | `sections[].items[]` | `label` + `media` |
+| `### Title` | `sections[].blocks` (a `heading` block) | First block: `{ type: 'heading', text: <title> }` |
+| label + path pairs | `sections[].blocks` ( `media` blocks) | Per pair: `{ type: 'media', media: { …, label } }` |
 
 ### Media type detection
 
@@ -81,7 +81,6 @@ These fields do **not** appear in `.md` files. Keep them in `projects.ts` direct
 | `id` | Unique numeric string (`'1'`, `'2'`, …) |
 | `images` | Carousel images for the project card |
 | `team` | Array of `{ name, avatar, href }` |
-| `fullWidth` | Per-item layout flag on `SectionItem` |
 
 ---
 
@@ -95,9 +94,9 @@ These fields do **not** appear in `.md` files. Keep them in `projects.ts` direct
 4. Update `name`, `description`, `intro`, `role`, `year`, `contribution`, `accentColor`, `accentGradient`.
 5. Set `image` from the `Thumbnail` field (convert to web-relative path).
 6. Rebuild `sections` from the `### Section` blocks:
-   - For each label + path pair, create a `SectionItem` with the correct `media.type`.
+   - For each `###` block, add `{ type: 'heading', text: <title> }` then, for each label + path pair, add `{ type: 'media', media: { … } }` with the correct `media.type` and `label` from the markdown label line.
    - When the path has a `[cover]` suffix, set `media.cover: true`.
-   - Preserve any existing `fullWidth` flags from the current TS data.
+   - Media frames always get top spacing from [`ProjectMediaBlock`](src/components/project/media-block/media-block.tsx) (fixed padding in CSS); do not set spacing in data.
 7. Update `images` to include all unique image sources (skip videos).
 8. Leave `team` and `id` unchanged.
 

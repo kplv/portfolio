@@ -24,7 +24,7 @@
   border-radius: 100px;
   background-color: color-mix(
     in oklch,
-    var(--media-label-accent) 5%,
+    var(--media-label-accent) 10%,
     transparent
   );
 }
@@ -112,7 +112,7 @@
 }
 
 .counterDim {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .srOnly {

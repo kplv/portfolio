@@ -1,0 +1,29 @@
+@import '../../../app/tokens.css';
+
+.heading {
+  font-family: var(--font-hagrid), serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 40px;
+  line-height: 120%;
+  overflow-wrap: break-word;
+  margin: 0;
+}
+
+.textGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: var(--content-max-width);
+}
+
+.textParagraph {
+  margin: 0;
+  font-size: var(--text-primary-size);
+  font-weight: var(--text-primary-weight);
+  line-height: var(--text-primary-line-height);
+  color: var(--text-primary-color);
+  text-wrap: balance;
+}

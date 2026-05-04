@@ -26,17 +26,13 @@ export type MediaBlock =
       label?: string;
     };
 
-export interface SectionItem {
-  /** Body paragraph when there is no media */
-  text?: string;
-  media?: MediaBlock | MediaBlock[];
-  /** Spans full width in single-column layout (reserved for future 2-col grid) */
-  fullWidth?: boolean;
-}
+export type SectionBlock =
+  | { type: 'heading'; text: string }
+  | { type: 'text'; text: string | string[] }
+  | { type: 'media'; media: MediaBlock | MediaBlock[] };
 
 export interface ProjectSection {
-  title: string;
-  items: SectionItem[];
+  blocks: SectionBlock[];
 }
 
 export interface Project {
@@ -111,9 +107,9 @@ export const projects: Project[] = [
     slug: 'ostrom',
     name: 'Ostrom',
     description:
-      "An expat-friendly energy app and Germany's first virtual power plant",
+      'Friendly energy startup with a mobile app for energy management and Germany\u2019s first virtual power plant',
     intro:
-      'Berlin-based energy startup with an expat-friendly mobile app and Germany\u2019s first virtual power plant. Raised \u20ac\u00a020M in Series B funding.',
+      'Friendly energy startup with a mobile app to handle all your energy management. Simple flows hide a complex infrastructure underneath, like a Germany\u2019s first virtual power plant.',
     image: '/images/projects/ostrom/ostrom-1.png',
     images: [
       '/images/projects/ostrom/ostrom-1.png',
@@ -128,146 +124,204 @@ export const projects: Project[] = [
       'radial-gradient(circle at 50% 85% in oklch, oklch(0.8 0.1 202) 0%, oklch(0.7 0.1 186) 100%)',
     role: 'Sr. Product Designer',
     year: '2025–26',
-    contribution: 'Product Design, Frontend, Strategy',
+    contribution: 'Product Design, Engineering, Strategy',
     team: [],
     sections: [
       {
-        title: 'My Role',
-        items: [
+        blocks: [
+          { type: 'heading', text: 'My Role' },
           {
-            text:
-              'I joined Ostrom first as a contractor, bringing product design expertise to build robust processes and improve product quality. I redesigned most critical flows, increased the design function\u2019s output and velocity, hired a designer, and supported marketing and growth initiatives. For most of my time there, I was the sole product designer. Later, the design team grew to two people.',
+            type: 'text',
+            text: 'I joined Ostrom to bring expertise in building mobile products with quality, velocity, and scalability in mind. My main contributions included core features redesigns, token approach for design system, new UI components & interactive patterns, and design strategy.',
           },
         ],
       },
       {
-        title: 'Crucial Flows Redesign',
-        items: [
+        blocks: [
+          { type: 'heading', text: 'Redesign' },
           {
-            media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-2.png',
-              cover: true,
-              label:
-                'Ostrom launched in 2022, and most flows remained unchanged. Over time, we gathered evidence that some features were not delivering enough customer value, which contributed to lower retention. The launch of new business streams, such as the virtual power plant, also exposed gaps: the existing approach no longer supported these initiatives or the company’s future vision. So we redesigned the most critical flows, including vehicle and solar statistics, the live energy graph, and battery modes.',
-            },
+            type: 'text',
+            text: 'Some parts of Ostrom app haven\u2019t changed much since its launch 2022. They were potential to align them more product strategy, and to bring more customer value. Better statistics, seamless onboarding, rewards revamp, \u2014 some of the examples of shipped improvements.',
           },
           {
-            media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-3.png',
-              cover: true,
-            },
+            type: 'media',
+            media: [
+              {
+                type: 'image',
+                src: '/images/projects/ostrom/ev-stats.png',
+                cover: true,
+                label:
+                  'Charging statistics redesign used components and patterns from a newly established design system. For example, a bottom navigation approach',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/ostrom/ev-stats-old-vs-new.png',
+                cover: true,
+                label:
+                  'In new version focus switched to earnings and spendings, and monthly view became a default.',
+              },
+            ],
           },
           {
-            media: {
-              type: 'video',
-              src: '/images/projects/ostrom/ostrom-6.mp4',
-              cover: true,
-            },
+            type: 'media',
+            media: [
+              {
+                type: 'image',
+                src: '/images/projects/ostrom/solar-stats.png',
+                cover: true,
+                label:
+                  'Solar statistics algo changed. I explored graph libraries in React Native, and we tested multiple directions with customers.',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/ostrom/solar-stats-old-vs-new.png',
+                cover: true,
+                label:
+                  'Instead of having everything on one page, we moved statistics to a separate one.',
+              },
+            ],
           },
           {
-            media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-4.png',
-              cover: true,
-            },
-          },
-        ],
-      },
-      {
-        title: 'From Figma to React Native',
-        items: [
-          {
-            media: {
-              type: 'video',
-              src: '/images/projects/ostrom/ostrom-5.mp4',
-              cover: true,
-              scale: 1.13,
-              label:
-                'I’d been working with React for a couple of years now, and with the advent of Claude, I was well positioned to move from Figma into prototypes that looked and felt closer to what end users would see. I explored most of the redesigns in code first, and the same approach applied to design system work. I analysed our production code and its issues, developed an approach to tokens and styles, and only then moved them into Figma.',
-            },
-          },
-          {
-            media: {
-              type: 'video',
-              src: '/images/projects/ostrom/ostrom-9.mp4',
-              cover: true,
-              label:
-                ' I treated even the smaller components with care. For example, this timestamp component, which we improved by adding a better loading state with skeletons and by gracefully handling error states.',
-            },
-          },
-        ],
-      },
-      {
-        title: 'Status Quo vs. After',
-        items: [
-          {
-            media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-11.png',
-              cover: true,
-              label:
-                'In user testing and later in production data, we saw improvements in retention, discoverability, and overall user satisfaction with the redesigns. The new design was perceived as more modern and clean, while meeting user needs without adding too much clutter to the screen.',
-            },
-          },
-          {
-            media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-12.png',
-              cover: true,
-            },
-          },
-
-          {
-            media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-13.png',
-              cover: true,
-            },
-          },
-        ],
-      },
-
-      {
-        title: 'Exploration & User Testing',
-        items: [
-          {
-            media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-7.png',
-              cover: true,
-              label:
-                'Because we didn\u2019t know what would work for each major redesign, I explored multiple directions. For every major launch, we tested with customers first. Before testing, we also conducted thorough research using customer insights and the quantitative data we had.',
-            },
-          },
-          {
-            media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-testing.png',
-              cover: true,
-            },
-          },
-          {
-            media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-14.png',
-              cover: true,
-            },
+            type: 'media',
+            media: [
+              {
+                type: 'video',
+                src: '/images/projects/ostrom/energy-flow.mp4',
+                cover: true,
+                label:
+                  'A glimpse on what\u2019s around your house right now. Animations were helpful in showing state \u2014 yes, but also look nice (\uD83E\uDD7A) ?',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/ostrom/energy-flow-old-vs-new.png',
+                cover: true,
+                label:
+                  'New version focused on main areas of interest: where my energy come from and how do I use it.',
+              },
+            ],
           },
         ],
       },
       {
-        title: 'Design Leadership',
-        items: [
+        blocks: [
+          { type: 'heading', text: 'Engineering' },
           {
-            media: {
-              type: 'image',
-              src: '/images/projects/ostrom/ostrom-8.png',
-              cover: true,
-              label:
-                'I\u2019d say I spent 80% of my time as a design engineer and individual contributor, and 20% on leadership activities such as quarterly planning, building the design function, hiring and developing team members, and improving overall design maturity. I took a systematic approach: I\u2019d assess the current state of the design function and identify the next improvements.',
-            },
+            type: 'text',
+            text: [
+              'I used React Native as the main prototyping \u2014 and\u00a0sometimes even \u2014 a hand-off tool. It\u2019s way closer to end customer experience and easy to handle with a bit of React and Typescript knowledge.',
+              'Of course, I\u2019d follow with components breakdown and detailed Figma flows. But still groundwork for design system tokens and new components happened in code.',
+            ],
+          },
+          {
+            type: 'media',
+            media: [
+              {
+                type: 'video',
+                src: '/images/projects/ostrom/ev-stats-react-native.mp4',
+                cover: true,
+                scale: 1.12,
+                label:
+                  'Modal interaction, cards, info elements, and navigation \u2014 examples of UI components that made it to production from initial prototypes.',
+              },
+              {
+                type: 'video',
+                src: '/images/projects/ostrom/timestamp-react-native.mp4',
+                cover: true,
+                label:
+                  'Smaller components also deserve care. This one shows last updated time, but also handles states gracefully. A skeleton is a nice touch as well.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'heading', text: 'Exploration' },
+          {
+            type: 'text',
+            text: 'For each major redesign, we based our exploration on data and customer insights. Team workshops and user testing were main means for team alignment and validation. Usually we tested multiple options, and then the best ones were released in short cycles.',
+          },
+          {
+            type: 'media',
+            media: [
+              {
+                type: 'image',
+                src: '/images/projects/ostrom/solar-stats-exploration.png',
+                cover: true,
+                label:
+                  'In solar statistics I explored more than 30+ approaches. They varied in\u00a0navigation patterns, and how they handled most common scenarios.',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/shared/empty-image.png',
+                cover: true,
+                label:
+                  'After the testing we\u2019d share learnings with the team. It helped with alignment, but also reinforced the value of a design team.',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/ostrom/energy-flow-exploration.png',
+                cover: true,
+                label:
+                  'I usually explored multiple approaches, including the ones that deviated from competitors research.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'heading', text: 'Marketing' },
+          {
+            type: 'text',
+            text: 'First, customer would see us somewhere in Instagram, and when would check our tariffs. We wanted to improve quality, clarity, and brand consistency. To boost conversion, we optimised first funnel pages, and tested different directions for marketing materials. Website changes not only improved the conversion significantly, but also set-up base for future A/B experiments.',
+          },
+          {
+            type: 'media',
+            media: [
+              {
+                type: 'image',
+                src: '/images/projects/shared/empty-image.png',
+                cover: true,
+                label:
+                  'We highlighted each tariff unique proposal, pricing, and cancellation policy \u2014 main point of confusion from research.',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/shared/empty-image.png',
+                cover: true,
+                label:
+                  'I\u2019ve created more than 100+ version for marketing templates, with only 4\u00a0of them being A/B tested in the end.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'heading', text: 'Beyond Hand-On Design' },
+          {
+            type: 'text',
+            text: 'Some of my time would go to quarterly planning, process improvement, and hiring. I followed a\u00a0systematic approach to build a robust design function step by step.',
+          },
+          {
+            type: 'media',
+            media: [
+              {
+                type: 'image',
+                src: '/images/projects/shared/empty-image.png',
+                cover: true,
+                label:
+                  'There are the patterns for design team to improve velocity and quality output.',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/shared/empty-image.png',
+                cover: true,
+                label:
+                  'Design Strategy was my initiative, \u2014 an introspect into current state of things, and a pitch of value the design could bring.',
+              },
+            ],
           },
         ],
       },
@@ -292,25 +346,26 @@ export const projects: Project[] = [
     accentColor: '#153e9b',
     accentGradient:
       'linear-gradient(135deg, #5be7ff 0%, #7858ff 60%, #18345b 100%)',
- 
+
     role: 'Product Designer II',
     year: '2023–24',
     contribution: 'Product & Interactive Design',
     team: [],
     sections: [
       {
-        title: 'My Role',
-        items: [
+        blocks: [
+          { type: 'heading', text: 'My Role' },
           {
-            text:
-              'I joined Trade Republic as a Product Designer II, bringing interactive, mobile, and 0 \u2192 1 design expertise. First, we launched the new performance review tool, taking it from the initial idea and cross-company alignment to a fully working product that is still used today. Later, I switched to the financial crime team, where I worked on launching new security features: account protection, new device notification, and source of income.',
+            type: 'text',
+            text: 'I joined Trade Republic as a Product Designer II, bringing interactive, mobile, and 0 \u2192 1 design expertise. First, we launched the new performance review tool, taking it from the initial idea and cross-company alignment to a fully working product that is still used today. Later, I switched to the financial crime team, where I worked on launching new security features: account protection, new device notification, and source of income.',
           },
         ],
       },
       {
-        title: '0 \u2192 1 Performance Tool',
-        items: [
+        blocks: [
+          { type: 'heading', text: '0 \u2192 1 Performance Tool' },
           {
+            type: 'media',
             media: {
               type: 'image',
               src: '/images/projects/trade/trade-review-tool.png',
@@ -322,9 +377,10 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: 'Account Protection',
-        items: [
+        blocks: [
+          { type: 'heading', text: 'Account Protection' },
           {
+            type: 'media',
             media: {
               type: 'image',
               src: '/images/projects/trade/trade-device-notification.png',
@@ -336,9 +392,10 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: 'Blocked Account',
-        items: [
+        blocks: [
+          { type: 'heading', text: 'Blocked Account' },
           {
+            type: 'media',
             media: {
               type: 'image',
               src: '/images/projects/trade/trade-blocked-acc.png',
@@ -350,9 +407,10 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: 'Source of Wealth',
-        items: [
+        blocks: [
+          { type: 'heading', text: 'Source of Wealth' },
           {
+            type: 'media',
             media: {
               type: 'image',
               src: '/images/projects/trade/trade-source-of-wealth.png',
@@ -364,9 +422,10 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: 'Interactions In Crucial Flows',
-        items: [
+        blocks: [
+          { type: 'heading', text: 'Interactions In Crucial Flows' },
           {
+            type: 'media',
             media: {
               type: 'video',
               src: '/images/projects/trade/trade-2.mp4',
@@ -376,6 +435,7 @@ export const projects: Project[] = [
             },
           },
           {
+            type: 'media',
             media: {
               type: 'video',
               src: '/images/projects/trade/trade-3.mp4',
@@ -413,9 +473,10 @@ export const projects: Project[] = [
     team: [],
     sections: [
       {
-        title: 'Code',
-        items: [
+        blocks: [
+          { type: 'heading', text: 'Code' },
           {
+            type: 'media',
             media: {
               type: 'video',
               src: '/images/playground/play-9.mp4',
@@ -427,9 +488,10 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: 'Interactive Design',
-        items: [
+        blocks: [
+          { type: 'heading', text: 'Interactive Design' },
           {
+            type: 'media',
             media: {
               type: 'video',
               src: '/images/playground/play-10.mp4',
@@ -439,6 +501,7 @@ export const projects: Project[] = [
             },
           },
           {
+            type: 'media',
             media: {
               type: 'video',
               src: '/images/playground/play-6.mp4',
@@ -448,6 +511,7 @@ export const projects: Project[] = [
             },
           },
           {
+            type: 'media',
             media: {
               type: 'video',
               src: '/images/playground/play-5.mp4',
@@ -458,9 +522,10 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: 'Font Design',
-        items: [
+        blocks: [
+          { type: 'heading', text: 'Font Design' },
           {
+            type: 'media',
             media: {
               type: 'image',
               src: '/images/playground/play-1.png',
@@ -470,6 +535,7 @@ export const projects: Project[] = [
             },
           },
           {
+            type: 'media',
             media: {
               type: 'image',
               src: '/images/playground/play-2.png',
@@ -481,9 +547,10 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: 'Projects',
-        items: [
+        blocks: [
+          { type: 'heading', text: 'Projects' },
           {
+            type: 'media',
             media: {
               type: 'image',
               src: '/images/playground/play-3.png',
@@ -493,6 +560,7 @@ export const projects: Project[] = [
             },
           },
           {
+            type: 'media',
             media: {
               type: 'image',
               src: '/images/playground/play-7.png',
@@ -502,6 +570,7 @@ export const projects: Project[] = [
             },
           },
           {
+            type: 'media',
             media: {
               type: 'video',
               src: '/images/playground/play-4.mp4',
