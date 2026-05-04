@@ -26,6 +26,11 @@
   background-color: transparent;
 }
 
+.swapLayer {
+  position: absolute;
+  inset: 0;
+}
+
 /* Skeleton — fades out when media loads */
 .skeleton {
   position: absolute;

@@ -1,9 +1,10 @@
 'use client';
 
 import type { CSSProperties } from 'react';
-import { motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import {
   PRESS_SCALE,
+  SPRING_ICON_SWAP,
   SPRING_PRESS,
 } from '@/config/animations';
 import styles from './media-label.module.css';
@@ -51,7 +52,7 @@ export function MediaLabel({
             <div className={styles.buttonContainer}>
               <motion.button
                 type="button"
-                className={styles.arrowButton}
+                className={[styles.arrowButton, styles.arrowButtonPrev].join(' ')}
                 onClick={onPrev}
                 aria-label="Previous image"
                 whileTap={tap}
@@ -63,7 +64,7 @@ export function MediaLabel({
               </motion.button>
               <motion.button
                 type="button"
-                className={styles.arrowButton}
+                className={[styles.arrowButton, styles.arrowButtonNext].join(' ')}
                 onClick={onNext}
                 aria-label="Next image"
                 whileTap={tap}
@@ -86,7 +87,27 @@ export function MediaLabel({
           ) : null}
         </div>
       ) : null}
-      {label ? <p className={styles.label}>{label}</p> : null}
+      <AnimatePresence initial={false} mode="popLayout">
+        {label ? (
+          <motion.p
+            key={label}
+            layout
+            className={styles.label}
+            initial={
+              shouldReduceMotion ? false : { opacity: 0, filter: 'blur(8px)' }
+            }
+            animate={{ opacity: 1, filter: 'blur(0px)' }}
+            exit={
+              shouldReduceMotion
+                ? { opacity: 0 }
+                : { opacity: 0, filter: 'blur(8px)' }
+            }
+            transition={SPRING_ICON_SWAP}
+          >
+            {label}
+          </motion.p>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }

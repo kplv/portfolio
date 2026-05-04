@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import Image from 'next/image';
-import { useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { MediaBlock } from '@/data/projects';
 import { MediaLabel } from '@/components/project/media-label';
 import styles from './media-block.module.css';
@@ -113,6 +113,7 @@ export function ProjectMediaBlock({ text, media, accentColor }: ProjectMediaBloc
   const isGallery = items.length > 1;
   const total = items.length;
   const [index, setIndex] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     setIndex(0);
@@ -138,11 +139,40 @@ export function ProjectMediaBlock({ text, media, accentColor }: ProjectMediaBloc
     >
       {active && (
         <div
-          key={isGallery ? `gallery-${index}` : 'single'}
           className={styles.container}
           data-cover={active.cover || undefined}
         >
-          {active.type === 'image' ? (
+          {isGallery ? (
+            <AnimatePresence initial={false} mode="sync">
+              <motion.div
+                key={`gallery-${index}`}
+                className={styles.swapLayer}
+                initial={shouldReduceMotion ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.15,
+                  ease: 'linear',
+                }}
+              >
+                {active.type === 'image' ? (
+                  <ProjectImage
+                    src={active.src}
+                    alt={active.alt ?? active.label ?? ''}
+                    cover={active.cover}
+                  />
+                ) : (
+                  <ProjectVideo
+                    src={active.src}
+                    poster={active.poster}
+                    loop={active.loop}
+                    cover={active.cover}
+                    scale={active.scale}
+                  />
+                )}
+              </motion.div>
+            </AnimatePresence>
+          ) : active.type === 'image' ? (
             <ProjectImage
               src={active.src}
               alt={active.alt ?? active.label ?? ''}
