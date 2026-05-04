@@ -1,10 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image, { type StaticImageData } from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
 import { EASE_OUT_QUINT, PRESS_DURATION, PRESS_SCALE } from '@/config/animations';
 import styles from './masked-avatar.module.css';
+
+// TODO: REMOVE — temp delay so we can see avatar skeleton pulse
+const DEBUG_LOAD_DELAY_MS = 5000;
 
 /** Stroke path from Figma mask (node 356:2723), aligned to viewBox 0 0 174.335 174.335 */
 const MASK_BORDER_PATH =
@@ -20,7 +23,17 @@ export interface MaskedAvatarProps {
 
 export function MaskedAvatar({ src, size = DEFAULT_SIZE }: MaskedAvatarProps) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const loadTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shouldReduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    return () => {
+      if (loadTimeoutRef.current) {
+        clearTimeout(loadTimeoutRef.current);
+        loadTimeoutRef.current = null;
+      }
+    };
+  }, []);
 
   const dim = { width: size, height: size };
   const sizesAttr = `${size}px`;
@@ -61,7 +74,15 @@ export function MaskedAvatar({ src, size = DEFAULT_SIZE }: MaskedAvatarProps) {
                 draggable={false}
                 className={styles.image}
                 data-loaded={isLoaded}
-                onLoad={() => setIsLoaded(true)}
+                onLoad={() => {
+                  if (loadTimeoutRef.current) {
+                    clearTimeout(loadTimeoutRef.current);
+                  }
+                  loadTimeoutRef.current = setTimeout(() => {
+                    setIsLoaded(true);
+                    loadTimeoutRef.current = null;
+                  }, DEBUG_LOAD_DELAY_MS);
+                }}
                 priority={false}
                 quality={90}
               />

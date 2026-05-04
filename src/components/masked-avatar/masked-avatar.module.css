@@ -1,5 +1,5 @@
 .root {
-  --masked-avatar-border-tint: #99a3be;
+  --masked-avatar-border-tint: var(--text-accent-color);
   position: relative;
   display: block;
   flex-shrink: 0;
@@ -8,12 +8,6 @@
   background: transparent;
   cursor: default;
   -webkit-tap-highlight-color: transparent;
-}
-
-@supports (color: oklch(from #99a3be l c h)) {
-  .root {
-    --masked-avatar-border-tint: oklch(from #99a3be l c h);
-  }
 }
 
 .root:focus,
@@ -59,7 +53,11 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-color: color-mix(in oklch, var(--slate-400) 12%, var(--background-color));
+  background-color: color-mix(
+    in srgb,
+    var(--text-accent-color) 6%,
+    var(--background-color)
+  );
   -webkit-mask-image: url('/images/masked-avatar-mask-alpha.svg');
   mask-image: url('/images/masked-avatar-mask-alpha.svg');
   -webkit-mask-size: contain;
@@ -68,12 +66,32 @@
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
+  animation: maskedAvatarSkeletonPulse 1s ease-in-out infinite alternate;
   transition: opacity 200ms ease;
+}
+
+@keyframes maskedAvatarSkeletonPulse {
+  from {
+    background-color: color-mix(
+      in srgb,
+      var(--text-accent-color) 6%,
+      var(--background-color)
+    );
+  }
+
+  to {
+    background-color: color-mix(
+      in srgb,
+      var(--text-accent-color) 14%,
+      var(--background-color)
+    );
+  }
 }
 
 .skeleton[data-loaded='true'] {
   opacity: 0;
   pointer-events: none;
+  animation: none;
 }
 
 .maskedClip {
@@ -122,7 +140,7 @@
 }
 
 .borderPath {
-  stroke: color-mix(in oklch, var(--masked-avatar-border-tint) 8%, transparent);
+  stroke: color-mix(in oklch, var(--masked-avatar-border-tint) 4%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -134,5 +152,9 @@
   .skeleton,
   .image {
     transition: none;
+  }
+
+  .skeleton {
+    animation: none;
   }
 }
