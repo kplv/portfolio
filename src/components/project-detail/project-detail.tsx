@@ -96,7 +96,7 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
                   }
                 >
                   <ProjectMediaBlock
-                    label={item.label}
+                    text={item.text}
                     media={item.media}
                     accentColor={accentColor}
                   />

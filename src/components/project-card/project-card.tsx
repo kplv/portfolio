@@ -15,13 +15,16 @@ function prefetchProjectMedia(project: Project) {
   project.sections?.forEach((section) =>
     section.items.forEach((item) => {
       if (!item.media) return;
-      if (item.media.type === 'image') {
-        const img = new window.Image();
-        img.src = item.media.src;
-      }
-      if (item.media.type === 'video' && item.media.poster) {
-        const img = new window.Image();
-        img.src = item.media.poster;
+      const medias = Array.isArray(item.media) ? item.media : [item.media];
+      for (const m of medias) {
+        if (m.type === 'image') {
+          const img = new window.Image();
+          img.src = m.src;
+        }
+        if (m.type === 'video' && m.poster) {
+          const img = new window.Image();
+          img.src = m.poster;
+        }
       }
     }),
   );

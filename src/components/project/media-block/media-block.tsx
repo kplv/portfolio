@@ -1,14 +1,16 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import Image from 'next/image';
 import { useReducedMotion } from 'motion/react';
 import type { MediaBlock } from '@/data/projects';
+import { MediaLabel } from '@/components/project/media-label';
 import styles from './media-block.module.css';
 
 export interface ProjectMediaBlockProps {
-  label?: string;
-  media?: MediaBlock;
+  /** Body paragraph when there is no media */
+  text?: string;
+  media?: MediaBlock | MediaBlock[];
   accentColor: string;
 }
 
@@ -99,38 +101,70 @@ function ProjectVideo({
         data-loaded={isLoaded}
         data-cover={cover || undefined}
         data-scaled={scale ? true : undefined}
-        style={scale ? ({ '--video-scale': scale } as React.CSSProperties) : undefined}
+        style={scale ? ({ '--video-scale': scale } as CSSProperties) : undefined}
         onCanPlay={() => setIsLoaded(true)}
       />
     </div>
   );
 }
 
-export function ProjectMediaBlock({ label, media, accentColor }: ProjectMediaBlockProps) {
+export function ProjectMediaBlock({ text, media, accentColor }: ProjectMediaBlockProps) {
+  const items = media ? (Array.isArray(media) ? media : [media]) : [];
+  const isGallery = items.length > 1;
+  const total = items.length;
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    setIndex(0);
+  }, [media]);
+
+  const active = items[index];
+  const caption = active?.label ?? text;
+  const showMediaLabel = isGallery || Boolean(caption);
+
+  const galleryHandlers = isGallery
+    ? {
+        current: index + 1,
+        total,
+        onPrev: () => setIndex((i) => (i - 1 + total) % total),
+        onNext: () => setIndex((i) => (i + 1) % total),
+      }
+    : {};
+
   return (
     <div
       className={styles.block}
-      style={{ '--media-accent-color': accentColor } as React.CSSProperties}
+      style={{ '--media-accent-color': accentColor } as CSSProperties}
     >
-      {label && (
-        <div className={styles.header}>
-          <p className={styles.label}>{label}</p>
-        </div>
-      )}
-      {media && (
-        <div className={styles.container} data-cover={media.cover || undefined}>
-          {media.type === 'image' ? (
-            <ProjectImage src={media.src} alt={media.alt ?? label ?? ''} cover={media.cover} />
+      {active && (
+        <div
+          key={isGallery ? `gallery-${index}` : 'single'}
+          className={styles.container}
+          data-cover={active.cover || undefined}
+        >
+          {active.type === 'image' ? (
+            <ProjectImage
+              src={active.src}
+              alt={active.alt ?? active.label ?? ''}
+              cover={active.cover}
+            />
           ) : (
             <ProjectVideo
-              src={media.src}
-              poster={media.poster}
-              loop={media.loop}
-              cover={media.cover}
-              scale={media.scale}
+              src={active.src}
+              poster={active.poster}
+              loop={active.loop}
+              cover={active.cover}
+              scale={active.scale}
             />
           )}
         </div>
+      )}
+      {showMediaLabel && (
+        <MediaLabel
+          label={caption}
+          color={accentColor}
+          {...galleryHandlers}
+        />
       )}
     </div>
   );
