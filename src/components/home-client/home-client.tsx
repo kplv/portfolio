@@ -18,6 +18,7 @@ import {
 } from '@/config/page-motion';
 import { getProjectByPathname, type Project } from '@/data/projects';
 import styles from './home-client.module.css';
+import { MediaLabel } from '@/components/project/media-label';
 
 const DEFAULT_TITLE = 'Denis Kopylov — Product Designer';
 const ABOUT_TITLE = 'About — Denis Kopylov';
@@ -77,7 +78,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
 
   useEffect(() => {
     // #region agent log
-    fetch('http://127.0.0.1:7364/ingest/a524ac81-addc-48b2-b5df-5bc6c74adf3c',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'d9fc50'},body:JSON.stringify({sessionId:'d9fc50',runId:'pre-fix',hypothesisId:'H3',location:'home-client.tsx:81',message:'Home header gradient prop',data:{pathname,isHome,isAbout,isProject,homeHeaderGradient},timestamp:Date.now()})}).catch(()=>{});
+    fetch('http://127.0.0.1:7364/ingest/a524ac81-addc-48b2-b5df-5bc6c74adf3c', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'd9fc50' }, body: JSON.stringify({ sessionId: 'd9fc50', runId: 'pre-fix', hypothesisId: 'H3', location: 'home-client.tsx:81', message: 'Home header gradient prop', data: { pathname, isHome, isAbout, isProject, homeHeaderGradient }, timestamp: Date.now() }) }).catch(() => { });
     // #endregion
   }, [pathname, isHome, isAbout, isProject, homeHeaderGradient]);
 
@@ -111,6 +112,9 @@ export function HomeClient({ projects, className }: HomeClientProps) {
               </motion.div>
             ) : (
               <motion.div key="home" style={{ display: 'contents' }}>
+                <div style={{ display: 'flex', maxWidth: 'var(--content-max-width)' }}>
+                  <MediaLabel label="A glimpse on what’s around your house right now. Animations were helpful in showing state — yes, but also look nice (🥺) ? " color="var(--text-accent-color)" />
+                </div>
                 <MotionIntroText
                   variants={HOME_SECTION_FADE}
                   custom={{ enterOrder: 0, exitOrder: 2 }}
@@ -121,6 +125,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
                   gradient={homeHeaderGradient}
                   text="Product designer with a focus on turning ideas into reality through coding, a holistic approach, and an eye for interactive experiences. Currently at Ostrom."
                 />
+
                 <MotionSocialLinkList
                   variants={HOME_SECTION_FADE}
                   custom={{ enterOrder: 1, exitOrder: 1 }}
@@ -132,6 +137,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
                   <SocialLink href="https://www.are.na/denis-kopylov/channels" text="Are.na" />
                   <SocialLink href="/about" text="About" />
                 </MotionSocialLinkList>
+
                 <MotionProjectList
                   variants={HOME_SECTION_FADE}
                   custom={{ enterOrder: 2, exitOrder: 0 }}
@@ -145,7 +151,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
             )}
           </AnimatePresence>
         </div>
-      </main>
-    </div>
+      </main >
+    </div >
   );
 }

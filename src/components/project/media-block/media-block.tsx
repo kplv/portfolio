@@ -80,7 +80,7 @@ function ProjectVideo({
     if (!inView || !video) return;
     video.preload = 'auto';
     if (loop && !shouldReduceMotion) {
-      video.play().catch(() => {});
+      video.play().catch(() => { });
     }
   }, [inView, loop, shouldReduceMotion]);
 
