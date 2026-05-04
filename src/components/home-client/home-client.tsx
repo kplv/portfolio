@@ -16,26 +16,8 @@ import {
   ROUTE_SECTION_REDUCED_MOTION_TARGET,
   ROUTE_SHELL_ANIMATE_PRESENCE_PROPS,
 } from '@/config/page-motion';
-import { getProjectByPathname, type MediaBlock, type Project } from '@/data/projects';
+import { getProjectByPathname, type Project } from '@/data/projects';
 import styles from './home-client.module.css';
-import { ProjectMediaBlock } from '@/components/project/media-block';
-
-const HOME_GALLERY: MediaBlock[] = [
-  {
-    type: 'video',
-    src: '/images/projects/ostrom/ostrom-6.mp4',
-    cover: true,
-    label:
-      "A glimpse on what's around your house right now. Animations were helpful in showing state — yes, but also look nice (🥺) ?",
-  },
-  {
-    type: 'image',
-    src: '/images/projects/ostrom/ostrom-13.png',
-    cover: true,
-    label:
-      'New version focused on main areas of interest: where my energy come from and how do I use it.',
-  },
-];
 
 const DEFAULT_TITLE = 'Denis Kopylov — Product Designer';
 const ABOUT_TITLE = 'About — Denis Kopylov';
@@ -123,11 +105,6 @@ export function HomeClient({ projects, className }: HomeClientProps) {
               </motion.div>
             ) : (
               <motion.div key="home" style={{ display: 'contents' }}>
-                <ProjectMediaBlock
-                  media={HOME_GALLERY}
-                  accent="var(--text-accent-color)"
-                  accentSolid="var(--text-accent-color)"
-                />
                 <MotionIntroText
                   variants={HOME_SECTION_FADE}
                   custom={{ enterOrder: 0, exitOrder: 2 }}
