@@ -3,7 +3,8 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-import { getAccentColor, type Project } from '@/data/projects';
+import { getAccentSolid, getAccentTextStyle, type Project } from '@/data/projects';
+import { useResolvedProjectAccent } from '@/hooks/use-resolved-project-accent';
 import styles from './project-card.module.css';
 
 export interface ProjectCardProps {
@@ -66,6 +67,10 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
   const canHover = useCanHover();
   const prefetchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const resolvedAccent = useResolvedProjectAccent(project);
+  const accentSolid = getAccentSolid(resolvedAccent);
+  const titleStyle = getAccentTextStyle(resolvedAccent);
+
   const images = project.images ?? [project.image];
   const currentImage = images[currentIndex];
 
@@ -91,7 +96,7 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
   return (
     <motion.div
       className={styles.wrapper}
-      style={{ '--project-accent': getAccentColor(project) } as React.CSSProperties}
+      style={{ '--project-accent': accentSolid } as React.CSSProperties}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
     >
@@ -162,7 +167,9 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
           </motion.div>
           <div className={styles.textBlock}>
             <motion.p className={styles.projectTitle}>
-              <span className={styles.projectName}>{project.name}. </span>
+              <span className={styles.projectName} style={titleStyle}>
+                {project.name}.{' '}
+              </span>
               <span className={styles.projectDescription}>
                 {project.description}
               </span>

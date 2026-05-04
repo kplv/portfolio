@@ -7,11 +7,17 @@ import {
   SPRING_ICON_SWAP,
   SPRING_PRESS,
 } from '@/config/animations';
+import {
+  getAccentSolid,
+  getAccentTextStyle,
+  isCssGradient,
+} from '@/data/projects';
 import styles from './media-label.module.css';
 
 export interface MediaLabelProps {
   label?: string;
-  color: string;
+  /** Resolved project accent (CSS solid, gradient, or display token). */
+  accent: string;
   onPrev?: () => void;
   onNext?: () => void;
   current?: number;
@@ -20,13 +26,18 @@ export interface MediaLabelProps {
 
 export function MediaLabel({
   label,
-  color,
+  accent,
   onPrev,
   onNext,
   current,
   total,
 }: MediaLabelProps) {
   const shouldReduceMotion = useReducedMotion();
+  const accentSolid = getAccentSolid(accent);
+  /** Gradient + `background-clip: text` is unreliable for small UI type; use derived solid. */
+  const counterTextStyle: CSSProperties = isCssGradient(accent)
+    ? { color: accentSolid }
+    : getAccentTextStyle(accent);
 
   const showPill = onPrev != null && onNext != null;
   const showCounter = current != null && total != null;
@@ -44,7 +55,12 @@ export function MediaLabel({
   return (
     <div
       className={styles.container}
-      style={{ '--media-label-accent': color } as CSSProperties}
+      style={
+        {
+          '--media-label-fill': accent,
+          '--media-label-solid': accentSolid,
+        } as CSSProperties
+      }
     >
       {showControls ? (
         <div className={styles.controlContainer}>
@@ -79,7 +95,11 @@ export function MediaLabel({
               <span className={styles.srOnly}>
                 Image {current} of {total}
               </span>
-              <span className={styles.counterText} aria-hidden>
+              <span
+                className={styles.counterText}
+                style={counterTextStyle}
+                aria-hidden
+              >
                 {current}
                 <span className={styles.counterDim}> / {total}</span>
               </span>

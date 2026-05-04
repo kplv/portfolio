@@ -10,7 +10,8 @@ import {
   ORDERED_ROUTE_SECTION_VARIANTS,
   ROUTE_SECTION_REDUCED_MOTION_TARGET,
 } from '@/config/page-motion';
-import { getAccentColor, getHeaderGradient, type Project } from '@/data/projects';
+import { getAccentSolid, type Project } from '@/data/projects';
+import { useResolvedProjectAccent } from '@/hooks/use-resolved-project-accent';
 import styles from './project-detail.module.css';
 
 export interface ProjectDetailProps {
@@ -21,8 +22,8 @@ export interface ProjectDetailProps {
 
 export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
   const shouldReduceMotion = useReducedMotion();
-  const accentColor = getAccentColor(project);
-  const headerGradient = getHeaderGradient(project);
+  const resolvedAccent = useResolvedProjectAccent(project);
+  const accentSolid = getAccentSolid(resolvedAccent);
   const sectionCount = project.sections?.length ?? 0;
   const reducedState = ROUTE_SECTION_REDUCED_MOTION_TARGET;
 
@@ -49,18 +50,18 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
           <IntroText
             header={project.name}
             text={project.intro ?? project.description}
-            gradient={headerGradient}
+            accent={resolvedAccent}
           />
           {project.role && project.year && project.contribution && (
             <InfoTable
               role={project.role}
               year={project.year}
               contribution={project.contribution}
-              color={accentColor}
+              accent={resolvedAccent}
             />
           )}
           {project.team && (
-            <TeamList members={project.team} color={accentColor} />
+            <TeamList members={project.team} color={accentSolid} />
           )}
         </motion.div>
 
@@ -78,8 +79,7 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
               <SectionBlockView
                 key={`${j}-${block.type}`}
                 block={block}
-                headerGradient={headerGradient}
-                accentColor={accentColor}
+                accent={resolvedAccent}
               />
             ))}
           </motion.div>

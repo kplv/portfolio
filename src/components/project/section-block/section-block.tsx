@@ -1,35 +1,29 @@
 'use client';
 
-import type { SectionBlock } from '@/data/projects';
+import {
+  getAccentSolid,
+  getAccentTextStyle,
+  type SectionBlock,
+} from '@/data/projects';
 import { ProjectMediaBlock } from '@/components/project/media-block';
 import styles from './section-block.module.css';
 
 export interface SectionBlockViewProps {
   block: SectionBlock;
-  headerGradient: string;
-  accentColor: string;
+  /** Theme-resolved project accent (gradient or solid). */
+  accent: string;
 }
 
 function normalizeParagraphs(text: string | string[]): string[] {
   return Array.isArray(text) ? text : [text];
 }
 
-export function SectionBlockView({
-  block,
-  headerGradient,
-  accentColor,
-}: SectionBlockViewProps) {
+export function SectionBlockView({ block, accent }: SectionBlockViewProps) {
+  const accentSolid = getAccentSolid(accent);
+
   if (block.type === 'heading') {
     return (
-      <h2
-        className={styles.heading}
-        style={{
-          backgroundImage: headerGradient,
-          backgroundClip: 'text',
-          WebkitBackgroundClip: 'text',
-          color: 'transparent',
-        }}
-      >
+      <h2 className={styles.heading} style={getAccentTextStyle(accent)}>
         {block.text}
       </h2>
     );
@@ -51,7 +45,8 @@ export function SectionBlockView({
   return (
     <ProjectMediaBlock
       media={block.media}
-      accentColor={accentColor}
+      accent={accent}
+      accentSolid={accentSolid}
     />
   );
 }

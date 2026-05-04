@@ -1,14 +1,15 @@
+import { getAccentTextStyle } from '@/data/projects';
 import styles from './info-table.module.css';
 
 export interface InfoTableProps {
   role: string;
   year: string;
   contribution: string;
-  color?: string;
+  accent?: string;
 }
 
-export function InfoTable({ role, year, contribution, color }: InfoTableProps) {
-  const headerStyle = color ? { color } : undefined;
+export function InfoTable({ role, year, contribution, accent }: InfoTableProps) {
+  const headerStyle = accent ? getAccentTextStyle(accent) : undefined;
 
   return (
     <div className={styles.container}>

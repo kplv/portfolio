@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { converter, formatCss } from 'culori';
 
 export interface TeamMember {
@@ -46,10 +47,13 @@ export interface Project {
   image: string;
   /** When provided, cycles through these instead of single image. */
   images?: string[];
-  /** Accent color in OKLCH; derived from last color of accentGradient when not set */
-  accentColor?: string;
-  /** When provided, used for project detail header and home overlay; accentColor used for other UI */
-  accentGradient?: string;
+  /**
+   * Project accent: a CSS color or a CSS gradient (use `oklch()` stops for gradients).
+   * For non-text UI that needs a single color, the last stop of a gradient is used.
+   */
+  accent: string;
+  /** When set, used instead of `accent` while `[data-theme='dark']`. */
+  accentDark?: string;
   team?: TeamMember[];
   role?: string;
   year?: string;
@@ -59,9 +63,21 @@ export interface Project {
 
 const toOklch = converter('oklch');
 
+export function isCssGradient(value: string): boolean {
+  const v = value.trim().toLowerCase();
+  return (
+    v.includes('linear-gradient') ||
+    v.includes('radial-gradient') ||
+    v.includes('conic-gradient') ||
+    v.includes('repeating-linear-gradient') ||
+    v.includes('repeating-radial-gradient')
+  );
+}
+
 /** Last color from gradient (hex, rgb, or oklch), converted to OKLCH */
 function lastColorFromGradientInOklch(gradient: string): string | undefined {
-  const colorRegex = /#[0-9a-fA-F]{3,8}|rgb\s*\([^)]+\)|oklch\s*\([^)]+\)/g;
+  const colorRegex =
+    /#[0-9a-fA-F]{3,8}|rgba?\s*\([^)]+\)|oklch\s*\([^)]+\)/g;
   const matches = gradient.match(colorRegex);
   if (!matches?.length) return undefined;
   const last = matches[matches.length - 1];
@@ -69,25 +85,55 @@ function lastColorFromGradientInOklch(gradient: string): string | undefined {
   return parsed ? formatCss(parsed) : undefined;
 }
 
-/** Resolved accent color in OKLCH: explicit accentColor, or last color from accentGradient, or fallback */
-export function getAccentColor(
+export function getResolvedAccent(
   project: Project,
+  theme: 'light' | 'dark',
+): string {
+  if (theme === 'dark' && project.accentDark) return project.accentDark;
+  return project.accent;
+}
+
+/**
+ * A single color for borders, tints, and `color-mix` (last stop if `css` is a gradient).
+ */
+export function getAccentSolid(
+  css: string,
   fallback = 'var(--mint-400)',
 ): string {
+  if (isCssGradient(css)) {
+    return lastColorFromGradientInOklch(css) ?? fallback;
+  }
+  return css;
+}
+
+/**
+ * `var(--…)` that references a gradient (e.g. `var(--text-display-gradient)`) needs the
+ * same treatment as a literal gradient.
+ */
+function isGradientLikeTextFill(css: string): boolean {
   return (
-    project.accentColor ??
-    (project.accentGradient
-      ? lastColorFromGradientInOklch(project.accentGradient)
-      : undefined) ??
-    fallback
+    isCssGradient(css) ||
+    (css.includes('var(') && css.toLowerCase().includes('gradient'))
   );
 }
 
-/** Gradient for headers: accentGradient when present, else fallback from accentColor */
-export function getHeaderGradient(project: Project): string {
-  if (project.accentGradient) return project.accentGradient;
-  const color = getAccentColor(project);
-  return `linear-gradient(90deg, ${color} 0%, ${color} 100%)`;
+export function getAccentTextStyle(css: string): CSSProperties {
+  if (isGradientLikeTextFill(css)) {
+    return {
+      backgroundImage: css,
+      backgroundClip: 'text',
+      WebkitBackgroundClip: 'text',
+      color: 'transparent',
+      WebkitTextFillColor: 'transparent',
+    };
+  }
+  return { color: css };
+}
+
+/** For callers that always use `background-clip: text` (twin-stop solid). */
+export function getTextClipBackground(css: string): string {
+  if (isCssGradient(css)) return css;
+  return `linear-gradient(90deg, ${css} 0%, ${css} 100%)`;
 }
 
 /** Resolves a project when pathname is `/${slug}` for a known project slug. */
@@ -119,9 +165,8 @@ export const projects: Project[] = [
       '/images/projects/ostrom/ostrom-7.png',
       '/images/projects/ostrom/ostrom-8.png',
     ],
-    accentColor: 'oklch(70% 0.1 186)',
-    accentGradient:
-      'radial-gradient(circle at 50% 85% in oklch, oklch(0.8 0.1 202) 0%, oklch(0.7 0.1 186) 100%)',
+    accent:
+      'linear-gradient(82.638deg in oklch, oklch(0.5686 0.0823 195.09) 0.85402%, oklch(0.6635 0.1129 188.77) 99.266%)',
     role: 'Sr. Product Designer',
     year: '2025–26',
     contribution: 'Product Design, Engineering, Strategy',
@@ -343,10 +388,10 @@ export const projects: Project[] = [
       '/images/projects/trade/trade-5.png',
       '/images/projects/trade/trade-6.png',
     ],
-    accentColor: '#153e9b',
-    accentGradient:
-      'linear-gradient(135deg, #5be7ff 0%, #7858ff 60%, #18345b 100%)',
-
+    accent:
+      'linear-gradient(82.638deg in oklch, oklch(0.4824 0.2723 266.61) 0.85402%, oklch(0.5126 0.2452 265.66) 99.266%)',
+    accentDark:
+      'linear-gradient(263.068deg in oklch, oklch(0.6438 0.1832 262.69) 22.575%, oklch(0.644 0.1623 258.02) 102.45%)',
     role: 'Product Designer II',
     year: '2023–24',
     contribution: 'Product & Interactive Design',
@@ -464,9 +509,8 @@ export const projects: Project[] = [
       '/images/playground/play-3.png',
       '/images/playground/play-7.png',
     ],
-    accentColor: 'oklch(0.62 0.20 275)',
-    accentGradient:
-      'radial-gradient(circle at 50% 85% in oklch, oklch(0.65 0.17 235) 0%, oklch(0.55 0.27 310) 100%)',
+    accent:
+      'linear-gradient(82.638deg in oklch, oklch(0.5833 0.2078 8.21) 0.85402%, oklch(0.5914 0.2359 22.78) 99.266%)',
     role: 'Designer',
     year: '2022 — Now',
     contribution: 'Everything',

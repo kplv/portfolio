@@ -4,6 +4,9 @@ Each `.md` file in this folder is the **content source of truth** for one portfo
 When the user asks to add or update a project, read the corresponding `.md` file and sync
 its contents into `src/data/projects.ts`.
 
+For **Figma-driven** case study updates (URL + node, captions with `[filename]` hints, carousels),
+follow **[`.cursor/rules/figma-to-projects.mdc`](../.cursor/rules/figma-to-projects.mdc)** instead of or alongside this markdown flow.
+
 ---
 
 ## File format
@@ -11,8 +14,8 @@ its contents into `src/data/projects.ts`.
 ```
 url: <slug>
 Thumbnail: <absolute path to the main page card image>
-Accent Color: <OKLCH color, e.g. oklch(70% 0.1 186)>
-Accent Gradient: <CSS gradient string>
+Accent: <CSS OKLCH color or CSS gradient with oklch() stops only>
+Accent Dark: <optional; same shape as Accent for dark mode>
 
 Name: <project name>
 Description: <short tagline for the project card>
@@ -46,8 +49,8 @@ What: <contribution type, e.g. Product Design, Frontend>
 |---|---|---|
 | `url` | `slug` | URL-safe identifier |
 | `Thumbnail` | `image` | Hero/thumbnail shown on the main page card |
-| `Accent Color` | `accentColor` | OKLCH accent color |
-| `Accent Gradient` | `accentGradient` | CSS gradient for modal header |
+| `Accent` | `accent` | Single CSS color **or** gradient; gradients must use **`oklch()`** stops only (no raw `rgb()`/`#hex` inside the gradient string). Used for titles, info labels, media controls, etc. |
+| `Accent Dark` | `accentDark` | Optional; when set, replaces `accent` while `[data-theme='dark']`. |
 | `Name` | `name` | Display name |
 | `Description` | `description` | Short tagline on project card |
 | `Intro Text` | `intro` | Longer text in modal header |
@@ -91,7 +94,7 @@ These fields do **not** appear in `.md` files. Keep them in `projects.ts` direct
 3. Find the matching project in the `projects` array by `slug`.
    - If it doesn't exist, create a new entry with a unique `id` and ask the user
      for `team`.
-4. Update `name`, `description`, `intro`, `role`, `year`, `contribution`, `accentColor`, `accentGradient`.
+4. Update `name`, `description`, `intro`, `role`, `year`, `contribution`, `accent`, and `accentDark` when provided.
 5. Set `image` from the `Thumbnail` field (convert to web-relative path).
 6. Rebuild `sections` from the `### Section` blocks:
    - For each `###` block, add `{ type: 'heading', text: <title> }` then, for each label + path pair, add `{ type: 'media', media: { … } }` with the correct `media.type` and `label` from the markdown label line.

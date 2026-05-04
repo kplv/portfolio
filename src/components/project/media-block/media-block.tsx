@@ -11,7 +11,10 @@ export interface ProjectMediaBlockProps {
   /** Body paragraph when there is no media */
   text?: string;
   media?: MediaBlock | MediaBlock[];
-  accentColor: string;
+  /** Resolved project accent (gradient or solid). */
+  accent: string;
+  /** Single color for borders / color-mix (last gradient stop when accent is a gradient). */
+  accentSolid: string;
 }
 
 function useInView(ref: React.RefObject<HTMLElement | null>) {
@@ -119,7 +122,8 @@ function ProjectVideo({
 export function ProjectMediaBlock({
   text,
   media,
-  accentColor,
+  accent,
+  accentSolid,
 }: ProjectMediaBlockProps) {
   const items = media ? (Array.isArray(media) ? media : [media]) : [];
   const isGallery = items.length > 1;
@@ -200,7 +204,7 @@ export function ProjectMediaBlock({
   return (
     <div
       className={styles.block}
-      style={{ '--media-accent-color': accentColor } as CSSProperties}
+      style={{ '--media-accent-color': accentSolid } as CSSProperties}
     >
       {mediaFrame && (
         <div className={styles.frameLeadIn}>{mediaFrame}</div>
@@ -208,7 +212,7 @@ export function ProjectMediaBlock({
       {showMediaLabel && (
         <MediaLabel
           label={caption}
-          color={accentColor}
+          accent={accent}
           {...galleryHandlers}
         />
       )}

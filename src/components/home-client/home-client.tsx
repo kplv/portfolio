@@ -93,12 +93,6 @@ export function HomeClient({ projects, className }: HomeClientProps) {
   const reducedState = ROUTE_SECTION_REDUCED_MOTION_TARGET;
   const homeHeaderGradient = 'var(--text-display-gradient)';
 
-  useEffect(() => {
-    // #region agent log
-    fetch('http://127.0.0.1:7364/ingest/a524ac81-addc-48b2-b5df-5bc6c74adf3c', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'd9fc50' }, body: JSON.stringify({ sessionId: 'd9fc50', runId: 'pre-fix', hypothesisId: 'H3', location: 'home-client.tsx:81', message: 'Home header gradient prop', data: { pathname, isHome, isAbout, isProject, homeHeaderGradient }, timestamp: Date.now() }) }).catch(() => { });
-    // #endregion
-  }, [pathname, isHome, isAbout, isProject, homeHeaderGradient]);
-
   return (
     <div className={styles.root}>
       <NavigationHeader />
@@ -131,7 +125,8 @@ export function HomeClient({ projects, className }: HomeClientProps) {
               <motion.div key="home" style={{ display: 'contents' }}>
                 <ProjectMediaBlock
                   media={HOME_GALLERY}
-                  accentColor="var(--text-accent-color)"
+                  accent="var(--text-accent-color)"
+                  accentSolid="var(--text-accent-color)"
                 />
                 <MotionIntroText
                   variants={HOME_SECTION_FADE}
@@ -140,7 +135,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
                   animate={shouldReduceMotion ? reducedState : 'show'}
                   exit={shouldReduceMotion ? reducedState : 'exit'}
                   header="Denis Kopylov"
-                  gradient={homeHeaderGradient}
+                  accent={homeHeaderGradient}
                   text="Product designer with a focus on turning ideas into reality through coding, a holistic approach, and an eye for interactive experiences. Currently at Ostrom."
                 />
 

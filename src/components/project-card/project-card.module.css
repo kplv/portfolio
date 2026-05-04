@@ -7,7 +7,6 @@
 
 .projectName {
   font-weight: 700;
-  color: color-mix(in srgb, var(--text-primary-color) 90%, transparent);
 }
 
 .projectDescription {
