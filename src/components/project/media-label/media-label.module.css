@@ -91,6 +91,8 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
+  -webkit-user-select: none;
+  user-select: none;
   color: var(--media-label-accent);
   font-size: var(--text-tertiary-size);
   line-height: var(--text-tertiary-line-height);
