@@ -37,6 +37,10 @@ function useInView(ref: React.RefObject<HTMLElement | null>) {
 function ProjectImage({ src, alt, cover }: { src: string; alt: string; cover?: boolean }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
+  useEffect(() => {
+    setIsLoaded(false);
+  }, [src]);
+
   return (
     <>
       <span className={styles.skeleton} data-loaded={isLoaded} aria-hidden="true" />
@@ -76,6 +80,10 @@ function ProjectVideo({
   const inView = useInView(containerRef as React.RefObject<HTMLElement | null>);
   const [isLoaded, setIsLoaded] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    setIsLoaded(false);
+  }, [src]);
 
   useEffect(() => {
     const video = videoRef.current;

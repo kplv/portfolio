@@ -41,13 +41,33 @@
     var(--media-accent-color) 8%,
     var(--background-color)
   );
+  animation: skeletonPulse 1s ease-in-out infinite alternate;
   transition: opacity 200ms ease;
   z-index: 1;
+}
+
+@keyframes skeletonPulse {
+  from {
+    background-color: color-mix(
+      in srgb,
+      var(--media-accent-color) 6%,
+      var(--background-color)
+    );
+  }
+
+  to {
+    background-color: color-mix(
+      in srgb,
+      var(--media-accent-color) 14%,
+      var(--background-color)
+    );
+  }
 }
 
 .skeleton[data-loaded='true'] {
   opacity: 0;
   pointer-events: none;
+  animation: none;
 }
 
 /* Media frame — "peek" offset (same as home page project card) */
@@ -101,6 +121,10 @@ video.media[data-scaled='true'] {
   .skeleton,
   .media {
     transition: none;
+  }
+
+  .skeleton {
+    animation: none;
   }
 }
 

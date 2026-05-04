@@ -29,6 +29,14 @@
   );
 }
 
+[data-theme='dark'] .buttonContainer {
+  background-color: color-mix(
+    in oklch,
+    var(--media-label-accent) 10%,
+    transparent
+  );
+}
+
 .arrowButton {
   position: relative;
   display: flex;
