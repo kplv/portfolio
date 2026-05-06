@@ -153,7 +153,7 @@ export const projects: Project[] = [
     slug: 'ostrom',
     name: 'Ostrom',
     description:
-      'Friendly energy startup with a mobile app for energy management and Germany\u2019s first virtual power plant',
+      'Major features redesign, design engineering, and process improvements for an energy management provider',
     intro:
       'Friendly energy startup with a mobile app to handle all your energy management. Simple flows hide a complex infrastructure underneath, like Germany\u2019s first virtual power plant.',
     image: '/images/projects/ostrom/ostrom-1.png',
@@ -293,7 +293,7 @@ export const projects: Project[] = [
                 type: 'video',
                 src: '/images/projects/ostrom/solar-exploration.mp4',
                 cover: true,
-                playbackRate: 0.85,
+                playbackRate: 0.5,
                 label:
                   'In solar statistics I explored more than 30 approaches. They varied in\u00a0navigation patterns, and how they handled the most common scenarios.',
               },
@@ -301,7 +301,7 @@ export const projects: Project[] = [
                 type: 'video',
                 src: '/images/projects/ostrom/energy-exploration.mp4',
                 cover: true,
-                playbackRate: 0.85,
+                playbackRate: 0.5,
                 label:
                   'The device chart was no exception either. I looked at it from different angles, including the ones that deviated from competitor research.',
               },
@@ -362,7 +362,7 @@ export const projects: Project[] = [
                 src: '/images/projects/ostrom/management-documents.png',
                 cover: true,
                 label:
-                  'Design patterns I used to systematically improve velocity and the quality of design output.',
+                  'Design patterns I used to systematically improve velocity and the quality of design output. For planning, I used both Notion and Linear (\u2764\ufe0f) to align with the team.',
               },
               {
                 type: 'image',
@@ -382,7 +382,7 @@ export const projects: Project[] = [
     slug: 'trade-republic',
     name: 'Trade Republic',
     description:
-      "Fraud prevention, delightful interactions, and employee tools for Europe's largest savings platform",
+      'Security features, productivity tools, and key-flows interactions for a biggest investment platform in Europe',
     intro:
       'Built fraud prevention flows from 0\u00a0\u2192\u00a01 for Trade Republic\u2019s 8M+ users, designed micro-interactions for core screens, and shipped an internal performance review tool.',
     image: '/images/projects/trade/trade-0.png',
@@ -407,7 +407,7 @@ export const projects: Project[] = [
           { type: 'heading', text: 'My Role' },
           {
             type: 'text',
-            text: 'I joined Trade Republic as a Product Designer II, bringing interactive, mobile, and 0 \u2192 1 design expertise. First, we launched the new performance review tool, taking it from the initial idea and cross-company alignment to a fully working product that is still used today. Later, I switched to the financial crime team, where I worked on launching new security features: account protection, new device notification, and source of income.',
+            text: 'I joined Trade Republic as a Product Designer II, bringing interactive, mobile, and 0 \u2192 1 design expertise. First, we launched the new performance review tool, taking it from the initial idea and cross-company alignment to a fully working product that is still used today. Later, I switched to the financial crime team, where I worked on launching new security features: account protection, new device notifications, and source of wealth.',
           },
         ],
       },
@@ -436,7 +436,7 @@ export const projects: Project[] = [
               src: '/images/projects/trade/trade-device-notification.png',
               cover: true,
               label:
-                'As the company grew, account takeovers became more frequent. Our team’s goal was to protect customers by letting them flag unfamiliar logins. When we detected an unfamiliar login, we sent the customer a notification and temporarily blocked the account if they did not recognise it. The flow was as simple as “Yes” / “No“, and we used customer responses to better educate our data models in the end.',
+                'As the company grew, account takeovers became more frequent. Our team’s goal was to protect customers by letting them flag unfamiliar logins. When we detected an unfamiliar login, we sent the customer a notification and temporarily blocked the account if they did not recognise it. The flow was as simple as “Yes” / “No”, and we used customer responses to better train our data models in the end.',
             },
           },
         ],
@@ -451,7 +451,7 @@ export const projects: Project[] = [
               src: '/images/projects/trade/trade-blocked-acc.png',
               cover: true,
               label:
-                'Once a customer flagged an unfamiliar login, or our models detected suspicious behavior, we blocked all sensitive operations to protect the customer’s money. We explored different approaches, including blocking access entirely, but ultimately landed on a more elegant solution: customers could still log in, but sensitive actions required identification. This let us verify the account while preventing fraudsters from stealing from it again.',
+                'Once a customer flagged an unfamiliar login, or our models detected suspicious behaviour, we blocked all sensitive operations to protect the customer’s money. We explored different approaches, including blocking access entirely, but ultimately landed on a more elegant solution: customers could still log in, but sensitive actions required identification. This let us verify the account while preventing fraudsters from stealing from it again.',
             },
           },
         ],
@@ -466,7 +466,7 @@ export const projects: Project[] = [
               src: '/images/projects/trade/trade-source-of-wealth.png',
               cover: true,
               label:
-                'As a bank, we have to make sure we know where our customers’ money comes from. For customers, it might seem like a mundane task, so we tried to make it as seamless as possible. We came up with a “shopping basket” solution, where I can add multiple sources of income, each with its own flow.',
+                'As a bank, we have to make sure we know where our customers’ money comes from. For customers, it might seem like a mundane task, so we tried to make it as seamless as possible. We came up with a “shopping basket” solution, where customers can add multiple sources of income, each with its own flow.',
             },
           },
         ],
@@ -481,7 +481,7 @@ export const projects: Project[] = [
               src: '/images/projects/trade/trade-2.mp4',
               cover: true,
               label:
-                'Interactions and animation have a special place in my heart, so at some point I initiated a project to gradually improve the most-used flows across the app by making them more polished and enjoyable for customers. We started with the most-used screen, which we call the amount screen, by making number inputs and buttons react more smoothly to customer intent.',
+                'Interactions and animations have a special place in my heart, so at some point I initiated a project to gradually improve the most-used flows across the app by making them more polished and enjoyable for customers. We started with the most-used screen, which we call the amount screen, by making number inputs and buttons react more smoothly to customer intent.',
             },
           },
           {
@@ -502,10 +502,9 @@ export const projects: Project[] = [
     id: '3',
     slug: 'playground',
     name: 'Other',
-    description:
-      "Voice assistants, freight sustainability in the UK, and fun stuff I've done over the years",
+    description: 'Interactive design and other projects from past years',
     intro:
-      'Projects of the past few years. Some were done inside product teams at major tech companies like Yandex. Some won awards such as Red Dot. Some are personal projects where I explored new approaches.',
+      'Projects from the past few years. Some were done inside product teams at major tech companies like Yandex. Some won awards such as Red Dot. Some are personal projects where I explored new approaches.',
     image: '/images/playground/play-0.png',
     images: [
       '/images/playground/play-0.png',
