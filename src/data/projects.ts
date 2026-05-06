@@ -76,8 +76,7 @@ export function isCssGradient(value: string): boolean {
 
 /** Last color from gradient (hex, rgb, or oklch), converted to OKLCH */
 function lastColorFromGradientInOklch(gradient: string): string | undefined {
-  const colorRegex =
-    /#[0-9a-fA-F]{3,8}|rgba?\s*\([^)]+\)|oklch\s*\([^)]+\)/g;
+  const colorRegex = /#[0-9a-fA-F]{3,8}|rgba?\s*\([^)]+\)|oklch\s*\([^)]+\)/g;
   const matches = gradient.match(colorRegex);
   if (!matches?.length) return undefined;
   const last = matches[matches.length - 1];
@@ -177,7 +176,7 @@ export const projects: Project[] = [
           { type: 'heading', text: 'My Role' },
           {
             type: 'text',
-            text: 'I joined Ostrom to bring expertise in building mobile products with quality, velocity, and scalability in mind. My main contributions included core features redesigns, token approach for design system, new UI components & interactive patterns, and design strategy.',
+            text: 'I joined Ostrom to bring expertise in building mobile products with quality, velocity, and scalability in mind. My main contributions included core features redesigns, token approach for design system, new UI components, interactive patterns, and overall design strategy.',
           },
         ],
       },
@@ -186,7 +185,7 @@ export const projects: Project[] = [
           { type: 'heading', text: 'Redesign' },
           {
             type: 'text',
-            text: 'Some parts of Ostrom app haven\u2019t changed much since its launch 2022. They were potential to align them more product strategy, and to bring more customer value. Better statistics, seamless onboarding, rewards revamp, \u2014 some of the examples of shipped improvements.',
+            text: 'Some parts of Ostrom app haven\u2019t changed much since its launch 2022. They was a great potential to align them with evolving product strategy, and to bring more value to customers. Better statistics, seamless devices onboarding, rewards revamp, \u2014 some of the examples of shipped improvements.',
           },
           {
             type: 'media',
@@ -196,14 +195,14 @@ export const projects: Project[] = [
                 src: '/images/projects/ostrom/ev-stats.png',
                 cover: true,
                 label:
-                  'Charging statistics redesign used components and patterns from a newly established design system. For example, a bottom navigation approach',
+                  'Charging statistics redesign used components and patterns from a newly established design system. For example, a bottom navigation approach.',
               },
               {
                 type: 'image',
                 src: '/images/projects/ostrom/ev-stats-old-vs-new.png',
                 cover: true,
                 label:
-                  'In new version focus switched to earnings and spendings, and monthly view became a default.',
+                  'In new version focus switched to earnings and spendings, and monthly view became a default.',
               },
             ],
           },
@@ -215,14 +214,14 @@ export const projects: Project[] = [
                 src: '/images/projects/ostrom/solar-stats.png',
                 cover: true,
                 label:
-                  'Solar statistics algo changed. I explored graph libraries in React Native, and we tested multiple directions with customers.',
+                  'Solar statistics also changed. I explored graph libraries in React Native, and we tested multiple directions with customers.',
               },
               {
                 type: 'image',
                 src: '/images/projects/ostrom/solar-stats-old-vs-new.png',
                 cover: true,
                 label:
-                  'Instead of having everything on one page, we moved statistics to a separate one.',
+                  'In new version, instead of having everything on one page, we moved solar statistics to a separate one.',
               },
             ],
           },
@@ -234,14 +233,14 @@ export const projects: Project[] = [
                 src: '/images/projects/ostrom/energy-flow.mp4',
                 cover: true,
                 label:
-                  'A glimpse on what\u2019s around your house right now. Animations were helpful in showing state \u2014 yes, but also look nice (\uD83E\uDD7A) ?',
+                  'A glimpse on what\u2019s around your house right now. Animations were helpful in showing state \u2014 yes, but also looked nice (\uD83E\uDD7A) ?',
               },
               {
                 type: 'image',
                 src: '/images/projects/ostrom/energy-flow-old-vs-new.png',
                 cover: true,
                 label:
-                  'New version focused on main areas of interest: where my energy come from and how do I use it.',
+                  'New version focused on main areas of interest, where my energy come from and how do I use it.',
               },
             ],
           },
@@ -253,7 +252,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             text: [
-              'I used React Native as the main prototyping \u2014 and\u00a0sometimes even \u2014 a hand-off tool. It\u2019s way closer to end customer experience and easy to handle with a bit of React and Typescript knowledge.',
+              'I used React Native as the main prototyping \u2014 and\u00a0sometimes even \u2014 a hand-off tool. It\u2019s way closer to end experience and easy to handle with a bit of React and Typescript knowledge.',
               'Of course, I\u2019d follow with components breakdown and detailed Figma flows. But still groundwork for design system tokens and new components happened in code.',
             ],
           },
@@ -266,14 +265,14 @@ export const projects: Project[] = [
                 cover: true,
                 scale: 1.12,
                 label:
-                  'Modal interaction, cards, info elements, and navigation \u2014 examples of UI components that made it to production from initial prototypes.',
+                  'Modal interaction, cards, info elements, and navigation \u2014 examples of components that made it to production from initial prototypes.',
               },
               {
                 type: 'video',
                 src: '/images/projects/ostrom/timestamp-react-native.mp4',
                 cover: true,
                 label:
-                  'Smaller components also deserve care. This one shows last updated time, but also handles states gracefully. A skeleton is a nice touch as well.',
+                  'Smaller components also deserved care. This one shows last updated time, but also handles states gracefully. A skeleton is a nice touch as well.',
               },
             ],
           },
@@ -284,31 +283,31 @@ export const projects: Project[] = [
           { type: 'heading', text: 'Exploration' },
           {
             type: 'text',
-            text: 'For each major redesign, we based our exploration on data and customer insights. Team workshops and user testing were main means for team alignment and validation. Usually we tested multiple options, and then the best ones were released in short cycles.',
+            text: 'For each major redesign, we based our exploration on data and customer insights. Team workshops and user testing were main means for team alignment and validation. Usually we tested multiple options, and then released best ones in short cycles.',
           },
           {
             type: 'media',
             media: [
               {
-                type: 'image',
-                src: '/images/projects/ostrom/solar-stats-exploration.png',
+                type: 'video',
+                src: '/images/projects/ostrom/solar-exploration.mp4',
                 cover: true,
                 label:
                   'In solar statistics I explored more than 30+ approaches. They varied in\u00a0navigation patterns, and how they handled most common scenarios.',
               },
               {
-                type: 'image',
-                src: '/images/projects/shared/empty-image.png',
+                type: 'video',
+                src: '/images/projects/ostrom/energy-exploration.mp4',
                 cover: true,
                 label:
-                  'After the testing we\u2019d share learnings with the team. It helped with alignment, but also reinforced the value of a design team.',
+                  'Device chart was not an exception as well. I looked at it from different angles, including the ones that deviated from competitors research.',
               },
               {
                 type: 'image',
-                src: '/images/projects/ostrom/energy-flow-exploration.png',
+                src: '/images/projects/shared/sharing-testing-results.png',
                 cover: true,
                 label:
-                  'I usually explored multiple approaches, including the ones that deviated from competitors research.',
+                  'After the testing I prepared learnings to share with the team. It helped with alignment, but also reinforced the value of a design team.',
               },
             ],
           },
@@ -319,24 +318,27 @@ export const projects: Project[] = [
           { type: 'heading', text: 'Marketing' },
           {
             type: 'text',
-            text: 'First, customer would see us somewhere in Instagram, and when would check our tariffs. We wanted to improve quality, clarity, and brand consistency. To boost conversion, we optimised first funnel pages, and tested different directions for marketing materials. Website changes not only improved the conversion significantly, but also set-up base for future A/B experiments.',
+            text: [
+              'I also worked on growth and funnel optimization. Social media and our landing page would be first user touch points. So we wanted to improve them in terms of quality, clarity, and brand consistency.',
+              'To boost conversion, we optimised first funnel pages, and tested different directions for marketing materials. Website changes not only improved the conversion significantly, but also set-up base for future A/B experiments.',
+            ],
           },
           {
             type: 'media',
             media: [
               {
                 type: 'image',
-                src: '/images/projects/shared/empty-image.png',
+                src: '/images/projects/ostrom/website-redesign.png',
                 cover: true,
                 label:
-                  'We highlighted each tariff unique proposal, pricing, and cancellation policy \u2014 main point of confusion from research.',
+                  'We highlighted each tariff unique proposal, pricing, and cancellation policy \u2014 main points of confusion from research.',
               },
               {
                 type: 'image',
-                src: '/images/projects/shared/empty-image.png',
+                src: '/images/projects/ostrom/marketing-assets.png',
                 cover: true,
                 label:
-                  'I\u2019ve created more than 100+ version for marketing templates, with only 4\u00a0of them being A/B tested in the end.',
+                  'I\u2019ve explored more than 100+ versions for marketing templates, with only few of them being A/B tested in the end.',
               },
             ],
           },
@@ -344,7 +346,7 @@ export const projects: Project[] = [
       },
       {
         blocks: [
-          { type: 'heading', text: 'Beyond Hand-On Design' },
+          { type: 'heading', text: 'Design Leadership' },
           {
             type: 'text',
             text: 'Some of my time would go to quarterly planning, process improvement, and hiring. I followed a\u00a0systematic approach to build a robust design function step by step.',
@@ -354,17 +356,17 @@ export const projects: Project[] = [
             media: [
               {
                 type: 'image',
-                src: '/images/projects/shared/empty-image.png',
+                src: '/images/projects/ostrom/management-documents.png',
                 cover: true,
                 label:
-                  'There are the patterns for design team to improve velocity and quality output.',
+                  'Design patterns I used to systematically improve velocity and quality of design output.',
               },
               {
                 type: 'image',
-                src: '/images/projects/shared/empty-image.png',
+                src: '/images/projects/ostrom/design-strategy.png',
                 cover: true,
                 label:
-                  'Design Strategy was my initiative, \u2014 an introspect into current state of things, and a pitch of value the design could bring.',
+                  'Design Strategy was my initiative, \u2014 an introspect into current state of things, and a pitch of value design could bring.',
               },
             ],
           },
