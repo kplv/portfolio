@@ -71,12 +71,14 @@ function ProjectVideo({
   loop = true,
   cover,
   scale,
+  playbackRate,
 }: {
   src: string;
   poster?: string;
   loop?: boolean;
   cover?: boolean;
   scale?: number;
+  playbackRate?: number;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -92,10 +94,11 @@ function ProjectVideo({
     const video = videoRef.current;
     if (!inView || !video) return;
     video.preload = 'auto';
+    video.playbackRate = playbackRate ?? 1;
     if (loop && !shouldReduceMotion) {
       video.play().catch(() => { });
     }
-  }, [inView, loop, shouldReduceMotion]);
+  }, [inView, loop, playbackRate, shouldReduceMotion]);
 
   return (
     <div ref={containerRef} className={cover ? styles.frameCover : styles.frame}>
@@ -179,6 +182,7 @@ export function ProjectMediaBlock({
                 loop={active.loop}
                 cover={active.cover}
                 scale={active.scale}
+                playbackRate={active.playbackRate}
               />
             )}
           </motion.div>
@@ -196,6 +200,7 @@ export function ProjectMediaBlock({
           loop={active.loop}
           cover={active.cover}
           scale={active.scale}
+          playbackRate={active.playbackRate}
         />
       )}
     </div>

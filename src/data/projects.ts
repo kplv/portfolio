@@ -23,6 +23,7 @@ export type MediaBlock =
       loop?: boolean;
       cover?: boolean;
       scale?: number;
+      playbackRate?: number;
       /** Caption shown below the media in MediaLabel */
       label?: string;
     };
@@ -154,7 +155,7 @@ export const projects: Project[] = [
     description:
       'Friendly energy startup with a mobile app for energy management and Germany\u2019s first virtual power plant',
     intro:
-      'Friendly energy startup with a mobile app to handle all your energy management. Simple flows hide a complex infrastructure underneath, like a Germany\u2019s first virtual power plant.',
+      'Friendly energy startup with a mobile app to handle all your energy management. Simple flows hide a complex infrastructure underneath, like Germany\u2019s first virtual power plant.',
     image: '/images/projects/ostrom/ostrom-1.png',
     images: [
       '/images/projects/ostrom/ostrom-1.png',
@@ -176,7 +177,7 @@ export const projects: Project[] = [
           { type: 'heading', text: 'My Role' },
           {
             type: 'text',
-            text: 'I joined Ostrom to bring expertise in building mobile products with quality, velocity, and scalability in mind. My main contributions included core features redesigns, token approach for design system, new UI components, interactive patterns, and overall design strategy.',
+            text: 'I joined Ostrom to bring expertise in building mobile products with quality, velocity, and scalability in mind. My main contributions included core feature redesigns, a token approach for the design system, new UI components, interactive patterns, and overall design strategy.',
           },
         ],
       },
@@ -185,7 +186,7 @@ export const projects: Project[] = [
           { type: 'heading', text: 'Redesign' },
           {
             type: 'text',
-            text: 'Some parts of Ostrom app haven\u2019t changed much since its launch 2022. They was a great potential to align them with evolving product strategy, and to bring more value to customers. Better statistics, seamless devices onboarding, rewards revamp, \u2014 some of the examples of shipped improvements.',
+            text: 'Some parts of the Ostrom app haven\u2019t changed much since its launch in 2022. There was great potential to align them with evolving product strategy, and to bring more value to customers. Better statistics, seamless device onboarding, rewards revamp \u2014 are some examples of shipped improvements.',
           },
           {
             type: 'media',
@@ -202,7 +203,7 @@ export const projects: Project[] = [
                 src: '/images/projects/ostrom/ev-stats-old-vs-new.png',
                 cover: true,
                 label:
-                  'In new version focus switched to earnings and spendings, and monthly view became a default.',
+                  'In the new version, focus switched to earnings and spending, and the monthly view became the default.',
               },
             ],
           },
@@ -221,7 +222,7 @@ export const projects: Project[] = [
                 src: '/images/projects/ostrom/solar-stats-old-vs-new.png',
                 cover: true,
                 label:
-                  'In new version, instead of having everything on one page, we moved solar statistics to a separate one.',
+                  'In the new version, instead of having everything on one page, we moved solar statistics to a separate one.',
               },
             ],
           },
@@ -233,14 +234,14 @@ export const projects: Project[] = [
                 src: '/images/projects/ostrom/energy-flow.mp4',
                 cover: true,
                 label:
-                  'A glimpse on what\u2019s around your house right now. Animations were helpful in showing state \u2014 yes, but also looked nice (\uD83E\uDD7A) ?',
+                  'A glimpse of what\u2019s around your house right now. Animations were helpful in showing state \u2014 yes, but also looked nice (\uD83E\uDD7A) ?',
               },
               {
                 type: 'image',
                 src: '/images/projects/ostrom/energy-flow-old-vs-new.png',
                 cover: true,
                 label:
-                  'New version focused on main areas of interest, where my energy come from and how do I use it.',
+                  'The new version focused on the main areas of interest: where my energy comes from and how I use it.',
               },
             ],
           },
@@ -252,8 +253,8 @@ export const projects: Project[] = [
           {
             type: 'text',
             text: [
-              'I used React Native as the main prototyping \u2014 and\u00a0sometimes even \u2014 a hand-off tool. It\u2019s way closer to end experience and easy to handle with a bit of React and Typescript knowledge.',
-              'Of course, I\u2019d follow with components breakdown and detailed Figma flows. But still groundwork for design system tokens and new components happened in code.',
+              'I used React Native as the main prototyping \u2014 and\u00a0sometimes even hand-off \u2014 tool. It\u2019s way closer to the end experience and easy to handle with a bit of React and TypeScript knowledge.',
+              'Of course, I\u2019d follow with a component breakdown and detailed Figma flows. But the groundwork for design system tokens and new components happened in code.',
             ],
           },
           {
@@ -272,7 +273,7 @@ export const projects: Project[] = [
                 src: '/images/projects/ostrom/timestamp-react-native.mp4',
                 cover: true,
                 label:
-                  'Smaller components also deserved care. This one shows last updated time, but also handles states gracefully. A skeleton is a nice touch as well.',
+                  'Smaller components also deserved care. This one shows the last updated time, but also handles states gracefully. A skeleton is a nice touch as well.',
               },
             ],
           },
@@ -283,7 +284,7 @@ export const projects: Project[] = [
           { type: 'heading', text: 'Exploration' },
           {
             type: 'text',
-            text: 'For each major redesign, we based our exploration on data and customer insights. Team workshops and user testing were main means for team alignment and validation. Usually we tested multiple options, and then released best ones in short cycles.',
+            text: 'For each major redesign, we based our exploration on data and customer insights. Team workshops and user testing were the main means for team alignment and validation. Usually we tested multiple options, and then released the best ones in short cycles.',
           },
           {
             type: 'media',
@@ -292,19 +293,21 @@ export const projects: Project[] = [
                 type: 'video',
                 src: '/images/projects/ostrom/solar-exploration.mp4',
                 cover: true,
+                playbackRate: 0.85,
                 label:
-                  'In solar statistics I explored more than 30+ approaches. They varied in\u00a0navigation patterns, and how they handled most common scenarios.',
+                  'In solar statistics I explored more than 30 approaches. They varied in\u00a0navigation patterns, and how they handled the most common scenarios.',
               },
               {
                 type: 'video',
                 src: '/images/projects/ostrom/energy-exploration.mp4',
                 cover: true,
+                playbackRate: 0.85,
                 label:
-                  'Device chart was not an exception as well. I looked at it from different angles, including the ones that deviated from competitors research.',
+                  'The device chart was no exception either. I looked at it from different angles, including the ones that deviated from competitor research.',
               },
               {
                 type: 'image',
-                src: '/images/projects/shared/sharing-testing-results.png',
+                src: '/images/projects/ostrom/sharing-testing-results.png',
                 cover: true,
                 label:
                   'After the testing I prepared learnings to share with the team. It helped with alignment, but also reinforced the value of a design team.',
@@ -319,8 +322,8 @@ export const projects: Project[] = [
           {
             type: 'text',
             text: [
-              'I also worked on growth and funnel optimization. Social media and our landing page would be first user touch points. So we wanted to improve them in terms of quality, clarity, and brand consistency.',
-              'To boost conversion, we optimised first funnel pages, and tested different directions for marketing materials. Website changes not only improved the conversion significantly, but also set-up base for future A/B experiments.',
+              'I also worked on growth and funnel optimisation. Social media and our landing page would be the first user touchpoints. So we wanted to improve them in terms of quality, clarity, and brand consistency.',
+              'To boost conversion, we optimised the first funnel pages, and tested different directions for marketing materials. The website changes not only improved the conversion significantly, but also set up a base for future A/B experiments.',
             ],
           },
           {
@@ -331,14 +334,14 @@ export const projects: Project[] = [
                 src: '/images/projects/ostrom/website-redesign.png',
                 cover: true,
                 label:
-                  'We highlighted each tariff unique proposal, pricing, and cancellation policy \u2014 main points of confusion from research.',
+                  'We highlighted each tariff\u2019s unique proposal, pricing, and cancellation policy \u2014 the main points of confusion from research.',
               },
               {
                 type: 'image',
                 src: '/images/projects/ostrom/marketing-assets.png',
                 cover: true,
                 label:
-                  'I\u2019ve explored more than 100+ versions for marketing templates, with only few of them being A/B tested in the end.',
+                  'I\u2019ve explored more than 100 versions for marketing templates, with only a few of them being A/B tested in the end.',
               },
             ],
           },
@@ -359,14 +362,14 @@ export const projects: Project[] = [
                 src: '/images/projects/ostrom/management-documents.png',
                 cover: true,
                 label:
-                  'Design patterns I used to systematically improve velocity and quality of design output.',
+                  'Design patterns I used to systematically improve velocity and the quality of design output.',
               },
               {
                 type: 'image',
                 src: '/images/projects/ostrom/design-strategy.png',
                 cover: true,
                 label:
-                  'Design Strategy was my initiative, \u2014 an introspect into current state of things, and a pitch of value design could bring.',
+                  'Design Strategy was my initiative \u2014 an introspection into the current state of things, and a pitch of the value design could bring.',
               },
             ],
           },

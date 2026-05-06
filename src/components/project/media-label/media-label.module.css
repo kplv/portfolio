@@ -49,6 +49,7 @@
   border: 0;
   background: transparent;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .arrowButton::before {
