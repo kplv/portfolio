@@ -156,15 +156,7 @@ export const projects: Project[] = [
       'Major features redesign, design engineering, and process improvements for an energy management provider',
     intro:
       'Friendly energy startup with a mobile app to handle all your energy management. Simple flows hide a complex infrastructure underneath, like Germany\u2019s first virtual power plant.',
-    image: '/images/projects/ostrom/ostrom-1.png',
-    images: [
-      '/images/projects/ostrom/ostrom-1.png',
-      '/images/projects/ostrom/ostrom-2.png',
-      '/images/projects/ostrom/ostrom-3.png',
-      '/images/projects/ostrom/ostrom-4.png',
-      '/images/projects/ostrom/ostrom-7.png',
-      '/images/projects/ostrom/ostrom-8.png',
-    ],
+    image: '/images/projects/ostrom/ostrom-thumbnail.png',
     accent:
       'linear-gradient(82.638deg in oklch, oklch(0.5686 0.0823 195.09) 0.85402%, oklch(0.6635 0.1129 188.77) 99.266%)',
     role: 'Sr. Product Designer',
@@ -385,14 +377,7 @@ export const projects: Project[] = [
       'Security features, productivity tools, and key-flows interactions for a biggest investment platform in Europe',
     intro:
       'Built fraud prevention flows from 0\u00a0\u2192\u00a01 for Trade Republic\u2019s 8M+ users, designed micro-interactions for core screens, and shipped an internal performance review tool.',
-    image: '/images/projects/trade/trade-0.png',
-    images: [
-      '/images/projects/trade/trade-0.png',
-      '/images/projects/trade/trade-1.png',
-      '/images/projects/trade/trade-4.png',
-      '/images/projects/trade/trade-5.png',
-      '/images/projects/trade/trade-6.png',
-    ],
+    image: '/images/projects/trade/trade-thumbnail.png',
     accent:
       'linear-gradient(82.638deg in oklch, oklch(0.4824 0.2723 266.61) 0.85402%, oklch(0.5126 0.2452 265.66) 99.266%)',
     accentDark:
