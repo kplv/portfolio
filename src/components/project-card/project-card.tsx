@@ -2,14 +2,39 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import type { Transition } from 'motion/react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import {
+  SPRING_THUMBNAIL_HOVER,
+  SPRING_THUMBNAIL_PRESS,
+  THUMBNAIL_HOVER_SCALE,
+  THUMBNAIL_PRESS_SCALE,
+  THUMBNAIL_REST_SCALE,
+} from '@/config/animations';
 import { getAccentSolid, getAccentTextStyle, type Project } from '@/data/projects';
 import { useResolvedProjectAccent } from '@/hooks/use-resolved-project-accent';
 import styles from './project-card.module.css';
 
+export interface ProjectCardThumbnailTuning {
+  restScale: number;
+  hoverScale: number;
+  pressScale: number;
+  hover: Transition;
+  press: Transition;
+}
+
+const defaultThumbnailTuning: ProjectCardThumbnailTuning = {
+  restScale: THUMBNAIL_REST_SCALE,
+  hoverScale: THUMBNAIL_HOVER_SCALE,
+  pressScale: THUMBNAIL_PRESS_SCALE,
+  hover: SPRING_THUMBNAIL_HOVER,
+  press: SPRING_THUMBNAIL_PRESS,
+};
+
 export interface ProjectCardProps {
   project: Project;
   onProjectClick?: (project: Project) => void;
+  tuning?: ProjectCardThumbnailTuning;
 }
 
 function prefetchProjectMedia(project: Project) {
@@ -33,16 +58,6 @@ function prefetchProjectMedia(project: Project) {
   });
 }
 
-const tapTransition = {
-  duration: 0.1,
-  ease: [0.23, 1, 0.32, 1] as [number, number, number, number],
-};
-
-const hoverTransition = {
-  duration: 0.15,
-  ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-};
-
 const fadeTransition = {
   duration: 0.2,
   ease: [0.23, 1, 0.32, 1] as [number, number, number, number],
@@ -60,12 +75,18 @@ function useCanHover() {
   return canHover;
 }
 
-export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  onProjectClick,
+  tuning,
+}: ProjectCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPressed, setIsPressed] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const canHover = useCanHover();
   const prefetchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const t = tuning ?? defaultThumbnailTuning;
 
   const resolvedAccent = useResolvedProjectAccent(project);
   const accentSolid = getAccentSolid(resolvedAccent);
@@ -134,12 +155,12 @@ export function ProjectCard({ project, onProjectClick }: ProjectCardProps) {
               className={styles.imageInner}
               animate={
                 isPressed && !shouldReduceMotion
-                  ? { scale: 1.18, transition: tapTransition }
-                  : { scale: 1.2, transition: hoverTransition }
+                  ? { scale: t.pressScale, transition: t.press }
+                  : { scale: t.restScale, transition: t.hover }
               }
               whileHover={
                 canHover && !shouldReduceMotion && !isPressed
-                  ? { scale: 1.25, transition: hoverTransition }
+                  ? { scale: t.hoverScale, transition: t.hover }
                   : undefined
               }
             >

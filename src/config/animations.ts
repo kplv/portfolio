@@ -38,6 +38,24 @@ export const SPRING_ROUTE_CONTENT = {
   mass: 0.55,
 };
 
+/** Thumbnail card press — DialKit-tuned. `visualDuration` matches DialKit's spring editor API. */
+export const SPRING_THUMBNAIL_PRESS = {
+  type: 'spring' as const,
+  visualDuration: 0.1,
+  bounce: 0,
+};
+
+/** Thumbnail card hover — DialKit-tuned. */
+export const SPRING_THUMBNAIL_HOVER = {
+  type: 'spring' as const,
+  visualDuration: 0.15,
+  bounce: 0.1,
+};
+
+export const THUMBNAIL_REST_SCALE = 1.2;
+export const THUMBNAIL_HOVER_SCALE = 1.25;
+export const THUMBNAIL_PRESS_SCALE = 1.18;
+
 /** Stagger container for page entrance — propagates to children via variants */
 export const ENTRANCE_STAGGER_STEP = 0.09;
 
