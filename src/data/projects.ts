@@ -374,9 +374,9 @@ export const projects: Project[] = [
     slug: 'trade-republic',
     name: 'Trade Republic',
     description:
-      'Security features, productivity tools, and key-flows interactions for a biggest investment platform in Europe',
+      'Designed fraud prevention flows for 8M+ users, improved micro-interactions on core screens, and shipped an internal performance review tool',
     intro:
-      'Built fraud prevention flows from 0\u00a0\u2192\u00a01 for Trade Republic\u2019s 8M+ users, designed micro-interactions for core screens, and shipped an internal performance review tool.',
+      'At Trade Republic I designed fraud prevention flows for 8M+ users, refined micro-interactions on core screens, and shipped an internal performance review tool.',
     image: '/images/projects/trade/trade-thumbnail.png',
     accent:
       'linear-gradient(82.638deg in oklch, oklch(0.4824 0.2723 266.61) 0.85402%, oklch(0.5126 0.2452 265.66) 99.266%)',
@@ -392,92 +392,133 @@ export const projects: Project[] = [
           { type: 'heading', text: 'My Role' },
           {
             type: 'text',
-            text: 'I joined Trade Republic as a Product Designer II, bringing interactive, mobile, and 0 \u2192 1 design expertise. First, we launched the new performance review tool, taking it from the initial idea and cross-company alignment to a fully working product that is still used today. Later, I switched to the financial crime team, where I worked on launching new security features: account protection, new device notifications, and source of wealth.',
+            text: 'I joined Trade Republic to bring mobile, interactive, and 0\u00a0\u2192\u00a01 design expertise. My main contributions included the new performance review tool, customer protection features, and improvements to core flows.',
           },
         ],
       },
       {
         blocks: [
-          { type: 'heading', text: '0 \u2192 1 Performance Tool' },
+          { type: 'heading', text: 'Performance Tool' },
+          {
+            type: 'text',
+            text: 'As the company grew, we needed clearer alignment on goals and working principles. We ran extensive workshops with the People team and leadership, then designed and shipped an experience that fit how reviews actually ran. It is still used today for all performance reviews and 360\u00b0 feedback.',
+          },
           {
             type: 'media',
-            media: {
-              type: 'image',
-              src: '/images/projects/trade/trade-review-tool.png',
-              cover: true,
-              label:
-                'One of the first projects we launched was a new tool for performance reviews. We started with extensive alignment sessions with the People team and C-level leadership on the initial goals, then focused on making the experience as seamless and transparent for employees as possible.',
-            },
+            media: [
+              {
+                type: 'image',
+                src: '/images/projects/trade/review-main-page.png',
+                cover: true,
+                label:
+                  'The main page of the performance review tool focused on at-hand tasks and highlighted timelines for the current review cycle.',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/trade/review-skills.png',
+                cover: true,
+                label:
+                  'Trade Republic branding relied heavily on typography, and internal tools were no exception.',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/trade/review-summary.png',
+                cover: true,
+                label:
+                  'Before sending the review to a manager, an employee could check that everything looked correct and quickly return to any part of the flow.',
+              },
+            ],
           },
         ],
       },
       {
         blocks: [
-          { type: 'heading', text: 'Account Protection' },
+          { type: 'heading', text: 'Security' },
+          {
+            type: 'text',
+            text: 'Fraud cases happened more often as we scaled, so we invested in stronger customer protection. Over time we shipped features across web and mobile, including new device alerts, ongoing verification, and temporary account freezes. They prevented tens of thousands of euros in damage and helped us train internal models more effectively.',
+          },
           {
             type: 'media',
-            media: {
-              type: 'image',
-              src: '/images/projects/trade/trade-device-notification.png',
-              cover: true,
-              label:
-                'As the company grew, account takeovers became more frequent. Our team’s goal was to protect customers by letting them flag unfamiliar logins. When we detected an unfamiliar login, we sent the customer a notification and temporarily blocked the account if they did not recognise it. The flow was as simple as “Yes” / “No”, and we used customer responses to better train our data models in the end.',
-            },
+            media: [
+              {
+                type: 'image',
+                src: '/images/projects/trade/new-device.png',
+                cover: true,
+                label:
+                  'When we spotted a suspicious login from a new device, the customer immediately received a notification.',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/trade/new-device-web-mail.png',
+                cover: true,
+                label:
+                  'I designed the flows with multiple touchpoints in mind: mobile, web, push notifications, and email.',
+              },
+            ],
           },
         ],
       },
       {
         blocks: [
-          { type: 'heading', text: 'Blocked Account' },
+          { type: 'heading', text: 'Source of Income' },
+          {
+            type: 'text',
+            text: 'If we did not know where our customers\u2019 money came from, the bank risked major fines. For customers the task felt mundane, so we focused on conversion and completion. The \u201cshopping basket\u201d pattern we shipped stayed simple for most cases but flexible enough for complex situations.',
+          },
           {
             type: 'media',
-            media: {
-              type: 'image',
-              src: '/images/projects/trade/trade-blocked-acc.png',
-              cover: true,
-              label:
-                'Once a customer flagged an unfamiliar login, or our models detected suspicious behaviour, we blocked all sensitive operations to protect the customer’s money. We explored different approaches, including blocking access entirely, but ultimately landed on a more elegant solution: customers could still log in, but sensitive actions required identification. This let us verify the account while preventing fraudsters from stealing from it again.',
-            },
+            media: [
+              {
+                type: 'image',
+                src: '/images/projects/trade/source-flow.png',
+                cover: true,
+                label:
+                  'We asked customers a few questions about income and kept enough flexibility to cover varied situations.',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/trade/source-mail.png',
+                cover: true,
+                label:
+                  'Completion rate was our main success metric. For example, we sent different emails depending on how close the submission deadline was.',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/trade/source-failed-state.png',
+                cover: true,
+                label:
+                  'Sometimes we asked customers to upload proof of income. When documents were blurry or incomplete, we sent them back with clear feedback on what to fix.',
+              },
+            ],
           },
         ],
       },
       {
         blocks: [
-          { type: 'heading', text: 'Source of Wealth' },
+          { type: 'heading', text: 'Interactions' },
           {
-            type: 'media',
-            media: {
-              type: 'image',
-              src: '/images/projects/trade/trade-source-of-wealth.png',
-              cover: true,
-              label:
-                'As a bank, we have to make sure we know where our customers’ money comes from. For customers, it might seem like a mundane task, so we tried to make it as seamless as possible. We came up with a “shopping basket” solution, where customers can add multiple sources of income, each with its own flow.',
-            },
-          },
-        ],
-      },
-      {
-        blocks: [
-          { type: 'heading', text: 'Interactions In Crucial Flows' },
-          {
-            type: 'media',
-            media: {
-              type: 'video',
-              src: '/images/projects/trade/trade-2.mp4',
-              cover: true,
-              label:
-                'Interactions and animations have a special place in my heart, so at some point I initiated a project to gradually improve the most-used flows across the app by making them more polished and enjoyable for customers. We started with the most-used screen, which we call the amount screen, by making number inputs and buttons react more smoothly to customer intent.',
-            },
+            type: 'text',
+            text: 'Interface animations always mattered a lot to me. I started a project to improve the busiest flows with clearer state handling and more polished interactions.',
           },
           {
             type: 'media',
-            media: {
-              type: 'video',
-              src: '/images/projects/trade/trade-3.mp4',
-              cover: true,
-              label:
-                'We also considered how to gracefully handle edge cases, for example, when a customer enters incorrect login details.',
-            },
+            media: [
+              {
+                type: 'video',
+                src: '/images/projects/trade/calculator.mp4',
+                cover: true,
+                label:
+                  'One of the most-used screens in the app. Notice how smooth and snappy the digits and separators feel.',
+              },
+              {
+                type: 'video',
+                src: '/images/projects/trade/pincode.mp4',
+                cover: true,
+                label:
+                  'We also handled edge cases with care, for example when a customer enters an incorrect PIN.',
+              },
+            ],
           },
         ],
       },
