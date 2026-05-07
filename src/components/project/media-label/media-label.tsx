@@ -17,12 +17,12 @@ const arrowButtonVariants = {
 
 const arrowPrevVariants = {
   rest: { x: 0, transition: SPRING_PRESS },
-  pressed: { x: -4, transition: SPRING_PRESS },
+  pressed: { x: 3, transition: SPRING_PRESS },
 } as const;
 
 const arrowNextVariants = {
   rest: { x: 0, transition: SPRING_PRESS },
-  pressed: { x: 4, transition: SPRING_PRESS },
+  pressed: { x: 3, transition: SPRING_PRESS },
 } as const;
 
 export interface MediaLabelProps {
@@ -81,11 +81,9 @@ export function MediaLabel({
                 animate="rest"
                 whileTap={tapVariant}
               >
-                <motion.span
-                  className={[styles.arrow, styles.arrowPrev].join(' ')}
-                  variants={arrowPrevVariants}
-                  aria-hidden
-                />
+                <span className={styles.arrowFlip} aria-hidden>
+                  <motion.span className={styles.arrow} variants={arrowPrevVariants} aria-hidden />
+                </span>
               </motion.button>
               <motion.button
                 type="button"
