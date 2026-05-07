@@ -113,6 +113,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
                   exit={shouldReduceMotion ? reducedState : 'exit'}
                   header="Denis Kopylov"
                   accent={homeHeaderGradient}
+                  italicHeader
                   text="Product designer with a focus on turning ideas into reality through coding, a holistic approach, and an eye for interactive experiences. Currently at Ostrom."
                 />
 

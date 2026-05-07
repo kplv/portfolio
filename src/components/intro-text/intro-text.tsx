@@ -9,12 +9,15 @@ export interface IntroTextProps extends Omit<HTMLMotionProps<'div'>, 'children'>
   text: string;
   /** Unified accent: CSS color, gradient, or tokens such as `var(--text-display-gradient)`. */
   accent?: string;
+  /** When true, uses the designed italic Hagrid face (home hero only). */
+  italicHeader?: boolean;
 }
 
 export function IntroText({
   header,
   text,
   accent,
+  italicHeader = false,
   className,
   ...motionProps
 }: IntroTextProps) {
@@ -27,7 +30,12 @@ export function IntroText({
       className={[styles.container, className].filter(Boolean).join(' ')}
     >
       <h1
-        className={styles.header}
+        className={[
+          styles.header,
+          italicHeader ? styles.headerItalic : null,
+        ]
+          .filter(Boolean)
+          .join(' ')}
         {...(headerStyle && { style: headerStyle })}
       >
         {header}

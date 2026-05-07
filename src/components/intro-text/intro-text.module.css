@@ -24,10 +24,14 @@
 .header {
   font-family: var(--font-hagrid), serif;
   font-weight: 800;
-  font-style: italic;
+  font-style: normal;
   font-size: 64px;
   line-height: 120%;
   color: var(--text-display-color);
+}
+
+.headerItalic {
+  font-style: italic;
 }
 
 @media screen and (max-width: 428px) {

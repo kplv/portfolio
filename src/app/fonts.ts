@@ -18,7 +18,18 @@ export const abcFavorit = localFont({
 })
 
 export const hagrid = localFont({
-  src: '../../public/fonts/Hagrid-Heavy-Italic.woff2',
+  src: [
+    {
+      path: '../../public/fonts/Hagrid-Heavy.woff2',
+      weight: '800',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/Hagrid-Heavy-Italic.woff2',
+      weight: '800',
+      style: 'italic',
+    },
+  ],
   variable: '--font-hagrid',
   display: 'swap',
 })
