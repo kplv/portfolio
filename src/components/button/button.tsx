@@ -3,12 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { useTheme } from 'next-themes';
-import {
-  EASE_OUT_QUINT,
-  PRESS_DURATION,
-  PRESS_SCALE,
-  SPRING_ICON_SWAP,
-} from '@/config/animations';
+import { useMotionTokens } from '@/config/motion-tokens';
 import styles from './button.module.css';
 
 export interface ButtonProps {
@@ -24,6 +19,7 @@ export function Button({ label, icon, themeSwitch, onClick, className, hitSlop =
   const shouldReduceMotion = useReducedMotion();
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const tokens = useMotionTokens();
 
   useEffect(() => setMounted(true), []);
 
@@ -56,11 +52,8 @@ export function Button({ label, icon, themeSwitch, onClick, className, hitSlop =
         shouldReduceMotion
           ? undefined
           : {
-              scale: PRESS_SCALE,
-              transition: {
-                duration: PRESS_DURATION,
-                ease: EASE_OUT_QUINT,
-              },
+              scale: tokens.interactiveTap.scale,
+              transition: tokens.interactiveTap.spring,
             }
       }
     >
@@ -78,7 +71,7 @@ export function Button({ label, icon, themeSwitch, onClick, className, hitSlop =
                 initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.6, filter: 'blur(8px)' }}
                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                 exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.6, filter: 'blur(8px)' }}
-                transition={SPRING_ICON_SWAP}
+                transition={tokens.iconSwapSpring}
               />
             </AnimatePresence>
           )}

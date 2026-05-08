@@ -1,100 +1,85 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback, useId } from 'react';
-import Script from 'next/script';
+import { useState, useSyncExternalStore } from 'react';
+import UnicornScene from 'unicornstudio-react/next';
 import { motion, useReducedMotion } from 'motion/react';
-import { EASE_OUT_QUINT } from '@/config/animations';
 import styles from './unicorn-background.module.css';
 
-const SDK_URL =
-  'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.4/dist/unicornStudio.umd.js';
+const SHADER_OPACITY = { home: 0.4, inner: 0.05 } as const;
+const SHADER_TRANSITION = {
+  type: 'spring' as const,
+  visualDuration: 0.2,
+  bounce: 0.2,
+};
 
 const LEGACY_PROJECT_ID = 'ssf4XIrdYQTi8HGovdhZ';
 
+/** Pin to official UMD so the loader uses loadExternalScript (src=) instead of injectBundledScript (inline). Bundled "extensions" are ESM and break when injected as classic script.text. */
+const UNICORN_SDK_URL =
+  'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.9/dist/unicornStudio.umd.js';
+
+export type ShaderSurface = 'home' | 'inner';
+
+function useHardwareCapable(): boolean {
+  return useSyncExternalStore(
+    () => () => {},
+    () => navigator.hardwareConcurrency >= 4,
+    () => false,
+  );
+}
+
 function useShouldRender(): boolean {
   const reducedMotion = useReducedMotion();
-  const [capable, setCapable] = useState(false);
-
-  useEffect(() => {
-    setCapable(navigator.hardwareConcurrency >= 4);
-  }, []);
-
+  const capable = useHardwareCapable();
   return !reducedMotion && capable;
 }
 
 interface UnicornBackgroundProps {
+  surface: ShaderSurface;
   paused?: boolean;
   isVisible?: boolean;
 }
 
 export function UnicornBackground({
+  surface,
   paused = false,
   isVisible = true,
 }: UnicornBackgroundProps) {
   const shouldRender = useShouldRender();
   const [loaded, setLoaded] = useState(false);
-  const sceneRef = useRef<UnicornScene | null>(null);
-  const reactId = useId();
-  const containerId = `unicorn-bg-${reactId.replace(/:/g, '')}`;
-  const initCalled = useRef(false);
 
-  const initScene = useCallback(() => {
-    if (initCalled.current || !window.UnicornStudio) return;
-    initCalled.current = true;
+  const targetOpacity = SHADER_OPACITY[surface];
 
-    window.UnicornStudio.addScene({
-      elementId: containerId,
-      projectId: LEGACY_PROJECT_ID,
-      scale: 1,
-      dpi: 1.5,
-      fps: 60,
-      lazyLoad: false,
-      production: true,
-      interactivity: {
-        mouse: { disableMobile: true },
-      },
-    })
-      .then((scene) => {
-        sceneRef.current = scene;
-        setLoaded(true);
-      })
-      .catch((err: unknown) => {
-        console.error('UnicornStudio scene failed to load:', err);
-      });
-  }, [containerId]);
-
-  useEffect(() => {
-    if (!shouldRender) return;
-    if (window.UnicornStudio) {
-      initScene();
-    }
-  }, [shouldRender, initScene]);
-
-  useEffect(() => {
-    return () => {
-      sceneRef.current?.destroy();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (sceneRef.current) {
-      sceneRef.current.paused = paused;
-    }
-  }, [paused]);
+  const visibleOpacity = loaded && isVisible ? targetOpacity : 0;
 
   if (!shouldRender) return null;
 
   return (
-    <>
-      <Script src={SDK_URL} strategy="afterInteractive" onLoad={initScene} />
-      <motion.div
-        className={styles.wrapper}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: loaded ? (isVisible ? 0.2 : 0) : 0 }}
-        transition={{ duration: 0.5, ease: EASE_OUT_QUINT }}
-      >
-        <div id={containerId} style={{ width: '100%', height: '100%' }} />
-      </motion.div>
-    </>
+    <motion.div
+      className={styles.wrapper}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: visibleOpacity }}
+      transition={SHADER_TRANSITION}
+    >
+      <UnicornScene
+        projectId={LEGACY_PROJECT_ID}
+        sdkUrl={UNICORN_SDK_URL}
+        width="100%"
+        height="100%"
+        scale={1}
+        dpi={1.5}
+        fps={60}
+        lazyLoad={false}
+        production
+        paused={paused}
+        showPlaceholderWhileLoading={false}
+        showPlaceholderOnError={false}
+        ariaLabel="Ambient background animation"
+        onLoad={() => setLoaded(true)}
+        onError={(err) => {
+          console.error('UnicornStudio scene failed to load:', err);
+        }}
+      />
+    </motion.div>
   );
 }

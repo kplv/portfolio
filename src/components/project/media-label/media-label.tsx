@@ -1,8 +1,9 @@
 'use client';
 
-import type { CSSProperties } from 'react';
+import { useMemo, type CSSProperties } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { SPRING_ICON_SWAP, SPRING_PRESS } from '@/config/animations';
+import { SPRING_ICON_SWAP } from '@/config/animations';
+import { useMotionTokens } from '@/config/motion-tokens';
 import {
   getAccentSolid,
   getAccentTextStyle,
@@ -13,16 +14,6 @@ import styles from './media-label.module.css';
 const arrowButtonVariants = {
   rest: {},
   pressed: {},
-} as const;
-
-const arrowPrevVariants = {
-  rest: { x: 0, transition: SPRING_PRESS },
-  pressed: { x: 3, transition: SPRING_PRESS },
-} as const;
-
-const arrowNextVariants = {
-  rest: { x: 0, transition: SPRING_PRESS },
-  pressed: { x: 3, transition: SPRING_PRESS },
 } as const;
 
 export interface MediaLabelProps {
@@ -44,6 +35,14 @@ export function MediaLabel({
   total,
 }: MediaLabelProps) {
   const shouldReduceMotion = useReducedMotion();
+  const tokens = useMotionTokens();
+  const arrowVariants = useMemo(
+    () => ({
+      rest: { x: 0, transition: tokens.arrow.spring },
+      pressed: { x: tokens.arrow.offsetX, transition: tokens.arrow.spring },
+    }),
+    [tokens.arrow.offsetX, tokens.arrow.spring],
+  );
   const accentSolid = getAccentSolid(accent);
   /** Gradient + `background-clip: text` is unreliable for small UI type; use derived solid. */
   const counterTextStyle: CSSProperties = isCssGradient(accent)
@@ -82,7 +81,7 @@ export function MediaLabel({
                 whileTap={tapVariant}
               >
                 <span className={styles.arrowFlip} aria-hidden>
-                  <motion.span className={styles.arrow} variants={arrowPrevVariants} aria-hidden />
+                  <motion.span className={styles.arrow} variants={arrowVariants} aria-hidden />
                 </span>
               </motion.button>
               <motion.button
@@ -95,7 +94,7 @@ export function MediaLabel({
                 animate="rest"
                 whileTap={tapVariant}
               >
-                <motion.span className={styles.arrow} variants={arrowNextVariants} aria-hidden />
+                <motion.span className={styles.arrow} variants={arrowVariants} aria-hidden />
               </motion.button>
             </div>
           ) : null}

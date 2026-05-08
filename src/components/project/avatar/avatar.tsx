@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
-import { SPRING_HOVER, SPRING_PRESS } from '@/config/animations';
+import { useMotionTokens } from '@/config/motion-tokens';
 import styles from './avatar.module.css';
 
 export interface AvatarProps {
@@ -17,6 +17,7 @@ export interface AvatarProps {
 export function Avatar({ name, avatar, href, color, zIndex }: AvatarProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+  const tokens = useMotionTokens();
 
   return (
     <motion.a
@@ -26,8 +27,16 @@ export function Avatar({ name, avatar, href, color, zIndex }: AvatarProps) {
       aria-label={name}
       className={styles.avatar}
       style={{ '--avatar-color': color, zIndex } as React.CSSProperties}
-      whileHover={shouldReduceMotion ? undefined : { scale: 1.15, transition: SPRING_HOVER }}
-      whileTap={shouldReduceMotion ? undefined : { scale: 0.88, transition: SPRING_PRESS }}
+      whileHover={
+        shouldReduceMotion
+          ? undefined
+          : { scale: tokens.avatar.hoverScale, transition: tokens.avatar.hoverSpring }
+      }
+      whileTap={
+        shouldReduceMotion
+          ? undefined
+          : { scale: tokens.avatar.pressScale, transition: tokens.avatar.pressSpring }
+      }
     >
       <span
         className={styles.skeleton}

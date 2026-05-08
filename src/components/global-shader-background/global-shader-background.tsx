@@ -10,7 +10,9 @@ export function GlobalShaderBackground() {
 
   const isAbout = pathname === '/about';
   const isHome = pathname === '/';
-  const showUnicornBackground = isHome || isAbout;
+  const segments = pathname.split('/').filter(Boolean);
+  const isProjectPage = segments.length === 1 && segments[0] !== 'about';
+  const showUnicornBackground = isHome || isAbout || isProjectPage;
 
   const themeReady = resolvedTheme === 'light' || resolvedTheme === 'dark';
   const isLightTheme = resolvedTheme === 'light';
@@ -19,7 +21,12 @@ export function GlobalShaderBackground() {
     return null;
   }
 
+  const surface = isHome || isAbout ? 'home' : 'inner';
+
   return (
-    <UnicornBackground isVisible={themeReady && isLightTheme} />
+    <UnicornBackground
+      surface={surface}
+      isVisible={themeReady && isLightTheme}
+    />
   );
 }

@@ -58,7 +58,7 @@
   flex-direction: column;
   gap: 20px;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .textBlock {
@@ -86,7 +86,6 @@
   width: 100%;
   height: auto;
   aspect-ratio: 4 / 3;
-  background-color: color-mix(in srgb, var(--slate-1000) 2%, transparent);
   border-radius: 24px;
   border: 2x solid;
   border-color: color-mix(in srgb, var(--project-accent) 2%, transparent);
@@ -94,6 +93,15 @@
   cursor: pointer;
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
+}
+
+.bgPlate {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--slate-1000);
+  pointer-events: none;
+  will-change: transform, opacity;
 }
 
 .imageWrapper:focus {
@@ -178,6 +186,6 @@
   border-color: var(--slate-800);
 }
 
-[data-theme='dark'] .imageWrapper {
-  background-color: color-mix(in srgb, white 4%, transparent);
+[data-theme='dark'] .bgPlate {
+  background-color: white;
 }

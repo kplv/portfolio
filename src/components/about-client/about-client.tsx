@@ -2,10 +2,8 @@
 
 import { motion, useReducedMotion } from 'motion/react';
 import { CardsHorizontallView } from '@/components/cards-horizontall-view';
-import {
-  ABOUT_SECTION_FADE,
-  ROUTE_SECTION_REDUCED_MOTION_TARGET,
-} from '@/config/page-motion';
+import { ROUTE_SECTION_REDUCED_MOTION_TARGET } from '@/config/page-motion';
+import { useOrderedRouteSectionVariants } from '@/hooks/use-ordered-route-section-variants';
 import styles from './about-client.module.css';
 
 /**
@@ -13,13 +11,14 @@ import styles from './about-client.module.css';
  */
 export function AboutSectionContent() {
   const shouldReduceMotion = useReducedMotion();
+  const sectionVariants = useOrderedRouteSectionVariants();
   const reducedState = ROUTE_SECTION_REDUCED_MOTION_TARGET;
 
   return (
     <>
       <motion.div
         className={styles.cardsWrap}
-        variants={ABOUT_SECTION_FADE}
+        variants={sectionVariants}
         custom={{ enterOrder: 0, exitOrder: 1 }}
         initial={shouldReduceMotion ? reducedState : 'hidden'}
         animate={shouldReduceMotion ? reducedState : 'show'}
@@ -33,7 +32,7 @@ export function AboutSectionContent() {
       </motion.div>
       <motion.div
         className={styles.copy}
-        variants={ABOUT_SECTION_FADE}
+        variants={sectionVariants}
         custom={{ enterOrder: 1, exitOrder: 0 }}
         initial={shouldReduceMotion ? reducedState : 'hidden'}
         animate={shouldReduceMotion ? reducedState : 'show'}

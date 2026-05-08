@@ -4,26 +4,18 @@ import { useCallback } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/button';
-import {
-  EASE_OUT_QUINT,
-  PRESS_DURATION,
-  PRESS_SCALE,
-  SPRING_ICON_SWAP,
-} from '@/config/animations';
+import { useMotionTokens } from '@/config/motion-tokens';
 import { getProjectByPathname, projects } from '@/data/projects';
+import { BackButton } from './back-button';
 import styles from './navigation-header.module.css';
 
 export type NavigationHeaderState = 'theme' | 'back';
-
-const actionSwapTransition = {
-  duration: 0.2,
-  ease: EASE_OUT_QUINT as [number, number, number, number],
-};
 
 export function NavigationHeader() {
   const pathname = usePathname();
   const router = useRouter();
   const shouldReduceMotion = useReducedMotion();
+  const tokens = useMotionTokens();
 
   const isProjectRoute =
     getProjectByPathname(pathname, projects) != null;
@@ -52,41 +44,11 @@ export function NavigationHeader() {
         className={`${styles.inner} ${styles.row}`}
         initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={shouldReduceMotion ? { duration: 0 } : { ...SPRING_ICON_SWAP }}
+        transition={shouldReduceMotion ? { duration: 0 } : tokens.nav.shellSpring}
       >
         <div className={styles.leftSlot}>
           <AnimatePresence initial={false}>
-            {showBack && (
-              <motion.button
-                key="nav-back"
-                type="button"
-                className={styles.goBack}
-                onClick={handleNavigateHome}
-                aria-label="Go back to home"
-                initial={
-                  shouldReduceMotion ? false : { opacity: 0, scale: 0.92 }
-                }
-                animate={{ opacity: 1, scale: 1 }}
-                exit={
-                  shouldReduceMotion ? undefined : { opacity: 0, scale: 0.92 }
-                }
-                transition={shouldReduceMotion ? { duration: 0 } : actionSwapTransition}
-                whileTap={
-                  shouldReduceMotion
-                    ? undefined
-                    : {
-                      scale: PRESS_SCALE,
-                      transition: {
-                        duration: PRESS_DURATION,
-                        ease: EASE_OUT_QUINT,
-                      },
-                    }
-                }
-              >
-                <span className={styles.goBackIcon} aria-hidden />
-                <span className={styles.goBackLabel}>Go Back</span>
-              </motion.button>
-            )}
+            {showBack && <BackButton key="nav-back" onClick={handleNavigateHome} />}
           </AnimatePresence>
         </div>
         <div className={styles.rightSlot}>

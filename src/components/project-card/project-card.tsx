@@ -1,16 +1,15 @@
 'use client';
 
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import type { Transition } from 'motion/react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import {
+  EASE_OUT_QUINT,
   SPRING_THUMBNAIL_HOVER,
   SPRING_THUMBNAIL_PRESS,
-  THUMBNAIL_HOVER_SCALE,
-  THUMBNAIL_PRESS_SCALE,
-  THUMBNAIL_REST_SCALE,
 } from '@/config/animations';
+import { useMotionTokens } from '@/config/motion-tokens';
 import { getAccentSolid, getAccentTextStyle, type Project } from '@/data/projects';
 import { useResolvedProjectAccent } from '@/hooks/use-resolved-project-accent';
 import styles from './project-card.module.css';
@@ -22,14 +21,6 @@ export interface ProjectCardThumbnailTuning {
   hover: Transition;
   press: Transition;
 }
-
-const defaultThumbnailTuning: ProjectCardThumbnailTuning = {
-  restScale: THUMBNAIL_REST_SCALE,
-  hoverScale: THUMBNAIL_HOVER_SCALE,
-  pressScale: THUMBNAIL_PRESS_SCALE,
-  hover: SPRING_THUMBNAIL_HOVER,
-  press: SPRING_THUMBNAIL_PRESS,
-};
 
 export interface ProjectCardProps {
   project: Project;
@@ -64,7 +55,7 @@ const fadeTransition = {
 };
 
 function useCanHover() {
-  const [canHover, setCanHover] = useState(false);
+  const [canHover, setCanHover] = useState<boolean | null>(null);
   useEffect(() => {
     const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
     setCanHover(mq.matches);
@@ -82,11 +73,29 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPressed, setIsPressed] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const canHover = useCanHover();
   const prefetchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const t = tuning ?? defaultThumbnailTuning;
+  const { cardHover, cardThumbnail } = useMotionTokens();
+
+  const t = useMemo<ProjectCardThumbnailTuning>(
+    () =>
+      tuning ?? {
+        restScale: cardThumbnail.restScale,
+        hoverScale: cardThumbnail.hoverScale,
+        pressScale: cardThumbnail.pressScale,
+        hover: SPRING_THUMBNAIL_HOVER,
+        press: SPRING_THUMBNAIL_PRESS,
+      },
+    [
+      tuning,
+      cardThumbnail.restScale,
+      cardThumbnail.hoverScale,
+      cardThumbnail.pressScale,
+    ],
+  );
 
   const resolvedAccent = useResolvedProjectAccent(project);
   const accentSolid = getAccentSolid(resolvedAccent);
@@ -101,13 +110,15 @@ export function ProjectCard({
   }, [images.length]);
 
   const handlePointerEnter = useCallback(() => {
-    if (!canHover) return;
+    if (canHover !== true) return;
+    setIsHovered(true);
     prefetchTimer.current = setTimeout(() => {
       prefetchProjectMedia(project);
     }, 100);
   }, [canHover, project]);
 
   const handlePointerLeave = useCallback(() => {
+    setIsHovered(false);
     if (prefetchTimer.current) {
       clearTimeout(prefetchTimer.current);
       prefetchTimer.current = null;
@@ -118,8 +129,6 @@ export function ProjectCard({
     <motion.div
       className={styles.wrapper}
       style={{ '--project-accent': accentSolid } as React.CSSProperties}
-      onPointerEnter={handlePointerEnter}
-      onPointerLeave={handlePointerLeave}
     >
       <div className={styles.card}>
 
@@ -129,6 +138,8 @@ export function ProjectCard({
             className={styles.imageWrapper}
             role="button"
             tabIndex={0}
+            onPointerEnter={handlePointerEnter}
+            onPointerLeave={handlePointerLeave}
             onTapStart={() => !shouldReduceMotion && setIsPressed(true)}
             onTap={() => setIsPressed(false)}
             onTapCancel={() => setIsPressed(false)}
@@ -152,6 +163,25 @@ export function ProjectCard({
             }}
           >
             <motion.div
+              className={styles.bgPlate}
+              initial={{ scale: cardHover.restScale, opacity: 0 }}
+              animate={
+                canHover === false
+                  ? { scale: 1, opacity: cardHover.bgOpacity }
+                  : isHovered && canHover === true
+                  ? { scale: 1, opacity: cardHover.bgOpacity }
+                  : { scale: cardHover.restScale, opacity: 0 }
+              }
+              transition={
+                canHover === true
+                  ? {
+                      opacity: { duration: cardHover.speed, ease: EASE_OUT_QUINT },
+                      scale: cardHover.scaleTransition,
+                    }
+                  : { duration: 0 }
+              }
+            />
+            <motion.div
               className={styles.imageInner}
               animate={
                 isPressed && !shouldReduceMotion
@@ -159,7 +189,7 @@ export function ProjectCard({
                   : { scale: t.restScale, transition: t.hover }
               }
               whileHover={
-                canHover && !shouldReduceMotion && !isPressed
+                canHover === true && !shouldReduceMotion && !isPressed
                   ? { scale: t.hoverScale, transition: t.hover }
                   : undefined
               }

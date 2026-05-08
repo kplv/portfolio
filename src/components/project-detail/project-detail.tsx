@@ -6,11 +6,9 @@ import { IntroText } from '@/components/intro-text';
 import { InfoTable } from '@/components/project/info-table';
 import { TeamList } from '@/components/project/team-list';
 import { SectionBlockView } from '@/components/project/section-block';
-import {
-  ORDERED_ROUTE_SECTION_VARIANTS,
-  ROUTE_SECTION_REDUCED_MOTION_TARGET,
-} from '@/config/page-motion';
+import { ROUTE_SECTION_REDUCED_MOTION_TARGET } from '@/config/page-motion';
 import { getAccentSolid, type Project } from '@/data/projects';
+import { useOrderedRouteSectionVariants } from '@/hooks/use-ordered-route-section-variants';
 import { useResolvedProjectAccent } from '@/hooks/use-resolved-project-accent';
 import styles from './project-detail.module.css';
 
@@ -22,6 +20,7 @@ export interface ProjectDetailProps {
 
 export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
   const shouldReduceMotion = useReducedMotion();
+  const sectionVariants = useOrderedRouteSectionVariants();
   const resolvedAccent = useResolvedProjectAccent(project);
   const accentSolid = getAccentSolid(resolvedAccent);
   const sectionCount = project.sections?.length ?? 0;
@@ -41,7 +40,7 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
       <div className={styles.panelContent}>
         <motion.div
           className={styles.entryBlock}
-          variants={ORDERED_ROUTE_SECTION_VARIANTS}
+          variants={sectionVariants}
           custom={{ enterOrder: 0, exitOrder: sectionCount }}
           initial={shouldReduceMotion ? reducedState : 'hidden'}
           animate={shouldReduceMotion ? reducedState : 'show'}
@@ -69,7 +68,7 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
           <motion.div
             key={`section-${i}`}
             className={styles.section}
-            variants={ORDERED_ROUTE_SECTION_VARIANTS}
+            variants={sectionVariants}
             custom={{ enterOrder: i + 1, exitOrder: sectionCount - i - 1 }}
             initial={shouldReduceMotion ? reducedState : 'hidden'}
             animate={shouldReduceMotion ? reducedState : 'show'}

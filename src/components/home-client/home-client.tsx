@@ -8,15 +8,17 @@ import { IntroText } from '@/components/intro-text';
 import { NavigationHeader } from '@/components/navigation-header';
 import { ProjectDetail } from '@/components/project-detail';
 import { ProjectList } from '@/components/project-list';
+import { ArenaIcon } from '@/components/icons/arena-icon';
+import { LinkedInIcon } from '@/components/icons/linkedin-icon';
 import { SocialLink } from '@/components/social-link/social-link';
 import { SocialLinkList } from '@/components/social-link-list/social-link-list';
 import {
   ABOUT_PRESENCE_BRIDGE,
-  HOME_SECTION_FADE,
   ROUTE_SECTION_REDUCED_MOTION_TARGET,
   ROUTE_SHELL_ANIMATE_PRESENCE_PROPS,
 } from '@/config/page-motion';
 import { getProjectByPathname, type Project } from '@/data/projects';
+import { useOrderedRouteSectionVariants } from '@/hooks/use-ordered-route-section-variants';
 import styles from './home-client.module.css';
 
 const DEFAULT_TITLE = 'Denis Kopylov — Product Designer';
@@ -34,6 +36,7 @@ const MotionProjectList = motion(ProjectList);
 
 export function HomeClient({ projects, className }: HomeClientProps) {
   const shouldReduceMotion = useReducedMotion();
+  const homeSectionVariants = useOrderedRouteSectionVariants();
   const pathname = usePathname();
   const isAbout = pathname === '/about';
   const isHome = pathname === '/';
@@ -106,7 +109,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
             ) : (
               <motion.div key="home" style={{ display: 'contents' }}>
                 <MotionIntroText
-                  variants={HOME_SECTION_FADE}
+                  variants={homeSectionVariants}
                   custom={{ enterOrder: 0, exitOrder: 2 }}
                   initial={shouldReduceMotion ? reducedState : 'hidden'}
                   animate={shouldReduceMotion ? reducedState : 'show'}
@@ -114,23 +117,31 @@ export function HomeClient({ projects, className }: HomeClientProps) {
                   header="Denis Kopylov"
                   accent={homeHeaderGradient}
                   italicHeader
-                  text="Product designer with a focus on turning ideas into reality through coding, a holistic approach, and an eye for interactive experiences. Currently at Ostrom."
+                  text="Product designer with a focus on turning ideas into reality through coding, a holistic approach, and an eye for interactive experiences. Currently at Ostrom."
                 />
 
                 <MotionSocialLinkList
-                  variants={HOME_SECTION_FADE}
+                  variants={homeSectionVariants}
                   custom={{ enterOrder: 1, exitOrder: 1 }}
                   initial={shouldReduceMotion ? reducedState : 'hidden'}
                   animate={shouldReduceMotion ? reducedState : 'show'}
                   exit={shouldReduceMotion ? reducedState : 'exit'}
                 >
-                  <SocialLink href="https://www.linkedin.com/in/deniskplv/" text="LinkedIn" />
-                  <SocialLink href="https://www.are.na/denis-kopylov/channels" text="Are.na" />
+                  <SocialLink
+                    href="https://www.linkedin.com/in/deniskplv/"
+                    text="LinkedIn"
+                    icon={<LinkedInIcon />}
+                  />
+                  <SocialLink
+                    href="https://www.are.na/denis-kopylov/channels"
+                    text="Are.na"
+                    icon={<ArenaIcon />}
+                  />
                   <SocialLink href="/about" text="About" />
                 </MotionSocialLinkList>
 
                 <MotionProjectList
-                  variants={HOME_SECTION_FADE}
+                  variants={homeSectionVariants}
                   custom={{ enterOrder: 2, exitOrder: 0 }}
                   initial={shouldReduceMotion ? reducedState : 'hidden'}
                   animate={shouldReduceMotion ? reducedState : 'show'}
@@ -142,7 +153,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
             )}
           </AnimatePresence>
         </div>
-      </main >
-    </div >
+      </main>
+    </div>
   );
 }

@@ -3,11 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
-import {
-  EASE_OUT_QUINT,
-  PRESS_DURATION,
-  PRESS_SCALE,
-} from '@/config/animations';
+import { useMotionTokens } from '@/config/motion-tokens';
 import styles from './document-link.module.css';
 
 const BORDER_VIEWBOX = '0 0 120 160';
@@ -106,6 +102,7 @@ function DocumentCardBody({
 
 export function DocumentLink(props: DocumentLinkProps) {
   const shouldReduceMotion = useReducedMotion();
+  const tokens = useMotionTokens();
 
   if (props.mode === 'navigate') {
     const { href, label, className } = props;
@@ -123,11 +120,8 @@ export function DocumentLink(props: DocumentLinkProps) {
             shouldReduceMotion
               ? undefined
               : {
-                  scale: PRESS_SCALE,
-                  transition: {
-                    duration: PRESS_DURATION,
-                    ease: EASE_OUT_QUINT,
-                  },
+                  scale: tokens.interactiveTap.scale,
+                  transition: tokens.interactiveTap.spring,
                 }
           }
         >
@@ -203,11 +197,8 @@ export function DocumentLink(props: DocumentLinkProps) {
         shouldReduceMotion
           ? undefined
           : {
-              scale: PRESS_SCALE,
-              transition: {
-                duration: PRESS_DURATION,
-                ease: EASE_OUT_QUINT,
-              },
+              scale: tokens.interactiveTap.scale,
+              transition: tokens.interactiveTap.spring,
             }
       }
     >

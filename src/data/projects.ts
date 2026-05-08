@@ -374,7 +374,7 @@ export const projects: Project[] = [
     slug: 'trade-republic',
     name: 'Trade Republic',
     description:
-      'Designed fraud prevention flows for 8M+ users, improved micro-interactions on core screens, and shipped an internal performance review tool',
+      'Fraud prevention flows for 8M+ users, micro-interactions on core screens, and an internal performance review tool',
     intro:
       'At Trade Republic I designed fraud prevention flows for 8M+ users, refined micro-interactions on core screens, and shipped an internal performance review tool.',
     image: '/images/projects/trade/trade-thumbnail.png',

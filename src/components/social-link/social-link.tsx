@@ -2,12 +2,14 @@
 
 import { motion, useReducedMotion } from 'motion/react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { type ReactNode } from 'react';
+import { useMotionTokens } from '@/config/motion-tokens';
 import styles from './social-link.module.css';
 
 export interface SocialLinkProps {
   href: string;
   text: string;
+  icon?: ReactNode;
 }
 
 function isExternalHref(href: string): boolean {
@@ -16,9 +18,9 @@ function isExternalHref(href: string): boolean {
 
 const MotionLink = motion.create(Link);
 
-export function SocialLink({ href, text }: SocialLinkProps) {
+export function SocialLink({ href, text, icon }: SocialLinkProps) {
   const shouldReduceMotion = useReducedMotion();
-  const [isHovered, setIsHovered] = useState(false);
+  const tokens = useMotionTokens();
   const external = isExternalHref(href);
   const LinkComponent = external ? motion.a : MotionLink;
 
@@ -29,16 +31,14 @@ export function SocialLink({ href, text }: SocialLinkProps) {
         ? { target: '_blank' as const, rel: 'noopener noreferrer' }
         : {})}
       className={styles.link}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
       whileHover={
         shouldReduceMotion
           ? undefined
           : {
-              opacity: 0.7,
+              opacity: tokens.link.hoverOpacity,
               transition: {
-                duration: 0.15,
-                ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+                duration: tokens.pressTap.duration,
+                ease: tokens.pressTap.ease,
               },
             }
       }
@@ -46,15 +46,23 @@ export function SocialLink({ href, text }: SocialLinkProps) {
         shouldReduceMotion
           ? undefined
           : {
-              scale: 0.97,
-              transition: {
-                duration: 0.1,
-                ease: [0.23, 1, 0.32, 1] as [number, number, number, number],
-              },
+              scale: tokens.interactiveTap.scale,
+              transition: tokens.interactiveTap.spring,
             }
       }
     >
+      {icon ? (
+        <span className={styles.icon} aria-hidden>
+          {icon}
+        </span>
+      ) : null}
       {text}
+      {/*
+        TODO(social-link): line/underline hover animation temporarily disabled.
+        Re-enable once we've finalized the icon + label hover treatment.
+        When uncommenting, restore: useState for isHovered, onHoverStart/onHoverEnd
+        on LinkComponent, and pass shouldReduceMotion + tokens into animate below.
+
       <motion.span
         className={styles.underline}
         initial={{ scaleX: 0 }}
@@ -63,14 +71,11 @@ export function SocialLink({ href, text }: SocialLinkProps) {
             ? { scaleX: isHovered ? 1 : 0 }
             : {
                 scaleX: isHovered ? 1 : 0,
-                transition: {
-                  type: 'spring',
-                  duration: 0.3,
-                  bounce: 0.1,
-                },
+                transition: tokens.link.underlineSpring,
               }
         }
       />
+      */}
     </LinkComponent>
   );
 }

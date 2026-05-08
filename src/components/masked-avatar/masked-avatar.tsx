@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image, { type StaticImageData } from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
-import { EASE_OUT_QUINT, PRESS_DURATION, PRESS_SCALE } from '@/config/animations';
+import { useMotionTokens } from '@/config/motion-tokens';
 import styles from './masked-avatar.module.css';
 
 /** Stroke path from Figma mask (node 356:2723), aligned to viewBox 0 0 174.335 174.335 */
@@ -21,6 +21,7 @@ export interface MaskedAvatarProps {
 export function MaskedAvatar({ src, size = DEFAULT_SIZE }: MaskedAvatarProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+  const tokens = useMotionTokens();
 
   useEffect(() => {
     setIsLoaded(false);
@@ -40,11 +41,8 @@ export function MaskedAvatar({ src, size = DEFAULT_SIZE }: MaskedAvatarProps) {
         shouldReduceMotion
           ? undefined
           : {
-              scale: PRESS_SCALE,
-              transition: {
-                duration: PRESS_DURATION,
-                ease: EASE_OUT_QUINT,
-              },
+              scale: tokens.interactiveTap.scale,
+              transition: tokens.interactiveTap.spring,
             }
       }
     >

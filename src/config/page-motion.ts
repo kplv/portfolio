@@ -1,3 +1,4 @@
+import type { Transition } from 'motion/react';
 import {
   EASE_OUT_QUINT,
   SPRING_ROUTE_CONTENT,
@@ -7,6 +8,16 @@ import {
 export type RouteSectionOrder = {
   enterOrder: number;
   exitOrder: number;
+};
+
+/** Theme shape accepted by {@link createOrderedSectionVariants} (widened from `PAGE_MOTION` for runtime overrides). */
+export type OrderedSectionTheme = {
+  orderedSection: typeof PAGE_MOTION.orderedSection;
+  orderedSectionTiming: {
+    staggerStep: number;
+    filterDuration: number;
+    contentSpring: Transition;
+  };
 };
 
 /**
@@ -33,9 +44,11 @@ export const PAGE_MOTION = {
     },
   },
   orderedSectionTiming: {
-    staggerStep: 0.25,
+    staggerStep: 0.15,
     /** Blur uses a tween (no spring overshoot on `filter`). */
     filterDuration: 0.35,
+    /** Spring driving opacity + scale on each ordered section. */
+    contentSpring: SPRING_ROUTE_CONTENT,
   },
   presenceBridge: {
     variants: {
@@ -60,16 +73,17 @@ export const PAGE_MOTION = {
 export const ABOUT_STAGGER_STEP = PAGE_MOTION.orderedSectionTiming.staggerStep;
 
 export function createOrderedSectionVariants(
-  theme: typeof PAGE_MOTION = PAGE_MOTION,
+  theme: OrderedSectionTheme = PAGE_MOTION,
 ) {
   const { hidden, show: showTarget, exit: exitTarget } = theme.orderedSection;
-  const { staggerStep, filterDuration } = theme.orderedSectionTiming;
+  const { staggerStep, filterDuration, contentSpring } =
+    theme.orderedSectionTiming;
 
   const staggeredTransition = (orderIndex: number) => {
     const delay = orderIndex * staggerStep;
     return {
-      opacity: { ...SPRING_ROUTE_CONTENT, delay },
-      scale: { ...SPRING_ROUTE_CONTENT, delay },
+      opacity: { ...contentSpring, delay },
+      scale: { ...contentSpring, delay },
       filter: {
         duration: filterDuration,
         ease: EASE_OUT_QUINT,
