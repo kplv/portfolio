@@ -531,9 +531,9 @@ export const projects: Project[] = [
   {
     id: '3',
     slug: 'playground',
-    name: 'More…',
+    name: 'More..',
     description:
-      'A mix of product design, code, and experiments from the last several years.',
+      'A mix of product design, code, and experiments from the last several years',
     intro:
       'Ah, a little bit of this and that from 9 years being a designer. My main focus always was a holistic approach, care for details in interactions, and deep technical knowledge.',
     image: '/images/projects/playground/before.png',
