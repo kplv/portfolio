@@ -43,12 +43,11 @@ export function AboutSectionContent() {
         </p>
         <p className={styles.paragraph}>
           A fan of Bauhaus, and then of Ulm School of Design — I approach work holistically.
-          Design is a practice, where command of form, colour, and material are essential. So I
-          code, but pay respect to design and art books. Great results come from synergy of
+          Design is a practice, where command of form, colour, and material are essential. So I           code, but pay respect to design and art books. I believe, great results come from synergy of
           disciplines and building on top of others’ work.
         </p>
         <p className={styles.paragraph}>
-          Apart from looking at screen, I spend my time dancing contemporary or riding a Fuji
+          Apart from looking at screen, I spend my time dancing contemporary or riding a Fuji
           Feather across Schöneberg, Berlin.{' '}
         </p>
       </motion.div>
