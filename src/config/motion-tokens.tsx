@@ -43,6 +43,7 @@ export interface MotionTokens {
   };
   link: {
     hoverOpacity: number;
+    hoverSpring: Transition;
     underlineSpring: Transition;
   };
   cardHover: {
@@ -104,6 +105,7 @@ export const DEFAULT_MOTION_TOKENS: MotionTokens = {
   },
   link: {
     hoverOpacity: 0.7,
+    hoverSpring: SPRING_INTERACTIVE_PHYSICS,
     underlineSpring: { type: 'spring', duration: 0.3, bounce: 0.1 },
   },
   cardHover: {

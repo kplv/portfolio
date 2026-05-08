@@ -36,10 +36,7 @@ export function SocialLink({ href, text, icon }: SocialLinkProps) {
           ? undefined
           : {
               opacity: tokens.link.hoverOpacity,
-              transition: {
-                duration: tokens.pressTap.duration,
-                ease: tokens.pressTap.ease,
-              },
+              transition: tokens.link.hoverSpring,
             }
       }
       whileTap={
