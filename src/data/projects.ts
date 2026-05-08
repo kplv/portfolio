@@ -59,6 +59,10 @@ export interface Project {
   role?: string;
   year?: string;
   contribution?: string;
+  /** Optional InfoTable column headers (defaults: Role / Year / Scope) */
+  infoRoleLabel?: string;
+  infoYearLabel?: string;
+  infoContributionLabel?: string;
   sections?: ProjectSection[];
 }
 
@@ -153,7 +157,7 @@ export const projects: Project[] = [
     slug: 'ostrom',
     name: 'Ostrom',
     description:
-      'Major features redesign, design engineering, and process improvements for an energy management provider',
+      'App redesign, design engineering, and process improvements for an energy management provider',
     intro:
       'Friendly energy startup with a mobile app to handle all your energy management. Simple flows hide a complex infrastructure underneath, like Germany\u2019s first virtual power plant.',
     image: '/images/projects/ostrom/ostrom-thumbnail.png',
@@ -374,7 +378,7 @@ export const projects: Project[] = [
     slug: 'trade-republic',
     name: 'Trade Republic',
     description:
-      'Fraud prevention flows for 8M+ users, micro-interactions on core screens, and an internal performance review tool',
+      'Security features, internal performance tool, and interaction design of a European savings platform with 8M+ customers',
     intro:
       'At Trade Republic I designed fraud prevention flows for 8M+ users, refined micro-interactions on core screens, and shipped an internal performance review tool.',
     image: '/images/projects/trade/trade-thumbnail.png',
@@ -527,36 +531,44 @@ export const projects: Project[] = [
   {
     id: '3',
     slug: 'playground',
-    name: 'Other',
-    description: 'Interactive design and other projects from past years',
+    name: 'More…',
+    description:
+      'A mix of product design, code, and experiments from the last several years.',
     intro:
-      'Projects from the past few years. Some were done inside product teams at major tech companies like Yandex. Some won awards such as Red Dot. Some are personal projects where I explored new approaches.',
-    image: '/images/playground/play-0.png',
+      'Ah, a little bit of this and that from 9 years being a designer. My main focus always was a holistic approach, care for details in interactions, and deep technical knowledge.',
+    image: '/images/playground/before.png',
     images: [
+      '/images/playground/before.png',
       '/images/playground/play-0.png',
       '/images/playground/play-1.png',
       '/images/playground/play-2.png',
       '/images/playground/play-3.png',
-      '/images/playground/play-7.png',
+      '/images/playground/playground-1.png',
     ],
     accent:
       'linear-gradient(82.638deg in oklch, oklch(0.5833 0.2078 8.21) 0.85402%, oklch(0.5914 0.2359 22.78) 99.266%)',
-    role: 'Designer',
-    year: '2022 — Now',
-    contribution: 'Everything',
-    team: [],
+    infoRoleLabel: 'What I Was Doing',
+    infoContributionLabel: 'Where',
+    role: 'Design, Code, Typefaces, 3D',
+    year: '2017—Now',
+    contribution: 'Arrival, SberDevices',
     sections: [
       {
         blocks: [
-          { type: 'heading', text: 'Code' },
+          { type: 'heading', text: 'React Playground' },
+          {
+            type: 'text',
+            text:
+              "I've been working with React for a few years already and I believe, the best design tool should be as close to end experience as possible. Knowledge of material creates ideas for new engineering changes, deeper feasibility insight, and generates ideas for exploration.",
+          },
           {
             type: 'media',
             media: {
               type: 'video',
-              src: '/images/playground/play-9.mp4',
+              src: '/images/playground/expo.mp4',
               cover: true,
               label:
-                'React Native Playground. I have an app where I prototype new components and just generally have fun. Some of it was later used in production for Ostrom.',
+                'I have an Expo playground, where I explore components, patterns, and familiarise with platform concepts.',
             },
           },
         ],
@@ -565,92 +577,68 @@ export const projects: Project[] = [
         blocks: [
           { type: 'heading', text: 'Interactive Design' },
           {
-            type: 'media',
-            media: {
-              type: 'video',
-              src: '/images/playground/play-10.mp4',
-              cover: true,
-              label:
-                'Bownce. I was preparing the Red Dot case for this project, working on micro-interactions and screen transitions.',
-            },
+            type: 'text',
+            text: [
+              'Tuned timing, physics-based animations, care for how everything fit together — all of it could elevate product. I leaned in heavily into micro-interactions, fluidity, and usability of touch-design. That allowed me to chip in projects, where I\'d fine tune interactive part, or provide interactive concept exploration.',
+              'Kudos to our teacher at design school Sergey Galtsev. Both for opportunities, but also for initial inclination in interaction design, all starting from my early work at :redmadrobot design agency.',
+            ],
           },
           {
             type: 'media',
-            media: {
-              type: 'video',
-              src: '/images/playground/play-6.mp4',
-              cover: true,
-              label:
-                'Badoo. A new voice-first dating experience. My graduation project.',
-            },
-          },
-          {
-            type: 'media',
-            media: {
-              type: 'video',
-              src: '/images/playground/play-5.mp4',
-              cover: true,
-              label: 'Badoo. Spent a lot of time making the flow feel alive.',
-            },
-          },
-        ],
-      },
-      {
-        blocks: [
-          { type: 'heading', text: 'Font Design' },
-          {
-            type: 'media',
-            media: {
-              type: 'image',
-              src: '/images/playground/play-1.png',
-              cover: true,
-              label:
-                'Tachkum Font. Final project of the type design workshop by Contrast Foundry in 2022.',
-            },
-          },
-          {
-            type: 'media',
-            media: {
-              type: 'image',
-              src: '/images/playground/play-2.png',
-              cover: true,
-              label:
-                'Tachkum Font. The name was inspired by an Abkhazian fairy tale.',
-            },
+            media: [
+              {
+                type: 'video',
+                src: '/images/playground/bownce.mp4',
+                cover: true,
+                label:
+                  'Bownce won a bronze (🥉  ) in Red Dot Awards in 2019. I was preparing flows navigation and micro-interactions.',
+              },
+              {
+                type: 'video',
+                src: '/images/playground/trading-platform.mp4',
+                cover: true,
+                label:
+                  'One of initial interaction concepts for a trading platform UI I worked on. In a visual concept we aimed to make a bold statement, and a fluid navigation.',
+              },
+              {
+                type: 'video',
+                src: '/images/playground/badoo.mp4',
+                cover: true,
+                label:
+                  'Badoo\'s voice-first dating, our graduation project from BHSAD with focus on joyful experience, and new approach to familiar products.',
+              },
+            ],
           },
         ],
       },
       {
         blocks: [
-          { type: 'heading', text: 'Projects' },
+          { type: 'heading', text: 'SberDevices' },
           {
-            type: 'media',
-            media: {
-              type: 'image',
-              src: '/images/playground/play-3.png',
-              cover: true,
-              label:
-                'Arrival. I worked on new features for customer support and fleet management.',
-            },
+            type: 'text',
+            text: [
+              'In 2022, I joined a new startup, who were to launch a new tablet device with a voice-assistant on Russian market. Eventually a startup were to have 10M MAU customers, but at the beginning my role was 0 → 1 product design of a new product stream there. ',
+              'I joined a team of geo services. We would allow folks to look for places, like restaurants and cinemas, buy movie tickets, book and plan events, — and a lot more. All features were voice controlled as well. I worked on all major launches in research, delivery, and ongoing improvement stages.',
+            ],
           },
           {
             type: 'media',
-            media: {
-              type: 'image',
-              src: '/images/playground/play-7.png',
-              cover: true,
-              label:
-                'SberDevices. I led a new stream for city exploration features, from voice to TV applications.',
-            },
-          },
-          {
-            type: 'media',
-            media: {
-              type: 'video',
-              src: '/images/playground/play-4.mp4',
-              cover: true,
-              label: 'SberDevices. Prototyping for TV was a fun experience.',
-            },
+            media: [
+              {
+                type: 'image',
+                src: '/images/playground/sberdevies-tv-mobile.png',
+                cover: true,
+                label:
+                  'Mobile and TV worked the same conceptually, but always catered for specific platform patterns.',
+              },
+              {
+                type: 'video',
+                src: '/images/playground/sberdevices-tv-navigation.mp4',
+                cover: true,
+                label:
+                  'TV application used React Underneath, but hardware should be accounted for, no fancy stuff.',
+              },
+            ],
           },
         ],
       },

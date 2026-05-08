@@ -1,0 +1,32 @@
+---
+description: >-
+  When editing portfolio copy in projects.ts (intros, section text, media labels),
+  apply proofread-only edits: fix objective errors without rewriting the author's voice.
+globs:
+  - src/data/projects.ts
+alwaysApply: false
+---
+
+# Proofread-only copy (`projects.ts`)
+
+When changing **`Project`** strings ( **`description`**, **`intro`**, **`role`**, section **`text`**, media **`label`**, etc.) in [`src/data/projects.ts`](src/data/projects.ts):
+
+## Allowed (objective fixes only)
+
+- Clear **spelling** mistakes.
+- Clear **grammar** errors in standard English **without** altering meaning (e.g. agreement, a clearly missing article).
+- **Punctuation** that repairs broken sentences when structure stays the same (periods, stray double spaces).
+- **Obvious typos** in proper nouns when the intended spelling is clear from context.
+
+## Not allowed without explicit user approval
+
+- Rephrasing, tightening, or “smoothing” for style.
+- Synonym swaps (“nine” ↔ “9”, US ↔ UK spelling) unless the user asks.
+- Restructuring (splitting/merging paragraphs, reordering clauses).
+- Voice changes (e.g. removing informal openers like “Ah,”).
+
+If a line could be **intentional voice** vs. an error, **leave it** or ask the user before editing.
+
+## Figma
+
+Treat Figma exports as **structure and hierarchy** reference. Final strings should match **user-approved copy**, not automatic paraphrase from design tools.

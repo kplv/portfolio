@@ -57,6 +57,9 @@ export function ProjectDetail({ project, onDismiss }: ProjectDetailProps) {
               year={project.year}
               contribution={project.contribution}
               accent={resolvedAccent}
+              roleLabel={project.infoRoleLabel}
+              yearLabel={project.infoYearLabel}
+              contributionLabel={project.infoContributionLabel}
             />
           )}
           {project.team && (

@@ -6,23 +6,37 @@ export interface InfoTableProps {
   year: string;
   contribution: string;
   accent?: string;
+  /** Overrides the default “Role” column header */
+  roleLabel?: string;
+  /** Overrides the default “Year” column header */
+  yearLabel?: string;
+  /** Overrides the default “Scope” column header */
+  contributionLabel?: string;
 }
 
-export function InfoTable({ role, year, contribution, accent }: InfoTableProps) {
+export function InfoTable({
+  role,
+  year,
+  contribution,
+  accent,
+  roleLabel = 'Role',
+  yearLabel = 'Year',
+  contributionLabel = 'Scope',
+}: InfoTableProps) {
   const headerStyle = accent ? getAccentTextStyle(accent) : undefined;
 
   return (
     <div className={styles.container}>
       <div className={styles.item}>
-        <p className={styles.header} style={headerStyle}>Role</p>
+        <p className={styles.header} style={headerStyle}>{roleLabel}</p>
         <p className={styles.text}>{role}</p>
       </div>
       <div className={styles.item}>
-        <p className={styles.header} style={headerStyle}>Year</p>
+        <p className={styles.header} style={headerStyle}>{yearLabel}</p>
         <p className={styles.text}>{year}</p>
       </div>
       <div className={styles.item}>
-        <p className={styles.header} style={headerStyle}>Scope</p>
+        <p className={styles.header} style={headerStyle}>{contributionLabel}</p>
         <p className={styles.text}>{contribution}</p>
       </div>
     </div>
