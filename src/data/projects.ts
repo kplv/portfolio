@@ -595,6 +595,13 @@ export const projects: Project[] = [
               },
               {
                 type: 'video',
+                src: '/images/playground/maestrello.mp4',
+                cover: true,
+                label:
+                  'Maestrello — my beloved Italian pizza in Moscow. It was nice to fine-tune interactions for a mobile version.',
+              },
+              {
+                type: 'video',
                 src: '/images/playground/trading-platform.mp4',
                 cover: true,
                 label:
