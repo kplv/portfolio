@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 24px;
   width: 100%;
-  max-width: 55vw;
+  max-width: min(55vw, 1024px);
 }
 
 .frameLeadIn {
@@ -129,6 +129,12 @@ video.media[data-scaled='true'] {
 
   .skeleton {
     animation: none;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .block {
+    max-width: min(65vw, 1024px);
   }
 }
 
