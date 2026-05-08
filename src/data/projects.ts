@@ -536,14 +536,14 @@ export const projects: Project[] = [
       'A mix of product design, code, and experiments from the last several years.',
     intro:
       'Ah, a little bit of this and that from 9 years being a designer. My main focus always was a holistic approach, care for details in interactions, and deep technical knowledge.',
-    image: '/images/playground/before.png',
+    image: '/images/projects/playground/before.png',
     images: [
-      '/images/playground/before.png',
-      '/images/playground/play-0.png',
-      '/images/playground/play-1.png',
-      '/images/playground/play-2.png',
-      '/images/playground/play-3.png',
-      '/images/playground/playground-1.png',
+      '/images/projects/playground/before.png',
+      '/images/projects/playground/play-0.png',
+      '/images/projects/playground/play-1.png',
+      '/images/projects/playground/play-2.png',
+      '/images/projects/playground/play-3.png',
+      '/images/projects/playground/playground-1.png',
     ],
     accent:
       'linear-gradient(82.638deg in oklch, oklch(0.5833 0.2078 8.21) 0.85402%, oklch(0.5914 0.2359 22.78) 99.266%)',
@@ -565,7 +565,7 @@ export const projects: Project[] = [
             type: 'media',
             media: {
               type: 'video',
-              src: '/images/playground/expo.mp4',
+              src: '/images/projects/playground/expo.mp4',
               cover: true,
               label:
                 'I have an Expo playground, where I explore components, patterns, and familiarise with platform concepts.',
@@ -588,28 +588,28 @@ export const projects: Project[] = [
             media: [
               {
                 type: 'video',
-                src: '/images/playground/bownce.mp4',
+                src: '/images/projects/playground/bownce.mp4',
                 cover: true,
                 label:
                   'Bownce won a bronze (🥉  ) in Red Dot Awards in 2019. I was preparing flows navigation and micro-interactions.',
               },
               {
                 type: 'video',
-                src: '/images/playground/maestrello.mp4',
+                src: '/images/projects/playground/maestrello.mp4',
                 cover: true,
                 label:
                   'Maestrello — my beloved Italian pizza in Moscow. It was nice to fine-tune interactions for a mobile version.',
               },
               {
                 type: 'video',
-                src: '/images/playground/trading-platform.mp4',
+                src: '/images/projects/playground/trading-platform.mp4',
                 cover: true,
                 label:
                   'One of initial interaction concepts for a trading platform UI I worked on. In a visual concept we aimed to make a bold statement, and a fluid navigation.',
               },
               {
                 type: 'video',
-                src: '/images/playground/badoo.mp4',
+                src: '/images/projects/playground/badoo.mp4',
                 cover: true,
                 label:
                   'Badoo\'s voice-first dating, our graduation project from BHSAD with focus on joyful experience, and new approach to familiar products.',
@@ -633,14 +633,14 @@ export const projects: Project[] = [
             media: [
               {
                 type: 'image',
-                src: '/images/playground/sberdevies-tv-mobile.png',
+                src: '/images/projects/playground/sberdevies-tv-mobile.png',
                 cover: true,
                 label:
                   'Mobile and TV worked the same conceptually, but always catered for specific platform patterns.',
               },
               {
                 type: 'video',
-                src: '/images/playground/sberdevices-tv-navigation.mp4',
+                src: '/images/projects/playground/sberdevices-tv-navigation.mp4',
                 cover: true,
                 label:
                   'TV application used React Underneath, but hardware should be accounted for, no fancy stuff.',
