@@ -47,7 +47,7 @@ export interface MotionTokens {
     underlineSpring: Transition;
   };
   cardHover: {
-    /** 0–1, peak alpha of the image-wrapper background on hover */
+    /** 0–1, peak opacity of the bg plate layer (tint strength lives in CSS color-mix) */
     bgOpacity: number;
     /** seconds, fade in/out duration of the bg alpha */
     speed: number;
@@ -109,7 +109,7 @@ export const DEFAULT_MOTION_TOKENS: MotionTokens = {
     underlineSpring: { type: 'spring', duration: 0.3, bounce: 0.1 },
   },
   cardHover: {
-    bgOpacity: 0.04,
+    bgOpacity: 1,
     speed: 0.18,
     restScale: 0.97,
     scaleTransition: SPRING_THUMBNAIL_HOVER,

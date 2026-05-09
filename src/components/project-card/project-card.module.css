@@ -99,7 +99,11 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background-color: var(--slate-1000);
+  background-color: color-mix(
+    in oklch,
+    var(--project-accent) 4%,
+    transparent
+  );
   pointer-events: none;
   will-change: transform, opacity;
 }
@@ -187,5 +191,9 @@
 }
 
 [data-theme='dark'] .bgPlate {
-  background-color: white;
+  background-color: color-mix(
+    in oklch,
+    var(--project-accent) 8%,
+    transparent
+  );
 }
