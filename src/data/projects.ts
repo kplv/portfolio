@@ -157,7 +157,7 @@ export const projects: Project[] = [
     slug: 'ostrom',
     name: 'Ostrom',
     description:
-      'App redesign, design engineering, and process improvements for an energy management provider',
+      'Redesign, design engineering, and process improvements for an energy management provider',
     intro:
       'Friendly energy startup with a mobile app to handle all your energy management. Simple flows hide a complex infrastructure underneath, like Germany\u2019s first virtual power plant.',
     image: '/images/projects/ostrom/ostrom-thumbnail.png',
@@ -378,7 +378,7 @@ export const projects: Project[] = [
     slug: 'trade-republic',
     name: 'Trade Republic',
     description:
-      'Security features, internal performance tool, and interaction design of a European savings platform with 8M+ customers',
+      'Security, performance tool, and interaction for a European savings platform with 8M+ customers',
     intro:
       'At Trade Republic I designed fraud prevention flows for 8M+ users, refined micro-interactions on core screens, and shipped an internal performance review tool.',
     image: '/images/projects/trade/trade-thumbnail.png',
@@ -558,8 +558,7 @@ export const projects: Project[] = [
           { type: 'heading', text: 'React Playground' },
           {
             type: 'text',
-            text:
-              "I've been working with React for a few years already and I believe, the best design tool should be as close to end experience as possible. Knowledge of material creates ideas for new engineering changes, deeper feasibility insight, and generates ideas for exploration.",
+            text: "I've been working with React for a few years already and I believe, the best design tool should be as close to end experience as possible. Knowledge of material creates ideas for new engineering changes, deeper feasibility insight, and generates ideas for exploration.",
           },
           {
             type: 'media',
@@ -579,7 +578,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             text: [
-              'Tuned timing, physics-based animations, care for how everything fit together — all of it could elevate product. I leaned in heavily into micro-interactions, fluidity, and usability of touch-design. That allowed me to chip in projects, where I\'d fine tune interactive part, or provide interactive concept exploration.',
+              "Tuned timing, physics-based animations, care for how everything fit together — all of it could elevate product. I leaned in heavily into micro-interactions, fluidity, and usability of touch-design. That allowed me to chip in projects, where I'd fine tune interactive part, or provide interactive concept exploration.",
               'Kudos to our teacher at design school Sergey Galtsev. Both for opportunities, but also for initial inclination in interaction design, all starting from my early work at :redmadrobot design agency.',
             ],
           },
@@ -612,7 +611,7 @@ export const projects: Project[] = [
                 src: '/images/projects/playground/badoo.mp4',
                 cover: true,
                 label:
-                  'Badoo\'s voice-first dating, our graduation project from BHSAD with focus on joyful experience, and new approach to familiar products.',
+                  "Badoo's voice-first dating, our graduation project from BHSAD with focus on joyful experience, and new approach to familiar products.",
               },
             ],
           },
