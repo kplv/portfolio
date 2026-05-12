@@ -2,14 +2,19 @@
 
 import { motion, useReducedMotion } from 'motion/react';
 import Link from 'next/link';
-import { type ReactNode } from 'react';
+import { type ReactNode, useMemo } from 'react';
 import { useMotionTokens } from '@/config/motion-tokens';
+import { getAccentTextStyle } from '@/data/projects';
 import styles from './social-link.module.css';
+
+const DEFAULT_SOCIAL_ACCENT = 'var(--text-display-gradient)';
 
 export interface SocialLinkProps {
   href: string;
   text: string;
   icon?: ReactNode;
+  /** CSS color or gradient (e.g. display token). Defaults to `--text-display-gradient`. */
+  accent?: string;
 }
 
 function isExternalHref(href: string): boolean {
@@ -18,11 +23,13 @@ function isExternalHref(href: string): boolean {
 
 const MotionLink = motion.create(Link);
 
-export function SocialLink({ href, text, icon }: SocialLinkProps) {
+export function SocialLink({ href, text, icon, accent }: SocialLinkProps) {
   const shouldReduceMotion = useReducedMotion();
   const tokens = useMotionTokens();
   const external = isExternalHref(href);
   const LinkComponent = external ? motion.a : MotionLink;
+  const fill = accent ?? DEFAULT_SOCIAL_ACCENT;
+  const labelStyle = useMemo(() => getAccentTextStyle(fill), [fill]);
 
   return (
     <LinkComponent
@@ -53,7 +60,9 @@ export function SocialLink({ href, text, icon }: SocialLinkProps) {
           {icon}
         </span>
       ) : null}
-      {text}
+      <span className={styles.label} style={labelStyle}>
+        {text}
+      </span>
       {/*
         TODO(social-link): line/underline hover animation temporarily disabled.
         Re-enable once we've finalized the icon + label hover treatment.
