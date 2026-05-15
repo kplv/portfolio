@@ -21,6 +21,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background 0.3s ease, color 0.3s ease;
+  /* Proportional old-style figures for body copy; override with tabular-nums / lining-nums where needed */
+  font-variant-numeric: oldstyle-nums;
 }
 
 * {

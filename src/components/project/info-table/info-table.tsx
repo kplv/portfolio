@@ -33,7 +33,7 @@ export function InfoTable({
       </div>
       <div className={styles.item}>
         <p className={styles.header} style={headerStyle}>{yearLabel}</p>
-        <p className={styles.text}>{year}</p>
+        <p className={[styles.text, styles.yearValue].join(' ')}>{year}</p>
       </div>
       <div className={styles.item}>
         <p className={styles.header} style={headerStyle}>{contributionLabel}</p>

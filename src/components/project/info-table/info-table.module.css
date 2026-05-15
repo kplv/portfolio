@@ -43,3 +43,7 @@
   font-weight: var(--text-secondary-weight);
   line-height: var(--text-secondary-line-height);
 }
+
+.yearValue {
+  font-variant-numeric: lining-nums tabular-nums;
+}

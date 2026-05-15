@@ -738,7 +738,7 @@ export const projects: Project[] = [
             type: 'text',
             text: [
               'In 2022 I took part in a Contrast Foundry design workshop where we learned the basics of font making, from initial drafts with pencil and paper to technical implementation of ligatures in a font file.',
-              'I made an accent typeface tailored for letters of one of the Caucasian languages, borrowing its name from the folklore of Abkhaz. In the end, the font supported basic Latin, Cyrillic, and Abkhazian letters and symbols.',
+              'I made an accent typeface tailored for letters of one of the Caucasian languages, borrowing its name “Tachkum” from the folklore of Abkhaz. In the end, the font supported basic Latin, Cyrillic, and Abkhazian letters and symbols.',
             ],
           },
           {
