@@ -4,6 +4,13 @@
   gap: 8px;
   color: var(--text-primary-color);
   opacity: 0.56;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.icon {
+  display: block;
+  transform: translateY(-1px);
 }
 
 .year {

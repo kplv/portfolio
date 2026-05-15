@@ -10,7 +10,7 @@ export interface YearTagProps {
 export function YearTag({ year }: YearTagProps) {
   return (
     <div className={styles.root}>
-      <CalendarIcon size={20} />
+      <CalendarIcon size={20} className={styles.icon} />
       <span className={styles.year}>{year}</span>
     </div>
   );

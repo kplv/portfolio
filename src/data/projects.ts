@@ -189,7 +189,7 @@ export const projects: Project[] = [
           { type: 'heading', text: 'Redesign' },
           {
             type: 'text',
-            text: 'Some parts of the Ostrom app haven\u2019t changed much since its launch in 2022. There was great potential to align them with evolving product strategy, and to bring more value to customers. Better statistics, seamless device onboarding, rewards revamp \u2014 are some examples of shipped improvements.',
+            text: 'Some parts of the Ostrom app haven\u2019t changed much since its launch in 2022. There was great potential to align them with evolving product strategy, and to bring more value to customers. Better statistics, seamless device onboarding, and a rewards revamp are some examples of shipped improvements.',
           },
           {
             type: 'media',
@@ -237,7 +237,7 @@ export const projects: Project[] = [
                 src: '/images/projects/ostrom/energy-flow.mp4',
                 cover: true,
                 label:
-                  'A glimpse of what\u2019s around your house right now. Animations were helpful in showing state \u2014 yes, but also looked nice (\uD83E\uDD7A) ?',
+                  'A glimpse of what\u2019s around your house right now. Animations were helpful in showing state \u2014 yes, but also looked nice (\uD83E\uDD7A)?',
               },
               {
                 type: 'image',
@@ -541,9 +541,9 @@ export const projects: Project[] = [
     slug: 'devices',
     name: 'SberDevices',
     description:
-      'City-exploration and productivity features for a mobile, TV, and voice-first product.',
+      'City-exploration and productivity features for a mobile, TV, and voice-first product',
     intro:
-      'A 19M MAU voice-startup covering usual daily scenarios, like ordering food, navigation, and entertainment. I was leading geo stream including everything around points of interest in the city, addresses, and places.',
+      'A 19M MAU voice-startup covering usual daily scenarios, like ordering food, navigation, and entertainment. I was leading the geo stream including everything around points of interest in the city, addresses, and places.',
     image: '/images/projects/devices/sber-thumbnail.png',
     images: [
       '/images/projects/devices/sber-thumbnail.png',
@@ -567,8 +567,8 @@ export const projects: Project[] = [
           {
             type: 'text',
             text: [
-              'A new voice-assistant came as an application for phone, tablet, and tv. We had data on most common questions, and planned a roadmap accordingly. In time search for places was introduced. Imagine, booking a table for tonight with voice, or quickly check a traffic jam while cooking breakfast.',
-              'I joined the team launching these geo scenarios at research and initial product discovery. Thanks to the research team we had plenty of opportunity to validate our ideas with users, as well as steady income of insights.',
+              'A new voice-assistant came as an application for phone, tablet, and tv. We had data on most common questions, and planned a roadmap accordingly. In time search for places was introduced. Imagine, booking a table for tonight with voice, or quickly checking a traffic jam while cooking breakfast.',
+              'I joined the team launching these geo scenarios at research and initial product discovery. Thanks to the research team we had plenty of opportunity to validate our ideas with users, as well as steady influx of insights.',
             ],
           },
         ],
@@ -580,7 +580,7 @@ export const projects: Project[] = [
             type: 'text',
             text: [
               'In the beginning there were simple cards for most common questions regarding anything falling within geo group: like an ATM nearby, a restaurant, a contact of an office nearby.',
-              "Ask what's to have for dinner, and see a bunch of options as an answer Siri-like. We knew what to cover next and where are points for improvements, and in time we got resources for a standalone product stream with more features and space for product growth.",
+              "Ask what to have for dinner, and see a bunch of options as an answer Siri-like. We knew what to cover next and where there were points for improvement, and in time we got resources for a standalone product stream with more features and space for product growth.",
             ],
           },
           {
@@ -609,7 +609,7 @@ export const projects: Project[] = [
           { type: 'heading', text: 'Cross-platform' },
           {
             type: 'text',
-            text: 'It was a challenge and the most fun part of work to keep 3 main touchpoints in mind. A mobile application, a tablet one, and a smart tv one. There were already mobile apps on the market covering same flows, so we instead put focus on tv and tablet. They were conceptually closer, had steadier retention, and we controlled hardware part as well.',
+            text: 'It was a challenge and the most fun part of work to keep 3 main touchpoints in mind. A mobile application, a tablet one, and a smart tv one. There were already mobile apps on the market covering the same flows, so we instead put focus on tv and tablet. They were conceptually closer, had steadier retention, and we controlled hardware part as well.',
           },
           {
             type: 'media',
@@ -669,7 +669,7 @@ export const projects: Project[] = [
     accent:
       'linear-gradient(82.638deg in oklch, oklch(0.5833 0.2078 8.21) 0.85402%, oklch(0.5914 0.2359 22.78) 99.266%)',
     role: 'Designer',
-    year: '2017—Now',
+    year: '2019–2026',
     cardYear: '2019…',
     contribution: 'Design, Code, Typefaces, 3D',
     sections: [
@@ -678,7 +678,7 @@ export const projects: Project[] = [
           { type: 'heading', text: 'React Playground' },
           {
             type: 'text',
-            text: "I've been working with React for a few years already and I believe, the best design tool should be as close to end experience as possible. Knowledge of material creates ideas for new engineering changes, deeper feasibility insight, and generates ideas for exploration.",
+            text: "I've been working with React for a few years already and I believe that the best design tool should be as close to end experience as possible. Knowledge of material creates ideas for new engineering changes, deeper feasibility insight, and generates ideas for exploration.",
           },
           {
             type: 'media',
@@ -698,8 +698,8 @@ export const projects: Project[] = [
           {
             type: 'text',
             text: [
-              "Tuned timing, physics-based animations, care for how everything fit together — all of it could elevate product. I leaned in heavily into micro-interactions, fluidity, and usability of touch-design. That allowed me to chip in projects, where I'd fine tune interactive part, or provide interactive concept exploration.",
-              'Kudos to our teacher at design school Sergey Galtsev. Both for opportunities, but also for initial inclination in interaction design, all starting from my early work at :redmadrobot design agency.',
+              "Tuned timing, physics-based animations, care for how everything fits together — all of it could elevate product. I leaned heavily into micro-interactions, fluidity, and usability of touch-design. That allowed me to chip in on projects, where I'd fine-tune the interactive part, or provide interactive concept exploration.",
+              'Kudos to our teacher at design school Sergey Galtsev. Both for opportunities and for initial inclination in interaction design, all starting from my early work at :redmadrobot design agency.',
             ],
           },
           {
@@ -710,7 +710,7 @@ export const projects: Project[] = [
                 src: '/images/projects/playground/bownce.mp4',
                 cover: true,
                 label:
-                  'Bownce won a bronze (🥉  ) in Red Dot Awards in 2019. I was preparing flows navigation and micro-interactions.',
+                  'Bownce won a bronze (🥉) at the Red Dot Awards in 2019. I was preparing the navigation flows and micro-interactions.',
               },
               {
                 type: 'video',
@@ -724,14 +724,14 @@ export const projects: Project[] = [
                 src: '/images/projects/playground/trading-platform.mp4',
                 cover: true,
                 label:
-                  'One of initial interaction concepts for a trading platform UI I worked on. In a visual concept we aimed to make a bold statement, and a fluid navigation.',
+                  'One of the initial interaction concepts for a trading platform UI I worked on. In a visual concept we aimed to make a bold statement, and a fluid navigation.',
               },
               {
                 type: 'video',
                 src: '/images/projects/playground/badoo.mp4',
                 cover: true,
                 label:
-                  "Badoo's voice-first dating, our graduation project from BHSAD with focus on joyful experience, and new approach to familiar products.",
+                  "Badoo's voice-first dating, our graduation project from BHSAD with a focus on joyful experience, and a new approach to familiar products.",
               },
             ],
           },
