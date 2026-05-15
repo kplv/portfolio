@@ -539,7 +539,7 @@ export const projects: Project[] = [
   {
     id: '3',
     slug: 'devices',
-    name: 'SberDevices',
+    name: 'Sber Devices',
     description:
       'City-exploration and productivity features for a mobile, TV, and voice-first product',
     intro:
@@ -575,7 +575,7 @@ export const projects: Project[] = [
       },
       {
         blocks: [
-          { type: 'heading', text: 'Conversational Design' },
+          { type: 'heading', text: 'Chat Flows' },
           {
             type: 'text',
             text: [
