@@ -62,6 +62,8 @@ export interface Project {
   team?: TeamMember[];
   role?: string;
   year?: string;
+  /** Year label on the home project card (detail page still uses `year`). */
+  cardYear?: string;
   contribution?: string;
   /** Optional InfoTable column headers (defaults: Role / Year / Scope) */
   infoRoleLabel?: string;
@@ -169,6 +171,7 @@ export const projects: Project[] = [
       'linear-gradient(82.638deg in oklch, oklch(0.5686 0.0823 195.09) 0.85402%, oklch(0.6635 0.1129 188.77) 99.266%)',
     role: 'Sr. Product Designer',
     year: '2025–26',
+    cardYear: '2026',
     contribution: 'Product Design, Engineering, Strategy',
     team: [],
     sections: [
@@ -392,6 +395,7 @@ export const projects: Project[] = [
       'linear-gradient(263.068deg in oklch, oklch(0.6438 0.1832 262.69) 22.575%, oklch(0.644 0.1623 258.02) 102.45%)',
     role: 'Product Designer II',
     year: '2023–24',
+    cardYear: '2024',
     contribution: 'Product & Interactive Design',
     team: [],
     sections: [
@@ -553,6 +557,7 @@ export const projects: Project[] = [
       'linear-gradient(0deg in oklch, oklch(0.71 0.23 158.15) 0.85402%, oklch(0.63 0.19 152.6) 99.266%)',
     role: 'Sr. Product Designer',
     year: '2021–22',
+    cardYear: '2022',
     contribution: 'Product & Interactive Design',
     team: [],
     sections: [
@@ -665,6 +670,7 @@ export const projects: Project[] = [
       'linear-gradient(82.638deg in oklch, oklch(0.5833 0.2078 8.21) 0.85402%, oklch(0.5914 0.2359 22.78) 99.266%)',
     role: 'Designer',
     year: '2017—Now',
+    cardYear: '2019…',
     contribution: 'Design, Code, Typefaces, 3D',
     sections: [
       {

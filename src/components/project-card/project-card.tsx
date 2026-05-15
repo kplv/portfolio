@@ -12,6 +12,7 @@ import {
 import { useMotionTokens } from '@/config/motion-tokens';
 import { getAccentSolid, getAccentTextStyle, type Project } from '@/data/projects';
 import { useResolvedProjectAccent } from '@/hooks/use-resolved-project-accent';
+import { YearTag } from '@/components/year-tag';
 import styles from './project-card.module.css';
 
 export interface ProjectCardThumbnailTuning {
@@ -218,6 +219,9 @@ export function ProjectCard({
             </motion.div>
           </motion.div>
           <div className={styles.textBlock}>
+            {project.cardYear ? (
+              <YearTag year={project.cardYear} />
+            ) : null}
             <motion.p className={styles.projectTitle}>
               <span className={styles.projectName} style={titleStyle}>
                 {project.name}

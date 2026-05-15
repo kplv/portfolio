@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary-color);
+  opacity: 0.56;
+}
+
+.year {
+  font-size: var(--text-tertiary-size);
+  font-weight: 700;
+  line-height: 100%;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+}
