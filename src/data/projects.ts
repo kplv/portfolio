@@ -49,6 +49,10 @@ export interface Project {
   /** When provided, cycles through these instead of single image. */
   images?: string[];
   /**
+   * Home card: omit the default ". " between `name` and `description` (e.g. title ends with "…").
+   */
+  hideSeparator?: boolean;
+  /**
    * Project accent: a CSS color or a CSS gradient (use `oklch()` stops for gradients).
    * For non-text UI that needs a single color, the last stop of a gradient is used.
    */
@@ -530,8 +534,120 @@ export const projects: Project[] = [
   },
   {
     id: '3',
+    slug: 'devices',
+    name: 'SberDevices',
+    description:
+      'City-exploration and productivity features for a mobile, TV, and voice-first product.',
+    intro:
+      'A 19M MAU voice-startup covering usual daily scenarios, like ordering food, navigation, and entertainment. I was leading geo stream including everything around points of interest in the city, addresses, and places.',
+    image: '/images/projects/devices/sber-thumbnail.png',
+    images: [
+      '/images/projects/devices/sber-thumbnail.png',
+      '/images/projects/devices/mobile-and-tv.png',
+      '/images/projects/devices/voice-search.png',
+      '/images/projects/devices/voice-mapped.png',
+    ],
+    accent:
+      'linear-gradient(0deg in oklch, oklch(0.71 0.23 158.15) 0.85402%, oklch(0.63 0.19 152.6) 99.266%)',
+    accentDark:
+      'linear-gradient(0deg in oklch, oklch(0.71 0.23 158.15) 0.85402%, oklch(0.63 0.19 152.6) 99.266%)',
+    role: 'Sr. Product Designer',
+    year: '2021–22',
+    contribution: 'Product & Interactive Design',
+    team: [],
+    sections: [
+      {
+        blocks: [
+          { type: 'heading', text: 'My Role' },
+          {
+            type: 'text',
+            text: [
+              'A new voice-assistant came as an application for phone, tablet, and tv. We had data on most common questions, and planned a roadmap accordingly. In time search for places was introduced. Imagine, booking a table for tonight with voice, or quickly check a traffic jam while cooking breakfast.',
+              'I joined the team launching these geo scenarios at research and initial product discovery. Thanks to the research team we had plenty of opportunity to validate our ideas with users, as well as steady income of insights.',
+            ],
+          },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'heading', text: 'Conversational Design' },
+          {
+            type: 'text',
+            text: [
+              'In the beginning there were simple cards for most common questions regarding anything falling within geo group: like an ATM nearby, a restaurant, a contact of an office nearby.',
+              "Ask what's to have for dinner, and see a bunch of options as an answer Siri-like. We knew what to cover next and where are points for improvements, and in time we got resources for a standalone product stream with more features and space for product growth.",
+            ],
+          },
+          {
+            type: 'media',
+            media: [
+              {
+                type: 'image',
+                src: '/images/projects/devices/voice-search.png',
+                cover: true,
+                label:
+                  'The whole geo product stream started from these cards. Later they evolved into a full app with pictures, engagement features, and cross-platform.',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/devices/voice-mapped.png',
+                cover: true,
+                label:
+                  'On a TV each flow could be controlled both by voice and regular navigation. Mapping the flows takes close collaboration between designers and data engineers to tune LLM models.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'heading', text: 'Cross-platform' },
+          {
+            type: 'text',
+            text: 'It was a challenge and the most fun part of work to keep 3 main touchpoints in mind. A mobile application, a tablet one, and a smart tv one. There were already mobile apps on the market covering same flows, so we instead put focus on tv and tablet. They were conceptually closer, had steadier retention, and we controlled hardware part as well.',
+          },
+          {
+            type: 'media',
+            media: [
+              {
+                type: 'image',
+                src: '/images/projects/devices/mobile-and-tv.png',
+                cover: true,
+                label:
+                  'This is a later stage of a product where we had a React based application, working as a standalone app on mobile and tv.',
+              },
+              {
+                type: 'video',
+                src: '/images/projects/devices/sberdevices-tv-navigation.mp4',
+                cover: true,
+                label:
+                  'TV used a control with a 4-pad stick. I remember, when we tested flows with customers, I just tapped 4-pad control papers on top of a MacBook keyboard.',
+              },
+              {
+                type: 'video',
+                src: '/images/projects/devices/tablet-test.mp4',
+                cover: true,
+                label:
+                  'All designers had a version of a tablet device. Manufactured by SberDevices, it came with a touch-screen, camera, and voice-control. Testing a feature I was working on, for saving home and work addresses.',
+              },
+              {
+                type: 'video',
+                src: '/images/projects/devices/tv-test.mp4',
+                cover: true,
+                label:
+                  'Testing long addresses list and map loading on a TV, we optimised responsiveness later on.',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: '4',
     slug: 'playground',
-    name: 'More..',
+    name: 'More…',
+    hideSeparator: true,
     description:
       'A mix of product design, code, and experiments from the last several years',
     intro:
@@ -547,11 +663,9 @@ export const projects: Project[] = [
     ],
     accent:
       'linear-gradient(82.638deg in oklch, oklch(0.5833 0.2078 8.21) 0.85402%, oklch(0.5914 0.2359 22.78) 99.266%)',
-    infoRoleLabel: 'What I Was Doing',
-    infoContributionLabel: 'Where',
-    role: 'Design, Code, Typefaces, 3D',
+    role: 'Designer',
     year: '2017—Now',
-    contribution: 'Arrival, SberDevices',
+    contribution: 'Design, Code, Typefaces, 3D',
     sections: [
       {
         blocks: [
@@ -619,12 +733,12 @@ export const projects: Project[] = [
       },
       {
         blocks: [
-          { type: 'heading', text: 'SberDevices' },
+          { type: 'heading', text: 'Fonts' },
           {
             type: 'text',
             text: [
-              'In 2022, I joined a new startup, who were to launch a new tablet device with a voice-assistant on Russian market. Eventually a startup were to have 10M MAU customers, but at the beginning my role was 0 → 1 product design of a new product stream there. ',
-              'I joined a team of geo services. We would allow folks to look for places, like restaurants and cinemas, buy movie tickets, book and plan events, — and a lot more. All features were voice controlled as well. I worked on all major launches in research, delivery, and ongoing improvement stages.',
+              'In 2022 I took part in a Contrast Foundry design workshop where we learned the basics of font making, from initial drafts with pencil and paper to technical implementation of ligatures in a font file.',
+              'I made an accent typeface tailored for letters of one of the Caucasian languages, borrowing its name from the folklore of Abkhaz. In the end, the font supported basic Latin, Cyrillic, and Abkhazian letters and symbols.',
             ],
           },
           {
@@ -632,17 +746,19 @@ export const projects: Project[] = [
             media: [
               {
                 type: 'image',
-                src: '/images/projects/playground/sberdevies-tv-mobile.png',
+                src: '/images/projects/playground/letter-set-tachkum.png',
                 cover: true,
+                alt: 'Tachkum typeface: full character set and sample text.',
                 label:
-                  'Mobile and TV worked the same conceptually, but always catered for specific platform patterns.',
+                  'Letter set and specimen for basic Latin, Cyrillic, and Abkhazian.',
               },
               {
-                type: 'video',
-                src: '/images/projects/playground/sberdevices-tv-navigation.mp4',
+                type: 'image',
+                src: '/images/projects/playground/inktraps-tachkum.png',
                 cover: true,
+                alt: 'Tachkum sketches exploring ink traps and pen-like strokes.',
                 label:
-                  'TV application used React Underneath, but hardware should be accounted for, no fancy stuff.',
+                  'I had a couple of iterations before landing on the idea of accent ink traps and some characters closer to a pen-like feel.',
               },
             ],
           },

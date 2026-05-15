@@ -100,6 +100,7 @@ export function ProjectCard({
   const resolvedAccent = useResolvedProjectAccent(project);
   const accentSolid = getAccentSolid(resolvedAccent);
   const titleStyle = getAccentTextStyle(resolvedAccent);
+  const afterName = project.hideSeparator ? ' ' : '. ';
 
   const images = project.images ?? [project.image];
   const currentImage = images[currentIndex];
@@ -219,7 +220,8 @@ export function ProjectCard({
           <div className={styles.textBlock}>
             <motion.p className={styles.projectTitle}>
               <span className={styles.projectName} style={titleStyle}>
-                {project.name}.{' '}
+                {project.name}
+                {afterName}
               </span>
               <span className={styles.projectDescription}>
                 {project.description}

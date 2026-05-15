@@ -39,9 +39,3 @@ Tachkum Font. The name was inspired by an Abkhazian fairy tale.
 
 Arrival. I worked on new features for customer support and fleet management.
 /Users/deniskplv/dev/portfolio/public/images/playground/play-3.png [cover]
-
-SberDevices. I led a new stream for city exploration features, from voice to TV applications.
-/Users/deniskplv/dev/portfolio/public/images/playground/play-7.png [cover]
-
-SberDevices. Prototyping for TV was a fun experience.
-/Users/deniskplv/dev/portfolio/public/images/playground/play-4.mp4 [cover]

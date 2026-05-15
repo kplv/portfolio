@@ -1,0 +1,35 @@
+.frame {
+  position: relative;
+  width: min(100%, 900px);
+  max-width: 900px;
+  aspect-ratio: 3 / 2;
+  max-height: min(600px, 70vh);
+  margin-inline: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--text-primary-color) 10%, transparent);
+  touch-action: none;
+  background: transparent;
+}
+
+.accentProbe {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  color: var(--text-accent-color);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  background: transparent;
+}
