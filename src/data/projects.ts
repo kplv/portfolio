@@ -165,7 +165,8 @@ export const projects: Project[] = [
     description:
       'Redesign, design engineering, and process improvements for an energy management provider',
     intro:
-      'Friendly energy startup with a mobile app to handle all your energy management. Simple flows hide a complex infrastructure underneath, like Germany\u2019s first virtual power plant.',
+      'Series B energy startup with a mobile app to handle all your energy. Mobile app is simple enough to hide a complex energy trading infrastructure beneath, like Germany’s first virtual power plant.',
+
     image: '/images/projects/ostrom/ostrom-thumbnail.png',
     accent:
       'linear-gradient(82.638deg in oklch, oklch(0.5686 0.0823 195.09) 0.85402%, oklch(0.6635 0.1129 188.77) 99.266%)',
@@ -180,7 +181,10 @@ export const projects: Project[] = [
           { type: 'heading', text: 'My Role' },
           {
             type: 'text',
-            text: 'I joined Ostrom to bring expertise in building mobile products with quality, velocity, and scalability in mind. My main contributions included core feature redesigns, a token approach for the design system, new UI components, interactive patterns, and overall design strategy.',
+            text: [
+              'Ostrom was looking to hire someone with expertise in mobile products, as well as a broader skill set spanning web, growth, communication, and design processes.',
+              'Most of my time was spent on core feature redesigns, transitioning components a token-based approach, and improving general interactive patterns.',
+            ],
           },
         ],
       },
@@ -334,17 +338,17 @@ export const projects: Project[] = [
             media: [
               {
                 type: 'image',
-                src: '/images/projects/ostrom/website-redesign.png',
-                cover: true,
-                label:
-                  'We highlighted each tariff\u2019s unique proposal, pricing, and cancellation policy \u2014 the main points of confusion from research.',
-              },
-              {
-                type: 'image',
                 src: '/images/projects/ostrom/marketing-assets.png',
                 cover: true,
                 label:
                   'I\u2019ve explored more than 100 versions for marketing templates, with only a few of them being A/B tested in the end.',
+              },
+              {
+                type: 'image',
+                src: '/images/projects/ostrom/website-redesign.png',
+                cover: true,
+                label:
+                  'We highlighted each tariff\u2019s unique proposal, pricing, and cancellation policy \u2014 the main points of confusion from research.',
               },
             ],
           },
@@ -580,7 +584,7 @@ export const projects: Project[] = [
             type: 'text',
             text: [
               'In the beginning there were simple cards for most common questions regarding anything falling within geo group: like an ATM nearby, a restaurant, a contact of an office nearby.',
-              "Ask what to have for dinner, and see a bunch of options as an answer Siri-like. We knew what to cover next and where there were points for improvement, and in time we got resources for a standalone product stream with more features and space for product growth.",
+              'Ask what to have for dinner, and see a bunch of options as an answer Siri-like. We knew what to cover next and where there were points for improvement, and in time we got resources for a standalone product stream with more features and space for product growth.',
             ],
           },
           {
