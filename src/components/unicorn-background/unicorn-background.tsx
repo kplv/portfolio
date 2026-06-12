@@ -1,6 +1,14 @@
 'use client';
 
-import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type RefObject,
+} from 'react';
 import Script from 'next/script';
 import { useReducedMotion } from 'motion/react';
 import {
@@ -42,6 +50,26 @@ function useShouldRender(): boolean {
   return !reducedMotion && capable;
 }
 
+function useStableViewportHeight(wrapperRef: RefObject<HTMLDivElement | null>): void {
+  useEffect(() => {
+    if (typeof window === 'undefined' || CSS.supports('height', '100lvh')) return;
+
+    const applyStableHeight = () => {
+      const height = Math.max(
+        window.innerHeight,
+        window.visualViewport?.height ?? 0,
+      );
+      wrapperRef.current?.style.setProperty('--unicorn-stable-vh', `${height}px`);
+    };
+
+    applyStableHeight();
+    window.addEventListener('orientationchange', applyStableHeight);
+    return () => {
+      window.removeEventListener('orientationchange', applyStableHeight);
+    };
+  }, [wrapperRef]);
+}
+
 function useIsPhoneViewport(): boolean {
   return useSyncExternalStore(
     (onStoreChange) => {
@@ -74,8 +102,10 @@ export function UnicornBackground({
   const shouldRender = useShouldRender();
   const isPhoneViewport = useIsPhoneViewport();
   const [loadedSceneKey, setLoadedSceneKey] = useState<string | null>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
   const sceneRef = useRef<UnicornSceneInstance | null>(null);
   const activeSceneKeyRef = useRef<string | null>(null);
+  useStableViewportHeight(wrapperRef);
   const themeRef = useRef(theme);
   const reactId = useId();
   const containerId = `unicorn-bg-${reactId.replace(/:/g, '')}`;
@@ -165,7 +195,7 @@ export function UnicornBackground({
   return (
     <>
       <Script src={UNICORN_SDK_URL} strategy="afterInteractive" onLoad={initScene} />
-      <div className={styles.wrapper} style={{ opacity: visibleOpacity }}>
+      <div ref={wrapperRef} className={styles.wrapper} style={{ opacity: visibleOpacity }}>
         <div id={containerId} style={{ width: '100%', height: '100%' }} />
       </div>
     </>

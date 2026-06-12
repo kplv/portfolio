@@ -1,6 +1,12 @@
 .wrapper {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: var(--unicorn-stable-vh, 100vh);
+  height: 100lvh;
+  overflow: hidden;
   /* Above root background so backdrop-filter on UI can sample this layer */
   z-index: 0;
   pointer-events: none;
