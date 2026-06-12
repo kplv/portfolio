@@ -3,17 +3,21 @@
 import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 import Script from 'next/script';
 import { useReducedMotion } from 'motion/react';
+import {
+  applyUnicornTheme,
+  getThemePreset,
+  type UnicornSceneInstance,
+  type UnicornTheme,
+} from './unicorn-theme';
 import styles from './unicorn-background.module.css';
 
-const SHADER_OPACITY = { home: 0.4, inner: 0.05 } as const;
+const SHADER_OPACITY = {
+  light: { home: 0.6, inner: 0.3 },
+  dark: { home: 0.1, inner: 0.05 },
+} as const;
 const UNICORN_SDK_URL =
-  'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.4/dist/unicornStudio.umd.js';
+  'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.2.4/dist/unicornStudio.umd.js';
 const PHONE_VIEWPORT_QUERY = '(max-width: 600px)';
-
-interface UnicornSceneInstance {
-  paused: boolean;
-  destroy: () => void;
-}
 
 interface UnicornStudioApi {
   addScene: (options: Record<string, unknown>) => Promise<UnicornSceneInstance>;
@@ -54,6 +58,7 @@ function useIsPhoneViewport(): boolean {
 
 interface UnicornBackgroundProps {
   projectId: string;
+  theme: UnicornTheme;
   surface: ShaderSurface;
   paused?: boolean;
   isVisible?: boolean;
@@ -61,6 +66,7 @@ interface UnicornBackgroundProps {
 
 export function UnicornBackground({
   projectId,
+  theme,
   surface,
   paused = false,
   isVisible = true,
@@ -70,13 +76,16 @@ export function UnicornBackground({
   const [loadedSceneKey, setLoadedSceneKey] = useState<string | null>(null);
   const sceneRef = useRef<UnicornSceneInstance | null>(null);
   const activeSceneKeyRef = useRef<string | null>(null);
+  const themeRef = useRef(theme);
   const reactId = useId();
   const containerId = `unicorn-bg-${reactId.replace(/:/g, '')}`;
-  const targetOpacity = SHADER_OPACITY[surface];
+  const targetOpacity = SHADER_OPACITY[theme][surface];
   const sceneDpi = isPhoneViewport ? 1 : 1.5;
   const sceneFps = isPhoneViewport ? 30 : 60;
   const sceneKey = `${projectId}:${sceneDpi}:${sceneFps}`;
   const visibleOpacity = loadedSceneKey === sceneKey && isVisible ? targetOpacity : 0;
+
+  themeRef.current = theme;
 
   const initScene = useCallback(() => {
     if (!shouldRender || !window.UnicornStudio) return;
@@ -86,9 +95,12 @@ export function UnicornBackground({
     sceneRef.current = null;
     activeSceneKeyRef.current = sceneKey;
 
+    const initialTheme = themeRef.current;
+
     window.UnicornStudio.addScene({
       elementId: containerId,
       projectId,
+      initialPreset: getThemePreset(initialTheme),
       scale: 1,
       dpi: sceneDpi,
       fps: sceneFps,
@@ -105,6 +117,7 @@ export function UnicornBackground({
         }
         sceneRef.current = scene;
         scene.paused = paused;
+        applyUnicornTheme(scene, themeRef.current);
         setLoadedSceneKey(sceneKey);
       })
       .catch((err: unknown) => {
@@ -141,6 +154,11 @@ export function UnicornBackground({
     if (!sceneRef.current) return;
     sceneRef.current.paused = paused;
   }, [paused]);
+
+  useEffect(() => {
+    if (!sceneRef.current || loadedSceneKey !== sceneKey) return;
+    applyUnicornTheme(sceneRef.current, theme);
+  }, [theme, loadedSceneKey, sceneKey]);
 
   if (!shouldRender) return null;
 

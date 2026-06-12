@@ -4,8 +4,7 @@ import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { UnicornBackground } from '@/components/unicorn-background';
 
-const LIGHT_UNICORN_PROJECT_ID = 'ssf4XIrdYQTi8HGovdhZ';
-const DARK_UNICORN_PROJECT_ID = 'JAzw6Fbu8uELL8QT7zQM';
+const UNICORN_PROJECT_ID = 'uTQ3D3yXA9AulHhPqku2';
 
 export function GlobalShaderBackground() {
   const pathname = usePathname();
@@ -23,12 +22,11 @@ export function GlobalShaderBackground() {
   }
 
   const surface = isHome || isAbout ? 'home' : 'inner';
-  const projectId =
-    resolvedTheme === 'dark' ? DARK_UNICORN_PROJECT_ID : LIGHT_UNICORN_PROJECT_ID;
 
   return (
     <UnicornBackground
-      projectId={projectId}
+      projectId={UNICORN_PROJECT_ID}
+      theme={resolvedTheme}
       surface={surface}
       isVisible={themeReady}
     />
