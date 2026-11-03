@@ -36,6 +36,10 @@ export const PAGE_MOTION = {
       opacity: 1,
       scale: 1,
       filter: 'blur(0px)',
+      /* Clear the filter once settled: a lingering `blur(0px)` creates a CSS
+         backdrop root, blocking descendant backdrop-filter from sampling the
+         fixed shader background. */
+      transitionEnd: { filter: 'none' },
     },
     exit: {
       opacity: 0,
@@ -64,7 +68,7 @@ export const PAGE_MOTION = {
     routeSectionTarget: {
       opacity: 1,
       scale: 1,
-      filter: 'blur(0px)',
+      filter: 'none',
     },
   },
 } as const;

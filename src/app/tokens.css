@@ -28,6 +28,21 @@
     oklch(0.94 0.01 165)
   );
 
+  /* Frosted glass surface (matches project-card plate): translucent tint + backdrop blur.
+     Keep radius modest — blur cost scales with radius and re-runs every frame over the live shader. */
+  /* Rest: page background at --glass-back (blends into the bg, darkens/lightens whatever
+     shader pixels pass behind) + a faint tint of the element's own icon/text color. */
+  /* Tunable amounts (DialKit "Glass button" in dev — see glass-dial.tsx). */
+  --glass-back: 10%;
+  --glass-tint: 0%;
+  --glass-tint-hover: 5%;
+  --glass-base: color-mix(in oklch, var(--background-color) var(--glass-back), transparent);
+  /* currentColor resolves per element (unregistered custom property), so each
+     surface is tinted by its own icon/label color. */
+  --glass-bg: color-mix(in oklch, currentColor var(--glass-tint), var(--glass-base));
+  --glass-bg-hover: color-mix(in oklch, currentColor var(--glass-tint-hover), var(--glass-base));
+  --glass-blur: blur(12px);
+
   --text-accent-color: var(--mint-500);
 
   /* === Typography Tokens === */
@@ -96,6 +111,9 @@
     var(--text-accent-color) 100%,
     transparent
   );
+  --glass-back: 15%;
+  --glass-tint: 2%;
+  --glass-tint-hover: 10%;
   --text-accent-color: var(--mint-300);
   --text-primary-color: rgba(255, 255, 255, 0.8);
   --text-secondary-color: var(--slate-600);
@@ -120,6 +138,7 @@
 /* === Responsive Typography === */
 @media screen and (max-width: 428px) {
   :root {
+    --glass-blur: blur(10px);
     --text-primary-size: 20px;
     --text-primary-line-height: 160%;
     --text-secondary-line-height: 130%;

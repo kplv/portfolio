@@ -51,7 +51,7 @@ export function ArenaIcon({ className, size = 28 }: ArenaIconProps) {
       <rect
         width="28"
         height="28"
-        fill={`url(#${ARENA_GRADIENT_ID})`}
+        style={{ fill: `var(--icon-fill, url(#${ARENA_GRADIENT_ID}))` }}
         mask={`url(#${ARENA_MASK_ID})`}
       />
     </svg>

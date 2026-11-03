@@ -4,6 +4,8 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { abcFavorit, hagrid } from "./fonts";
 import { GlobalShaderBackground } from "@/components/global-shader-background";
+import { DialKitRoot } from "@/components/dialkit-root";
+import { GlassDial } from "@/components/glass-dial";
 import { YandexMetrica } from "@/components/yandex-metrica/yandex-metrica";
 
 export const metadata: Metadata = {
@@ -25,6 +27,8 @@ export default function RootLayout({
         <Providers>
           <GlobalShaderBackground />
           {children}
+          <GlassDial />
+          <DialKitRoot />
         </Providers>
       </body>
     </html>

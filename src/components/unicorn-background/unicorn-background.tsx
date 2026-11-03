@@ -17,12 +17,11 @@ import {
   type UnicornSceneInstance,
   type UnicornTheme,
 } from './unicorn-theme';
+import { DARK_BLUR as darkBlur, getSceneQuality } from './dark-blur';
 import styles from './unicorn-background.module.css';
 
-const SHADER_OPACITY = {
-  light: { home: 0.6, inner: 0.3 },
-  dark: { home: 0.1, inner: 0.05 },
-} as const;
+// Dark-mode opacity lives in DARK_BLUR (dark-blur.ts).
+const LIGHT_SHADER_OPACITY = { home: 1, inner: 0.3 } as const;
 const UNICORN_SDK_URL =
   'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.2.4/dist/unicornStudio.umd.js';
 const PHONE_VIEWPORT_QUERY = '(max-width: 600px)';
@@ -109,13 +108,24 @@ export function UnicornBackground({
   const themeRef = useRef(theme);
   const reactId = useId();
   const containerId = `unicorn-bg-${reactId.replace(/:/g, '')}`;
-  const targetOpacity = SHADER_OPACITY[theme][surface];
-  const sceneDpi = isPhoneViewport ? 1 : 1.5;
-  const sceneFps = isPhoneViewport ? 30 : 60;
+  const {
+    dpi: sceneDpi,
+    fps: sceneFps,
+  } = getSceneQuality(theme, isPhoneViewport, darkBlur);
   const sceneKey = `${projectId}:${sceneDpi}:${sceneFps}`;
+  const isDark = theme === 'dark';
+  const targetOpacity = isDark
+    ? surface === 'home'
+      ? darkBlur.opacityHome
+      : darkBlur.opacityInner
+    : LIGHT_SHADER_OPACITY[surface];
+  const pixelated = isDark && darkBlur.pixelated;
   const visibleOpacity = loadedSceneKey === sceneKey && isVisible ? targetOpacity : 0;
 
-  themeRef.current = theme;
+  // Synced before the scene effects below (effects run in declaration order).
+  useEffect(() => {
+    themeRef.current = theme;
+  }, [theme]);
 
   const initScene = useCallback(() => {
     if (!shouldRender || !window.UnicornStudio) return;
@@ -196,7 +206,15 @@ export function UnicornBackground({
     <>
       <Script src={UNICORN_SDK_URL} strategy="afterInteractive" onLoad={initScene} />
       <div ref={wrapperRef} className={styles.wrapper} style={{ opacity: visibleOpacity }}>
-        <div id={containerId} style={{ width: '100%', height: '100%' }} />
+        <div
+          id={containerId}
+          style={{
+            width: '100%',
+            height: '100%',
+            // Inherited by the scene's canvas.
+            imageRendering: pixelated ? 'pixelated' : undefined,
+          }}
+        />
       </div>
     </>
   );

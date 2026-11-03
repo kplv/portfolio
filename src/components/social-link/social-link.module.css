@@ -12,17 +12,42 @@
   -webkit-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  /* At rest: same colour as body text. --social-link-accent is set inline from the accent prop. */
+  --social-link-label-bg: linear-gradient(
+    var(--text-primary-color),
+    var(--text-primary-color)
+  );
+  --icon-fill: var(--text-primary-color);
+}
+
+/* Accent on hover (pointer devices only, so it doesn't stick after a tap), press, and keyboard focus. */
+@media (hover: hover) {
+  .link:hover {
+    --social-link-label-bg: var(--social-link-accent);
+    --icon-fill: initial; /* falls back to the icon's own gradient */
+  }
+}
+
+.link:active,
+.link:focus-visible {
+  --social-link-label-bg: var(--social-link-accent);
+  --icon-fill: initial;
 }
 
 .label {
   display: inline-block;
+  background-image: var(--social-link-label-bg);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Expanded hit area for better accessibility */
 .link::before {
   content: '';
   position: absolute;
-  inset: -16px;
+  inset: -12px;
 }
 
 /* Animated underline (JSX motion.span currently commented out in social-link.tsx) */

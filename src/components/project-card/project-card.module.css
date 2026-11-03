@@ -87,10 +87,20 @@
   height: auto;
   aspect-ratio: 4 / 3;
   border-radius: 24px;
-  border: 2x solid;
-  border-color: color-mix(in srgb, var(--project-accent) 2%, transparent);
+  /*
+   * Card surface tint + edge. The edge is an inset shadow, not a border, so the
+   * tinted plate covers the full box and there's no seam between them.
+   */
+  --card-tint: 4%;
+  --card-border-tint: 1%;
   overflow: hidden;
   cursor: pointer;
+  transition: box-shadow 0.18s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.imageWrapperActive {
+  box-shadow: inset 0 0 0 2px
+    color-mix(in oklch, var(--project-accent) var(--card-border-tint), transparent);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
@@ -101,7 +111,7 @@
   border-radius: inherit;
   background-color: color-mix(
     in oklch,
-    var(--project-accent) 4%,
+    var(--project-accent) var(--card-tint),
     transparent
   );
   pointer-events: none;
@@ -190,10 +200,7 @@
   border-color: var(--slate-800);
 }
 
-[data-theme='dark'] .bgPlate {
-  background-color: color-mix(
-    in oklch,
-    var(--project-accent) 8%,
-    transparent
-  );
+[data-theme='dark'] .imageWrapper {
+  --card-tint: 8%;
+  --card-border-tint: 1%;
 }

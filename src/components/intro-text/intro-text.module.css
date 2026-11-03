@@ -38,4 +38,9 @@
   .text {
     margin-bottom: 32px;
   }
+
+  /* Plain header shares .text styles; keep header-to-text spacing on .container gap. */
+  .headerPlain {
+    margin-bottom: 0;
+  }
 }

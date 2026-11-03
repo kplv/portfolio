@@ -15,6 +15,9 @@ import { useResolvedProjectAccent } from '@/hooks/use-resolved-project-accent';
 import { YearTag } from '@/components/year-tag';
 import styles from './project-card.module.css';
 
+/** Temporarily hidden; flip to true to bring the year tag back. */
+const SHOW_YEAR_TAG = false;
+
 export interface ProjectCardThumbnailTuning {
   restScale: number;
   hoverScale: number;
@@ -137,7 +140,12 @@ export function ProjectCard({
         <div className={styles.body}>
 
           <motion.div
-            className={styles.imageWrapper}
+            className={[
+              styles.imageWrapper,
+              (isHovered || canHover === false) && styles.imageWrapperActive,
+            ]
+              .filter(Boolean)
+              .join(' ')}
             role="button"
             tabIndex={0}
             onPointerEnter={handlePointerEnter}
@@ -219,7 +227,7 @@ export function ProjectCard({
             </motion.div>
           </motion.div>
           <div className={styles.textBlock}>
-            {project.cardYear ? (
+            {SHOW_YEAR_TAG && project.cardYear ? (
               <YearTag year={project.cardYear} />
             ) : null}
             <motion.p className={styles.projectTitle}>

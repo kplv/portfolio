@@ -76,7 +76,6 @@ export function HomeClient({ projects, className }: HomeClientProps) {
     .filter(Boolean)
     .join(' ');
   const reducedState = ROUTE_SECTION_REDUCED_MOTION_TARGET;
-  const homeHeaderGradient = 'var(--text-display-gradient)';
 
   return (
     <div className={styles.root}>
@@ -115,9 +114,8 @@ export function HomeClient({ projects, className }: HomeClientProps) {
                   animate={shouldReduceMotion ? reducedState : 'show'}
                   exit={shouldReduceMotion ? reducedState : 'exit'}
                   header="Denis Kopylov"
-                  accent={homeHeaderGradient}
-                  italicHeader
-                  text="Product designer with a focus on turning ideas into reality through coding, a holistic approach, and an eye for interactive experiences. Currently at Ostrom."
+                  plainHeader
+                  text="Product designer. I code, tinker with animations, love mobile screens, and hoarding references is my go-to procrastination. Derzeit bin ich bei Finanzfluss."
                 />
 
                 <MotionSocialLinkList

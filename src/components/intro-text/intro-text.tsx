@@ -11,6 +11,8 @@ export interface IntroTextProps extends Omit<HTMLMotionProps<'div'>, 'children'>
   accent?: string;
   /** When true, uses the designed italic Hagrid face (home hero only). */
   italicHeader?: boolean;
+  /** When true, the header uses the same type style as the body text (ignores `accent`). */
+  plainHeader?: boolean;
 }
 
 export function IntroText({
@@ -18,11 +20,12 @@ export function IntroText({
   text,
   accent,
   italicHeader = false,
+  plainHeader = false,
   className,
   ...motionProps
 }: IntroTextProps) {
   const headerStyle =
-    accent ? getAccentTextStyle(accent) : undefined;
+    accent && !plainHeader ? getAccentTextStyle(accent) : undefined;
 
   return (
     <motion.div
@@ -31,8 +34,8 @@ export function IntroText({
     >
       <h1
         className={[
-          styles.header,
-          italicHeader ? styles.headerItalic : null,
+          plainHeader ? `${styles.text} ${styles.headerPlain}` : styles.header,
+          italicHeader && !plainHeader ? styles.headerItalic : null,
         ]
           .filter(Boolean)
           .join(' ')}

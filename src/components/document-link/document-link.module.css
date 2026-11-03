@@ -50,8 +50,11 @@
   height: 160px;
   flex-shrink: 0;
   border-radius: 16px;
-  background-color: var(--document-link-card-bg);
+  background-color: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   overflow: hidden;
+  transition: background-color 150ms ease;
 }
 
 .borderSvg {
@@ -104,6 +107,10 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .root:hover .card {
+    background-color: var(--glass-bg-hover);
+  }
+
   .root:hover .line {
     background-color: var(--document-link-line-active);
   }

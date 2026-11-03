@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from 'motion/react';
 import Link from 'next/link';
-import { type ReactNode, useMemo } from 'react';
+import { type CSSProperties, type ReactNode, useMemo } from 'react';
 import { useMotionTokens } from '@/config/motion-tokens';
 import { getAccentTextStyle } from '@/data/projects';
 import styles from './social-link.module.css';
@@ -29,7 +29,14 @@ export function SocialLink({ href, text, icon, accent }: SocialLinkProps) {
   const external = isExternalHref(href);
   const LinkComponent = external ? motion.a : MotionLink;
   const fill = accent ?? DEFAULT_SOCIAL_ACCENT;
-  const labelStyle = useMemo(() => getAccentTextStyle(fill), [fill]);
+  // Accent only shows on hover/active (see .link in CSS); at rest links use primary text colour.
+  const linkStyle = useMemo(() => {
+    const accentStyle = getAccentTextStyle(fill);
+    const accentBg =
+      accentStyle.backgroundImage ??
+      `linear-gradient(${accentStyle.color}, ${accentStyle.color})`;
+    return { '--social-link-accent': accentBg } as CSSProperties;
+  }, [fill]);
 
   return (
     <LinkComponent
@@ -38,6 +45,7 @@ export function SocialLink({ href, text, icon, accent }: SocialLinkProps) {
         ? { target: '_blank' as const, rel: 'noopener noreferrer' }
         : {})}
       className={styles.link}
+      style={linkStyle}
       whileHover={
         shouldReduceMotion
           ? undefined
@@ -60,7 +68,7 @@ export function SocialLink({ href, text, icon, accent }: SocialLinkProps) {
           {icon}
         </span>
       ) : null}
-      <span className={styles.label} style={labelStyle}>
+      <span className={styles.label}>
         {text}
       </span>
       {/*

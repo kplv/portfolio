@@ -54,7 +54,7 @@ export function LinkedInIcon({
       <rect
         width="28"
         height="28"
-        fill={`url(#${LINKEDIN_GRADIENT_ID})`}
+        style={{ fill: `var(--icon-fill, url(#${LINKEDIN_GRADIENT_ID}))` }}
         mask={`url(#${LINKEDIN_MASK_ID})`}
       />
     </svg>
