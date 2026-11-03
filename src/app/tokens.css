@@ -32,9 +32,9 @@
      Keep radius modest — blur cost scales with radius and re-runs every frame over the live shader. */
   /* Rest: page background at --glass-back (blends into the bg, darkens/lightens whatever
      shader pixels pass behind) + a faint tint of the element's own icon/text color. */
-  /* Tunable amounts (DialKit "Glass button" in dev — see glass-dial.tsx). */
-  --glass-back: 10%;
-  --glass-tint: 0%;
+  /* Glass amounts. */
+  --glass-back: 5%;
+  --glass-tint: 1%;
   --glass-tint-hover: 5%;
   --glass-base: color-mix(in oklch, var(--background-color) var(--glass-back), transparent);
   /* currentColor resolves per element (unregistered custom property), so each
