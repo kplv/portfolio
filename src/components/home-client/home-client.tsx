@@ -115,7 +115,7 @@ export function HomeClient({ projects, className }: HomeClientProps) {
                   exit={shouldReduceMotion ? reducedState : 'exit'}
                   header="Denis Kopylov"
                   plainHeader
-                  text="Product designer. I code, tinker with animations, love mobile screens, and hoarding references is my go-to procrastination. Derzeit bin ich bei Finanzfluss."
+                  text="Product designer. I code, tinker animations, and enjoy squishy buttons. Derzeit bin ich bei Finanzfluss."
                 />
 
                 <MotionSocialLinkList

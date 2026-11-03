@@ -53,22 +53,10 @@
   background-color: var(--glass-bg);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
+  box-shadow: inset 0 0 0 var(--card-edge-width)
+    color-mix(in oklch, var(--text-accent-color) var(--card-edge-tint), transparent);
   overflow: hidden;
   transition: background-color 150ms ease;
-}
-
-.borderSvg {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: none;
-}
-
-.borderPath {
-  stroke: var(--document-link-border);
 }
 
 .body {

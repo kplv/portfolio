@@ -6,7 +6,6 @@ import { motion, useReducedMotion } from 'motion/react';
 import { useMotionTokens } from '@/config/motion-tokens';
 import styles from './document-link.module.css';
 
-const BORDER_VIEWBOX = '0 0 120 160';
 
 function downloadAttributeValue(baseName: string): string {
   const t = baseName.trim();
@@ -50,24 +49,6 @@ function DocumentCardBody({
   return (
     <span className={styles.float}>
       <span className={styles.card}>
-        <svg
-          className={styles.borderSvg}
-          viewBox={BORDER_VIEWBOX}
-          aria-hidden
-        >
-          <rect
-            className={styles.borderPath}
-            x={1}
-            y={1}
-            width={118}
-            height={158}
-            rx={16}
-            ry={16}
-            fill="none"
-            strokeWidth={2}
-            vectorEffect="nonScalingStroke"
-          />
-        </svg>
         <div className={styles.body}>
           <div className={styles.topSlot}>
             <div className={styles.linesColumn}>

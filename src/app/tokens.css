@@ -12,11 +12,6 @@
     var(--text-accent-color) 1%,
     oklch(1 0 0)
   );
-  --document-link-border: color-mix(
-    in oklch,
-    var(--text-accent-color) 8%,
-    transparent
-  );
   --document-link-line: color-mix(
     in oklch,
     var(--text-primary-color) 15%,
@@ -42,6 +37,9 @@
   --glass-bg: color-mix(in oklch, currentColor var(--glass-tint), var(--glass-base));
   --glass-bg-hover: color-mix(in oklch, currentColor var(--glass-tint-hover), var(--glass-base));
   --glass-blur: blur(12px);
+  /* Card edge (shared by project cards + document link): inset shadow, tinted by the card's accent. */
+  --card-edge-width: 2px;
+  --card-edge-tint: 1%;
 
   --text-accent-color: var(--mint-500);
 
@@ -96,11 +94,6 @@
   --background-color: var(--slate-1100);
   --document-link-accent: var(--text-accent-color);
   --document-link-card-bg: color-mix(in oklch, oklch(1 0 0) 10%, hsla(222, 15%, 4%, 1));
-  --document-link-border: color-mix(
-    in oklch,
-    var(--text-accent-color) 2%,
-    transparent
-  );
   --document-link-line: color-mix(
     in oklch,
     var(--text-primary-color) 44%,
